@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.roydon.niuyin.ui.activity.VideoSearchActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl_test_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0px">
+
+        <com.roydon.niuyin.widget.XCollapsingToolbarLayout
+            android:id="@+id/ctl_test_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:scrimVisibleHeightTrigger="100dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/t_test_title"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_marginEnd="20dp"
+                app:layout_collapseMode="pin" />
+
+            <com.hjq.bar.TitleBar
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:backButton="false"
+                app:barStyle="transparent"
+                app:layout_collapseMode="pin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_back_black" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_search_container"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_home_search_bar_transparent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_search_black" />
+
+                        <com.hjq.widget.view.ClearEditText
+                            style="@style/EditTextStyle"
+                            android:id="@+id/tv_hint_keyword"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="10dp"
+                            android:gravity="left|center_horizontal"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <!--                    <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--                        android:id="@+id/tv_hint_keyword"-->
+                    <!--                        android:layout_width="0px"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_marginStart="20dp"-->
+                    <!--                        android:layout_marginEnd="20dp"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:background="@drawable/bg_home_search_bar_transparent"-->
+                    <!--                        android:gravity="left|center_vertical"-->
+                    <!--                        android:paddingLeft="10dp"-->
+                    <!--                        android:paddingRight="10dp"-->
+                    <!--                        android:text="请输入搜索内容"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="15sp" />-->
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="搜索"
+                        android:textColor="@color/red"
+                        android:textSize="15sp" />
+
+                    <!--                    <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--                        android:id="@+id/iv_test_search"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_marginEnd="10dp"-->
+                    <!--                        android:src="@drawable/ic_search_white" />-->
+
+                </LinearLayout>
+
+            </com.hjq.bar.TitleBar>
+
+        </com.roydon.niuyin.widget.XCollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_test_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="搜索"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+</LinearLayout>
