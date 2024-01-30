@@ -49,14 +49,6 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_avatar_default" />
 
-                    <!--                    <com.roydon.niuyin.widget.RoundImageView-->
-                    <!--                        android:id="@+id/riv_avatar"-->
-                    <!--                        android:layout_width="36dp"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:layout_gravity="center_vertical"-->
-                    <!--                        android:scaleType="fitXY"-->
-                    <!--                        android:src="@mipmap/avatar_ganyu" />-->
-
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_search_hint"
                         android:layout_width="0px"
