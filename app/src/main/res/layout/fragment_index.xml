@@ -42,20 +42,27 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
 
-                    <com.roydon.niuyin.widget.RoundImageView
-                        android:id="@+id/riv_avatar"
-                        android:layout_width="36dp"
+                    <com.hjq.widget.square.SquareImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/avatar_ganyu" />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_avatar_default" />
+
+                    <!--                    <com.roydon.niuyin.widget.RoundImageView-->
+                    <!--                        android:id="@+id/riv_avatar"-->
+                    <!--                        android:layout_width="36dp"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_gravity="center_vertical"-->
+                    <!--                        android:scaleType="fitXY"-->
+                    <!--                        android:src="@mipmap/avatar_ganyu" />-->
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_search_hint"
                         android:layout_width="0px"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_home_search_bar_transparent"
                         android:gravity="center"
@@ -67,8 +74,7 @@
                         android:id="@+id/iv_test_search"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_search_white" />
+                        android:src="@drawable/ic_search_b" />
 
                 </LinearLayout>
 

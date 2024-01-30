@@ -9,6 +9,7 @@ import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.CacheDataManager;
+import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
@@ -24,10 +25,10 @@ import com.hjq.widget.view.SwitchButton;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/03/01
- *    desc   : 设置界面
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/03/01
+ * desc   : 设置界面
  */
 public final class SettingActivity extends MyActivity
         implements SwitchButton.OnCheckedChangeListener {
@@ -116,8 +117,11 @@ public final class SettingActivity extends MyActivity
                 break;
             case R.id.sb_setting_exit:
                 if (true) {
+                    // 清除token
                     TokenManager tokenManager = new TokenManager(getActivity());
                     tokenManager.clearToken();
+                    // 清除用户缓存
+                    SPUtils.remove(SPUtils.AVATAR, getActivity());
                     startActivity(LoginActivity.class);
                     // 进行内存优化，销毁除登录页之外的所有界面
                     ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
@@ -131,8 +135,11 @@ public final class SettingActivity extends MyActivity
 
                             @Override
                             public void onSucceed(HttpData<Void> data) {
+                                // 清除token
                                 TokenManager tokenManager = new TokenManager(getActivity());
                                 tokenManager.clearToken();
+                                // 清除用户缓存
+                                SPUtils.remove(SPUtils.AVATAR, getActivity());
                                 startActivity(LoginActivity.class);
                                 // 进行内存优化，销毁除登录页之外的所有界面
                                 ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);

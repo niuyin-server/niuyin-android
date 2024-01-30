@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
+import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.UpdateImageApi;
@@ -21,12 +22,12 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/04/20
- *    desc   : 个人资料
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/04/20
+ * desc   : 个人资料
  */
-public final class PersonalDataActivity extends MyActivity {
+public final class PersonalProfileActivity extends MyActivity {
 
     @BindView(R.id.iv_person_data_avatar)
     ImageView mAvatarView;
@@ -39,19 +40,27 @@ public final class PersonalDataActivity extends MyActivity {
     @BindView(R.id.sb_person_data_phone)
     SettingBar mPhoneView;
 
-    /** 省 */
+    /**
+     * 省
+     */
     private String mProvince = "广东省";
-    /** 市 */
+    /**
+     * 市
+     */
     private String mCity = "广州市";
-    /** 区 */
+    /**
+     * 区
+     */
     private String mArea = "天河区";
 
-    /** 头像地址 */
+    /**
+     * 头像地址
+     */
     private String mAvatarUrl;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_personal_data;
+        return R.layout.activity_personal_profile;
     }
 
     @Override
@@ -62,10 +71,12 @@ public final class PersonalDataActivity extends MyActivity {
 
     @Override
     protected void initData() {
+        String avatarCache = SPUtils.getString(SPUtils.AVATAR, "", getActivity());
+
         GlideApp.with(getActivity())
-                .load(R.drawable.ic_head_placeholder)
-                .placeholder(R.drawable.ic_head_placeholder)
-                .error(R.drawable.ic_head_placeholder)
+                .load(avatarCache)
+                .placeholder(R.drawable.ic_avatar_default)
+                .error(R.drawable.ic_avatar_default)
                 .circleCrop()
                 .into(mAvatarView);
 
@@ -102,7 +113,7 @@ public final class PersonalDataActivity extends MyActivity {
                         EasyHttp.post(getActivity())
                                 .api(new UpdateImageApi()
                                         .setImage(new File(data.get(0))))
-                                .request(new HttpCallback<HttpData<String>>(PersonalDataActivity.this) {
+                                .request(new HttpCallback<HttpData<String>>(PersonalProfileActivity.this) {
 
                                     @Override
                                     public void onSucceed(HttpData<String> data) {
@@ -115,7 +126,8 @@ public final class PersonalDataActivity extends MyActivity {
                     }
 
                     @Override
-                    public void onCancel() {}
+                    public void onCancel() {
+                    }
                 });
                 break;
             case R.id.sb_person_data_name:

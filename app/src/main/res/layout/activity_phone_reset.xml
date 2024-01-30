@@ -10,6 +10,7 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:leftIcon="@drawable/ic_back_b"
         app:title="@string/phone_reset_title" />
 
     <androidx.appcompat.widget.AppCompatTextView

@@ -9,7 +9,8 @@
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/ic_back_b"/>
 
     <ProgressBar
         android:id="@+id/pb_browser_progress"

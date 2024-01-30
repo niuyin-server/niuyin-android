@@ -2,7 +2,6 @@ package com.roydon.niuyin.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -16,36 +15,28 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.hjq.http.EasyConfig;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
-import com.roydon.niuyin.http.request.LoginApi;
 import com.roydon.niuyin.http.request.user.UserInfoApi;
-import com.roydon.niuyin.http.response.LoginBean;
 import com.roydon.niuyin.http.response.MemberInfoVO;
-import com.roydon.niuyin.ui.activity.AboutActivity;
 import com.roydon.niuyin.ui.activity.BrowserActivity;
 import com.roydon.niuyin.ui.activity.DialogActivity;
 import com.roydon.niuyin.ui.activity.GuideActivity;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.ImageActivity;
-import com.roydon.niuyin.ui.activity.LoginActivity;
-import com.roydon.niuyin.ui.activity.PasswordForgetActivity;
 import com.roydon.niuyin.ui.activity.PasswordResetActivity;
-import com.roydon.niuyin.ui.activity.PersonalDataActivity;
+import com.roydon.niuyin.ui.activity.PersonalProfileActivity;
 import com.roydon.niuyin.ui.activity.PhoneResetActivity;
-import com.roydon.niuyin.ui.activity.PhoneVerifyActivity;
-import com.roydon.niuyin.ui.activity.RegisterActivity;
 import com.roydon.niuyin.ui.activity.SettingActivity;
 import com.roydon.niuyin.ui.activity.StatusActivity;
 import com.roydon.niuyin.ui.dialog.MessageDialog;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 
@@ -104,8 +95,8 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         ImmersionBar.setTitleBar(getAttachActivity(), mToolbar);
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
-        setOnClickListener(R.id.btn_test_dialog, R.id.btn_test_hint, R.id.btn_test_reset, R.id.btn_test_change,
-                R.id.btn_test_personal, R.id.btn_test_setting, R.id.btn_test_about, R.id.btn_test_guide, R.id.btn_test_browser,
+        setOnClickListener(R.id.btn_test_dialog, R.id.btn_test_hint, R.id.btn_test_reset, R.id.btn_test_change, R.id.ll_userinfo,
+                R.id.btn_test_setting, R.id.btn_test_guide, R.id.btn_test_browser,
                 R.id.btn_test_image, R.id.btn_test_pay);
     }
 
@@ -121,6 +112,8 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                         memberInfoVO = data.getData();
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_GET_USERINFO);
+                        // 更新缓存
+                        SPUtils.putString(SPUtils.AVATAR, memberInfoVO.getAvatar(), getContext());
                     }
                 });
 
@@ -170,14 +163,18 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
             mUserinfoView.setVisibility(View.GONE);
             mMenuNicknameView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.black));
             mMenuSearchView.setBackgroundResource(R.drawable.bg_icon_transparent);
+            mMenuSearchView.setImageResource(R.drawable.ic_search_b);
             mMenuListView.setBackgroundResource(R.drawable.bg_icon_transparent);
+            mMenuListView.setImageResource(R.drawable.ic_list_b);
             mMenuNickNameView.setVisibility(View.VISIBLE);
         } else {
             getStatusBarConfig().statusBarDarkFont(false).init();
             mUserinfoView.setVisibility(View.VISIBLE);
             mMenuNicknameView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.white));
             mMenuSearchView.setBackgroundResource(R.drawable.bg_icon_grey);
+            mMenuSearchView.setImageResource(R.drawable.ic_search_w);
             mMenuListView.setBackgroundResource(R.drawable.bg_icon_grey);
+            mMenuListView.setImageResource(R.drawable.ic_list_w);
             mMenuNickNameView.setVisibility(View.GONE);
         }
     }
@@ -198,14 +195,11 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
             case R.id.btn_test_change:
                 startActivity(PhoneResetActivity.class);
                 break;
-            case R.id.btn_test_personal:
-                startActivity(PersonalDataActivity.class);
-                break;
             case R.id.btn_test_setting:
                 startActivity(SettingActivity.class);
                 break;
-            case R.id.btn_test_about:
-                startActivity(AboutActivity.class);
+            case R.id.ll_userinfo:
+                startActivity(PersonalProfileActivity.class);
                 break;
             case R.id.btn_test_guide:
                 startActivity(GuideActivity.class);

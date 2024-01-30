@@ -140,7 +140,7 @@
             android:screenOrientation="portrait" />
         <!-- 个人资料 -->
         <activity
-            android:name=".ui.activity.PersonalDataActivity"
+            android:name=".ui.activity.PersonalProfileActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/personal_data_title"
             android:launchMode="singleTop"

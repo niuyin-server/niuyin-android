@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.activity.PersonalDataActivity">
+    tools:context="com.roydon.niuyin.ui.activity.PersonalProfileActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:leftIcon="@drawable/ic_back_b"
         app:title="@string/personal_data_title" />
 
     <com.hjq.widget.layout.SettingBar
@@ -21,12 +22,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_person_data_avatar"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="end|center_vertical"
             android:layout_margin="20dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/ic_head_placeholder" />
+            tools:src="@drawable/ic_avatar_default" />
 
     </com.hjq.widget.layout.SettingBar>
 
@@ -45,7 +46,8 @@
         android:layout_height="wrap_content"
         app:bar_leftText="@string/personal_data_name"
         app:bar_rightHint="@string/personal_data_name_hint"
-        app:bar_rightText="Android 轮子哥" />
+        app:bar_rightIcon="@drawable/icon_go_black"
+        app:bar_rightText="还会心动吗" />
 
     <com.hjq.widget.layout.SettingBar
         android:id="@+id/sb_person_data_address"
@@ -53,7 +55,7 @@
         android:layout_height="wrap_content"
         app:bar_leftText="@string/personal_data_address"
         app:bar_rightHint="@string/personal_data_address_hint"
-        app:bar_rightIcon="@drawable/ico_go_black" />
+        app:bar_rightIcon="@drawable/icon_go_black" />
 
     <com.hjq.widget.layout.SettingBar
         android:id="@+id/sb_person_data_phone"
@@ -62,6 +64,6 @@
         android:layout_marginTop="10dp"
         app:bar_leftText="@string/personal_data_phone"
         app:bar_rightHint="@string/personal_data_phone_hint"
-        app:bar_rightIcon="@drawable/ico_go_black" />
+        app:bar_rightIcon="@drawable/icon_go_black" />
 
 </LinearLayout>

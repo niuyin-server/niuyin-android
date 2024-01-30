@@ -17,8 +17,8 @@ import com.roydon.niuyin.helper.DoubleClickHelper;
 import com.roydon.niuyin.other.KeyboardWatcher;
 import com.roydon.niuyin.ui.fragment.FragmentUpload;
 import com.roydon.niuyin.ui.fragment.IndexFragment;
-import com.roydon.niuyin.ui.fragment.TestFragmentB;
-import com.roydon.niuyin.ui.fragment.TestFragmentC;
+import com.roydon.niuyin.ui.fragment.FriendFragment;
+import com.roydon.niuyin.ui.fragment.MessageFragment;
 import com.roydon.niuyin.ui.fragment.FragmentMe;
 
 import butterknife.BindView;
@@ -52,9 +52,9 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     protected void initData() {
         mPagerAdapter = new BaseFragmentAdapter<>(this);
         mPagerAdapter.addFragment(IndexFragment.newInstance());
-        mPagerAdapter.addFragment(TestFragmentB.newInstance());
+        mPagerAdapter.addFragment(FriendFragment.newInstance());
         mPagerAdapter.addFragment(FragmentUpload.newInstance());
-        mPagerAdapter.addFragment(TestFragmentC.newInstance());
+        mPagerAdapter.addFragment(MessageFragment.newInstance());
         mPagerAdapter.addFragment(FragmentMe.newInstance());
 
         mViewPager.setAdapter(mPagerAdapter);
@@ -73,13 +73,13 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
                 mPagerAdapter.setCurrentItem(IndexFragment.class);
                 return true;
             case R.id.home_friend:
-                mPagerAdapter.setCurrentItem(TestFragmentB.class);
+                mPagerAdapter.setCurrentItem(FriendFragment.class);
                 return true;
             case R.id.home_upload:
                 mPagerAdapter.setCurrentItem(FragmentUpload.class);
                 return true;
             case R.id.home_message:
-                mPagerAdapter.setCurrentItem(TestFragmentC.class);
+                mPagerAdapter.setCurrentItem(MessageFragment.class);
                 return true;
             case R.id.home_me:
                 mPagerAdapter.setCurrentItem(FragmentMe.class);
