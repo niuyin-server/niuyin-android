@@ -22,18 +22,18 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/12/2
- *    desc   : 支付密码对话框
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/12/2
+ * desc   : 支付密码对话框
  */
 public final class PayPasswordDialog {
 
-    public static final class Builder
-            extends BaseDialog.Builder<Builder>
-            implements BaseAdapter.OnItemClickListener {
+    public static final class Builder extends BaseDialog.Builder<Builder> implements BaseAdapter.OnItemClickListener {
 
-        /** 输入键盘文本 */
+        /**
+         * 输入键盘文本
+         */
         private static final String[] KEYBOARD_TEXT = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""};
 
         private OnListener mListener;
@@ -171,11 +171,17 @@ public final class PayPasswordDialog {
 
     private static final class KeyboardAdapter extends MyAdapter<String> {
 
-        /** 数字按钮条目 */
+        /**
+         * 数字按钮条目
+         */
         private static final int TYPE_NORMAL = 0;
-        /** 删除按钮条目 */
+        /**
+         * 删除按钮条目
+         */
         private static final int TYPE_DELETE = 1;
-        /** 空按钮条目 */
+        /**
+         * 空按钮条目
+         */
         private static final int TYPE_EMPTY = 2;
 
         private KeyboardAdapter(Context context) {
@@ -233,13 +239,14 @@ public final class PayPasswordDialog {
         /**
          * 输入完成时回调
          *
-         * @param password      输入的密码
+         * @param password 输入的密码
          */
         void onCompleted(BaseDialog dialog, String password);
 
         /**
          * 点击取消时回调
          */
-        default void onCancel(BaseDialog dialog) {}
+        default void onCancel(BaseDialog dialog) {
+        }
     }
 }

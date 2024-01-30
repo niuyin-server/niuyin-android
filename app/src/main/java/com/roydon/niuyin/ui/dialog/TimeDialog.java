@@ -18,15 +18,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/08/17
- *    desc   : 时间选择对话框
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/08/17
+ * desc   : 时间选择对话框
  */
 public final class TimeDialog {
 
-    public static final class Builder
-            extends UIDialog.Builder<Builder> implements Runnable {
+    public static final class Builder extends UIDialog.Builder<Builder> implements Runnable {
 
         private final RecyclerView mHourView;
         private final RecyclerView mMinuteView;
@@ -139,7 +138,7 @@ public final class TimeDialog {
                 setHour(time.substring(0, 2));
                 setMinute(time.substring(2, 4));
                 setSecond(time.substring(4, 6));
-            // 10:20:30
+                // 10:20:30
             } else if (time.matches("\\d{2}:\\d{2}:\\d{2}")) {
                 setHour(time.substring(0, 2));
                 setMinute(time.substring(3, 5));
@@ -248,15 +247,16 @@ public final class TimeDialog {
         /**
          * 选择完时间后回调
          *
-         * @param hour              时钟
-         * @param minute            分钟
-         * @param second            秒钟
+         * @param hour   时钟
+         * @param minute 分钟
+         * @param second 秒钟
          */
         void onSelected(BaseDialog dialog, int hour, int minute, int second);
 
         /**
          * 点击取消时回调
          */
-        default void onCancel(BaseDialog dialog) {}
+        default void onCancel(BaseDialog dialog) {
+        }
     }
 }

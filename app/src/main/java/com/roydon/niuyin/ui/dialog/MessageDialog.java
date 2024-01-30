@@ -18,8 +18,7 @@ import com.roydon.niuyin.aop.SingleClick;
  */
 public final class MessageDialog {
 
-    public static final class Builder
-            extends UIDialog.Builder<Builder> {
+    public static final class Builder extends UIDialog.Builder<Builder> {
 
         private OnListener mListener;
 

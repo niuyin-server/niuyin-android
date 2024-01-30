@@ -14,7 +14,7 @@
         android:id="@+id/iv_share_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:scaleRatio="1.2"
+        app:scaleRatio="1.1"
         tools:src="@mipmap/ic_launcher" />
 
     <androidx.appcompat.widget.AppCompatTextView

@@ -36,6 +36,7 @@ import com.roydon.niuyin.ui.activity.PhoneResetActivity;
 import com.roydon.niuyin.ui.activity.SettingActivity;
 import com.roydon.niuyin.ui.activity.StatusActivity;
 import com.roydon.niuyin.ui.dialog.MessageDialog;
+import com.roydon.niuyin.ui.dialog.SlideDialog;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         ImmersionBar.setTitleBar(getAttachActivity(), mToolbar);
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
-        setOnClickListener(R.id.btn_test_dialog, R.id.btn_test_hint, R.id.btn_test_reset, R.id.btn_test_change, R.id.ll_userinfo,
+        setOnClickListener(R.id.iv_menu_list, R.id.btn_test_dialog, R.id.btn_test_hint, R.id.btn_test_reset, R.id.btn_test_change, R.id.ll_userinfo,
                 R.id.btn_test_setting, R.id.btn_test_guide, R.id.btn_test_browser,
                 R.id.btn_test_image, R.id.btn_test_pay);
     }
@@ -183,6 +184,11 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_menu_list:
+                // slide弹窗
+                new SlideDialog.Builder(getAttachActivity())
+                        .show();
+                break;
             case R.id.btn_test_dialog:
                 startActivity(DialogActivity.class);
                 break;

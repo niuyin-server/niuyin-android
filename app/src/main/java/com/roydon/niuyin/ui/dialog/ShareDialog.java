@@ -27,16 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/03/23
- *    desc   : 分享对话框
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/03/23
+ * desc   : 分享对话框
  */
 public final class ShareDialog {
 
-    public static final class Builder
-            extends BaseDialog.Builder<Builder>
-            implements BaseAdapter.OnItemClickListener {
+    public static final class Builder extends BaseDialog.Builder<Builder> implements BaseAdapter.OnItemClickListener {
 
         private final ShareAdapter mAdapter;
 
@@ -148,11 +146,17 @@ public final class ShareDialog {
 
     private static class ShareBean {
 
-        /** 分享图标 */
+        /**
+         * 分享图标
+         */
         private final Drawable mShareIcon;
-        /** 分享名称 */
+        /**
+         * 分享名称
+         */
         private final String mShareName;
-        /** 分享平台 */
+        /**
+         * 分享平台
+         */
         private final Platform mSharePlatform;
 
         private ShareBean(Drawable icon, String name, Platform platform) {

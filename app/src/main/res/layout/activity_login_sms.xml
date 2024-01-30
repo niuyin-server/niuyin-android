@@ -193,7 +193,7 @@
             android:layout_marginBottom="25dp"
             android:layout_weight="1"
             android:src="@drawable/ic_login_qq"
-            app:scaleRatio="1.2" />
+            app:scaleRatio="1.1" />
 
         <com.hjq.widget.view.ScaleImageView
             android:id="@+id/iv_login_wx"
@@ -205,7 +205,7 @@
             android:layout_marginBottom="25dp"
             android:layout_weight="1"
             android:src="@drawable/ic_login_wx"
-            app:scaleRatio="1.2" />
+            app:scaleRatio="1.1" />
     </LinearLayout>
 
 </LinearLayout>

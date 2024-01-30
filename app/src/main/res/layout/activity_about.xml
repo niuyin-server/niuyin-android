@@ -20,7 +20,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp"
         android:src="@drawable/ic_niuyin_logo"
-        app:scaleRatio="1.5" />
+        app:scaleRatio="1.2" />
 
     <LinearLayout
         android:layout_width="match_parent"
