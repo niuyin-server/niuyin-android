@@ -1,22 +1,30 @@
 package com.roydon.niuyin.ui.fragment;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.ui.activity.HomeActivity;
+import com.roydon.niuyin.ui.activity.VideoCategoryActivity;
 import com.roydon.niuyin.ui.activity.VideoSearchActivity;
+import com.roydon.niuyin.ui.adapter.HomeAdapter;
+import com.roydon.niuyin.ui.fragment.index.IndexFollowFragment;
+import com.roydon.niuyin.ui.fragment.index.IndexHotFragment;
+import com.roydon.niuyin.ui.fragment.index.IndexRecommendFragment;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -29,6 +37,14 @@ public final class IndexFragment extends MyFragment<HomeActivity> implements XCo
     XCollapsingToolbarLayout mCollapsingToolbarLayout;
     @BindView(R.id.t_test_title)
     Toolbar mToolbar;
+
+    @BindView(R.id.slidingTabLayout)
+    SlidingTabLayout mSlidingTabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager mViewPager;
+
+    @BindView(R.id.iv_category)
+    ImageView mVideoCategoryView;
 
     @BindView(R.id.iv_avatar)
     ImageView mAvatarView;
@@ -50,7 +66,6 @@ public final class IndexFragment extends MyFragment<HomeActivity> implements XCo
     protected void initView() {
         // 给这个 ToolBar 设置顶部内边距，才能和 TitleBar 进行对齐
         ImmersionBar.setTitleBar(getAttachActivity(), mToolbar);
-        getStatusBarConfig().statusBarDarkFont(true).init();
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
         String avatarCache = SPUtils.getString(SPUtils.AVATAR, "", getContext());
@@ -65,9 +80,24 @@ public final class IndexFragment extends MyFragment<HomeActivity> implements XCo
                     .circleCrop()
                     .into(mAvatarView);
         }
+        // tab
+        String[] mTitles = {"关注", "推荐", "热门"};
+        ArrayList<Fragment> mIndexFragments = new ArrayList<>();
+        mIndexFragments.add(IndexFollowFragment.newInstance());
+        mIndexFragments.add(IndexRecommendFragment.newInstance());
+        mIndexFragments.add(IndexHotFragment.newInstance());
+        mViewPager.setOffscreenPageLimit(mIndexFragments.size());
+        mViewPager.setAdapter(new HomeAdapter(getFragmentManager(), mTitles, mIndexFragments));
+        mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setCurrentTab(1);
+        // 点击事件监听
         mHintView.setOnClickListener(v -> {
             startActivity(VideoSearchActivity.class);
         });
+        mVideoCategoryView.setOnClickListener(v -> {
+            startActivity(VideoCategoryActivity.class);
+        });
+
     }
 
     @Override

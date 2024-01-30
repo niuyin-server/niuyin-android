@@ -407,22 +407,6 @@
                 android:text="点我进入重置手机" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_test_setting"
-                style="@style/ButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="点我进入设置界面" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_test_guide"
-                style="@style/ButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="点我进入引导界面" />
-
-            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_test_browser"
                 style="@style/ButtonStyle"
                 android:layout_width="match_parent"

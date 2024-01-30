@@ -117,6 +117,11 @@ dependencies {
     // Dex 分包，解决 64k 方法问题
     //implementation 'androidx.multidex:multidex:2.0.1'
 
+    // tablayout
+//    implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
+    // https://blog.csdn.net/gpf1320253667/article/details/82768774
+    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+
     // 网络请求框架：https://github.com/getActivity/EasyHttp
     implementation 'com.hjq:http:5.0'
 
@@ -201,4 +206,6 @@ dependencies {
     // 图片压缩：https://github.com/Curzibn/Luban
     // 对象存储：https://github.com/leavesC/DoKV
     // 数据注入：https://github.com/JumeiRdGroup/Parceler
+
+
 }

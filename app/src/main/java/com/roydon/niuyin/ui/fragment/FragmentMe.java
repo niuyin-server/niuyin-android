@@ -97,8 +97,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
         setOnClickListener(R.id.iv_menu_list, R.id.btn_test_dialog, R.id.btn_test_hint, R.id.btn_test_reset, R.id.btn_test_change, R.id.ll_userinfo,
-                R.id.btn_test_setting, R.id.btn_test_guide, R.id.btn_test_browser,
-                R.id.btn_test_image, R.id.btn_test_pay);
+                R.id.btn_test_browser, R.id.btn_test_image, R.id.btn_test_pay);
     }
 
     @Override
@@ -215,14 +214,8 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
             case R.id.btn_test_change:
                 startActivity(PhoneResetActivity.class);
                 break;
-            case R.id.btn_test_setting:
-                startActivity(SettingActivity.class);
-                break;
             case R.id.ll_userinfo:
                 startActivity(PersonalProfileActivity.class);
-                break;
-            case R.id.btn_test_guide:
-                startActivity(GuideActivity.class);
                 break;
             case R.id.btn_test_browser:
                 BrowserActivity.start(getAttachActivity(), "http://106.14.105.101:5173");
