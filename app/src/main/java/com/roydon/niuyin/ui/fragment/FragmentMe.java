@@ -180,6 +180,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @SingleClick
     @Override
     public void onClick(View v) {
@@ -187,6 +188,19 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
             case R.id.iv_menu_list:
                 // slide弹窗
                 new SlideDialog.Builder(getAttachActivity())
+                        .setListener(view -> {
+                            switch (view.getId()) {
+                                case R.id.ll_my_qrcode:
+                                    toast("我的二维码");
+                                    break;
+                                case R.id.ll_setting:
+                                    startActivity(SettingActivity.class);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        })
+                        .setAutoDismiss(true)
                         .show();
                 break;
             case R.id.btn_test_dialog:

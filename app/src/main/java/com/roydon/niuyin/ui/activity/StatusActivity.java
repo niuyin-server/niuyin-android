@@ -66,7 +66,8 @@ public final class StatusActivity extends MyActivity implements StatusAction, On
 
         new MenuDialog.Builder(this)
                 //.setAutoDismiss(false) // 设置点击按钮后不关闭对话框
-                .setList("加载中", "请求错误", "空数据提示", "自定义提示").setListener((dialog, position, object) -> {
+                .setList("加载中", "请求错误", "空数据提示", "自定义提示")
+                .setListener((dialog, position, object) -> {
                     switch (position) {
                         case 0:
                             showLoading();

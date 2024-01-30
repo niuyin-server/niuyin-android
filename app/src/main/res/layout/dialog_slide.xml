@@ -17,6 +17,7 @@
         android:id="@+id/ll_my_qrcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/selector_hover_grey"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="20dp">
@@ -43,6 +44,7 @@
         android:id="@+id/ll_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/selector_hover_grey"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="20dp">
