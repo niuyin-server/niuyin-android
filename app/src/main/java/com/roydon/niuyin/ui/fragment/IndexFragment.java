@@ -18,34 +18,32 @@ import butterknife.BindView;
 /**
  * desc   : 项目炫酷效果示例
  */
-public final class TestFragmentA extends MyFragment<HomeActivity> implements XCollapsingToolbarLayout.OnScrimsListener {
+public final class IndexFragment extends MyFragment<HomeActivity> implements XCollapsingToolbarLayout.OnScrimsListener {
 
     @BindView(R.id.ctl_test_bar)
     XCollapsingToolbarLayout mCollapsingToolbarLayout;
     @BindView(R.id.t_test_title)
     Toolbar mToolbar;
 
-//    @BindView(R.id.tv_test_address)
-//    TextView mAddressView;
-    @BindView(R.id.tv_test_hint)
+    @BindView(R.id.tv_search_hint)
     TextView mHintView;
     @BindView(R.id.iv_test_search)
     ImageView mSearchView;
 
-    public static TestFragmentA newInstance() {
-        return new TestFragmentA();
+    public static IndexFragment newInstance() {
+        return new IndexFragment();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_test_a;
+        return R.layout.fragment_index;
     }
 
     @Override
     protected void initView() {
         // 给这个 ToolBar 设置顶部内边距，才能和 TitleBar 进行对齐
         ImmersionBar.setTitleBar(getAttachActivity(), mToolbar);
-
+        getStatusBarConfig().statusBarDarkFont(true).init();
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
 
@@ -88,7 +86,7 @@ public final class TestFragmentA extends MyFragment<HomeActivity> implements XCo
             mHintView.setBackgroundResource(R.drawable.bg_home_search_bar_transparent);
             mHintView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.white60));
             mSearchView.setImageResource(R.drawable.ic_search_white);
-            getStatusBarConfig().statusBarDarkFont(false).init();
+            getStatusBarConfig().statusBarDarkFont(true).init();
         }
     }
 }

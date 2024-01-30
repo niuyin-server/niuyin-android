@@ -15,12 +15,10 @@ import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 
 import butterknife.BindView;
 
-public class VideoSearchActivity extends MyActivity implements XCollapsingToolbarLayout.OnScrimsListener {
+public class VideoSearchActivity extends MyActivity {
 
     @BindView(R.id.iv_back)
     ImageView mBack;
-    @BindView(R.id.ll_search_container)
-    LinearLayout llSearchContainer;
     @BindView(R.id.tv_hint_keyword)
     EditText mHintKeyword;
     @BindView(R.id.tv_search)
@@ -29,15 +27,6 @@ public class VideoSearchActivity extends MyActivity implements XCollapsingToolba
     @Override
     protected int getLayoutId() {
         return R.layout.activity_video_search;
-    }
-
-    @Override
-    public void onScrimsStateChange(XCollapsingToolbarLayout layout, boolean shown) {
-        if (shown) {
-            llSearchContainer.setBackgroundResource(R.drawable.bg_home_search_bar_gray);
-        } else {
-            llSearchContainer.setBackgroundResource(R.drawable.bg_home_search_bar_transparent);
-        }
     }
 
     @Override

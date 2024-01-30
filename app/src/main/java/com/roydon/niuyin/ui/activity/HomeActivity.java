@@ -16,10 +16,10 @@ import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.DoubleClickHelper;
 import com.roydon.niuyin.other.KeyboardWatcher;
 import com.roydon.niuyin.ui.fragment.FragmentUpload;
-import com.roydon.niuyin.ui.fragment.TestFragmentA;
+import com.roydon.niuyin.ui.fragment.IndexFragment;
 import com.roydon.niuyin.ui.fragment.TestFragmentB;
 import com.roydon.niuyin.ui.fragment.TestFragmentC;
-import com.roydon.niuyin.ui.fragment.TestFragmentD;
+import com.roydon.niuyin.ui.fragment.FragmentMe;
 
 import butterknife.BindView;
 
@@ -45,18 +45,17 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         // 不使用图标默认变色
         mBottomNavigationView.setItemIconTintList(null);
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
-
         KeyboardWatcher.with(this).setListener(this);
     }
 
     @Override
     protected void initData() {
         mPagerAdapter = new BaseFragmentAdapter<>(this);
-        mPagerAdapter.addFragment(TestFragmentA.newInstance());
+        mPagerAdapter.addFragment(IndexFragment.newInstance());
         mPagerAdapter.addFragment(TestFragmentB.newInstance());
         mPagerAdapter.addFragment(FragmentUpload.newInstance());
         mPagerAdapter.addFragment(TestFragmentC.newInstance());
-        mPagerAdapter.addFragment(TestFragmentD.newInstance());
+        mPagerAdapter.addFragment(FragmentMe.newInstance());
 
         mViewPager.setAdapter(mPagerAdapter);
 
@@ -71,7 +70,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_home:
-                mPagerAdapter.setCurrentItem(TestFragmentA.class);
+                mPagerAdapter.setCurrentItem(IndexFragment.class);
                 return true;
             case R.id.home_friend:
                 mPagerAdapter.setCurrentItem(TestFragmentB.class);
@@ -83,7 +82,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
                 mPagerAdapter.setCurrentItem(TestFragmentC.class);
                 return true;
             case R.id.home_me:
-                mPagerAdapter.setCurrentItem(TestFragmentD.class);
+                mPagerAdapter.setCurrentItem(FragmentMe.class);
                 return true;
             default:
                 break;

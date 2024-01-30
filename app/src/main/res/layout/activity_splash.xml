@@ -23,7 +23,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_gravity="end"
-        android:src="@mipmap/avatar_ganyu" />
+        android:src="@drawable/ic_debug" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/iv_splash_name"

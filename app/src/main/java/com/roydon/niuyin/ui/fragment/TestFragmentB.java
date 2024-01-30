@@ -14,16 +14,9 @@ import com.hjq.widget.view.SwitchButton;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 项目自定义控件展示
+ * desc   : 项目自定义控件展示
  */
-public final class TestFragmentB extends MyFragment<HomeActivity>
-        implements SwitchButton.OnCheckedChangeListener {
-
-    @BindView(R.id.iv_test_circle)
-    ImageView mCircleView;
+public final class TestFragmentB extends MyFragment<HomeActivity> implements SwitchButton.OnCheckedChangeListener {
 
     @BindView(R.id.sb_test_switch)
     SwitchButton mSwitchButton;
@@ -48,10 +41,6 @@ public final class TestFragmentB extends MyFragment<HomeActivity>
 
     @Override
     protected void initData() {
-        GlideApp.with(this)
-                .load(R.drawable.bg_launcher)
-                .circleCrop()
-                .into(mCircleView);
     }
 
     @SingleClick

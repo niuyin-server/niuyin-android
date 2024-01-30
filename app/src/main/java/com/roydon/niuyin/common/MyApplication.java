@@ -4,8 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.billy.android.swipe.SmartSwipeBack;
 import com.hjq.bar.TitleBar;
@@ -13,10 +16,12 @@ import com.hjq.bar.style.TitleBarLightStyle;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.SwipeAction;
 import com.roydon.niuyin.helper.ActivityStackManager;
+import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.model.RequestHandler;
 import com.roydon.niuyin.http.server.ReleaseServer;
 import com.roydon.niuyin.http.server.TestServer;
 import com.roydon.niuyin.other.AppConfig;
+import com.roydon.niuyin.other.CommonConstants;
 import com.roydon.niuyin.ui.activity.CrashActivity;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.hjq.http.EasyConfig;
@@ -37,6 +42,7 @@ import okhttp3.OkHttpClient;
  */
 public final class MyApplication extends Application {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
         super.onCreate();
@@ -46,6 +52,7 @@ public final class MyApplication extends Application {
     /**
      * 初始化一些第三方框架
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void initSDK(Application application) {
         // 友盟统计、登录、分享 SDK
         UmengClient.init(application);
@@ -109,7 +116,7 @@ public final class MyApplication extends Application {
         } else {
             server = new ReleaseServer();
         }
-
+        TokenManager tokenManager = new TokenManager(application);
         EasyConfig.with(new OkHttpClient())
                 // 是否打印日志
                 .setLogEnabled(AppConfig.isDebug())
@@ -122,7 +129,7 @@ public final class MyApplication extends Application {
                 // 添加全局请求参数
 //                .addParam("Content-Type", "application/json;charset=UTF-8")
                 // 添加全局请求头
-//                .addHeader("Content-Type", "application/json;charset=UTF-8")
+                .addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + tokenManager.getToken())
                 // 启用配置
                 .into();
 

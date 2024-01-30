@@ -7,8 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.helper.ActivityStackManager;
@@ -24,6 +28,7 @@ import com.hjq.http.exception.ResultException;
 import com.hjq.http.exception.ServerException;
 import com.hjq.http.exception.TimeoutException;
 import com.hjq.http.exception.TokenException;
+import com.roydon.niuyin.ui.adapter.LocalDateTimeTypeAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +38,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
 
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -43,9 +49,12 @@ import okhttp3.ResponseBody;
  * time   : 2019/12/07
  * desc   : 请求处理类
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public final class RequestHandler implements IRequestHandler {
 
-    private static final Gson GSON = new Gson();
+    private static final Gson GSON = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
+            .create();
 
     @Override
     public Object requestSucceed(Context context, Response response, Type type) throws Exception {

@@ -8,7 +8,6 @@
     tools:context="com.roydon.niuyin.ui.activity.VideoSearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abl_test_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -16,7 +15,6 @@
         app:elevation="0px">
 
         <com.roydon.niuyin.widget.XCollapsingToolbarLayout
-            android:id="@+id/ctl_test_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="@color/white"
@@ -24,10 +22,8 @@
             app:scrimVisibleHeightTrigger="100dp">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/t_test_title"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:layout_marginEnd="20dp"
                 app:layout_collapseMode="pin" />
 
             <com.hjq.bar.TitleBar
@@ -57,7 +53,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_home_search_bar_transparent"
+                        android:background="@drawable/bg_video_search_bar"
                         android:orientation="horizontal"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp">

@@ -27,6 +27,7 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.helper.InputTextHelper;
+import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.GetCodeApi;
@@ -193,6 +194,9 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                                 // 更新 Token
 //                                EasyConfig.getInstance().addParam("token", data.getData().getToken());
                                 EasyConfig.getInstance().addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + data.getData().getToken());
+                                // token保存到本地
+                                TokenManager tokenManager = new TokenManager(getActivity());
+                                tokenManager.saveToken(data.getData().getToken());
                                 // 跳转到主页
                                 startActivity(HomeActivity.class);
                                 finish();

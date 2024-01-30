@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.roydon.niuyin.ui.fragment.TestFragmentA"
+    tools:context="com.roydon.niuyin.ui.fragment.IndexFragment"
     tools:ignore="HardcodedText">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,18 +23,10 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:scrimVisibleHeightTrigger="100dp">
 
-            <!--            <androidx.appcompat.widget.AppCompatImageView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:scaleType="centerCrop"-->
-            <!--                android:src="@drawable/bg_launcher"-->
-            <!--                app:layout_collapseMode="parallax" />-->
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/t_test_title"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:layout_marginEnd="20dp"
                 app:layout_collapseMode="pin" />
 
             <com.hjq.bar.TitleBar
@@ -50,31 +42,6 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
 
-<!--                    <androidx.appcompat.widget.AppCompatTextView-->
-<!--                        android:id="@+id/tv_test_address"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_marginStart="10dp"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        android:text="广州"-->
-<!--                        android:textColor="@color/white"-->
-<!--                        android:textSize="15sp" />-->
-
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:id="@+id/tv_test_address"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="10dp"-->
-<!--                        app:cardCornerRadius="20dp"-->
-<!--                        app:cardElevation="0px">-->
-
-<!--                        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                            android:layout_width="36dp"-->
-<!--                            android:layout_height="36dp"-->
-<!--                            android:scaleType="centerCrop"-->
-<!--                            android:src="@mipmap/avatar_ganyu" />-->
-<!--                    </androidx.cardview.widget.CardView>-->
-
                     <com.roydon.niuyin.widget.RoundImageView
                         android:id="@+id/riv_avatar"
                         android:layout_width="36dp"
@@ -84,7 +51,7 @@
                         android:src="@mipmap/avatar_ganyu" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_test_hint"
+                        android:id="@+id/tv_search_hint"
                         android:layout_width="0px"
                         android:layout_height="match_parent"
                         android:layout_marginStart="20dp"
@@ -123,6 +90,11 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="首页" />
 
         </LinearLayout>
 

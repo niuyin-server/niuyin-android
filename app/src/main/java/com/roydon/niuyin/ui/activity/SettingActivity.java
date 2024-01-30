@@ -9,6 +9,7 @@ import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.CacheDataManager;
+import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.LogoutApi;
@@ -115,6 +116,8 @@ public final class SettingActivity extends MyActivity
                 break;
             case R.id.sb_setting_exit:
                 if (true) {
+                    TokenManager tokenManager = new TokenManager(getActivity());
+                    tokenManager.clearToken();
                     startActivity(LoginActivity.class);
                     // 进行内存优化，销毁除登录页之外的所有界面
                     ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
@@ -128,6 +131,8 @@ public final class SettingActivity extends MyActivity
 
                             @Override
                             public void onSucceed(HttpData<Void> data) {
+                                TokenManager tokenManager = new TokenManager(getActivity());
+                                tokenManager.clearToken();
                                 startActivity(LoginActivity.class);
                                 // 进行内存优化，销毁除登录页之外的所有界面
                                 ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
