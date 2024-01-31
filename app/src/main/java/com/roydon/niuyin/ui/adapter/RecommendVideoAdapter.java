@@ -20,7 +20,7 @@ import butterknife.BindView;
 /**
  * @author roydon
  * @date 2024/1/31 14:42
- * @description niuyin-android
+ * @description 首页推荐视频适配器
  */
 public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
 
@@ -71,6 +71,8 @@ public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
             mNicknameView.setText(item.getAuthor().getNickName());
             if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
                 mVideoTypeView.setVisibility(View.GONE);
+            } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
+                mVideoTypeView.setVisibility(View.VISIBLE);
             }
             mViewNumView.setText(item.getViewNum().toString());
             mLikeNumView.setText(item.getLikeNum().toString());

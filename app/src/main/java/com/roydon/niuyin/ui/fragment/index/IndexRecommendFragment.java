@@ -19,6 +19,7 @@ import com.hjq.widget.layout.WrapRecyclerView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
@@ -27,6 +28,8 @@ import com.roydon.niuyin.http.request.video.RecommendVideoApi;
 import com.roydon.niuyin.http.response.MemberInfoVO;
 import com.roydon.niuyin.http.response.VideoRecommendVO;
 import com.roydon.niuyin.ui.activity.HomeActivity;
+import com.roydon.niuyin.ui.activity.VideoImagePlayActivity;
+import com.roydon.niuyin.ui.activity.VideoPlayActivity;
 import com.roydon.niuyin.ui.adapter.RecommendVideoAdapter;
 import com.roydon.niuyin.ui.adapter.StatusAdapter;
 import com.roydon.niuyin.widget.HintLayout;
@@ -121,7 +124,6 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                 });
     }
 
-
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressLint("NotifyDataSetChanged")
@@ -144,7 +146,14 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        toast(mAdapter.getItem(position).getVideoId());
+        VideoRecommendVO videoRecommendVO = mAdapter.getItem(position);
+        if (videoRecommendVO.getPublishType().equals(PublishType.VIDEO.getCode())) {
+            // 视频
+            VideoPlayActivity.start(getContext(), videoRecommendVO.getVideoId());
+        } else if (videoRecommendVO.getPublishType().equals(PublishType.IMAGE.getCode())) {
+            // 图文
+            VideoImagePlayActivity.start(getContext(), videoRecommendVO.getVideoId());
+        }
     }
 
     @Override

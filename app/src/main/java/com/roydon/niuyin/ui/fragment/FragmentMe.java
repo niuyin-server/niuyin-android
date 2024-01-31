@@ -174,6 +174,10 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                     .load(memberInfoVO.getAvatar())
                     .circleCrop()
                     .into(mAvatarView);
+            GlideApp.with(this)
+                    .load(memberInfoVO.getAvatar())
+                    .circleCrop()
+                    .into(mMenuAvatarView);
         }
         mNickNameView.setText(memberInfoVO.getNickName());
         mMenuNickNameView.setText(memberInfoVO.getNickName());

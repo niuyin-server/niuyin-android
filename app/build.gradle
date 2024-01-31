@@ -113,6 +113,36 @@ dependencies {
     implementation project(':widget')
     // 友盟隔离
     implementation project(':umeng')
+    implementation project(':copy')
+
+//    # 必选，内部默认使用系统mediaplayer进行解码
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
+
+//    # 可选，包含StandardVideoController的实现
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-ui:3.3.7'
+
+//    # 可选，使用exoplayer进行解码
+//    implementation 'xyz.doikki.android.dkplayer:player-exo:3.3.7'
+
+//    # 可选，使用ijkplayer进行解码
+    implementation 'xyz.doikki.android.dkplayer:player-ijk:3.3.7'
+
+//    # 可选，如需要缓存或者抖音预加载功能请引入此库
+    implementation 'xyz.doikki.android.dkplayer:videocache:3.3.7'
+
+    // https://github.com/Rukey7/IjkPlayerView
+//    implementation 'com.github.Rukey7:IjkPlayerView:1.0.4'
+    // bilibili 视频库 https://github.com/Bilibili/ijkplayer
+//    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+//    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+//    # Other ABIs: optional
+//    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
+//    compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+//    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
+//    compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
+//
+//    # ExoPlayer as IMediaPlayer: optional, experimental
+//    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
 
     // Dex 分包，解决 64k 方法问题
     //implementation 'androidx.multidex:multidex:2.0.1'
