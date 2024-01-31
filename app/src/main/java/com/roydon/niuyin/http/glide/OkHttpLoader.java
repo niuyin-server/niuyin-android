@@ -13,10 +13,7 @@ import java.io.InputStream;
 import okhttp3.Call;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/15
- *    desc   : OkHttp 加载模型
+ * desc   : OkHttp 加载模型
  */
 public class OkHttpLoader implements ModelLoader<GlideUrl, InputStream> {
 
@@ -32,8 +29,7 @@ public class OkHttpLoader implements ModelLoader<GlideUrl, InputStream> {
     }
 
     @Override
-    public LoadData<InputStream> buildLoadData(@NonNull GlideUrl model, int width, int height,
-                                               @NonNull Options options) {
+    public LoadData<InputStream> buildLoadData(@NonNull GlideUrl model, int width, int height, @NonNull Options options) {
         return new LoadData<>(model, new OkHttpFetcher(mFactory, model));
     }
 
@@ -52,6 +48,7 @@ public class OkHttpLoader implements ModelLoader<GlideUrl, InputStream> {
         }
 
         @Override
-        public void teardown() {}
+        public void teardown() {
+        }
     }
 }

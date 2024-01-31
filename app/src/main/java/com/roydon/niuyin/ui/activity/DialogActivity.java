@@ -25,7 +25,6 @@ import com.roydon.niuyin.ui.dialog.ToastDialog;
 import com.roydon.niuyin.ui.dialog.UpdateDialog;
 import com.roydon.niuyin.ui.dialog.WaitDialog;
 import com.roydon.niuyin.ui.popup.MenuPopup;
-import com.hjq.demo.wxapi.WXEntryActivity;
 import com.hjq.umeng.Platform;
 import com.hjq.umeng.UmengClient;
 import com.hjq.umeng.UmengShare;

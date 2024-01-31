@@ -15,14 +15,17 @@ import com.hjq.umeng.UmengClient;
 import butterknife.ButterKnife;
 
 /**
- *    desc   : 项目中 Fragment 懒加载基类
+ * desc   : 项目中 Fragment 懒加载基类
  */
-public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A>
-        implements ToastAction, TitleBarAction {
+public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> implements ToastAction, TitleBarAction {
 
-    /** 标题栏对象 */
+    /**
+     * 标题栏对象
+     */
     private TitleBar mTitleBar;
-    /** 状态栏沉浸 */
+    /**
+     * 状态栏沉浸
+     */
     private ImmersionBar mImmersionBar;
 
     @Override

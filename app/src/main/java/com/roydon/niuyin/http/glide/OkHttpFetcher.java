@@ -21,10 +21,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/15
- *    desc   : OkHttp 加载器
+ * desc   : OkHttp 加载器
  */
 public class OkHttpFetcher implements DataFetcher<InputStream>, Callback {
 
@@ -41,8 +38,7 @@ public class OkHttpFetcher implements DataFetcher<InputStream>, Callback {
     }
 
     @Override
-    public void loadData(@NonNull Priority priority,
-                         @NonNull final DataFetcher.DataCallback<? super InputStream> callback) {
+    public void loadData(@NonNull Priority priority, @NonNull final DataFetcher.DataCallback<? super InputStream> callback) {
         Request.Builder requestBuilder = new Request.Builder().url(mGlideUrl.toStringUrl());
         for (Map.Entry<String, String> headerEntry : mGlideUrl.getHeaders().entrySet()) {
             String key = headerEntry.getKey();
@@ -78,7 +74,8 @@ public class OkHttpFetcher implements DataFetcher<InputStream>, Callback {
             if (mInputStream != null) {
                 mInputStream.close();
             }
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
 
         if (mResponseBody != null) {
             mResponseBody.close();

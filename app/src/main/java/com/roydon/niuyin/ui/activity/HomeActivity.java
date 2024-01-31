@@ -16,9 +16,9 @@ import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.DoubleClickHelper;
 import com.roydon.niuyin.other.KeyboardWatcher;
 import com.roydon.niuyin.ui.fragment.FragmentUpload;
-import com.roydon.niuyin.ui.fragment.IndexFragment;
-import com.roydon.niuyin.ui.fragment.FriendFragment;
-import com.roydon.niuyin.ui.fragment.MessageFragment;
+import com.roydon.niuyin.ui.fragment.FragmentIndex;
+import com.roydon.niuyin.ui.fragment.FragmentFriend;
+import com.roydon.niuyin.ui.fragment.FragmentMessage;
 import com.roydon.niuyin.ui.fragment.FragmentMe;
 
 import butterknife.BindView;
@@ -51,10 +51,10 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     @Override
     protected void initData() {
         mPagerAdapter = new BaseFragmentAdapter<>(this);
-        mPagerAdapter.addFragment(IndexFragment.newInstance());
-        mPagerAdapter.addFragment(FriendFragment.newInstance());
+        mPagerAdapter.addFragment(FragmentIndex.newInstance());
+        mPagerAdapter.addFragment(FragmentFriend.newInstance());
         mPagerAdapter.addFragment(FragmentUpload.newInstance());
-        mPagerAdapter.addFragment(MessageFragment.newInstance());
+        mPagerAdapter.addFragment(FragmentMessage.newInstance());
         mPagerAdapter.addFragment(FragmentMe.newInstance());
 
         mViewPager.setAdapter(mPagerAdapter);
@@ -70,16 +70,16 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_home:
-                mPagerAdapter.setCurrentItem(IndexFragment.class);
+                mPagerAdapter.setCurrentItem(FragmentIndex.class);
                 return true;
             case R.id.home_friend:
-                mPagerAdapter.setCurrentItem(FriendFragment.class);
+                mPagerAdapter.setCurrentItem(FragmentFriend.class);
                 return true;
             case R.id.home_upload:
                 mPagerAdapter.setCurrentItem(FragmentUpload.class);
                 return true;
             case R.id.home_message:
-                mPagerAdapter.setCurrentItem(MessageFragment.class);
+                mPagerAdapter.setCurrentItem(FragmentMessage.class);
                 return true;
             case R.id.home_me:
                 mPagerAdapter.setCurrentItem(FragmentMe.class);

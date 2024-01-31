@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.fragment.IndexFragment">
+    tools:context="com.roydon.niuyin.ui.fragment.FragmentIndex">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/abl_test_bar"

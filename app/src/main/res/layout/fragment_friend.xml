@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.fragment.FriendFragment"
+    tools:context="com.roydon.niuyin.ui.fragment.FragmentFriend"
     tools:ignore="HardcodedText">
 
     <com.hjq.bar.TitleBar

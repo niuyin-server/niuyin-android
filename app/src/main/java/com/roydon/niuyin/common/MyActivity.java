@@ -55,15 +55,15 @@ public abstract class MyActivity extends BaseActivity implements ToastAction, Ti
     }
 
     /**
-     * 显示加载对话框
+     * 显示加载对话框 todo 禁用网络加载框，后续取消注释
      */
     public void showDialog() {
-        if (mDialog == null) {
-            mDialog = new WaitDialog.Builder(this).setCancelable(false).create();
-        }
-        if (!mDialog.isShowing()) {
-            mDialog.show();
-        }
+//        if (mDialog == null) {
+//            mDialog = new WaitDialog.Builder(this).setCancelable(false).create();
+//        }
+//        if (!mDialog.isShowing()) {
+//            mDialog.show();
+//        }
         mDialogTotal++;
     }
 

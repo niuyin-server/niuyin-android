@@ -1,4 +1,4 @@
-package com.roydon.niuyin.ui.adapter;
+package com.roydon.niuyin.http.model;
 
 import android.os.Build;
 

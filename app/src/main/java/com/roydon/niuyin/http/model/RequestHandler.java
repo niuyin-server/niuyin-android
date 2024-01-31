@@ -28,7 +28,6 @@ import com.hjq.http.exception.ResultException;
 import com.hjq.http.exception.ServerException;
 import com.hjq.http.exception.TimeoutException;
 import com.hjq.http.exception.TokenException;
-import com.roydon.niuyin.ui.adapter.LocalDateTimeTypeAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,9 +43,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/12/07
  * desc   : 请求处理类
  */
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -67,7 +63,6 @@ public final class RequestHandler implements IRequestHandler {
         if (body == null) {
             return null;
         }
-
         if (Response.class.equals(type)) {
             return response;
         }

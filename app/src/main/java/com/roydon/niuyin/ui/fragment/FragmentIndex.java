@@ -24,14 +24,13 @@ import com.roydon.niuyin.ui.fragment.index.IndexRecommendFragment;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
 /**
  * desc   : 项目炫酷效果示例
  */
-public final class IndexFragment extends MyFragment<HomeActivity> implements XCollapsingToolbarLayout.OnScrimsListener {
+public final class FragmentIndex extends MyFragment<HomeActivity> implements XCollapsingToolbarLayout.OnScrimsListener {
 
     @BindView(R.id.ctl_test_bar)
     XCollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -53,8 +52,8 @@ public final class IndexFragment extends MyFragment<HomeActivity> implements XCo
     @BindView(R.id.iv_test_search)
     ImageView mSearchView;
 
-    public static IndexFragment newInstance() {
-        return new IndexFragment();
+    public static FragmentIndex newInstance() {
+        return new FragmentIndex();
     }
 
     @Override
