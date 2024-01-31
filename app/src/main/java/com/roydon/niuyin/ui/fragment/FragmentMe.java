@@ -192,10 +192,6 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
             getStatusBarConfig().statusBarDarkFont(true).init();
             mUserinfoView.setVisibility(View.GONE);
             mMenuAvatarView.setVisibility(View.VISIBLE);
-            GlideApp.with(this)
-                    .load(memberInfoVO.getAvatar())
-                    .circleCrop()
-                    .into(mMenuAvatarView);
             mMenuNicknameView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.black));
             mMenuSearchView.setBackgroundResource(R.drawable.bg_icon_transparent);
             mMenuSearchView.setImageResource(R.drawable.ic_search_b);

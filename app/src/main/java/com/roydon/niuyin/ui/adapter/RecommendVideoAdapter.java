@@ -54,6 +54,8 @@ public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
         TextView mViewNumView;
         @BindView(R.id.tv_like_num)
         TextView mLikeNumView;
+        @BindView(R.id.tv_comment_num)
+        TextView mCommentNumView;
 
         @SuppressLint("SetTextI18n")
         @Override
@@ -72,6 +74,7 @@ public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
             }
             mViewNumView.setText(item.getViewNum().toString());
             mLikeNumView.setText(item.getLikeNum().toString());
+            mCommentNumView.setText(item.getCommentNum().toString());
         }
     }
 }

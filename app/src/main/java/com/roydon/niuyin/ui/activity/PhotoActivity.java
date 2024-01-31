@@ -37,16 +37,9 @@ import java.util.Set;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/07/24
- *    desc   : 图片选择
+ * desc   : 图片选择
  */
-public final class PhotoActivity extends MyActivity
-        implements StatusAction,
-        BaseAdapter.OnItemClickListener,
-        BaseAdapter.OnItemLongClickListener,
-        BaseAdapter.OnChildClickListener, Runnable {
+public final class PhotoActivity extends MyActivity implements StatusAction, BaseAdapter.OnItemClickListener, BaseAdapter.OnItemLongClickListener, BaseAdapter.OnChildClickListener, Runnable {
 
     public static void start(BaseActivity activity, OnPhotoSelectListener listener) {
         start(activity, 1, listener);
@@ -84,14 +77,22 @@ public final class PhotoActivity extends MyActivity
 
     private PhotoAdapter mAdapter;
 
-    /** 最大选中 */
+    /**
+     * 最大选中
+     */
     private int mMaxSelect = 1;
-    /** 选中列表 */
+    /**
+     * 选中列表
+     */
     private final ArrayList<String> mSelectPhoto = new ArrayList<>();
 
-    /** 全部图片 */
+    /**
+     * 全部图片
+     */
     private final ArrayList<String> mAllPhoto = new ArrayList<>();
-    /** 图片专辑 */
+    /**
+     * 图片专辑
+     */
     private final HashMap<String, List<String>> mAllAlbum = new HashMap<>();
 
     @Override
@@ -223,9 +224,10 @@ public final class PhotoActivity extends MyActivity
 
     /**
      * {@link BaseAdapter.OnItemClickListener}
-     * @param recyclerView      RecyclerView对象
-     * @param itemView          被点击的条目对象
-     * @param position          被点击的条目位置
+     *
+     * @param recyclerView RecyclerView对象
+     * @param itemView     被点击的条目对象
+     * @param position     被点击的条目位置
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
@@ -238,9 +240,10 @@ public final class PhotoActivity extends MyActivity
 
     /**
      * {@link BaseAdapter.OnItemLongClickListener}
-     * @param recyclerView      RecyclerView对象
-     * @param itemView          被点击的条目对象
-     * @param position          被点击的条目位置
+     *
+     * @param recyclerView RecyclerView对象
+     * @param itemView     被点击的条目对象
+     * @param position     被点击的条目位置
      */
     @Override
     public boolean onItemLongClick(RecyclerView recyclerView, View itemView, int position) {
@@ -254,9 +257,10 @@ public final class PhotoActivity extends MyActivity
 
     /**
      * {@link BaseAdapter.OnChildClickListener}
-     * @param recyclerView      RecyclerView对象
-     * @param childView         被点击的条目子 View Id
-     * @param position          被点击的条目位置
+     *
+     * @param recyclerView RecyclerView对象
+     * @param childView    被点击的条目子 View Id
+     * @param position     被点击的条目位置
      */
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
@@ -415,7 +419,7 @@ public final class PhotoActivity extends MyActivity
         /**
          * 选择回调
          *
-         * @param data          图片列表
+         * @param data 图片列表
          */
         void onSelected(List<String> data);
 

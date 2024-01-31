@@ -16,8 +16,6 @@ import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.widget.HintLayout;
 
 /**
- * author : Android 轮子哥
- * time   : 2019/12/08
  * desc   : 界面状态提示
  */
 public interface StatusAction {
@@ -31,7 +29,7 @@ public interface StatusAction {
      * 显示加载中
      */
     default void showLoading() {
-        showLoading(R.raw.loading);
+        showLoading(R.raw.loading_hi);
     }
 
     default void showLoading(@RawRes int id) {
