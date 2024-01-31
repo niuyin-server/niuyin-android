@@ -81,6 +81,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        showLoading();
     }
 
     @Override
@@ -126,6 +127,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                     break;
                 case HANDLER_RECOMMEND_VIDEO:
                     mAdapter.setData(videoRecommendVOList);
+                    showComplete();
                     break;
                 default:
                     break;
