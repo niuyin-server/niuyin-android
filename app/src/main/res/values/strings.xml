@@ -111,6 +111,9 @@
     <string name="me_tab_like">喜欢</string>
     <string name="me_tab_favorite">收藏</string>
 
+    <!--    视频播放 tab-->
+    <string name="videoplay_tab_info">简介</string>
+    <string name="videoplay_tab_comment">评论</string>
     <!-- 登录 -->
     <string name="login_register">注册</string>
     <string name="login_forget">忘记密码？</string>

@@ -64,31 +64,16 @@
                             android:src="@drawable/ic_search_b" />
 
                         <com.hjq.widget.view.ClearEditText
-                            style="@style/EditTextStyle"
                             android:id="@+id/tv_hint_keyword"
+                            style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:paddingLeft="10dp"
                             android:gravity="left|center_horizontal"
+                            android:paddingLeft="10dp"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
-
-                    <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-                    <!--                        android:id="@+id/tv_hint_keyword"-->
-                    <!--                        android:layout_width="0px"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:layout_marginStart="20dp"-->
-                    <!--                        android:layout_marginEnd="20dp"-->
-                    <!--                        android:layout_weight="1"-->
-                    <!--                        android:background="@drawable/bg_home_search_bar_transparent"-->
-                    <!--                        android:gravity="left|center_vertical"-->
-                    <!--                        android:paddingLeft="10dp"-->
-                    <!--                        android:paddingRight="10dp"-->
-                    <!--                        android:text="请输入搜索内容"-->
-                    <!--                        android:textColor="@color/black"-->
-                    <!--                        android:textSize="15sp" />-->
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_search"
@@ -96,15 +81,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="搜索"
-                        android:textColor="@color/red"
-                        android:textSize="15sp" />
-
-                    <!--                    <androidx.appcompat.widget.AppCompatImageView-->
-                    <!--                        android:id="@+id/iv_test_search"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:layout_marginEnd="10dp"-->
-                    <!--                        android:src="@drawable/ic_search_white" />-->
+                        android:textColor="@color/primaryRed"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
