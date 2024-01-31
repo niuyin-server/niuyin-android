@@ -40,7 +40,7 @@ public final class IndexFragment extends MyFragment<HomeActivity> implements XCo
 
     @BindView(R.id.slidingTabLayout)
     SlidingTabLayout mSlidingTabLayout;
-    @BindView(R.id.view_pager)
+    @BindView(R.id.viewPager)
     ViewPager mViewPager;
 
     @BindView(R.id.iv_category)

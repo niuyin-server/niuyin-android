@@ -13,7 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -35,8 +38,16 @@ import com.roydon.niuyin.ui.activity.PersonalProfileActivity;
 import com.roydon.niuyin.ui.activity.PhoneResetActivity;
 import com.roydon.niuyin.ui.activity.SettingActivity;
 import com.roydon.niuyin.ui.activity.StatusActivity;
+import com.roydon.niuyin.ui.adapter.HomeAdapter;
+import com.roydon.niuyin.ui.adapter.MeAdapter;
 import com.roydon.niuyin.ui.dialog.MessageDialog;
 import com.roydon.niuyin.ui.dialog.SlideDialog;
+import com.roydon.niuyin.ui.fragment.index.IndexFollowFragment;
+import com.roydon.niuyin.ui.fragment.index.IndexHotFragment;
+import com.roydon.niuyin.ui.fragment.index.IndexRecommendFragment;
+import com.roydon.niuyin.ui.fragment.me.MeFavoriteFragment;
+import com.roydon.niuyin.ui.fragment.me.MeLikeFragment;
+import com.roydon.niuyin.ui.fragment.me.MePostFragment;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
@@ -49,6 +60,7 @@ import butterknife.BindView;
  * time   : 2018/10/18
  * desc   : 项目界面跳转示例
  */
+@SuppressLint("NonConstantResourceId")
 public final class FragmentMe extends MyFragment<HomeActivity> implements XCollapsingToolbarLayout.OnScrimsListener {
 
     // handler
@@ -60,6 +72,8 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     @BindView(R.id.t_test_title)
     Toolbar mToolbar;
 
+    @BindView(R.id.iv_menu_avatar)
+    ImageView mMenuAvatarView;
     @BindView(R.id.tv_menu_nickname)
     TextView mMenuNicknameView;
     @BindView(R.id.iv_menu_search)
@@ -79,6 +93,11 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     @BindView(R.id.tv_user_id)
     TextView mUserIdView;
 
+    @BindView(R.id.slidingTabLayout)
+    SlidingTabLayout mSlidingTabLayout;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+
     private MemberInfoVO memberInfoVO;
 
     public static FragmentMe newInstance() {
@@ -96,8 +115,19 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         ImmersionBar.setTitleBar(getAttachActivity(), mToolbar);
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
-        setOnClickListener(R.id.iv_menu_list, R.id.btn_test_dialog, R.id.btn_test_hint, R.id.btn_test_reset, R.id.btn_test_change, R.id.ll_userinfo,
-                R.id.btn_test_browser, R.id.btn_test_image, R.id.btn_test_pay);
+        // tab
+        String[] mTitles = {"作品", "喜欢", "收藏"};
+        ArrayList<Fragment> mMeFragments = new ArrayList<>();
+        mMeFragments.add(MePostFragment.newInstance());
+        mMeFragments.add(MeLikeFragment.newInstance());
+        mMeFragments.add(MeFavoriteFragment.newInstance());
+        mViewPager.setOffscreenPageLimit(mMeFragments.size());
+        mViewPager.setAdapter(new MeAdapter(getChildFragmentManager(), mTitles, mMeFragments));
+        mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setCurrentTab(0);
+
+        setOnClickListener(R.id.iv_menu_list, R.id.ll_userinfo);
+
     }
 
     @Override
@@ -161,6 +191,11 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         if (shown) {
             getStatusBarConfig().statusBarDarkFont(true).init();
             mUserinfoView.setVisibility(View.GONE);
+            mMenuAvatarView.setVisibility(View.VISIBLE);
+            GlideApp.with(this)
+                    .load(memberInfoVO.getAvatar())
+                    .circleCrop()
+                    .into(mMenuAvatarView);
             mMenuNicknameView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.black));
             mMenuSearchView.setBackgroundResource(R.drawable.bg_icon_transparent);
             mMenuSearchView.setImageResource(R.drawable.ic_search_b);
@@ -170,6 +205,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         } else {
             getStatusBarConfig().statusBarDarkFont(false).init();
             mUserinfoView.setVisibility(View.VISIBLE);
+            mMenuAvatarView.setVisibility(View.GONE);
             mMenuNicknameView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.white));
             mMenuSearchView.setBackgroundResource(R.drawable.bg_icon_grey);
             mMenuSearchView.setImageResource(R.drawable.ic_search_w);
@@ -202,48 +238,8 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                         .setAutoDismiss(true)
                         .show();
                 break;
-            case R.id.btn_test_dialog:
-                startActivity(DialogActivity.class);
-                break;
-            case R.id.btn_test_hint:
-                startActivity(StatusActivity.class);
-                break;
-            case R.id.btn_test_reset:
-                startActivity(PasswordResetActivity.class);
-                break;
-            case R.id.btn_test_change:
-                startActivity(PhoneResetActivity.class);
-                break;
             case R.id.ll_userinfo:
                 startActivity(PersonalProfileActivity.class);
-                break;
-            case R.id.btn_test_browser:
-                BrowserActivity.start(getAttachActivity(), "http://106.14.105.101:5173");
-                break;
-            case R.id.btn_test_image:
-                ArrayList<String> images = new ArrayList<>();
-                images.add("https://www.baidu.com/img/bd_logo.png");
-                images.add("https://avatars1.githubusercontent.com/u/28616817?s=460&v=4");
-                ImageActivity.start(getAttachActivity(), images, 0);
-                break;
-            case R.id.btn_test_pay:
-                new MessageDialog.Builder(getAttachActivity())
-                        .setTitle("捐赠")
-                        .setMessage("如果你觉得这个开源项目很棒，希望它能更好地坚持开发下去，可否愿意花一点点钱（推荐 10.24 元）作为对于开发者的激励")
-                        .setConfirm("支付宝")
-                        .setCancel(null)
-                        //.setAutoDismiss(false)
-                        .setListener(dialog -> {
-                            try {
-                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("alipays://platformapi/startapp?saId=10000007&clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2FFKX04202G4K6AVCF5GIY66%3F_s%3Dweb-other"));
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                toast("这个开源项目因为你的支持而能够不断更新、完善，非常感谢你的支持");
-                            } catch (Exception e) {
-                                toast("打开支付宝失败");
-                            }
-                        })
-                        .show();
                 break;
             default:
                 break;
