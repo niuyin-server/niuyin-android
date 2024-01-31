@@ -64,15 +64,7 @@ public class VideoPlayActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        // tab
-        String[] mTitles = {"简介", "评论"};
-        ArrayList<Fragment> mIndexFragments = new ArrayList<>();
-        mIndexFragments.add(VideoInfoFragment.newInstance());
-        mIndexFragments.add(VideoCommentFragment.newInstance());
-        mViewPager.setOffscreenPageLimit(mIndexFragments.size());
-        mViewPager.setAdapter(new VideoPlayAdapter(getSupportFragmentManager(), mTitles, mIndexFragments));
-        mSlidingTabLayout.setViewPager(mViewPager);
-        mSlidingTabLayout.setCurrentTab(0);
+
     }
 
     @Override
@@ -118,6 +110,18 @@ public class VideoPlayActivity extends MyActivity {
         controller.addDefaultControlComponent(videoInfoVO.getVideoTitle(), false);
         mVideoPlayerView.setVideoController(controller); //设置控制器
         mVideoPlayerView.start(); //开始播放，不调用则不自动播放
+
+        // tab
+        String[] mTitles = {"简介", "评论"};
+        ArrayList<Fragment> mIndexFragments = new ArrayList<>();
+        VideoInfoFragment videoInfoFragment = VideoInfoFragment.newInstance();
+        videoInfoFragment.setVideoInfoVO(videoInfoVO);
+        mIndexFragments.add(videoInfoFragment);
+        mIndexFragments.add(VideoCommentFragment.newInstance());
+        mViewPager.setOffscreenPageLimit(mIndexFragments.size());
+        mViewPager.setAdapter(new VideoPlayAdapter(getSupportFragmentManager(), mTitles, mIndexFragments));
+        mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setCurrentTab(0);
     }
 
     @Override

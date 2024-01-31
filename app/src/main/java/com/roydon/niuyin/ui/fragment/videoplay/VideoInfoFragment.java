@@ -1,8 +1,16 @@
 package com.roydon.niuyin.ui.fragment.videoplay;
 
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.http.glide.GlideApp;
+import com.roydon.niuyin.http.response.VideoInfoVO;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
+
+import butterknife.BindView;
 
 /**
  * @author roydon
@@ -11,8 +19,22 @@ import com.roydon.niuyin.ui.activity.VideoPlayActivity;
  */
 public class VideoInfoFragment extends MyFragment<VideoPlayActivity> {
 
+    @BindView(R.id.ll_author)
+    LinearLayout mAuthorLayout;
+    @BindView(R.id.iv_author_avatar)
+    ImageView mAuthorAvatarView;
+    @BindView(R.id.tv_author_nickname)
+    TextView mAuthorNicknameView;
+
+    private VideoInfoVO videoInfoVO;
+
+
     public static VideoInfoFragment newInstance() {
         return new VideoInfoFragment();
+    }
+
+    public void setVideoInfoVO(VideoInfoVO videoInfoVO) {
+        this.videoInfoVO = videoInfoVO;
     }
 
     @Override
@@ -22,7 +44,14 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> {
 
     @Override
     protected void initView() {
+        GlideApp.with(this)
+                .load(videoInfoVO.getAuthor().getAvatar())
+                .circleCrop()
+                .into(mAuthorAvatarView);
+        mAuthorNicknameView.setText(videoInfoVO.getAuthor().getNickName());
+        mAuthorLayout.setOnClickListener(v -> {
 
+        });
     }
 
     @Override
