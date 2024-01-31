@@ -137,14 +137,14 @@
     <string name="setting_cache">清空缓存</string>
     <string name="setting_auto">自动登录</string>
     <string name="setting_agreement">隐私协议</string>
-    <string name="setting_about">关于我们</string>
+    <string name="setting_about">关于</string>
     <string name="setting_exit">退出登录</string>
 
     <!-- 关于 -->
-    <string name="about_title">关于我们</string>
-    <string name="about_author"><font color="#85b84f">Android</font> 轮子哥</string>
+    <string name="about_title">关于</string>
+    <string name="about_author"><font color="#f69f69">Android</font> — roydon</string>
 
-    <string name="about_copyright">Copyright © 2018 &#8211; 2020</string>
+    <string name="about_copyright">Copyright © 2023 &#8211; 2024</string>
 
     <!-- 忘记密码 -->
     <string name="password_forget_title">忘记密码</string>
@@ -205,5 +205,7 @@
 
     <string name="photo_launch_fail">无法启动相机</string>
     <string name="photo_picture_error">图片错误</string>
+
+    <string name="github_link">https://github.com/roydonGuo</string>
 
 </resources>
