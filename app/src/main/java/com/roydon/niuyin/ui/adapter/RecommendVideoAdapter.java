@@ -1,6 +1,8 @@
 package com.roydon.niuyin.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyAdapter;
+import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.response.VideoRecommendVO;
 
@@ -45,7 +48,14 @@ public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
         ImageView mAvatarView;
         @BindView(R.id.tv_author_nickname)
         TextView mNicknameView;
+        @BindView(R.id.iv_video_type)
+        ImageView mVideoTypeView;
+        @BindView(R.id.tv_view_num)
+        TextView mViewNumView;
+        @BindView(R.id.tv_like_num)
+        TextView mLikeNumView;
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
             VideoRecommendVO item = getItem(position);
@@ -57,6 +67,11 @@ public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
                 GlideApp.with(getContext()).load(item.getAuthor().getAvatar()).into(mAvatarView);
             }
             mNicknameView.setText(item.getAuthor().getNickName());
+            if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
+                mVideoTypeView.setVisibility(View.GONE);
+            }
+            mViewNumView.setText(item.getViewNum().toString());
+            mLikeNumView.setText(item.getLikeNum().toString());
         }
     }
 }
