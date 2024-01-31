@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="5dp"
+            app:cardElevation="4dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_cover"

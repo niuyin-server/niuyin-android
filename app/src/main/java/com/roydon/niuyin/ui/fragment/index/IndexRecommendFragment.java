@@ -78,7 +78,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
     protected void initView() {
         mAdapter = new RecommendVideoAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         showLoading();
@@ -112,6 +112,12 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO);
                     }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        toast("加载失败");
+                        showEmpty();
+                    }
                 });
     }
 
@@ -124,6 +130,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
             super.handleMessage(msg);
             switch (msg.what) {
                 case HANDLER_WHAT_EMPTY:
+                    showEmpty();
                     break;
                 case HANDLER_RECOMMEND_VIDEO:
                     mAdapter.setData(videoRecommendVOList);

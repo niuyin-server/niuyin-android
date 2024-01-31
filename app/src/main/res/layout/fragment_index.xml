@@ -129,7 +129,7 @@
             android:src="@drawable/ic_category_b" />
     </LinearLayout>
 
-    <com.hjq.widget.layout.NoScrollViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

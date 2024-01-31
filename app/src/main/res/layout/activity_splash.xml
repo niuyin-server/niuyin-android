@@ -25,6 +25,13 @@
         android:layout_gravity="end"
         android:src="@drawable/ic_test" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/ic_niuyin_logo" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/iv_splash_name"
         android:layout_width="wrap_content"
