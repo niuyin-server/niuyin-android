@@ -8,6 +8,6 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:singleLine="true"
-    android:textColor="@color/black"
+    android:textColor="@color/gray"
     android:textSize="16sp"
-    tools:text="2018年" />
+    tools:text="2024" />
