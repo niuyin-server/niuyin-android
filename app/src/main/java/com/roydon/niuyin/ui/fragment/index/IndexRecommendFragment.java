@@ -81,7 +81,6 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
     protected void initView() {
         mAdapter = new RecommendVideoAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
-//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         showLoading();

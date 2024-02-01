@@ -126,6 +126,24 @@ public final class RequestHandler implements IRequestHandler {
                     throw new ResultException(model.getMessage(), model);
                 }
             }
+
+            // 分页数据
+            if (result instanceof PageDataInfo) {
+                PageDataInfo model = (PageDataInfo) result;
+                if (model.getCode() == 200) {
+                    // 代表执行成功
+                    return result;
+                } else if (model.getCode() == 401) {
+                    // 代表登录失效，需要重新登录
+                    throw new TokenException(context.getString(R.string.http_account_error));
+                } else if (model.getCode() == 500) {
+                    // 代表登录失效，需要重新登录
+                    throw new ServerException(context.getString(R.string.http_server_error));
+                } else {
+                    // 代表执行失败
+                    throw new ResultException(model.getMsg(), model);
+                }
+            }
         }
         return result;
     }
