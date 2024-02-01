@@ -17,17 +17,13 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.enums.PublishType;
-import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.video.HotVideoApi;
-import com.roydon.niuyin.http.request.video.RecommendVideoApi;
-import com.roydon.niuyin.http.response.VideoRecommendVO;
 import com.roydon.niuyin.http.response.VideoVO;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.VideoImagePlayActivity;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
 import com.roydon.niuyin.ui.adapter.HotVideoAdapter;
-import com.roydon.niuyin.ui.adapter.RecommendVideoAdapter;
 import com.roydon.niuyin.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -60,6 +56,7 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
     private List<VideoVO> videoVOList;
 
     private int pageNum = 1;
+    private int pageSize = 10;
 
     public static IndexHotFragment newInstance() {
         return new IndexHotFragment();
@@ -93,7 +90,7 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
         EasyHttp.post(this)
                 .api(new HotVideoApi()
                         .setPageNum(pageNum)
-                        .setPageSize(10))
+                        .setPageSize(pageSize))
                 .request(new HttpCallback<PageDataInfo<VideoVO>>(this.getAttachActivity()) {
 
                     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -105,6 +102,9 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
                         } else {
                             mRefreshLayout.finishLoadMore(true);
                             videoVOList.addAll(rows.getRows());
+                            if (rows.getRows().size() < pageSize) {
+                                mRefreshLayout.setNoMoreData(true);
+                            }
                         }
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_HOT_VIDEO);

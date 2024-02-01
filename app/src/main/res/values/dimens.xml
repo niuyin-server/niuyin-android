@@ -3,6 +3,7 @@
 
     <!-- 默认分割线大小 -->
     <dimen name="line_size">1px</dimen>
+    <dimen name="line_size2">2px</dimen>
 
     <!-- 默认圆角大小 -->
     <dimen name="circle_size">999dp</dimen>

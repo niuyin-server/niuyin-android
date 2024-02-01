@@ -61,7 +61,7 @@ public class GlideConfig extends AppGlideModule {
         builder.setBitmapPool(new LruBitmapPool(customBitmapPoolSize));
 
         // 设置默认的加载占位图和加载出错图
-        builder.setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.image_loading).error(R.drawable.image_load_err));
+        builder.setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.image_loading_egg).error(R.drawable.image_loading_err));
     }
 
     @Override

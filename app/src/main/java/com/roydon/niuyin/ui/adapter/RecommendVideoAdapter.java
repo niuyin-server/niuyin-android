@@ -30,8 +30,8 @@ public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
 
     @NonNull
     @Override
-    public RecommendVideoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecommendVideoAdapter.ViewHolder();
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder();
     }
 
     final class ViewHolder extends MyAdapter.ViewHolder {

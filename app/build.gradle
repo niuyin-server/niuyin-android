@@ -115,6 +115,9 @@ dependencies {
     implementation project(':umeng')
     implementation project(':copy')
 
+    // 闪光UI库 https://github.com/ChadCSong/ShineButton
+    implementation 'com.sackcentury:shinebutton:0.2.0'
+
 //    # 必选，内部默认使用系统mediaplayer进行解码
     implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
 

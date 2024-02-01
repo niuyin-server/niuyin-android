@@ -85,6 +85,12 @@
         <item name="android:background">@color/colorLine</item>
     </style>
 
+    <style name="HorizontalLineStyle2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_size2</item>
+        <item name="android:background">@color/colorLine2</item>
+    </style>
+
     <!-- 默认垂直分割线样式 -->
     <style name="VerticalLineStyle">
         <item name="android:layout_width">@dimen/line_size</item>

@@ -203,10 +203,10 @@ public class TimeUtils {
             smartTime = String.valueOf(smartDetail[3]) + "时" + String.valueOf(smartDetail[4]) + "分";
         }
         if (smartDetail[2] > 1) {
-            smartTime = String.valueOf(smartDetail[2]) + "天" + String.valueOf(smartDetail[3]) + "时";
+            smartTime = String.valueOf(smartDetail[2]) + "日" + String.valueOf(smartDetail[3]) + "时";
         }
         if (smartDetail[1] > 1) {
-            smartTime = String.valueOf(smartDetail[1]) + "月" + String.valueOf(smartDetail[2]) + "天";
+            smartTime = String.valueOf(smartDetail[1]) + "月" + String.valueOf(smartDetail[2]) + "日";
         }
         if (smartDetail[0] > 1970) {
             smartTime = String.valueOf(smartDetail[0]) + "年" + smartTime;

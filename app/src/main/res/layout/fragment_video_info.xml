@@ -14,15 +14,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
             <!--            作者-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <LinearLayout
                     android:id="@+id/ll_author"
@@ -46,8 +46,8 @@
                         android:paddingEnd="10dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
                             android:id="@+id/tv_author_nickname"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="start"
                             android:text="还会心动吗"
@@ -92,7 +92,236 @@
                     android:text="关注" />
 
             </LinearLayout>
+            <!--            视频信息-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:paddingBottom="10dp">
 
+                <LinearLayout
+                    android:id="@+id/ll_open_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_video_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="视频标题"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_open_desc"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_down_b" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_video_b" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_view_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="0"
+                        android:textColor="@color/gray" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_comment_b_e" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_comment_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="0"
+                        android:textColor="@color/gray" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_publish_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="2024"
+                        android:textColor="@color/gray" />
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mc_video_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- 在这里添加折叠面板的内容 -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_video_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="0"
+                            android:textColor="@color/gray" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/videoTagRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_video_tag" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+            <!--            社交操作-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <!--                    点赞-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.sackcentury.shinebuttonlib.ShineButton
+                        android:id="@+id/sb_like"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_behave_like_g"
+                        app:btn_color="@color/gray"
+                        app:btn_fill_color="@color/primaryRed"
+                        app:shine_size="28dp"
+                        app:siShape="@drawable/ic_behave_like_g" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="1.2万" />
+
+                </LinearLayout>
+                <!--                    点踩-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.sackcentury.shinebuttonlib.ShineButton
+                        android:id="@+id/sb_not_like"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        app:btn_color="@color/gray"
+                        app:btn_fill_color="@color/primaryRed"
+                        app:shine_size="28dp"
+                        app:siShape="@drawable/ic_behave_not_like_g" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="不喜欢" />
+
+                </LinearLayout>
+                <!--                    收藏-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.sackcentury.shinebuttonlib.ShineButton
+                        android:id="@+id/sb_favorite"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        app:btn_color="@color/gray"
+                        app:btn_fill_color="@color/gold"
+                        app:shine_size="28dp"
+                        app:siShape="@drawable/ic_behave_favorite_g" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="1.2万" />
+
+                </LinearLayout>
+                <!--                    分享-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.sackcentury.shinebuttonlib.ShineButton
+                        android:id="@+id/sb_share"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        app:btn_color="@color/gray"
+                        app:btn_fill_color="@color/primaryRed"
+                        app:shine_size="28dp"
+                        app:siShape="@drawable/ic_behave_share_g" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="1.2万" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View style="@style/HorizontalLineStyle2" />
+
+            <!--            相关视频-->
             <com.roydon.niuyin.widget.HintLayout
                 android:id="@+id/hl_status_hint"
                 android:layout_width="match_parent"
@@ -112,10 +341,7 @@
                         android:id="@+id/rv_status_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                        app:spanCount="2"
-                        tools:listitem="@layout/item_recommend_video" />
+                        android:orientation="vertical" />
 
                     <com.scwang.smartrefresh.layout.footer.BallPulseFooter
                         android:layout_width="match_parent"
