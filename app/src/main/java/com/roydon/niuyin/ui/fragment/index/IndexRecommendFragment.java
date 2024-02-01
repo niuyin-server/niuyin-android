@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -57,7 +58,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
     @BindView(R.id.rl_status_refresh)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.rv_status_list)
-    RecyclerView mRecyclerView;
+    WrapRecyclerView mRecyclerView;
 
     private RecommendVideoAdapter mAdapter;
 
@@ -118,7 +119,10 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                     @Override
                     public void onFail(Exception e) {
                         toast("加载失败");
-                        showEmpty();
+//                        showEmpty();
+                        TextView footerView = mRecyclerView.addFooterView(R.layout.item_picker);
+                        footerView.setText("我也是有底线的");
+                        footerView.setOnClickListener(v -> toast("点击了尾部"));
                     }
                 });
     }

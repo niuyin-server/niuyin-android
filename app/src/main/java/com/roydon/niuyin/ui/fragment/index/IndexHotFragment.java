@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.widget.layout.WrapRecyclerView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
@@ -49,7 +51,7 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
     @BindView(R.id.rl_status_refresh)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.rv_status_list)
-    RecyclerView mRecyclerView;
+    WrapRecyclerView mRecyclerView;
 
     private HotVideoAdapter mAdapter;
 
@@ -104,6 +106,9 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
                             videoVOList.addAll(rows.getRows());
                             if (rows.getRows().size() < pageSize) {
                                 mRefreshLayout.setNoMoreData(true);
+                                TextView footerView = mRecyclerView.addFooterView(R.layout.item_recycler_footer);
+                                footerView.setText("— 我也是有底线的 —");
+                                footerView.setOnClickListener(v -> toast("点击了尾部"));
                             }
                         }
                         // 更新ui
