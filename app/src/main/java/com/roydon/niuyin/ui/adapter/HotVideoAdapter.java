@@ -2,18 +2,24 @@ package com.roydon.niuyin.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyAdapter;
 import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.response.VideoVO;
+import com.roydon.niuyin.utils.DateUtils;
+import com.roydon.niuyin.utils.TimeUtils;
+
+import java.time.ZoneOffset;
 
 import butterknife.BindView;
 
@@ -54,7 +60,10 @@ public class HotVideoAdapter extends MyAdapter<VideoVO> {
         TextView mViewNumView;
         @BindView(R.id.tv_like_num)
         TextView mLikeNumView;
+        @BindView(R.id.tv_publish_time)
+        TextView mPublishTimeView;
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
@@ -74,6 +83,7 @@ public class HotVideoAdapter extends MyAdapter<VideoVO> {
             }
             mViewNumView.setText(item.getViewNum().toString());
             mLikeNumView.setText(item.getLikeNum().toString());
+            mPublishTimeView.setText(TimeUtils.getSmartDate(DateUtils.localDateTime2Long(item.getCreateTime())));
         }
     }
 }
