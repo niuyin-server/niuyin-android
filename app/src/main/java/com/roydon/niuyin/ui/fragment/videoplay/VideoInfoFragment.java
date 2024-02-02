@@ -117,13 +117,16 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         mBehaveShareButton.setOnClickListener(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void initData() {
-        GlideApp.with(this)
-                .load(videoInfoVO.getAuthor().getAvatar())
-                .circleCrop()
-                .into(mAuthorAvatarView);
+        if (videoInfoVO.getAuthor() != null && !videoInfoVO.getAuthor().getAvatar().equals("")) {
+            GlideApp.with(this)
+                    .load(videoInfoVO.getAuthor().getAvatar())
+                    .circleCrop()
+                    .into(mAuthorAvatarView);
+        }
         mAuthorNicknameView.setText(videoInfoVO.getAuthor().getNickName());
         mVideoTitleView.setText(videoInfoVO.getVideoTitle());
         mViewNumView.setText(videoInfoVO.getViewNum().toString());

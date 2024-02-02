@@ -28,10 +28,10 @@
             android:layout_height="match_parent"
             app:banner_indicator_gravity="center"
             app:banner_indicator_normal_color="@color/white"
-            app:banner_indicator_normal_width="10dp"
-            app:banner_indicator_radius="2dp"
+            app:banner_indicator_normal_width="30dp"
+            app:banner_indicator_radius="5dp"
             app:banner_indicator_selected_color="@color/primaryRed"
-            app:banner_indicator_selected_width="15dp"
+            app:banner_indicator_selected_width="30dp"
             app:banner_indicator_space="10dp"
             app:banner_loop_time="5000" />
 

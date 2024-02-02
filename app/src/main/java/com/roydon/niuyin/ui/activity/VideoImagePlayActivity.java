@@ -9,11 +9,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.RatioFrameLayout;
@@ -26,6 +29,9 @@ import com.roydon.niuyin.http.response.VideoInfoVO;
 import com.roydon.niuyin.other.IntentKey;
 import com.roydon.niuyin.ui.adapter.SquareIndicator;
 import com.roydon.niuyin.ui.adapter.VideoImageBannerAdapter;
+import com.roydon.niuyin.ui.adapter.VideoPlayAdapter;
+import com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment;
+import com.roydon.niuyin.ui.fragment.videoplay.VideoInfoFragment;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -56,6 +62,11 @@ public class VideoImagePlayActivity extends MyActivity {
     @BindView(R.id.banner)
     Banner mBanner;
 
+    @BindView(R.id.slidingTabLayout)
+    SlidingTabLayout mSlidingTabLayout;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+
     private VideoInfoVO videoInfoVO;
 
     @Override
@@ -67,23 +78,20 @@ public class VideoImagePlayActivity extends MyActivity {
     protected void initView() {
         // 4:3竖屏视频
         mScreenScaleLayout.setSizeRatio(0.75f);
+
     }
 
     @Override
     protected void initData() {
 
-        EasyHttp.get(this)
-                .api(new VideoInfoApi()
-                        .setVideoId(getString(IntentKey.VIDEO_ID)))
-                .request(new HttpCallback<HttpData<VideoInfoVO>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<VideoInfoVO> data) {
-                        videoInfoVO = data.getData();
-                        // 获取视频成功
-                        mHandler.sendEmptyMessage(HANDLER_VIDEO_INFO);
-                    }
-                });
+        EasyHttp.get(this).api(new VideoInfoApi().setVideoId(getString(IntentKey.VIDEO_ID))).request(new HttpCallback<HttpData<VideoInfoVO>>(this) {
+            @Override
+            public void onSucceed(HttpData<VideoInfoVO> data) {
+                videoInfoVO = data.getData();
+                // 获取视频成功
+                mHandler.sendEmptyMessage(HANDLER_VIDEO_INFO);
+            }
+        });
 
     }
 
@@ -98,6 +106,7 @@ public class VideoImagePlayActivity extends MyActivity {
                     break;
                 case HANDLER_VIDEO_INFO:
                     useBanner(videoInfoVO);
+                    initSlideTab(videoInfoVO);
                     break;
                 default:
                     break;
@@ -115,17 +124,33 @@ public class VideoImagePlayActivity extends MyActivity {
                     @Override
                     public void onBindView(BannerImageHolder holder, String data, int position, int size) {
                         //图片加载
-                        Glide.with(holder.itemView)
-                                .load(data)
-                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
-                                .into(holder.imageView);
+                        Glide.with(holder.itemView).load(data).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder.imageView);
                     }
-                })
-                .addBannerLifecycleObserver(this)//添加生命周期观察者
+                }).addBannerLifecycleObserver(this)//添加生命周期观察者
                 .setIndicator(new SquareIndicator(this));
         mBanner.setOnBannerListener((data, position) -> {
             toast("点击了第" + position + "个");
         });
 
     }
+
+    /**
+     * 初始化tab
+     *
+     * @param videoInfoVO
+     */
+    private void initSlideTab(VideoInfoVO videoInfoVO) {
+        // tab
+        String[] mTitles = {"简介", "评论"};
+        ArrayList<Fragment> mIndexFragments = new ArrayList<>();
+        VideoInfoFragment videoInfoFragment = VideoInfoFragment.newInstance();
+        videoInfoFragment.setVideoInfoVO(videoInfoVO);
+        mIndexFragments.add(videoInfoFragment);
+        mIndexFragments.add(VideoCommentFragment.newInstance());
+        mViewPager.setOffscreenPageLimit(mIndexFragments.size());
+        mViewPager.setAdapter(new VideoPlayAdapter(getSupportFragmentManager(), mTitles, mIndexFragments));
+        mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setCurrentTab(0);
+    }
+
 }

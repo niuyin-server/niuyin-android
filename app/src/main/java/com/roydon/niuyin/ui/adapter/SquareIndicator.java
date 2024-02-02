@@ -44,7 +44,7 @@ public class SquareIndicator extends BaseIndicator {
         int indicatorWidth = config.getSelectedWidth() + (config.getNormalWidth() + config.getIndicatorSpace()) * (count - 1);
         leftOffset = (totalWidth - indicatorWidth) / 2; // 更新 leftOffset 的值
 //        setMeasuredDimension(totalWidth, Math.max(config.getNormalWidth(), config.getSelectedWidth()));
-        setMeasuredDimension(totalWidth, 5);
+        setMeasuredDimension(totalWidth, 8);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SquareIndicator extends BaseIndicator {
             mPaint.setColor(config.getCurrentPosition() == i ? config.getSelectedColor() : config.getNormalColor());
             int indicatorWidth = config.getCurrentPosition() == i ? config.getSelectedWidth() : config.getNormalWidth();
 //            int indicatorHeight = Math.max(config.getNormalWidth(), config.getSelectedWidth());
-            int indicatorHeight = 5;
+            int indicatorHeight = 8;
             canvas.drawRect(left, 0, left + indicatorWidth, indicatorHeight, mPaint);
             left += indicatorWidth + config.getIndicatorSpace();
         }
