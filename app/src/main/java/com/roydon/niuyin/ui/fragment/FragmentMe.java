@@ -55,10 +55,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2018/10/18
- * desc   : 项目界面跳转示例
+ * desc   : 我的
  */
 @SuppressLint("NonConstantResourceId")
 public final class FragmentMe extends MyFragment<HomeActivity> implements XCollapsingToolbarLayout.OnScrimsListener {

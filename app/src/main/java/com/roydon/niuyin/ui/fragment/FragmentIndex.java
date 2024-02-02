@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * desc   : 项目炫酷效果示例
+ * desc   : 首页
  */
 public final class FragmentIndex extends MyFragment<HomeActivity> implements XCollapsingToolbarLayout.OnScrimsListener {
 

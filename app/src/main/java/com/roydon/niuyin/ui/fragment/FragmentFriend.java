@@ -8,7 +8,8 @@ import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 
 /**
- * desc   : 项目自定义控件展示
+ * desc   : 朋友
+ * author  : roydon
  */
 public final class FragmentFriend extends MyFragment<HomeActivity> {
 

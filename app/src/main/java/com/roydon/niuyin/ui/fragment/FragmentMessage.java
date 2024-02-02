@@ -8,7 +8,7 @@ import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 
 /**
- * desc   : 项目框架使用示例
+ * desc   : 消息
  */
 public final class FragmentMessage extends MyFragment<HomeActivity> {
 
