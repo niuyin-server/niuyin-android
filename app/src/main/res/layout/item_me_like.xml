@@ -8,7 +8,7 @@
     android:layout_marginTop="2dp"
     android:layout_marginEnd="1dp"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.adapter.MePostAdapter">
+    tools:context="com.roydon.niuyin.ui.adapter.MeLikeAdapter">
 
     <LinearLayout
         android:layout_width="match_parent"
