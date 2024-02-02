@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,9 +14,80 @@
         app:leftIcon="@drawable/ic_back_b"
         app:title="图文" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_video_id"
+    <!-- 16:10 视频-->
+    <com.hjq.widget.layout.RatioFrameLayout
+        android:id="@+id/rl_screen_scale"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:sizeRatio="1.6">
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:banner_indicator_gravity="center"
+            app:banner_indicator_normal_color="@color/white"
+            app:banner_indicator_normal_width="10dp"
+            app:banner_indicator_radius="2dp"
+            app:banner_indicator_selected_color="@color/primaryRed"
+            app:banner_indicator_selected_width="15dp"
+            app:banner_indicator_space="10dp"
+            app:banner_loop_time="5000" />
+
+    </com.hjq.widget.layout.RatioFrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_slide_b" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/slidingTabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:tl_indicator_color="@color/primaryRed"
+                app:tl_tab_padding="20dp"
+                app:tl_tab_space_equal="true"
+                app:tl_textSelectColor="@color/white"
+                app:tl_textUnselectColor="@color/black"
+                tl:tl_indicator_margin_left="3dp"
+                tl:tl_indicator_margin_right="3dp"
+                tl:tl_indicator_style="BLOCK" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_category_b" />
+    </LinearLayout>
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </LinearLayout>

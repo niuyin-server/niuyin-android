@@ -16,9 +16,6 @@ import com.roydon.niuyin.common.MyAdapter;
 import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.response.MyVideoVO;
-import com.roydon.niuyin.http.response.VideoVO;
-import com.roydon.niuyin.utils.DateUtils;
-import com.roydon.niuyin.utils.TimeUtils;
 
 import butterknife.BindView;
 
