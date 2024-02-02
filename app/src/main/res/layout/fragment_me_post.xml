@@ -7,45 +7,35 @@
     android:orientation="vertical"
     tools:context="com.roydon.niuyin.ui.fragment.me.MePostFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <com.roydon.niuyin.widget.HintLayout
+        android:id="@+id/hl_status_hint"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/rl_status_refresh"
+            style="@style/RefreshLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.scwang.smartrefresh.header.MaterialHeader
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/me_tab_post"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.hjq.widget.layout.WrapRecyclerView
+                android:id="@+id/rv_status_list"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:gravity="center"
-                android:text="@string/me_tab_post"
-                android:textSize="20sp" />
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="3"
+                tools:listitem="@layout/item_me_post" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:gravity="center"
-                android:text="@string/me_tab_post"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/me_tab_post"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </com.roydon.niuyin.widget.HintLayout>
 
 </LinearLayout>
