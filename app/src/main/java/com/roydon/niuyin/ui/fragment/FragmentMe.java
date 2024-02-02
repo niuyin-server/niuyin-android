@@ -138,7 +138,6 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
 
                     @Override
                     public void onSucceed(HttpData<MemberInfoVO> data) {
-//                        toast("成功" + data.getData().toString());
                         memberInfoVO = data.getData();
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_GET_USERINFO);

@@ -47,6 +47,7 @@ import butterknife.BindView;
  * @date 2024/1/31 12:00
  * @description niuyin-android
  */
+@SuppressLint("NonConstantResourceId")
 public class MePostFragment extends MyFragment<HomeActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
 
     // handler

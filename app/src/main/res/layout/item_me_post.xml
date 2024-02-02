@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="2dp"
-    android:layout_marginTop="3dp"
-    android:layout_marginEnd="2dp"
-    android:background="@drawable/bg_me_post"
+    android:layout_marginStart="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="1dp"
     android:orientation="vertical"
     tools:context="com.roydon.niuyin.ui.adapter.HotVideoAdapter">
 
@@ -34,7 +33,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:cardCornerRadius="5dp"
                         app:cardElevation="4dp">
 
                         <androidx.appcompat.widget.AppCompatImageView
