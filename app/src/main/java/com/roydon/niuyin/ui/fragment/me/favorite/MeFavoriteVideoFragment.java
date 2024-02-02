@@ -152,13 +152,14 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        MyFavoriteVideoVO myFavoriteVideoVO = mAdapter.getItem(position);
-        if (myFavoriteVideoVO.getPublishType().equals(PublishType.VIDEO.getCode())) {
+        MyFavoriteVideoVO item = mAdapter.getItem(position);
+        if (item == null) return;
+        if ((PublishType.VIDEO.getCode()).equals(item.getPublishType())) {
             // 视频
-            VideoPlayActivity.start(getContext(), myFavoriteVideoVO.getVideoId());
-        } else if (myFavoriteVideoVO.getPublishType().equals(PublishType.IMAGE.getCode())) {
+            VideoPlayActivity.start(getContext(), item.getVideoId());
+        } else if ((PublishType.IMAGE.getCode()).equals(item.getPublishType())) {
             // 图文
-            VideoImagePlayActivity.start(getContext(), myFavoriteVideoVO.getVideoId());
+            VideoImagePlayActivity.start(getContext(), item.getVideoId());
         }
     }
 

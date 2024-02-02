@@ -148,13 +148,14 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        MyVideoVO myVideoVO = mAdapter.getItem(position);
-        if (myVideoVO.getPublishType().equals(PublishType.VIDEO.getCode())) {
+        MyVideoVO item = mAdapter.getItem(position);
+        if (item == null) return;
+        if ((PublishType.VIDEO.getCode()).equals(item.getPublishType())) {
             // 视频
-            VideoPlayActivity.start(getContext(), myVideoVO.getVideoId());
-        } else if (myVideoVO.getPublishType().equals(PublishType.IMAGE.getCode())) {
+            VideoPlayActivity.start(getContext(), item.getVideoId());
+        } else if ((PublishType.IMAGE.getCode()).equals(item.getPublishType())) {
             // 图文
-            VideoImagePlayActivity.start(getContext(), myVideoVO.getVideoId());
+            VideoImagePlayActivity.start(getContext(), item.getVideoId());
         }
     }
 
