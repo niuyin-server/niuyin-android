@@ -26,6 +26,11 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> {
     }
 
     @Override
+    protected void lazyLoadData() {
+
+    }
+
+    @Override
     protected void initData() {
 
     }

@@ -110,6 +110,11 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
     }
 
     @Override
+    protected void lazyLoadData() {
+
+    }
+
+    @Override
     protected void initData() {
 
     }

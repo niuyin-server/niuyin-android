@@ -22,19 +22,21 @@ import com.hjq.base.action.HandlerAction;
 import java.util.Random;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : Fragment 基类
+ * desc   : Fragment 基类
  */
-public abstract class BaseFragment<A extends BaseActivity>
-        extends Fragment implements ContextAction, HandlerAction, ClickAction, BundleAction {
+public abstract class BaseFragment<A extends BaseActivity> extends Fragment implements ContextAction, HandlerAction, ClickAction, BundleAction {
 
-    /** Activity 对象 */
+    /**
+     * Activity 对象
+     */
     private A mActivity;
-    /** 根布局 */
+    /**
+     * 根布局
+     */
     private View mRootView;
-    /** 是否初始化过 */
+    /**
+     * 是否初始化过
+     */
     private boolean mInitialize;
 
     @SuppressWarnings("unchecked")

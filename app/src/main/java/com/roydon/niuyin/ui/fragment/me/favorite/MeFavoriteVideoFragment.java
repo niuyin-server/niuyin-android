@@ -83,8 +83,13 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     }
 
     @Override
-    protected void initData() {
+    protected void lazyLoadData() {
         getMyFavoriteVideoPage(true);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     /**

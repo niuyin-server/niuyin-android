@@ -31,6 +31,11 @@ public final class FragmentUpload extends MyFragment<HomeActivity> {
     }
 
     @Override
+    protected void lazyLoadData() {
+
+    }
+
+    @Override
     protected void initData() {
 
     }

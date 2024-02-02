@@ -1,23 +1,51 @@
 package com.roydon.niuyin.common;
 
+import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseFragment;
-import com.roydon.niuyin.action.TitleBarAction;
-import com.roydon.niuyin.action.ToastAction;
 import com.hjq.http.EasyHttp;
 import com.hjq.umeng.UmengClient;
+import com.roydon.niuyin.action.TitleBarAction;
+import com.roydon.niuyin.action.ToastAction;
 
 import butterknife.ButterKnife;
 
-/**
- * desc   : 项目中 Fragment 懒加载基类
- */
-public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> implements ToastAction, TitleBarAction {
+public abstract class LazyLoadFragment<A extends MyActivity> extends BaseFragment<A> implements ToastAction, TitleBarAction {
+    private boolean isViewCreated = false; // 标记视图是否已创建
+    private boolean isDataLoaded = false; // 标记数据是否已加载
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isViewCreated = true;
+        lazyLoadData(); // 在视图创建后进行数据加载
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isDataLoaded && isViewCreated && isVisibleToUser) {
+            lazyLoadData(); // 在 Fragment 可见时进行数据加载
+        }
+    }
+
+    private void lazyLoadData() {
+        if (!isDataLoaded) {
+            lazyLoad(); // 子类实现具体的数据加载逻辑
+            isDataLoaded = true;
+        }
+    }
+
+    public void lazyLoad(){
+        initData();
+    }
 
     /**
      * 标题栏对象
@@ -28,8 +56,6 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> i
      */
     private ImmersionBar mImmersionBar;
 
-    private boolean isLazyLoaded = false; // 标记是否已经懒加载过
-
     @Override
     protected void initFragment() {
         ButterKnife.bind(this, getView());
@@ -39,47 +65,8 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> i
         }
 
         initImmersion();
-
-        // 如果是第一次初始化且可见，则进行懒加载
-        if (!isLazyLoaded && getUserVisibleHint()) {
-            lazyLoad();
-        }
-
         super.initFragment();
     }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        // 如果可见且未懒加载过，则进行懒加载
-        if (!isLazyLoaded && isVisibleToUser && isViewCreated()) {
-            lazyLoad();
-        }
-    }
-
-    private void lazyLoad() {
-        // 进行懒加载操作
-        lazyLoadData();
-        isLazyLoaded = true;
-    }
-
-    protected abstract void lazyLoadData(); // 子类实现具体的数据加载逻辑
-
-    private boolean isViewCreated() {
-        return getView() != null;
-    }
-
-//    @Override
-//    protected void initFragment() {
-//        ButterKnife.bind(this, getView());
-//
-//        if (getTitleBar() != null) {
-//            getTitleBar().setOnTitleBarListener(this);
-//        }
-//
-//        initImmersion();
-//        super.initFragment();
-//    }
 
     /**
      * 初始化沉浸式
@@ -168,6 +155,9 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> i
         // 重新初始化状态栏
         statusBarConfig().init();
         UmengClient.onResume(this);
+        if (!isDataLoaded && isViewCreated && getUserVisibleHint()) {
+            lazyLoadData(); // 在 Fragment 可见时进行数据加载
+        }
     }
 
     @Override

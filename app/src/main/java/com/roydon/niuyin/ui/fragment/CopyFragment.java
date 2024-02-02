@@ -27,6 +27,11 @@ public final class CopyFragment extends MyFragment<CopyActivity> {
     }
 
     @Override
+    protected void lazyLoadData() {
+
+    }
+
+    @Override
     protected void initData() {
 
     }

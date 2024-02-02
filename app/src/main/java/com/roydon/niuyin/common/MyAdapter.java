@@ -1,5 +1,6 @@
 package com.roydon.niuyin.common;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 
@@ -16,20 +17,25 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/12/19
- *    desc   : 项目中 RecyclerView 适配器基类
+ * desc   : 项目中 RecyclerView 适配器基类
  */
 public abstract class MyAdapter<T> extends BaseAdapter<MyAdapter.ViewHolder> {
 
-    /** 列表数据 */
+    /**
+     * 列表数据
+     */
     private List<T> mDataSet;
-    /** 当前列表的页码，默认为第一页，用于分页加载功能 */
+    /**
+     * 当前列表的页码，默认为第一页，用于分页加载功能
+     */
     private int mPageNumber = 1;
-    /** 是否是最后一页，默认为false，用于分页加载功能 */
+    /**
+     * 是否是最后一页，默认为false，用于分页加载功能
+     */
     private boolean mLastPage;
-    /** 标记对象 */
+    /**
+     * 标记对象
+     */
     private Object mTag;
 
     public MyAdapter(@NonNull Context context) {
@@ -44,6 +50,7 @@ public abstract class MyAdapter<T> extends BaseAdapter<MyAdapter.ViewHolder> {
     /**
      * 设置新的数据
      */
+    @SuppressLint("NotifyDataSetChanged")
     public void setData(@Nullable List<T> data) {
         mDataSet = data;
         notifyDataSetChanged();
@@ -76,6 +83,7 @@ public abstract class MyAdapter<T> extends BaseAdapter<MyAdapter.ViewHolder> {
     /**
      * 清空当前数据
      */
+    @SuppressLint("NotifyDataSetChanged")
     public void clearData() {
         if (mDataSet == null || mDataSet.size() == 0) {
             return;
@@ -155,7 +163,7 @@ public abstract class MyAdapter<T> extends BaseAdapter<MyAdapter.ViewHolder> {
     /**
      * 设置当前的页码
      */
-    public void setPageNumber(@IntRange(from = 0)int pageNumber) {
+    public void setPageNumber(@IntRange(from = 0) int pageNumber) {
         mPageNumber = pageNumber;
     }
 
@@ -212,6 +220,7 @@ public abstract class MyAdapter<T> extends BaseAdapter<MyAdapter.ViewHolder> {
         }
 
         @Override
-        public void onBindView(int position) {}
+        public void onBindView(int position) {
+        }
     }
 }

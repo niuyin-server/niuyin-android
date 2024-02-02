@@ -114,6 +114,11 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         mBehaveShareButton.setOnClickListener(this);
     }
 
+    @Override
+    protected void lazyLoadData() {
+
+    }
+
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

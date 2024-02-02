@@ -79,8 +79,13 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
     }
 
     @Override
-    protected void initData() {
+    protected void lazyLoadData() {
         getMyLikePage(true);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     /**

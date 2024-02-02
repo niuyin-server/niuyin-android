@@ -79,8 +79,13 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
     }
 
     @Override
-    protected void initData() {
+    protected void lazyLoadData() {
         getHotVideoPage(true);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     /**

@@ -80,8 +80,13 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
     }
 
     @Override
-    protected void initData() {
+    protected void lazyLoadData() {
         getMyPostPage(true);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     /**

@@ -114,6 +114,11 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     }
 
     @Override
+    protected void lazyLoadData() {
+
+    }
+
+    @Override
     protected void initData() {
         EasyHttp.get(this)
                 .api(new UserInfoApi())

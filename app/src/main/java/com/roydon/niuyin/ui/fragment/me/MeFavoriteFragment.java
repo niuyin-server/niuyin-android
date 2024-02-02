@@ -50,6 +50,11 @@ public class MeFavoriteFragment extends MyFragment<HomeActivity> {
     }
 
     @Override
+    protected void lazyLoadData() {
+
+    }
+
+    @Override
     protected void initData() {
 
     }
