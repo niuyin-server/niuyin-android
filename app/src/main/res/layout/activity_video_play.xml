@@ -16,6 +16,7 @@
 
     <!-- 16:10 视频-->
     <com.hjq.widget.layout.RatioFrameLayout
+        android:id="@+id/rl_screen_scale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"

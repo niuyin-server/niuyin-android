@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.widget.layout.RatioFrameLayout;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.common.MyActivity;
@@ -49,6 +50,8 @@ public class VideoPlayActivity extends MyActivity {
 
     private VideoInfoVO videoInfoVO;
 
+    @BindView(R.id.rl_screen_scale)
+    RatioFrameLayout mScreenScaleLayout;
     @BindView(R.id.videoPlayer)
     VideoView mVideoPlayerView;
 
@@ -64,7 +67,8 @@ public class VideoPlayActivity extends MyActivity {
 
     @Override
     protected void initView() {
-
+        // 4:3竖屏视频
+        mScreenScaleLayout.setSizeRatio(0.75f);
     }
 
     @Override

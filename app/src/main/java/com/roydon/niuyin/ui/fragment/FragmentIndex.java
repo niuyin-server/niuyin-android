@@ -1,5 +1,6 @@
 package com.roydon.niuyin.ui.fragment;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,7 +49,7 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
     @BindView(R.id.iv_avatar)
     ImageView mAvatarView;
     @BindView(R.id.tv_search_hint)
-    TextView mHintView;
+    TextView mSearchHintView;
     @BindView(R.id.iv_test_search)
     ImageView mSearchView;
 
@@ -90,13 +91,22 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setCurrentTab(1);
         // 点击事件监听
-        mHintView.setOnClickListener(v -> {
-            startActivity(VideoSearchActivity.class);
-        });
-        mVideoCategoryView.setOnClickListener(v -> {
-            startActivity(VideoCategoryActivity.class);
-        });
+        setOnClickListener(R.id.tv_search_hint, R.id.iv_category);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_search_hint:
+                startActivity(VideoSearchActivity.class);
+                break;
+            case R.id.iv_category:
+                startActivity(VideoCategoryActivity.class);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -123,13 +133,13 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
     @Override
     public void onScrimsStateChange(XCollapsingToolbarLayout layout, boolean shown) {
         if (shown) {
-            mHintView.setBackgroundResource(R.drawable.bg_home_search_bar_gray);
-            mHintView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.black60));
+            mSearchHintView.setBackgroundResource(R.drawable.bg_home_search_bar_gray);
+            mSearchHintView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.black60));
             mSearchView.setImageResource(R.drawable.ic_search_b);
             getStatusBarConfig().statusBarDarkFont(true).init();
         } else {
-            mHintView.setBackgroundResource(R.drawable.bg_home_search_bar_transparent);
-            mHintView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.white60));
+            mSearchHintView.setBackgroundResource(R.drawable.bg_home_search_bar_transparent);
+            mSearchHintView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.white60));
             mSearchView.setImageResource(R.drawable.ic_search_white);
             getStatusBarConfig().statusBarDarkFont(true).init();
         }

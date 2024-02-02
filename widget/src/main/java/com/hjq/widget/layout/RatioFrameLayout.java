@@ -16,7 +16,7 @@ import com.hjq.widget.R;
 public final class RatioFrameLayout extends FrameLayout {
 
     /** 宽高比 */
-    private final float mSizeRatio;
+    private  float mSizeRatio;
 
     public RatioFrameLayout(Context context) {
         this(context, null);
@@ -32,6 +32,10 @@ public final class RatioFrameLayout extends FrameLayout {
         final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RatioFrameLayout);
         mSizeRatio = array.getFloat(R.styleable.RatioFrameLayout_sizeRatio, 0);
         array.recycle();
+    }
+
+    public void setSizeRatio(float mSizeRatio) {
+        this.mSizeRatio = mSizeRatio;
     }
 
     @Override
