@@ -1,4 +1,4 @@
-package com.roydon.niuyin.http.response;
+package com.roydon.niuyin.http.response.member;
 
 import com.roydon.niuyin.http.response.entity.Member;
 import com.roydon.niuyin.http.response.entity.MemberInfo;

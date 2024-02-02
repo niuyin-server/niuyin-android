@@ -15,11 +15,9 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyAdapter;
 import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.glide.GlideApp;
-import com.roydon.niuyin.http.response.VideoVO;
+import com.roydon.niuyin.http.response.video.VideoVO;
 import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
-
-import java.time.ZoneOffset;
 
 import butterknife.BindView;
 
@@ -68,17 +66,20 @@ public class HotVideoAdapter extends MyAdapter<VideoVO> {
         @Override
         public void onBindView(int position) {
             VideoVO item = getItem(position);
-            if (item.getCoverImage() != null || !item.getCoverImage().equals("")) {
+            if (item == null) {
+                return;
+            }
+            if (item.getCoverImage() != null && !item.getCoverImage().equals("")) {
                 GlideApp.with(getContext()).load(item.getCoverImage()).into(mCoverView);
             }
             mTitleView.setText(item.getVideoTitle());
-            if (item.getUserAvatar() != null || !item.getUserAvatar().equals("")) {
+            if (item.getUserAvatar() != null && !item.getUserAvatar().equals("")) {
                 GlideApp.with(getContext()).load(item.getUserAvatar()).into(mAvatarView);
             }
             mNicknameView.setText(item.getUserNickName());
-            if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
+            if ((PublishType.VIDEO.getCode()).equals(item.getPublishType())) {
                 mVideoTypeView.setVisibility(View.GONE);
-            } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
+            } else if ((PublishType.IMAGE.getCode()).equals(item.getPublishType())) {
                 mVideoTypeView.setVisibility(View.VISIBLE);
             }
             mViewNumView.setText(item.getViewNum().toString());

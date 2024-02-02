@@ -1,4 +1,4 @@
-package com.roydon.niuyin.http.response;
+package com.roydon.niuyin.http.response.video;
 
 import com.roydon.niuyin.http.response.entity.Video;
 import com.roydon.niuyin.http.response.entity.VideoPosition;

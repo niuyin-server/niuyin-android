@@ -15,7 +15,7 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyAdapter;
 import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.glide.GlideApp;
-import com.roydon.niuyin.http.response.MyVideoVO;
+import com.roydon.niuyin.http.response.video.MyVideoVO;
 
 import butterknife.BindView;
 
@@ -54,12 +54,15 @@ public class MePostAdapter extends MyAdapter<MyVideoVO> {
         @Override
         public void onBindView(int position) {
             MyVideoVO item = getItem(position);
-            if (item.getCoverImage() != null || !item.getCoverImage().equals("")) {
+            if (item == null) {
+                return;
+            }
+            if (item.getCoverImage() != null && !item.getCoverImage().equals("")) {
                 GlideApp.with(getContext()).load(item.getCoverImage()).into(mCoverView);
             }
-            if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
+            if ((PublishType.VIDEO.getCode()).equals(item.getPublishType())) {
                 mVideoTypeView.setVisibility(View.GONE);
-            } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
+            } else if ((PublishType.IMAGE.getCode()).equals(item.getPublishType())) {
                 mVideoTypeView.setVisibility(View.VISIBLE);
             }
             mLikeNumView.setText(item.getLikeNum().toString());

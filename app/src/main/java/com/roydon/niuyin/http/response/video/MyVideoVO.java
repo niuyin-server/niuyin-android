@@ -1,8 +1,8 @@
-package com.roydon.niuyin.http.response;
+package com.roydon.niuyin.http.response.video;
 
 import java.time.LocalDateTime;
 
-public class MyLikeVideoVO {
+public class MyVideoVO {
 
     private String videoId;
     private String videoTitle; // 标题
@@ -11,7 +11,7 @@ public class MyLikeVideoVO {
     private LocalDateTime createTime; // 发布时间
     private Long likeNum;  // 点赞量
 
-    public MyLikeVideoVO(String videoId, String videoTitle, String coverImage, String publishType, LocalDateTime createTime, Long likeNum) {
+    public MyVideoVO(String videoId, String videoTitle, String coverImage, String publishType, LocalDateTime createTime, Long likeNum) {
         this.videoId = videoId;
         this.videoTitle = videoTitle;
         this.coverImage = coverImage;
@@ -22,7 +22,7 @@ public class MyLikeVideoVO {
 
     @Override
     public String toString() {
-        return "MyLikeVideoVO{" +
+        return "MyVideoVO{" +
                 "videoId='" + videoId + '\'' +
                 ", videoTitle='" + videoTitle + '\'' +
                 ", coverImage='" + coverImage + '\'' +

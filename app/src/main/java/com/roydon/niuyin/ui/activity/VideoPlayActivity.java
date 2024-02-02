@@ -19,13 +19,9 @@ import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.video.VideoInfoApi;
-import com.roydon.niuyin.http.response.VideoInfoVO;
+import com.roydon.niuyin.http.response.video.VideoInfoVO;
 import com.roydon.niuyin.other.IntentKey;
-import com.roydon.niuyin.ui.adapter.HomeAdapter;
 import com.roydon.niuyin.ui.adapter.VideoPlayAdapter;
-import com.roydon.niuyin.ui.fragment.index.IndexFollowFragment;
-import com.roydon.niuyin.ui.fragment.index.IndexHotFragment;
-import com.roydon.niuyin.ui.fragment.index.IndexRecommendFragment;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoInfoFragment;
 

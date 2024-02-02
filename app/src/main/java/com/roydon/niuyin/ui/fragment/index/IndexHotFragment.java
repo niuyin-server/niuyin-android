@@ -21,7 +21,7 @@ import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.video.HotVideoApi;
-import com.roydon.niuyin.http.response.VideoVO;
+import com.roydon.niuyin.http.response.video.VideoVO;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.VideoImagePlayActivity;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;

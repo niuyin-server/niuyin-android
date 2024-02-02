@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,7 +12,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hjq.http.EasyHttp;
@@ -25,7 +22,7 @@ import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.video.VideoInfoApi;
-import com.roydon.niuyin.http.response.VideoInfoVO;
+import com.roydon.niuyin.http.response.video.VideoInfoVO;
 import com.roydon.niuyin.other.IntentKey;
 import com.roydon.niuyin.ui.adapter.SquareIndicator;
 import com.roydon.niuyin.ui.adapter.VideoImageBannerAdapter;
@@ -33,14 +30,10 @@ import com.roydon.niuyin.ui.adapter.VideoPlayAdapter;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoInfoFragment;
 import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
-import com.youth.banner.indicator.CircleIndicator;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import butterknife.BindView;
 

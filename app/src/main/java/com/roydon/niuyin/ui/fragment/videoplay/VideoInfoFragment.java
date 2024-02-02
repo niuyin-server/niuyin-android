@@ -23,10 +23,8 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.http.glide.GlideApp;
-import com.roydon.niuyin.http.response.VideoInfoVO;
-import com.roydon.niuyin.ui.activity.CrashActivity;
+import com.roydon.niuyin.http.response.video.VideoInfoVO;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
-import com.roydon.niuyin.ui.adapter.RecommendVideoAdapter;
 import com.roydon.niuyin.ui.adapter.VideoTagAdapter;
 import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
@@ -38,7 +36,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.Arrays;
 
 import butterknife.BindView;
-import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
 /**
  * @author roydon

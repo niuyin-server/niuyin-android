@@ -1,5 +1,6 @@
-package com.roydon.niuyin.http.response;
+package com.roydon.niuyin.http.response.video;
 
+import com.roydon.niuyin.http.response.Author;
 import com.roydon.niuyin.http.response.entity.VideoPosition;
 
 import java.time.LocalDateTime;

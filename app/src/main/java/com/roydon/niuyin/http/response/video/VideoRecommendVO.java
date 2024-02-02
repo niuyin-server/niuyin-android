@@ -1,4 +1,6 @@
-package com.roydon.niuyin.http.response;
+package com.roydon.niuyin.http.response.video;
+
+import com.roydon.niuyin.http.response.Author;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
