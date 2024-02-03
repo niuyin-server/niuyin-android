@@ -12,9 +12,9 @@
 
     <com.hjq.widget.square.SquareLinearLayout
         android:layout_width="28dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_height="wrap_content">
+        android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_sort"
@@ -32,7 +32,7 @@
         android:id="@+id/tv_keyword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="center_vertical|left"
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"

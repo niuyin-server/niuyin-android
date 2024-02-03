@@ -29,7 +29,7 @@ public interface StatusAction {
      * 显示加载中
      */
     default void showLoading() {
-        showLoading(R.raw.loading_hi);
+        showLoading(R.raw.loading_cat);
     }
 
     default void showLoading(@RawRes int id) {
