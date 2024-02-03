@@ -18,7 +18,10 @@ import butterknife.BindView;
 /**
  * @author roydon
  * @date 2024/1/31 12:00
- * @description niuyin-android
+ * @description 我的收藏fragment，包含两个子fragment
+ *
+ * @see MeFavoriteFolderFragment 收藏夹
+ * @see MeFavoriteVideoFragment 收藏视频
  */
 public class MeFavoriteFragment extends MyFragment<HomeActivity> {
 
