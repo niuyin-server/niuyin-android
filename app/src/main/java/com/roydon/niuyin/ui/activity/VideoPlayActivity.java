@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -50,6 +52,8 @@ public class VideoPlayActivity extends MyActivity {
     RatioFrameLayout mScreenScaleLayout;
     @BindView(R.id.videoPlayer)
     VideoView mVideoPlayerView;
+    @BindView(R.id.iv_video_status)
+    ImageView mVideoStatusView;
 
     @BindView(R.id.slidingTabLayout)
     SlidingTabLayout mSlidingTabLayout;
@@ -63,6 +67,7 @@ public class VideoPlayActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        mVideoStatusView.setVisibility(View.GONE);
         // 4:3竖屏视频
         mScreenScaleLayout.setSizeRatio(0.75f);
     }
@@ -128,6 +133,7 @@ public class VideoPlayActivity extends MyActivity {
     protected void onPause() {
         super.onPause();
         mVideoPlayerView.pause();
+//        mVideoStatusView.setVisibility(View.VISIBLE);
     }
 
     @Override
