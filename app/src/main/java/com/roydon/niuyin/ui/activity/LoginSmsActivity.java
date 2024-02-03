@@ -37,6 +37,7 @@ import com.roydon.niuyin.http.request.LoginSmsApi;
 import com.roydon.niuyin.http.response.LoginBean;
 import com.roydon.niuyin.other.CommonConstants;
 import com.roydon.niuyin.other.KeyboardWatcher;
+import com.roydon.niuyin.ui.dialog.WaitDialog;
 
 import butterknife.BindView;
 
@@ -181,7 +182,7 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                     toast(R.string.common_phone_input_error);
                     return;
                 }
-
+                new WaitDialog.Builder(this).setCancelable(false).create().show();
                 EasyHttp.post(this)
                         .api(new LoginSmsApi()
                                 .setTelephone(mTelephoneView.getText().toString())

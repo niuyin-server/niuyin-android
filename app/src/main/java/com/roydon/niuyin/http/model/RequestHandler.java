@@ -117,7 +117,10 @@ public final class RequestHandler implements IRequestHandler {
                     return result;
                 } else if (model.getCode() == 401) {
                     // 代表登录失效，需要重新登录
-                    throw new TokenException(context.getString(R.string.http_account_error));
+                    throw new TokenException(context.getString(R.string.http_account_error_401));
+                } else if (model.getCode() == 403) {
+                    // 代表登录失效，需要重新登录
+                    throw new TokenException(context.getString(R.string.http_account_error_403));
                 } else if (model.getCode() == 500) {
                     // 代表登录失效，需要重新登录
                     throw new ServerException(context.getString(R.string.http_server_error));
