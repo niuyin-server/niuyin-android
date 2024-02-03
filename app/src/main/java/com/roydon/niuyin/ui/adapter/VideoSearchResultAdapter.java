@@ -3,6 +3,7 @@ package com.roydon.niuyin.ui.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -70,7 +71,8 @@ public class VideoSearchResultAdapter extends MyAdapter<AppVideoSearchVO> {
             if (item.getCoverImage() != null && !item.getCoverImage().equals("")) {
                 GlideApp.with(getContext()).load(item.getCoverImage()).into(mCoverView);
             }
-            mTitleView.setText(item.getVideoTitle());
+            CharSequence styledText = Html.fromHtml(item.getVideoTitle(), Html.FROM_HTML_MODE_LEGACY);
+            mTitleView.setText(styledText);
             if (item.getAuthor().getAvatar() != null && !item.getAuthor().getAvatar().equals("")) {
                 GlideApp.with(getContext()).load(item.getAuthor().getAvatar()).into(mAvatarView);
             }

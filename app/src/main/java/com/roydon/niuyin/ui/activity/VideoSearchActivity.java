@@ -190,12 +190,12 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
             // 点击事件发生在 mVideoSearchHistoryRecyclerView 上
             VideoSearchHistory item = mVideoSearchHistoryAdapter.getItem(position);
             if (item == null) return;
-            toast(item.getKeyword());
+            VideoSearchResultActivity.start(this, item.getKeyword());
         } else if (recyclerView == mHotSearchRecyclerView) {
             // 点击事件发生在 mHotSearchRecyclerView 上
             String item = mHotVideoSearchAdapter.getItem(position);
             if (item == null) return;
-            toast(item);
+            VideoSearchResultActivity.start(this, item);
         }
     }
 

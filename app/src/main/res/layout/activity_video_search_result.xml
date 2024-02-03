@@ -93,35 +93,46 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.roydon.niuyin.widget.HintLayout
-        android:id="@+id/hl_status_hint"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:id="@+id/rl_status_refresh"
-            style="@style/RefreshLayoutStyle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.scwang.smartrefresh.header.MaterialHeader
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.hjq.widget.layout.WrapRecyclerView
-                android:id="@+id/rv_status_list"
+            <com.roydon.niuyin.widget.HintLayout
+                android:id="@+id/hl_status_hint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listCount="10"
-                tools:listitem="@layout/item_video_search_result" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                    android:id="@+id/rl_status_refresh"
+                    style="@style/RefreshLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+                    <com.scwang.smartrefresh.header.MaterialHeader
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-    </com.roydon.niuyin.widget.HintLayout>
+                    <com.hjq.widget.layout.WrapRecyclerView
+                        android:id="@+id/rv_status_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listCount="10"
+                        tools:listitem="@layout/item_video_search_result" />
 
+                    <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            </com.roydon.niuyin.widget.HintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
