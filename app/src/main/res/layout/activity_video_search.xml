@@ -134,7 +134,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/videoSearchHistoryRecyclerView"
@@ -148,12 +149,13 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <View style="@style/HorizontalLineStyle" />
+            <View style="@style/HorizontalLineStyle2" />
 
             <!--            热搜榜-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -173,14 +175,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/hotSearchRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        tools:listitem="@layout/item_video_search_history" />
+                        tools:listitem="@layout/item_hot_video_search" />
 
                 </LinearLayout>
             </LinearLayout>

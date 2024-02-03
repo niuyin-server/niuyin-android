@@ -7,24 +7,22 @@
     android:layout_marginBottom="5dp"
     android:background="@drawable/bg_recommend_video"
     android:orientation="horizontal"
-    tools:context="com.roydon.niuyin.ui.adapter.VideoSearchHistoryAdapter">
+    android:padding="5dp"
+    tools:context="com.roydon.niuyin.ui.adapter.HotVideoSearchAdapter">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
+        android:layout_gravity="center"
         android:paddingStart="5dp"
-        android:paddingTop="3dp"
         android:paddingEnd="5dp"
-        android:paddingBottom="3dp"
         android:text="1"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_history_keyword"
+        android:id="@+id/tv_keyword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
@@ -33,7 +31,6 @@
         android:maxLines="1"
         android:paddingStart="5dp"
         android:paddingTop="3dp"
-        android:paddingEnd="5dp"
         android:paddingBottom="3dp"
         android:text="热搜"
         android:textColor="@color/black"

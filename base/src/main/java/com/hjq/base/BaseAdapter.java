@@ -14,30 +14,43 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hjq.base.action.ContextAction;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : RecyclerView 适配器基类
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : RecyclerView 适配器基类
  */
-public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
-        extends RecyclerView.Adapter<VH> implements ContextAction {
+public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder> extends RecyclerView.Adapter<VH> implements ContextAction {
 
-    /** 上下文对象 */
+    /**
+     * 上下文对象
+     */
     private final Context mContext;
 
-    /** RecyclerView 对象 */
+    /**
+     * RecyclerView 对象
+     */
     private RecyclerView mRecyclerView;
 
-    /** 条目点击事件 */
+    /**
+     * 条目点击事件
+     */
     private OnItemClickListener mItemClickListener;
-    /** 条目长按事件 */
+    /**
+     * 条目长按事件
+     */
     private OnItemLongClickListener mItemLongClickListener;
-    /** RecyclerView 滚动事件 */
+    /**
+     * RecyclerView 滚动事件
+     */
     private OnScrollingListener mScrollingListener;
 
-    /** 条目子 View 点击事件 */
+    /**
+     * 条目子 View 点击事件
+     */
     private SparseArray<OnChildClickListener> mChildClickListeners;
-    /** 条目子 View 长按事件 */
+    /**
+     * 条目子 View 长按事件
+     */
     private SparseArray<OnChildLongClickListener> mChildLongClickListeners;
 
     public BaseAdapter(Context context) {
@@ -76,7 +89,9 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
     public abstract class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
 
-        /** 当前 ViewHolder 位置 */
+        /**
+         * 当前 ViewHolder 位置
+         */
         private int mViewHolderPosition;
 
         public ViewHolder(@LayoutRes int id) {
@@ -132,7 +147,7 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
         @Override
         public void onClick(View v) {
             if (v == getItemView()) {
-                if(mItemClickListener != null) {
+                if (mItemClickListener != null) {
                     mItemClickListener.onItemClick(mRecyclerView, v, getViewHolderPosition());
                     return;
                 }
@@ -271,7 +286,9 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
         }
     }
 
-    /** 自定义滚动监听器 */
+    /**
+     * 自定义滚动监听器
+     */
     private ScrollListener mScrollListener;
 
     private class ScrollListener extends RecyclerView.OnScrollListener {
@@ -308,21 +325,21 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
         /**
          * 列表滚动到最顶部
          *
-         * @param recyclerView      RecyclerView 对象
+         * @param recyclerView RecyclerView 对象
          */
         void onScrollTop(RecyclerView recyclerView);
 
         /**
          * 列表滚动中
          *
-         * @param recyclerView      RecyclerView 对象
+         * @param recyclerView RecyclerView 对象
          */
         void onScrolling(RecyclerView recyclerView);
 
         /**
          * 列表滚动到最底部
          *
-         * @param recyclerView      RecyclerView 对象
+         * @param recyclerView RecyclerView 对象
          */
         void onScrollDown(RecyclerView recyclerView);
     }
@@ -330,14 +347,14 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
     /**
      * RecyclerView 条目点击监听类
      */
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
 
         /**
          * 当 RecyclerView 某个条目被点击时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param itemView          被点击的条目对象
-         * @param position          被点击的条目位置
+         * @param recyclerView RecyclerView 对象
+         * @param itemView     被点击的条目对象
+         * @param position     被点击的条目位置
          */
         void onItemClick(RecyclerView recyclerView, View itemView, int position);
     }
@@ -350,10 +367,10 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
         /**
          * 当 RecyclerView 某个条目被长按时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param itemView          被点击的条目对象
-         * @param position          被点击的条目位置
-         * @return                  是否拦截事件
+         * @param recyclerView RecyclerView 对象
+         * @param itemView     被点击的条目对象
+         * @param position     被点击的条目位置
+         * @return 是否拦截事件
          */
         boolean onItemLongClick(RecyclerView recyclerView, View itemView, int position);
     }
@@ -366,9 +383,9 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
         /**
          * 当 RecyclerView 某个条目 子 View 被点击时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param childView         被点击的条目子 View Id
-         * @param position          被点击的条目位置
+         * @param recyclerView RecyclerView 对象
+         * @param childView    被点击的条目子 View Id
+         * @param position     被点击的条目位置
          */
         void onChildClick(RecyclerView recyclerView, View childView, int position);
     }
@@ -381,9 +398,9 @@ public abstract class BaseAdapter<VH extends BaseAdapter.ViewHolder>
         /**
          * 当 RecyclerView 某个条目子 View 被长按时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param childView         被点击的条目子 View Id
-         * @param position          被点击的条目位置
+         * @param recyclerView RecyclerView 对象
+         * @param childView    被点击的条目子 View Id
+         * @param position     被点击的条目位置
          */
         void onChildLongClick(RecyclerView recyclerView, View childView, int position);
     }

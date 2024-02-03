@@ -24,26 +24,32 @@ import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.behave.MyPostPageApi;
+import com.roydon.niuyin.http.request.search.HotVideoSearchApi;
 import com.roydon.niuyin.http.request.search.VideoSearchHistoryApi;
 import com.roydon.niuyin.http.response.search.VideoSearchHistory;
 import com.roydon.niuyin.http.response.video.MyVideoVO;
+import com.roydon.niuyin.ui.adapter.HotVideoSearchAdapter;
 import com.roydon.niuyin.ui.adapter.VideoSearchHistoryAdapter;
 import com.roydon.niuyin.widget.HintLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 
+@SuppressLint("NonConstantResourceId")
 public class VideoSearchActivity extends MyActivity implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
 
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_VIDEO_SEARCH_HISTORY = 1;
     private static final int HANDLER_VIDEO_SEARCH_HISTORY_EMPTY = 2;
+    private static final int HANDLER_HOT_VIDEO_SEARCH = 3;
+    private static final int HANDLER_HOT_VIDEO_SEARCH_EMPTY = 4;
 
     @BindView(R.id.iv_back)
     ImageView mBack;
@@ -56,6 +62,13 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
     RecyclerView mVideoSearchHistoryRecyclerView;
     private VideoSearchHistoryAdapter mVideoSearchHistoryAdapter;
     private List<VideoSearchHistory> mVideoSearchHistoryList;
+    // 热搜
+    @BindView(R.id.hotSearchRecyclerView)
+    RecyclerView mHotSearchRecyclerView;
+    private HotVideoSearchAdapter mHotVideoSearchAdapter;
+    private String[] mHotVideoSearchs;
+    private int hotVideoSearchPageNum = 1;
+    private int hotVideoSearchPageSize = 50;
 
     @Override
     protected int getLayoutId() {
@@ -81,12 +94,17 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
         mVideoSearchHistoryAdapter = new VideoSearchHistoryAdapter(this);
         mVideoSearchHistoryAdapter.setOnItemClickListener(this);
         mVideoSearchHistoryRecyclerView.setAdapter(mVideoSearchHistoryAdapter);
+        // 牛音热搜
+        mHotVideoSearchAdapter = new HotVideoSearchAdapter(this);
+        mHotVideoSearchAdapter.setOnItemClickListener(this);
+        mHotSearchRecyclerView.setAdapter(mHotVideoSearchAdapter);
 
     }
 
     @Override
     protected void initData() {
         getVideoSearchHistory();
+        getHotVideoSearch();
     }
 
     /**
@@ -115,6 +133,32 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
                 });
     }
 
+    /**
+     * 牛音热搜
+     */
+    public void getHotVideoSearch() {
+        EasyHttp.post(this)
+                .api(new HotVideoSearchApi().setPageNum(hotVideoSearchPageNum).setPageSize(hotVideoSearchPageSize))
+                .request(new HttpCallback<HttpData<String[]>>(this) {
+
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSucceed(HttpData<String[]> data) {
+                        if (Objects.isNull(data) || data.getData().length == 0) {
+                            mHandler.sendEmptyMessage(HANDLER_HOT_VIDEO_SEARCH_EMPTY);
+                        }
+                        mHotVideoSearchs = data.getData();
+                        // 更新ui
+                        mHandler.sendEmptyMessage(HANDLER_HOT_VIDEO_SEARCH);
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        toast("加载失败");
+                    }
+                });
+    }
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressLint("NotifyDataSetChanged")
@@ -129,6 +173,11 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
                     break;
                 case HANDLER_VIDEO_SEARCH_HISTORY_EMPTY:
                     break;
+                case HANDLER_HOT_VIDEO_SEARCH:
+                    mHotVideoSearchAdapter.setData(Arrays.asList(mHotVideoSearchs));
+                    break;
+                case HANDLER_HOT_VIDEO_SEARCH_EMPTY:
+                    break;
                 default:
                     break;
             }
@@ -142,9 +191,17 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        VideoSearchHistory item = mVideoSearchHistoryAdapter.getItem(position);
-        if (item == null) return;
-        toast(item.getKeyword());
+        if (recyclerView == mVideoSearchHistoryRecyclerView) {
+            // 点击事件发生在 mVideoSearchHistoryRecyclerView 上
+            VideoSearchHistory item = mVideoSearchHistoryAdapter.getItem(position);
+            if (item == null) return;
+            toast(item.getKeyword());
+        } else if (recyclerView == mHotSearchRecyclerView) {
+            // 点击事件发生在 mHotSearchRecyclerView 上
+            String item = mHotVideoSearchAdapter.getItem(position);
+            if (item == null) return;
+            toast(item);
+        }
     }
 
     @Override
