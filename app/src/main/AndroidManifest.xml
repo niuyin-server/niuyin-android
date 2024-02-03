@@ -29,6 +29,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:targetApi="n">
+        <activity
+            android:name=".ui.activity.VideoSearchResultActivity"
+            android:exported="false" />
         <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
             android:name="UMENG_CHANNEL"
@@ -162,22 +165,22 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible" /><!--手机短信登录-->
+            android:windowSoftInputMode="stateVisible" /> <!-- 手机短信登录 -->
         <activity
             android:name=".ui.activity.LoginSmsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" /><!--视频分类-->
+            android:screenOrientation="portrait" /> <!-- 视频分类 -->
         <activity
             android:name=".ui.activity.VideoCategoryActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" /><!--图文-->
+            android:screenOrientation="portrait" /> <!-- 图文 -->
         <activity
             android:name=".ui.activity.VideoImagePlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" /><!--视频播放-->
+            android:screenOrientation="portrait" /> <!-- 视频播放 -->
         <activity
             android:name=".ui.activity.VideoPlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

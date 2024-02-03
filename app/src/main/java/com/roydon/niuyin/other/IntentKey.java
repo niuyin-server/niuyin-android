@@ -99,4 +99,7 @@ public final class IntentKey {
 
     // 视频
     public static final String VIDEO_ID = "video_id";
+
+    // 搜索
+    public static final String SEARCH_KEYWORD = "search_keyword";
 }

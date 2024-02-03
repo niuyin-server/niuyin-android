@@ -40,7 +40,7 @@ import butterknife.BindView;
  * @date 2024/1/31 14:13
  * @description 首页推荐
  */
-public final class IndexRecommendFragment extends MyFragment<HomeActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
+public final class IndexRecommendFragment extends MyFragment<HomeActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener, BaseAdapter.OnItemLongClickListener {
 
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
@@ -146,14 +146,21 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        VideoRecommendVO videoRecommendVO = mAdapter.getItem(position);
-        if (videoRecommendVO.getPublishType().equals(PublishType.VIDEO.getCode())) {
+        VideoRecommendVO item = mAdapter.getItem(position);
+        if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
             // 视频
-            VideoPlayActivity.start(getContext(), videoRecommendVO.getVideoId());
-        } else if (videoRecommendVO.getPublishType().equals(PublishType.IMAGE.getCode())) {
+            VideoPlayActivity.start(getContext(), item.getVideoId());
+        } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
             // 图文
-            VideoImagePlayActivity.start(getContext(), videoRecommendVO.getVideoId());
+            VideoImagePlayActivity.start(getContext(), item.getVideoId());
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(RecyclerView recyclerView, View itemView, int position) {
+        VideoRecommendVO item = mAdapter.getItem(position);
+        toast("长按了第" + position + "个item, " + item.getVideoId());
+        return true;
     }
 
     @Override

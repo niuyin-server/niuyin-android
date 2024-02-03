@@ -20,21 +20,16 @@ import com.hjq.http.listener.HttpCallback;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyActivity;
-import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.model.HttpData;
-import com.roydon.niuyin.http.model.PageDataInfo;
-import com.roydon.niuyin.http.request.behave.MyPostPageApi;
 import com.roydon.niuyin.http.request.search.HotVideoSearchApi;
 import com.roydon.niuyin.http.request.search.VideoSearchHistoryApi;
 import com.roydon.niuyin.http.response.search.VideoSearchHistory;
-import com.roydon.niuyin.http.response.video.MyVideoVO;
 import com.roydon.niuyin.ui.adapter.HotVideoSearchAdapter;
 import com.roydon.niuyin.ui.adapter.VideoSearchHistoryAdapter;
 import com.roydon.niuyin.widget.HintLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -87,7 +82,7 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
         // 点击搜索
         mSearch.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(mHintKeyword.getText().toString())) {
-                toast("点击搜索：" + mHintKeyword.getText().toString());
+                VideoSearchResultActivity.start(this, mHintKeyword.getText().toString());
             }
         });
         // 历史搜索
