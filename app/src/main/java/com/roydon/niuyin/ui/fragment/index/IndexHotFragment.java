@@ -32,6 +32,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -109,7 +110,7 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
                         } else {
                             mRefreshLayout.finishLoadMore(true);
                             videoVOList.addAll(rows.getRows());
-                            if (rows.getRows().size() < pageSize) {
+                            if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < pageSize) {
                                 mRefreshLayout.setNoMoreData(true);
                                 TextView footerView = mRecyclerView.addFooterView(R.layout.item_recycler_footer);
                                 footerView.setText("— 我也是有底线的 —");

@@ -32,6 +32,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -110,7 +111,7 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
                             mRefreshLayout.finishLoadMore(true);
                             myLikeVideoVOList.addAll(rows.getRows() == null ? new ArrayList<>() : rows.getRows());
                         }
-                        if (rows.getRows().size() < myLikeVideoVOList.size()) {
+                        if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myLikeVideoVOList.size()) {
                             mRefreshLayout.setEnableLoadMore(false);
                             toast("not have more");
                         }

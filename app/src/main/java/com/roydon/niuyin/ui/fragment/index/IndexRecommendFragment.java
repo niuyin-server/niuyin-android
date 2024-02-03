@@ -117,7 +117,6 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                     @Override
                     public void onFail(Exception e) {
                         toast("加载失败");
-//                        showEmpty();
                         TextView footerView = mRecyclerView.addFooterView(R.layout.item_recycler_footer);
                         footerView.setText("我也是有底线的");
                         footerView.setOnClickListener(v -> toast("点击了尾部"));

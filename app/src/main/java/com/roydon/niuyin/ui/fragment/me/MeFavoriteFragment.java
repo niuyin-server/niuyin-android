@@ -38,6 +38,11 @@ public class MeFavoriteFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
+
+    }
+
+    @Override
+    protected void lazyLoadData() {
         // tab
         String[] mTitles = {"收藏夹", "视频"};
         ArrayList<Fragment> mMeFragments = new ArrayList<>();
@@ -47,11 +52,6 @@ public class MeFavoriteFragment extends MyFragment<HomeActivity> {
         mViewPager.setAdapter(new MeAdapter(getChildFragmentManager(), mTitles, mMeFragments));
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setCurrentTab(1);
-    }
-
-    @Override
-    protected void lazyLoadData() {
-
     }
 
     @Override
