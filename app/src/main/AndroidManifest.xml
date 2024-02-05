@@ -29,9 +29,6 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:targetApi="n">
-        <activity
-            android:name=".ui.activity.VideoSearchResultActivity"
-            android:exported="false" />
         <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
             android:name="UMENG_CHANNEL"
@@ -186,6 +183,19 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!--视频搜索结果-->
+        <activity
+            android:name=".ui.activity.VideoSearchResultActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!--分类视频-->
+        <activity
+            android:name=".ui.activity.CategoryVideoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

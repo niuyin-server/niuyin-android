@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
  *    desc   : 文本输入辅助类，通过管理多个 TextView 输入是否为空来启用或者禁用按钮的点击事件
  *    blog   : https://www.jianshu.com/p/fd3795e8a6b3
  */

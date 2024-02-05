@@ -1,45 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/transparent"
-    android:orientation="vertical"
+    android:clickable="true"
+    android:foreground="@drawable/ripple_recommend_video_card"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
     tools:context="com.roydon.niuyin.ui.adapter.VideoCategoryAdapter">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="0dp"
-        android:foreground="@drawable/ripple_recommend_video_card">
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.roydon.niuyin.widget.RoundImageView
+            android:id="@+id/iv_category_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:src="@color/gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_category_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <com.roydon.niuyin.widget.RoundImageView
-                android:id="@+id/iv_category_image"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:src="@color/gray" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_category_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:text="分类"
-                android:textColor="@color/gray"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="分类"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

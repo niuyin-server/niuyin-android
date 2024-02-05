@@ -9,9 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.collection.ArrayMap;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/11/18
  *    desc   : Activity 栈管理
  */
 public final class ActivityStackManager implements Application.ActivityLifecycleCallbacks {

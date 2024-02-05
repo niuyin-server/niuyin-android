@@ -102,6 +102,9 @@ public class VideoCategoryActivity extends MyActivity implements StatusAction, B
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
+        AppVideoCategoryVo item = mAdapter.getItem(position);
+        if (item != null) {
+            CategoryVideoActivity.start(this, item);
+        }
     }
 }

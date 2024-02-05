@@ -5,7 +5,7 @@ import com.hjq.http.config.IRequestApi;
 /**
  * @author roydon
  * @date 2024/2/5 14:36
- * @description 父视频分类1列表
+ * @description 父视频分类列表
  * get
  */
 public class ParentVideoCategoryApi implements IRequestApi {

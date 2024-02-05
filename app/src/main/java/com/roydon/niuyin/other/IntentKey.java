@@ -100,6 +100,7 @@ public final class IntentKey {
     // 视频
     public static final String VIDEO_ID = "video_id";
     public static final String VIDEO_SCREEN_TYPE = "video_screen_type";
+    public static final String APP_VIDEO_CATEGORY_VO = "app_video_category_vo"; //视频分类
 
     // 搜索
     public static final String SEARCH_KEYWORD = "search_keyword";

@@ -123,7 +123,9 @@ public class VideoImagePlayActivity extends MyActivity {
                 .setIndicator(new SquareIndicator(this));
         mBanner.setOnBannerListener((data, position) -> {
 //            toast("点击了第" + position + "个");
-            ImageActivity.start(this, (ArrayList<String>) Arrays.asList(videoInfoVO.getImageList()), position);
+            String[] imageList = videoInfoVO.getImageList();
+            ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(imageList));
+            ImageActivity.start(this, arrayList, position);
         });
 
     }
