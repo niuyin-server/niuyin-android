@@ -123,7 +123,7 @@
 
     <!-- 水波纹效果应用于 LinearLayout 的背景 -->
     <style name="RippleLinearLayout" parent="Theme.AppCompat">
-        <item name="android:background">@drawable/ripple_effect_recommend_video_card</item>
+        <item name="android:background">@drawable/ripple_recommend_video_card</item>
     </style>
 
 

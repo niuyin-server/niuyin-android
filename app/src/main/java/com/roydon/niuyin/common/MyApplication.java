@@ -116,7 +116,7 @@ public final class MyApplication extends Application {
         } else {
             server = new ReleaseServer();
         }
-        TokenManager tokenManager = new TokenManager(application);
+
         EasyConfig.with(new OkHttpClient())
                 // 是否打印日志
                 .setLogEnabled(AppConfig.isDebug())
@@ -129,7 +129,7 @@ public final class MyApplication extends Application {
                 // 添加全局请求参数
 //                .addParam("Content-Type", "application/json;charset=UTF-8")
                 // 添加全局请求头
-                .addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + tokenManager.getToken())
+                .addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + TokenManager.getToken(application))
                 // 启用配置
                 .into();
 

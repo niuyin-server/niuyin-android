@@ -16,6 +16,7 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.SwipeAction;
 import com.roydon.niuyin.action.TitleBarAction;
 import com.roydon.niuyin.action.ToastAction;
+import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.ui.dialog.WaitDialog;
 import com.hjq.http.EasyHttp;
@@ -232,5 +233,13 @@ public abstract class MyActivity extends BaseActivity implements ToastAction, Ti
         }
         mDialog = null;
         super.onDestroy();
+    }
+
+    public void spSetString(String key, String val) {
+        SPUtils.putString(key, val, this);
+    }
+
+    public String spGetString(String key) {
+        return SPUtils.getString(key, "", this);
     }
 }

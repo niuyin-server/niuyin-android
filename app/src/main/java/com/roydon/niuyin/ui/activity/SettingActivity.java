@@ -118,10 +118,9 @@ public final class SettingActivity extends MyActivity
             case R.id.sb_setting_exit:
                 if (true) {
                     // 清除token
-                    TokenManager tokenManager = new TokenManager(getActivity());
-                    tokenManager.clearToken();
+                    TokenManager.clearToken(getActivity());
                     // 清除用户缓存
-                    SPUtils.remove(SPUtils.AVATAR, getActivity());
+                    SPUtils.clear(this);
                     startActivity(LoginActivity.class);
                     // 进行内存优化，销毁除登录页之外的所有界面
                     ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
@@ -136,8 +135,7 @@ public final class SettingActivity extends MyActivity
                             @Override
                             public void onSucceed(HttpData<Void> data) {
                                 // 清除token
-                                TokenManager tokenManager = new TokenManager(getActivity());
-                                tokenManager.clearToken();
+                                TokenManager.clearToken(getActivity());
                                 // 清除用户缓存
                                 SPUtils.remove(SPUtils.AVATAR, getActivity());
                                 startActivity(LoginActivity.class);

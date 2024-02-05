@@ -196,8 +196,7 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
 //                                EasyConfig.getInstance().addParam("token", data.getData().getToken());
                                 EasyConfig.getInstance().addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + data.getData().getToken());
                                 // token保存到本地
-                                TokenManager tokenManager = new TokenManager(getActivity());
-                                tokenManager.saveToken(data.getData().getToken());
+                                TokenManager.saveToken(getActivity(), data.getData().getToken());
                                 // 跳转到主页
                                 startActivity(HomeActivity.class);
                                 finish();

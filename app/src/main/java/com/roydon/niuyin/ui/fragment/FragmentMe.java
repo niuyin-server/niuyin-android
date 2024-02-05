@@ -143,7 +143,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_GET_USERINFO);
                         // 更新缓存
-                        SPUtils.putString(SPUtils.AVATAR, memberInfoVO.getAvatar(), getContext());
+                        spSetString(SPUtils.AVATAR, memberInfoVO.getAvatar());
                     }
                 });
 

@@ -122,7 +122,8 @@ public class VideoImagePlayActivity extends MyActivity {
                 }).addBannerLifecycleObserver(this)//添加生命周期观察者
                 .setIndicator(new SquareIndicator(this));
         mBanner.setOnBannerListener((data, position) -> {
-            toast("点击了第" + position + "个");
+//            toast("点击了第" + position + "个");
+            ImageActivity.start(this, (ArrayList<String>) Arrays.asList(videoInfoVO.getImageList()), position);
         });
 
     }

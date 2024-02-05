@@ -76,4 +76,9 @@ public class SPUtils {
         sp.edit().remove(key).commit();
     }
 
+    public static void clear(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        sp.edit().clear().apply();
+    }
+
 }

@@ -71,7 +71,7 @@ public final class PersonalProfileActivity extends MyActivity {
 
     @Override
     protected void initData() {
-        String avatarCache = SPUtils.getString(SPUtils.AVATAR, "", getActivity());
+        String avatarCache = spGetString(SPUtils.AVATAR);
 
         GlideApp.with(getActivity())
                 .load(avatarCache)

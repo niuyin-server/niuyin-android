@@ -11,6 +11,7 @@ import com.roydon.niuyin.action.TitleBarAction;
 import com.roydon.niuyin.action.ToastAction;
 import com.hjq.http.EasyHttp;
 import com.hjq.umeng.UmengClient;
+import com.roydon.niuyin.helper.SPUtils;
 
 import butterknife.ButterKnife;
 
@@ -180,5 +181,13 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> i
     public void onDetach() {
         EasyHttp.cancel(this);
         super.onDetach();
+    }
+
+    public void spSetString(String key, String val) {
+        SPUtils.putString(key, val, getContext());
+    }
+
+    public String spGetString(String key) {
+        return SPUtils.getString(key, "", getContext());
     }
 }

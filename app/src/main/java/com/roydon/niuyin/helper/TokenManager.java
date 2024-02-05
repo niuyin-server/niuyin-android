@@ -10,29 +10,27 @@ public class TokenManager {
     private static final String PREF_NAME = "TokenPrefs";
     private static final String KEY_TOKEN = "token";
 
-    private SharedPreferences sharedPreferences;
-
-    public TokenManager(Context context) {
-        sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-    }
-
-    public void saveToken(String token) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    public static void saveToken(Context context, String token) {
+        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
         editor.putString(KEY_TOKEN, token);
-        editor.apply();
+        editor.commit();
     }
 
-    public String getToken() {
-        return sharedPreferences.getString(KEY_TOKEN, null);
+    public static String getToken(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return sp.getString(KEY_TOKEN, null);
     }
 
-    public boolean hasToken() {
-        return sharedPreferences.contains(KEY_TOKEN);
+    public boolean hasToken(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return sp.contains(KEY_TOKEN);
     }
 
-    public void clearToken() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    public static void clearToken(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
         editor.remove(KEY_TOKEN);
-        editor.apply();
+        editor.commit();
     }
 }

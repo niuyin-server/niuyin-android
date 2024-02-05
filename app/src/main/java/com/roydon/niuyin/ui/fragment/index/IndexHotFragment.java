@@ -44,7 +44,7 @@ import butterknife.BindView;
  * @date 2024/2/1 19:33
  * @description 热门视频
  */
-public final class IndexHotFragment extends MyFragment<HomeActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
+public final class IndexHotFragment extends MyFragment<HomeActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener ,BaseAdapter.OnItemLongClickListener{
 
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
@@ -77,6 +77,7 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
     protected void initView() {
         mAdapter = new HotVideoAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemLongClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         showLoading();
@@ -107,6 +108,10 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onSucceed(PageDataInfo<VideoVO> rows) {
+                        if (rows.getTotal() == 0) {
+                            mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
+                            return;
+                        }
                         if (isRefresh) {
                             mRefreshLayout.finishRefresh(true);
                             videoVOList = rows.getRows();
@@ -172,7 +177,7 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
                 } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
                     // 竖屏 0.75
 //                    toast("竖屏视频");
-                    VideoPlayActivity.start(getContext(), item.getVideoId(),VideoScreenType.SHU.getCode());
+                    VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
                 }
             }
 //            VideoPlayActivity.start(getContext(), videoVO.getVideoId(), VideoScreenType.DEFAULT.getCode());
@@ -180,6 +185,11 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
             // 图文
             VideoImagePlayActivity.start(getContext(), item.getVideoId());
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(RecyclerView recyclerView, View itemView, int position) {
+        return true;
     }
 
     @Override
