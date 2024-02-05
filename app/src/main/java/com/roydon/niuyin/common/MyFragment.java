@@ -64,23 +64,14 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> i
         isLazyLoaded = true;
     }
 
-    protected abstract void lazyLoadData(); // 子类实现具体的数据加载逻辑
+    /**
+     * 懒加载
+     */
+    protected abstract void lazyLoadData();
 
     private boolean isViewCreated() {
         return getView() != null;
     }
-
-//    @Override
-//    protected void initFragment() {
-//        ButterKnife.bind(this, getView());
-//
-//        if (getTitleBar() != null) {
-//            getTitleBar().setOnTitleBarListener(this);
-//        }
-//
-//        initImmersion();
-//        super.initFragment();
-//    }
 
     /**
      * 初始化沉浸式

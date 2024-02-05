@@ -90,10 +90,14 @@ public class CategoryVideoActivity extends MyActivity {
 
     @Override
     protected void initData() {
-
         getChildrenVideoCategory(parentVideoCategory.getId());
     }
 
+    /**
+     * 获取子分类
+     *
+     * @param id 父分类id
+     */
     private void getChildrenVideoCategory(Long id) {
         EasyHttp.get(this)
                 .api(new ChildrenVideoCategoryApi().setId(id))

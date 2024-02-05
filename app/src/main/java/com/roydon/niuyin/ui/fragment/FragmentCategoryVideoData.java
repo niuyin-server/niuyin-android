@@ -27,6 +27,9 @@ public final class FragmentCategoryVideoData extends MyFragment<CategoryVideoAct
 
     }
 
+    /**
+     * 懒加载
+     */
     @Override
     protected void lazyLoadData() {
 
