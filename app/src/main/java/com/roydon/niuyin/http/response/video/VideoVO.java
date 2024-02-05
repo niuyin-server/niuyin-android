@@ -27,8 +27,8 @@ public class VideoVO extends Video {
     // 热力值
     private Double hotScore;
 
-    public VideoVO(String videoId, Long userId, String videoTitle, String videoDesc, String coverImage, String videoUrl, Long viewNum, Long likeNum, Long favoritesNum, String publishType, String showType, String positionFlag, String auditsStatus, String delFlag, String createBy, LocalDateTime createTime, String updateBy, LocalDateTime updateTime, Long commentNum, String userNickName, String userAvatar, boolean weatherLike, boolean weatherFavorite, boolean weatherFollow, String[] tags, String[] imageList, VideoPosition position, Double hotScore) {
-        super(videoId, userId, videoTitle, videoDesc, coverImage, videoUrl, viewNum, likeNum, favoritesNum, publishType, showType, positionFlag, auditsStatus, delFlag, createBy, createTime, updateBy, updateTime);
+    public VideoVO(String videoId, Long userId, String videoTitle, String videoDesc, String coverImage, String videoUrl, Long viewNum, Long likeNum, Long favoritesNum, String publishType, String showType, String positionFlag, String auditsStatus, String videoInfo, String delFlag, String createBy, LocalDateTime createTime, String updateBy, LocalDateTime updateTime, Long commentNum, String userNickName, String userAvatar, boolean weatherLike, boolean weatherFavorite, boolean weatherFollow, String[] tags, String[] imageList, VideoPosition position, Double hotScore) {
+        super(videoId, userId, videoTitle, videoDesc, coverImage, videoUrl, viewNum, likeNum, favoritesNum, publishType, showType, positionFlag, auditsStatus, videoInfo, delFlag, createBy, createTime, updateBy, updateTime);
         this.commentNum = commentNum;
         this.userNickName = userNickName;
         this.userAvatar = userAvatar;

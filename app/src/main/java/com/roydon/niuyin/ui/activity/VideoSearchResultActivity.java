@@ -25,25 +25,17 @@ import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.enums.PublishType;
-import com.roydon.niuyin.http.model.HttpData;
+import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.model.PageDataInfo;
-import com.roydon.niuyin.http.request.search.HotVideoSearchApi;
 import com.roydon.niuyin.http.request.search.VideoSearchApi;
-import com.roydon.niuyin.http.request.search.VideoSearchHistoryApi;
 import com.roydon.niuyin.http.response.search.AppVideoSearchVO;
-import com.roydon.niuyin.http.response.search.VideoSearchHistory;
-import com.roydon.niuyin.http.response.video.VideoRecommendVO;
 import com.roydon.niuyin.other.IntentKey;
-import com.roydon.niuyin.ui.adapter.HotVideoAdapter;
-import com.roydon.niuyin.ui.adapter.HotVideoSearchAdapter;
-import com.roydon.niuyin.ui.adapter.VideoSearchHistoryAdapter;
 import com.roydon.niuyin.ui.adapter.VideoSearchResultAdapter;
 import com.roydon.niuyin.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -197,7 +189,7 @@ public class VideoSearchResultActivity extends MyActivity implements StatusActio
         AppVideoSearchVO item = mVideoSearchResultAdapter.getItem(position);
         if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
             // 视频
-            VideoPlayActivity.start(this, item.getVideoId());
+            VideoPlayActivity.start(this, item.getVideoId(), VideoScreenType.DEFAULT.getCode());
         } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
             // 图文
             VideoImagePlayActivity.start(this, item.getVideoId());

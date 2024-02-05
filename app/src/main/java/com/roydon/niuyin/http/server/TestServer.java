@@ -9,7 +9,7 @@ public class TestServer extends ReleaseServer {
 
     @Override
     public String getHost() {
-        return "https://32bd3202.r21.cpolar.top/";
+        return "https://1f4999d8.r3.cpolar.cn/";
     }
 
     @Override

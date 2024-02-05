@@ -18,6 +18,7 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.enums.PublishType;
+import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.behave.MyLikeVideoPageApi;
 import com.roydon.niuyin.http.response.behave.MyLikeVideoVO;
@@ -157,7 +158,7 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
         if (item == null) return;
         if ((PublishType.VIDEO.getCode()).equals(item.getPublishType())) {
             // 视频
-            VideoPlayActivity.start(getContext(), item.getVideoId());
+            VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
         } else if ((PublishType.IMAGE.getCode()).equals(item.getPublishType())) {
             // 图文
             VideoImagePlayActivity.start(getContext(), item.getVideoId());

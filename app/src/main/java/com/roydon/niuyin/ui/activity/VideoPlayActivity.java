@@ -13,21 +13,25 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
+import com.google.gson.Gson;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.RatioFrameLayout;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.common.MyActivity;
+import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.video.VideoInfoApi;
 import com.roydon.niuyin.http.response.video.VideoInfoVO;
 import com.roydon.niuyin.other.IntentKey;
+import com.roydon.niuyin.other.MediaVideoInfo;
 import com.roydon.niuyin.ui.adapter.VideoPlayAdapter;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoInfoFragment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import xyz.doikki.videocontroller.StandardVideoController;
@@ -40,9 +44,10 @@ public class VideoPlayActivity extends MyActivity {
     private static final int HANDLER_VIDEO_INFO = 1;
 
     @DebugLog
-    public static void start(Context context, String videoId) {
+    public static void start(Context context, String videoId, String videoScreenType) {
         Intent intent = new Intent(context, VideoPlayActivity.class);
         intent.putExtra(IntentKey.VIDEO_ID, videoId);
+        intent.putExtra(IntentKey.VIDEO_SCREEN_TYPE, videoScreenType);
         context.startActivity(intent);
     }
 
@@ -68,8 +73,13 @@ public class VideoPlayActivity extends MyActivity {
     @Override
     protected void initView() {
         mVideoStatusView.setVisibility(View.GONE);
-        // 4:3竖屏视频
-        mScreenScaleLayout.setSizeRatio(0.75f);
+        if (getString(IntentKey.VIDEO_SCREEN_TYPE) != null) {
+            if (VideoScreenType.HENG.getCode().equals(getString(IntentKey.VIDEO_SCREEN_TYPE))) {
+                mScreenScaleLayout.setSizeRatio(1.6f);
+            } else if (VideoScreenType.SHU.getCode().equals(getString(IntentKey.VIDEO_SCREEN_TYPE))) {
+                mScreenScaleLayout.setSizeRatio(0.75f);
+            }
+        }
     }
 
     @Override
@@ -101,6 +111,7 @@ public class VideoPlayActivity extends MyActivity {
                 case HANDLER_WHAT_EMPTY:
                     break;
                 case HANDLER_VIDEO_INFO:
+//                    setScreenLayout(videoInfoVO);
                     showVideoInfo(videoInfoVO);
                     break;
                 default:
@@ -109,7 +120,24 @@ public class VideoPlayActivity extends MyActivity {
         }
     };
 
+    private void setScreenLayout(VideoInfoVO videoInfoVO) {
+        // 设置视频比例 4:3竖屏视频
+        if (!Objects.isNull(videoInfoVO.getVideoInfo())) {
+            MediaVideoInfo mediaVideoInfo = new Gson().fromJson(videoInfoVO.getVideoInfo(), MediaVideoInfo.class);
+            if (mediaVideoInfo.getWidth() > mediaVideoInfo.getHeight()) {
+                // 横屏 1.6
+                toast("横屏视频");
+                mScreenScaleLayout.setSizeRatio(1.6f);
+            } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
+                // 竖屏 0.75
+                toast("竖屏视频");
+                mScreenScaleLayout.setSizeRatio(0.75f);
+            }
+        }
+    }
+
     private void showVideoInfo(VideoInfoVO videoInfoVO) {
+
         mVideoPlayerView.setUrl(videoInfoVO.getVideoUrl()); //设置视频地址
         StandardVideoController controller = new StandardVideoController(this);
         controller.addDefaultControlComponent(videoInfoVO.getVideoTitle(), false);

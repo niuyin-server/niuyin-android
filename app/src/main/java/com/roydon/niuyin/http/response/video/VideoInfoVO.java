@@ -24,6 +24,7 @@ public class VideoInfoVO {
     private Long commentNum; // 评论量
     private String publishType; // 发布类型（0视频，1图文）
     private String positionFlag; // 定位功能（0关闭，1开启）
+    private String videoInfo; //视频详情
     private LocalDateTime createTime; // 发布时间
     private Long userId;
     private Author author;
@@ -42,7 +43,7 @@ public class VideoInfoVO {
     // 热力值
     private Double hotScore;
 
-    public VideoInfoVO(String videoId, String videoTitle, String coverImage, String videoDesc, String videoUrl, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, String positionFlag, LocalDateTime createTime, Long userId, Author author, boolean weatherFollow, boolean weatherLike, boolean weatherFavorite, String[] tags, String[] imageList, VideoPosition position, Double hotScore) {
+    public VideoInfoVO(String videoId, String videoTitle, String coverImage, String videoDesc, String videoUrl, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, String positionFlag, String videoInfo, LocalDateTime createTime, Long userId, Author author, boolean weatherFollow, boolean weatherLike, boolean weatherFavorite, String[] tags, String[] imageList, VideoPosition position, Double hotScore) {
         this.videoId = videoId;
         this.videoTitle = videoTitle;
         this.coverImage = coverImage;
@@ -54,6 +55,7 @@ public class VideoInfoVO {
         this.commentNum = commentNum;
         this.publishType = publishType;
         this.positionFlag = positionFlag;
+        this.videoInfo = videoInfo;
         this.createTime = createTime;
         this.userId = userId;
         this.author = author;
@@ -80,6 +82,7 @@ public class VideoInfoVO {
                 ", commentNum=" + commentNum +
                 ", publishType='" + publishType + '\'' +
                 ", positionFlag='" + positionFlag + '\'' +
+                ", videoInfo='" + videoInfo + '\'' +
                 ", createTime=" + createTime +
                 ", userId=" + userId +
                 ", author=" + author +
@@ -91,22 +94,6 @@ public class VideoInfoVO {
                 ", position=" + position +
                 ", hotScore=" + hotScore +
                 '}';
-    }
-
-    public String getVideoDesc() {
-        return videoDesc;
-    }
-
-    public void setVideoDesc(String videoDesc) {
-        this.videoDesc = videoDesc;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
     }
 
     public String getVideoId() {
@@ -131,6 +118,22 @@ public class VideoInfoVO {
 
     public void setCoverImage(String coverImage) {
         this.coverImage = coverImage;
+    }
+
+    public String getVideoDesc() {
+        return videoDesc;
+    }
+
+    public void setVideoDesc(String videoDesc) {
+        this.videoDesc = videoDesc;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public Long getViewNum() {
@@ -179,6 +182,14 @@ public class VideoInfoVO {
 
     public void setPositionFlag(String positionFlag) {
         this.positionFlag = positionFlag;
+    }
+
+    public String getVideoInfo() {
+        return videoInfo;
+    }
+
+    public void setVideoInfo(String videoInfo) {
+        this.videoInfo = videoInfo;
     }
 
     public LocalDateTime getCreateTime() {

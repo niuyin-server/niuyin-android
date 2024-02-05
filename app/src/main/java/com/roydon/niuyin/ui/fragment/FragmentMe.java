@@ -1,14 +1,20 @@
 package com.roydon.niuyin.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.RippleDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -67,6 +73,8 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     LinearLayout mUserinfoView;
 
     // 用户信息
+    @BindView(R.id.iv_user_bg)
+    ImageView mUserBgView;
     @BindView(R.id.riv_avatar)
     ImageView mAvatarView;
     @BindView(R.id.tv_nickname)
@@ -75,6 +83,10 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     TextView mMenuNickNameView;
     @BindView(R.id.tv_user_id)
     TextView mUserIdView;
+
+    // 按钮
+    @BindView(R.id.btn_edit_profile)
+    Button mEditProfileBtn;
 
     @BindView(R.id.slidingTabLayout)
     SlidingTabLayout mSlidingTabLayout;
@@ -92,6 +104,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         return R.layout.fragment_me;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
         // 给这个 ToolBar 设置顶部内边距，才能和 TitleBar 进行对齐
@@ -165,6 +178,12 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                     .load(memberInfoVO.getAvatar())
                     .circleCrop()
                     .into(mMenuAvatarView);
+            mMenuAvatarView.setVisibility(View.GONE);
+        }
+        if (memberInfoVO.getMemberInfo().getBackImage() != null && !memberInfoVO.getMemberInfo().getBackImage().equals("")) {
+            GlideApp.with(this)
+                    .load(memberInfoVO.getMemberInfo().getBackImage())
+                    .into(mUserBgView);
         }
         mNickNameView.setText(memberInfoVO.getNickName());
         mMenuNickNameView.setText(memberInfoVO.getNickName());

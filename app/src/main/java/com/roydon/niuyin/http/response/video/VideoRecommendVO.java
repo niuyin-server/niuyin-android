@@ -15,9 +15,25 @@ public class VideoRecommendVO implements Serializable {
     private Long favoriteNum;  // 收藏量
     private Long commentNum; //评论量
     private String publishType; //发布类型（0视频，1图文）
+    private String videoInfo;
     private LocalDateTime createTime; //发布时间
     private Long userId;
     private Author author;
+
+    public VideoRecommendVO(String videoId, String videoTitle, String coverImage, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, String videoInfo, LocalDateTime createTime, Long userId, Author author) {
+        this.videoId = videoId;
+        this.videoTitle = videoTitle;
+        this.coverImage = coverImage;
+        this.viewNum = viewNum;
+        this.likeNum = likeNum;
+        this.favoriteNum = favoriteNum;
+        this.commentNum = commentNum;
+        this.publishType = publishType;
+        this.videoInfo = videoInfo;
+        this.createTime = createTime;
+        this.userId = userId;
+        this.author = author;
+    }
 
     @Override
     public String toString() {
@@ -30,24 +46,11 @@ public class VideoRecommendVO implements Serializable {
                 ", favoriteNum=" + favoriteNum +
                 ", commentNum=" + commentNum +
                 ", publishType='" + publishType + '\'' +
+                ", videoInfo='" + videoInfo + '\'' +
                 ", createTime=" + createTime +
                 ", userId=" + userId +
                 ", author=" + author +
                 '}';
-    }
-
-    public VideoRecommendVO(String videoId, String videoTitle, String coverImage, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, LocalDateTime createTime, Long userId, Author author) {
-        this.videoId = videoId;
-        this.videoTitle = videoTitle;
-        this.coverImage = coverImage;
-        this.viewNum = viewNum;
-        this.likeNum = likeNum;
-        this.favoriteNum = favoriteNum;
-        this.commentNum = commentNum;
-        this.publishType = publishType;
-        this.createTime = createTime;
-        this.userId = userId;
-        this.author = author;
     }
 
     public String getVideoId() {
@@ -112,6 +115,14 @@ public class VideoRecommendVO implements Serializable {
 
     public void setPublishType(String publishType) {
         this.publishType = publishType;
+    }
+
+    public String getVideoInfo() {
+        return videoInfo;
+    }
+
+    public void setVideoInfo(String videoInfo) {
+        this.videoInfo = videoInfo;
     }
 
     public LocalDateTime getCreateTime() {

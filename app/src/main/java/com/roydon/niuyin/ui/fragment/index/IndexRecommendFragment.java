@@ -1,6 +1,8 @@
 package com.roydon.niuyin.ui.fragment.index;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -19,9 +22,11 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.enums.PublishType;
+import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.video.RecommendVideoApi;
 import com.roydon.niuyin.http.response.video.VideoRecommendVO;
+import com.roydon.niuyin.other.MediaVideoInfo;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.VideoImagePlayActivity;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
@@ -32,6 +37,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -149,7 +155,20 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
         VideoRecommendVO item = mAdapter.getItem(position);
         if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
             // 视频
-            VideoPlayActivity.start(getContext(), item.getVideoId());
+            // 设置视频比例 4:3竖屏视频
+            if (!Objects.isNull(item.getVideoInfo())) {
+                MediaVideoInfo mediaVideoInfo = new Gson().fromJson(item.getVideoInfo(), MediaVideoInfo.class);
+                if (mediaVideoInfo.getWidth() > mediaVideoInfo.getHeight()) {
+                    // 横屏 1.6
+//                    toast("横屏视频");
+                    VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.HENG.getCode());
+                } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
+                    // 竖屏 0.75
+//                    toast("竖屏视频");
+                    VideoPlayActivity.start(getContext(), item.getVideoId(),VideoScreenType.SHU.getCode());
+                }
+            }
+//            VideoPlayActivity.start(getContext(), item.getVideoId());
         } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
             // 图文
             VideoImagePlayActivity.start(getContext(), item.getVideoId());

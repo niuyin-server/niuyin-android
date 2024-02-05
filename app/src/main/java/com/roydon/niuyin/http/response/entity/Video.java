@@ -44,6 +44,7 @@ public class Video implements Serializable {
      * 审核状态(0:待审核1:审核成功2:审核失败)
      */
     private String auditsStatus;
+    private String videoInfo;
     /**
      * 删除标志（0代表存在 1代表删除）
      */
@@ -65,7 +66,7 @@ public class Video implements Serializable {
      */
     private LocalDateTime updateTime;
 
-    public Video(String videoId, Long userId, String videoTitle, String videoDesc, String coverImage, String videoUrl, Long viewNum, Long likeNum, Long favoritesNum, String publishType, String showType, String positionFlag, String auditsStatus, String delFlag, String createBy, LocalDateTime createTime, String updateBy, LocalDateTime updateTime) {
+    public Video(String videoId, Long userId, String videoTitle, String videoDesc, String coverImage, String videoUrl, Long viewNum, Long likeNum, Long favoritesNum, String publishType, String showType, String positionFlag, String auditsStatus, String videoInfo, String delFlag, String createBy, LocalDateTime createTime, String updateBy, LocalDateTime updateTime) {
         this.videoId = videoId;
         this.userId = userId;
         this.videoTitle = videoTitle;
@@ -79,6 +80,7 @@ public class Video implements Serializable {
         this.showType = showType;
         this.positionFlag = positionFlag;
         this.auditsStatus = auditsStatus;
+        this.videoInfo = videoInfo;
         this.delFlag = delFlag;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -102,6 +104,7 @@ public class Video implements Serializable {
                 ", showType='" + showType + '\'' +
                 ", positionFlag='" + positionFlag + '\'' +
                 ", auditsStatus='" + auditsStatus + '\'' +
+                ", videoInfo='" + videoInfo + '\'' +
                 ", delFlag='" + delFlag + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
@@ -212,6 +215,14 @@ public class Video implements Serializable {
 
     public void setAuditsStatus(String auditsStatus) {
         this.auditsStatus = auditsStatus;
+    }
+
+    public String getVideoInfo() {
+        return videoInfo;
+    }
+
+    public void setVideoInfo(String videoInfo) {
+        this.videoInfo = videoInfo;
     }
 
     public String getDelFlag() {
