@@ -162,13 +162,11 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                 MediaVideoInfo mediaVideoInfo = new Gson().fromJson(item.getVideoInfo(), MediaVideoInfo.class);
                 if (mediaVideoInfo.getWidth() > mediaVideoInfo.getHeight()) {
                     // 横屏 1.6
-//                    toast("横屏视频");
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.HENG.getCode());
                 } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
                     // 竖屏 0.75
-//                    toast("竖屏视频");
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
-                }else if(Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())){
+                } else if (Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())) {
                     // 正方形视频
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SQUARE.getCode());
                 }
