@@ -123,7 +123,8 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
 
                     @Override
                     public void onFail(Exception e) {
-                        toast("加载失败");
+                        toast(e.getMessage());
+                        showError(view -> getRecommendVideoList(isRefresh));
                         TextView footerView = mRecyclerView.addFooterView(R.layout.item_recycler_footer);
                         footerView.setText("我也是有底线的");
                         footerView.setOnClickListener(v -> toast("点击了尾部"));
@@ -166,7 +167,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                 } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
                     // 竖屏 0.75
 //                    toast("竖屏视频");
-                    VideoPlayActivity.start(getContext(), item.getVideoId(),VideoScreenType.SHU.getCode());
+                    VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
                 }
             }
 //            VideoPlayActivity.start(getContext(), item.getVideoId());
