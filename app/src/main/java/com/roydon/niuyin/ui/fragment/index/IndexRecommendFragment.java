@@ -168,9 +168,14 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                     // 竖屏 0.75
 //                    toast("竖屏视频");
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
+                }else if(Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())){
+                    // 正方形视频
+                    VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SQUARE.getCode());
                 }
+            } else {
+                // 默认横屏
+                VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
             }
-//            VideoPlayActivity.start(getContext(), item.getVideoId());
         } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
             // 图文
             VideoImagePlayActivity.start(getContext(), item.getVideoId());

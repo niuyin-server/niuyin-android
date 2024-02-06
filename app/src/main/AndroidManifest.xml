@@ -182,6 +182,7 @@
             android:name=".ui.activity.VideoPlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <!--视频搜索结果-->
         <activity

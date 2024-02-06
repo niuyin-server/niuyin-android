@@ -183,7 +183,12 @@ public final class FragmentCategoryVideoData extends MyFragment<CategoryVideoAct
                 } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
                     // 竖屏 0.75
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
+                }else if(Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())){
+                    // 正方形视频
+                    VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SQUARE.getCode());
                 }
+            }else {
+                VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
             }
         } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
             // 图文

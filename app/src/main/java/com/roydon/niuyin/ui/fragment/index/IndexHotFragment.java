@@ -178,7 +178,12 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
                     // 竖屏 0.75
 //                    toast("竖屏视频");
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
+                }else if(Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())){
+                    // 正方形视频
+                    VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SQUARE.getCode());
                 }
+            }else {
+                VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
             }
 //            VideoPlayActivity.start(getContext(), videoVO.getVideoId(), VideoScreenType.DEFAULT.getCode());
         } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {

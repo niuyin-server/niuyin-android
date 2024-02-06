@@ -78,6 +78,10 @@ public class VideoPlayActivity extends MyActivity {
                 mScreenScaleLayout.setSizeRatio(1.6f);
             } else if (VideoScreenType.SHU.getCode().equals(getString(IntentKey.VIDEO_SCREEN_TYPE))) {
                 mScreenScaleLayout.setSizeRatio(0.75f);
+            } else if (VideoScreenType.SQUARE.getCode().equals(getString(IntentKey.VIDEO_SCREEN_TYPE))) {
+                mScreenScaleLayout.setSizeRatio(1f);
+            } else if (VideoScreenType.DEFAULT.getCode().equals(getString(IntentKey.VIDEO_SCREEN_TYPE))) {
+//                mScreenScaleLayout.setSizeRatio(1f);
             }
         }
     }

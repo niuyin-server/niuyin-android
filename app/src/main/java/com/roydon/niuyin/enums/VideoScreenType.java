@@ -10,6 +10,7 @@ public enum VideoScreenType {
     DEFAULT("-1", "默认"),
     HENG("0", "横屏"),
     SHU("1", "竖屏"),
+    SQUARE("2", "方形"),
     ;
 
     private final String code;

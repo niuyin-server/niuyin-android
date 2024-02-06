@@ -77,9 +77,9 @@ public class RecommendVideoAdapter extends MyAdapter<VideoRecommendVO> {
             } else if ((PublishType.IMAGE.getCode()).equals(item.getPublishType())) {
                 mVideoTypeView.setVisibility(View.VISIBLE);
             }
-            mViewNumView.setText(item.getViewNum().toString());
-            mLikeNumView.setText(item.getLikeNum().toString());
-            mCommentNumView.setText(item.getCommentNum().toString());
+            mViewNumView.setText(item.getViewNum() + "");
+            mLikeNumView.setText(item.getLikeNum() + "");
+            mCommentNumView.setText(item.getCommentNum() + "");
         }
     }
 }
