@@ -30,8 +30,7 @@ import java.util.List;
  */
 public final class SelectDialog {
 
-    public static final class Builder
-            extends UIDialog.Builder<Builder> {
+    public static final class Builder extends UIDialog.Builder<Builder> {
 
         private OnListener mListener;
 

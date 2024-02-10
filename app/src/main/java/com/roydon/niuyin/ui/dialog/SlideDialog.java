@@ -2,12 +2,7 @@ package com.roydon.niuyin.ui.dialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
-
-import androidx.annotation.RequiresApi;
 
 import com.hjq.base.BaseDialog;
 import com.roydon.niuyin.R;

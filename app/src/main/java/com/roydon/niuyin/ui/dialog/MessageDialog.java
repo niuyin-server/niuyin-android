@@ -33,6 +33,7 @@ public final class MessageDialog {
         public Builder setMessage(@StringRes int id) {
             return setMessage(getString(id));
         }
+
         public Builder setMessage(CharSequence text) {
             mMessageView.setText(text);
             return this;

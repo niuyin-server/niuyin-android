@@ -7,71 +7,75 @@
     android:orientation="vertical"
     tools:context="com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment">
 
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
+    <!--    <androidx.core.widget.NestedScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="vertical">-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:orientation="vertical">-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/input_area"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@+id/input_area">
+        <LinearLayout
+            android:id="@+id/input_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/et_commend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_input"
+                android:hint="哎呦，不错呦，发条评论吧"
+                android:includeFontPadding="false"
+                android:padding="8dp"
+                android:textColor="@color/black" />
 
-                <LinearLayout
-                    android:id="@+id/input_area"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/send"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/selector_button_primary"
+                android:gravity="center"
+                android:text="发送"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/edit_text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_card_radius_grey"
-                        android:includeFontPadding="false"
-                        android:padding="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/send"
-                        android:layout_width="80dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:background="@drawable/selector_button_primary"
-                        android:gravity="center"
-                        android:text="发送"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--        </LinearLayout>-->
-<!--    </androidx.core.widget.NestedScrollView>-->
+    <!--        </LinearLayout>-->
+    <!--    </androidx.core.widget.NestedScrollView>-->
 
 </LinearLayout>

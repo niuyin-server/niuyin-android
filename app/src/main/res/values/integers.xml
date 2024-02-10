@@ -9,4 +9,6 @@
     <integer name="sms_code_login_length">6</integer>
     <!-- 短信验证码的长度 -->
     <integer name="sms_code_register_length">6</integer>
+    <!-- 视频评论限制长度 -->
+    <integer name="video_commend_limit_length">300</integer>
 </resources>

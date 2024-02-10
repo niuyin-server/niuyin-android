@@ -60,7 +60,7 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     private List<MyFavoriteVideoVO> myFavoriteVideoVOList;
 
     private int pageNum = 1;
-    private int pageSize = 15;
+    private int pageSize = 24;
 
     public static MeFavoriteVideoFragment newInstance() {
         return new MeFavoriteVideoFragment();

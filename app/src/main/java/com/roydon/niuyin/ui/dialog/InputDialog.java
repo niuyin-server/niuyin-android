@@ -19,10 +19,7 @@ import com.roydon.niuyin.aop.SingleClick;
  */
 public final class InputDialog {
 
-    public static final class Builder
-            extends UIDialog.Builder<Builder>
-            implements BaseDialog.OnShowListener,
-            BaseDialog.OnDismissListener {
+    public static final class Builder extends UIDialog.Builder<Builder> implements BaseDialog.OnShowListener, BaseDialog.OnDismissListener {
 
         private OnListener mListener;
         private final EditText mInputView;

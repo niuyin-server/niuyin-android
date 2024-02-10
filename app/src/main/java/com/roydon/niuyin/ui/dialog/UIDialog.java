@@ -15,16 +15,12 @@ import com.hjq.base.action.AnimAction;
 import com.roydon.niuyin.R;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/09/21
- *    desc   : 项目通用 Dialog 布局封装
+ * desc   : 项目通用 Dialog 布局封装
  */
 public final class UIDialog {
 
     @SuppressWarnings("unchecked")
-    public static class Builder<B extends UIDialog.Builder>
-            extends BaseDialog.Builder<B> {
+    public static class Builder<B extends UIDialog.Builder> extends BaseDialog.Builder<B> {
 
         private boolean mAutoDismiss = true;
 
@@ -45,9 +41,9 @@ public final class UIDialog {
             mContainerLayout = findViewById(R.id.ll_ui_container);
 
             mTitleView = findViewById(R.id.tv_ui_title);
-            mCancelView  = findViewById(R.id.tv_ui_cancel);
+            mCancelView = findViewById(R.id.tv_ui_cancel);
             mLineView = findViewById(R.id.v_ui_line);
-            mConfirmView  = findViewById(R.id.tv_ui_confirm);
+            mConfirmView = findViewById(R.id.tv_ui_confirm);
 
             setOnClickListener(R.id.tv_ui_cancel, R.id.tv_ui_confirm);
         }
@@ -64,6 +60,7 @@ public final class UIDialog {
         public B setTitle(@StringRes int id) {
             return setTitle(getString(id));
         }
+
         public B setTitle(CharSequence text) {
             mTitleView.setText(text);
             return (B) this;
@@ -72,6 +69,7 @@ public final class UIDialog {
         public B setCancel(@StringRes int id) {
             return setCancel(getString(id));
         }
+
         public B setCancel(CharSequence text) {
             mCancelView.setText(text);
             mLineView.setVisibility((text == null || "".equals(text.toString())) ? View.GONE : View.VISIBLE);
@@ -81,6 +79,7 @@ public final class UIDialog {
         public B setConfirm(@StringRes int id) {
             return setConfirm(getString(id));
         }
+
         public B setConfirm(CharSequence text) {
             mConfirmView.setText(text);
             return (B) this;

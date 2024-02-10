@@ -26,9 +26,7 @@ import java.util.List;
  */
 public final class AlbumDialog {
 
-    public static final class Builder
-            extends BaseDialog.Builder<Builder>
-            implements BaseAdapter.OnItemClickListener {
+    public static final class Builder extends BaseDialog.Builder<Builder> implements BaseAdapter.OnItemClickListener {
 
         private OnListener mListener;
 

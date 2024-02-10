@@ -61,7 +61,7 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
     private List<MyVideoVO> myVideoVOList;
 
     private int pageNum = 1;
-    private int pageSize = 15;
+    private int pageSize = 24;
 
     public static MePostFragment newInstance() {
         return new MePostFragment();
