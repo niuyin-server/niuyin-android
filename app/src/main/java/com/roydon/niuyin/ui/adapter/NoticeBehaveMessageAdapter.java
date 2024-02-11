@@ -17,6 +17,8 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyAdapter;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.response.notice.NoticeVO;
+import com.roydon.niuyin.utils.DateUtils;
+import com.roydon.niuyin.utils.TimeUtils;
 
 import butterknife.BindView;
 
@@ -55,6 +57,8 @@ public class NoticeBehaveMessageAdapter extends MyAdapter<NoticeVO> {
         CardView mVideoCoverCV;
         @BindView(R.id.iv_video_cover)
         ImageView mVideoCoverIV;
+        @BindView(R.id.tv_notice_time)
+        TextView mNoticeTimeTV;
         @BindView(R.id.btn_follow)
         Button mFollowBtn;
 
@@ -99,6 +103,7 @@ public class NoticeBehaveMessageAdapter extends MyAdapter<NoticeVO> {
             if (item.getNickName() != null && !item.getNickName().equals("")) {
                 mUserNicknameTV.setText(item.getNickName());
             }
+            mNoticeTimeTV.setText(TimeUtils.getSmartDate(DateUtils.localDateTime2Long(item.getCreateTime())));
             mNoticeDescTV.setText(item.getContent());
             if (item.getVideoCoverImage() != null && !item.getVideoCoverImage().equals("")) {
                 GlideApp.with(getContext()).load(item.getVideoCoverImage()).into(mVideoCoverIV);
