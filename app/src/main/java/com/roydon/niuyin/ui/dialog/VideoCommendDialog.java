@@ -1,5 +1,6 @@
 package com.roydon.niuyin.ui.dialog;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,10 +9,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hjq.base.BaseDialog;
 import com.hjq.base.action.AnimAction;
+import com.hjq.toast.ToastUtils;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 
@@ -21,14 +24,19 @@ import com.roydon.niuyin.aop.SingleClick;
  * @description niuyin-android
  * 视频评论弹窗
  */
+@SuppressLint("MissingInflatedId")
 public class VideoCommendDialog {
 
-    public static final class Builder extends BaseDialog.Builder<Builder>  implements BaseDialog.OnShowListener, BaseDialog.OnCancelListener{
+    public static final class Builder extends BaseDialog.Builder<Builder> implements BaseDialog.OnShowListener, BaseDialog.OnCancelListener {
 
         OnListener mListener;
 
+        private String commendText;
+
         private EditText mCommentContentET;
         private TextView mCommentLimitTV;
+        private ImageView mSmileIV;
+        private ImageView mAtIV;
         private Button mSendButton;
 
         public Builder(Context context) {
@@ -41,7 +49,14 @@ public class VideoCommendDialog {
 
             mCommentContentET = findViewById(R.id.et_comment_content);
             mCommentLimitTV = findViewById(R.id.tv_comment_limit);
+            mSmileIV = findViewById(R.id.iv_smile);
+            mAtIV = findViewById(R.id.iv_at);
             mSendButton = findViewById(R.id.btn_send);
+
+            mSendButton.setEnabled(false);
+
+            addOnShowListener(this);
+            addOnCancelListener(this);
 
             mCommentContentET.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -51,6 +66,9 @@ public class VideoCommendDialog {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (s.length() > 0) {
+                        mSendButton.setEnabled(true);
+                    }
                     // 在文本变化时执行的操作
                     int remainingChars = getResources().getInteger(R.integer.video_commend_limit_length) - s.length(); // 计算还可以输入的字数
                     mCommentLimitTV.setText(String.valueOf(remainingChars)); // 更新TextView显示
@@ -68,6 +86,11 @@ public class VideoCommendDialog {
             return this;
         }
 
+        public Builder setCommendText(String commendText) {
+            this.commendText = commendText;
+            return this;
+        }
+
         /**
          * Dialog 显示了
          *
@@ -75,10 +98,12 @@ public class VideoCommendDialog {
          */
         @Override
         public void onShow(BaseDialog dialog) {
+            mCommentContentET.setText(commendText);
+            mCommentContentET.setSelection(mCommentContentET.getText().length());
             mCommentContentET.setFocusable(true);
             mCommentContentET.setFocusableInTouchMode(true);
             mCommentContentET.requestFocus();
-            postDelayed(() -> getSystemService(InputMethodManager.class).showSoftInput(mCommentContentET, 0), 500);
+            postDelayed(() -> getSystemService(InputMethodManager.class).showSoftInput(mCommentContentET, 0), 300);
         }
 
         /**
@@ -97,6 +122,12 @@ public class VideoCommendDialog {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.iv_smile:
+                    ToastUtils.show("smile");
+                    break;
+                case R.id.iv_at:
+                    ToastUtils.show("at");
+                    break;
                 case R.id.btn_send:
                     if (mListener != null) {
                         mListener.onSend(getDialog(), mCommentContentET.getText().toString());
@@ -113,8 +144,18 @@ public class VideoCommendDialog {
 
         /**
          * 发送回调
+         *
+         * @param dialog
+         * @param content 评论内容
          */
         void onSend(BaseDialog dialog, String content);
+
+        /**
+         * 取消回调
+         *
+         * @param dialog
+         * @param content 评论内容
+         */
         void onCancel(BaseDialog dialog, String content);
 
     }

@@ -40,7 +40,6 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> {
 
     @Override
     protected void lazyLoadData() {
-
     }
 
     @Override
@@ -55,15 +54,16 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> {
             case R.id.et_commend:
                 // 评论弹窗
                 new VideoCommendDialog.Builder(getAttachActivity())
+                        .setCommendText(mCommendView.getText().toString())
                         .setListener(new VideoCommendDialog.OnListener() {
                             @Override
                             public void onSend(BaseDialog dialog, String content) {
                                 toast(content);
+                                mCommendView.clearComposingText();
                             }
 
                             @Override
                             public void onCancel(BaseDialog dialog, String content) {
-                                toast("取消了");
                                 mCommendView.setText(content);
                             }
                         })

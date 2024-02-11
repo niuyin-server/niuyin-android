@@ -59,18 +59,26 @@
                 android:padding="8dp"
                 android:textColor="@color/black" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/send"
-                android:layout_width="80dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
+            <!--            <androidx.appcompat.widget.AppCompatButton-->
+            <!--                android:id="@+id/send"-->
+            <!--                android:layout_width="80dp"-->
+            <!--                android:layout_height="32dp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:background="@drawable/selector_button_primary"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="发送"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="15sp"-->
+            <!--                android:textStyle="bold" />-->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_smile"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/selector_button_primary"
-                android:gravity="center"
-                android:text="发送"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:src="@drawable/ic_smile_b" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
