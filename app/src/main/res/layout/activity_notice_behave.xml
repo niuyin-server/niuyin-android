@@ -4,12 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activity.NoticeBehaveActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/ic_back_b"
-        app:title="互动通知" />
+        app:rightIcon="@drawable/ic_down_b_t"
+        app:title="互动消息" />
+
+    <com.roydon.niuyin.widget.HintLayout
+        android:id="@+id/hl_status_hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/rl_status_refresh"
+            style="@style/RefreshLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.hjq.widget.layout.WrapRecyclerView
+                android:id="@+id/rv_status_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listCount="10"
+                tools:listitem="@layout/item_notice_behave_message" />
+
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </com.roydon.niuyin.widget.HintLayout>
 
 </LinearLayout>

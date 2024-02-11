@@ -83,11 +83,12 @@ public class VideoSearchResultActivity extends MyActivity implements StatusActio
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.iv_back, R.id.tv_search);
+        showLoading();
         mVideoSearchResultAdapter = new VideoSearchResultAdapter(this);
         mVideoSearchResultAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mVideoSearchResultAdapter);
-        showLoading();
+        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        setOnClickListener(R.id.iv_back, R.id.tv_search);
     }
 
     @Override

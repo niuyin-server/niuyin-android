@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backButton="false"
-        app:leftIcon="@drawable/ic_add_b"
+        app:leftIcon="@drawable/ic_add_b_c"
         app:rightIcon="@drawable/ic_setting_b"
         app:title="@string/home_nav_message" />
 
@@ -39,7 +39,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/notice_status_setting" />
+                        android:src="@drawable/setting_status" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"

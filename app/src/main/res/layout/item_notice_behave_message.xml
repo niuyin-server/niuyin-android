@@ -8,7 +8,7 @@
     android:foreground="@drawable/ripple_recommend_video_card"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp"
-    tools:context="com.roydon.niuyin.ui.adapter.NoticeTypeAdapter">
+    tools:context="com.roydon.niuyin.ui.adapter.NoticeBehaveMessageAdapter">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,12 +18,27 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <com.roydon.niuyin.widget.RoundImageView
-            android:id="@+id/iv_notice_icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:src="@color/gray" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.roydon.niuyin.widget.RoundImageView
+                android:id="@+id/iv_user_avatar"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@color/gray" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_notice_type"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignEnd="@+id/iv_user_avatar"
+                android:layout_alignBottom="@+id/iv_user_avatar"
+                android:src="@color/white"
+                android:visibility="gone" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -37,7 +52,7 @@
             android:paddingBottom="5dp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_notice_name"
+                android:id="@+id/tv_user_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -45,7 +60,7 @@
                 android:maxLines="1"
                 android:text="系统通知"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -55,7 +70,7 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="授权登录提醒"
+                android:text="赞了你的作品"
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
 
@@ -67,10 +82,31 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_right_b" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_video_cover"
+                android:layout_width="96dp"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_video_cover"
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_follow"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/selector_button_primary"
+                android:text="回关"
+                android:textColor="@color/black"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
