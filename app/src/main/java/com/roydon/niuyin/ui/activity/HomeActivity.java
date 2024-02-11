@@ -5,8 +5,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hjq.base.BaseFragmentAdapter;
 import com.roydon.niuyin.R;
@@ -61,6 +63,18 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
 
         // 限制页面数量
         mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
+
+        // 添加徽章 badge
+        BadgeDrawable badge = mBottomNavigationView.getOrCreateBadge(R.id.home_message);
+        badge.setNumber(10);
+        // 设置徽章的显示位置
+        badge.setVerticalOffset(10);
+//        badge.setHorizontalOffset(10);
+        // 设置徽章的样式
+        badge.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryRed));
+        badge.setBadgeTextColor(ContextCompat.getColor(this, R.color.white));
+        badge.setMaxCharacterCount(3);
+
     }
 
     /**

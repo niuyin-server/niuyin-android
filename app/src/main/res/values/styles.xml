@@ -1,6 +1,7 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+<!--    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">-->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- 窗口背景颜色 -->
         <item name="android:windowBackground">@color/windowBackground</item>
         <!-- 应用的主要色调，ActionBar Toolbar 默认使用该颜色 -->
@@ -24,6 +25,9 @@
         <!--<item name="android:windowSoftInputMode">stateHidden</item>-->
         <!-- 关闭 RecyclerView ScrollView ViewPager 水波纹效果 -->
         <item name="android:overScrollMode">never</item>
+        <!--徽章样式-->
+        <item name="badgeStyle">@style/Widget.MaterialComponents.Badge</item>
+
     </style>
 
     <!-- 默认圆角按钮样式 -->
@@ -136,6 +140,12 @@
     <style name="RippleLinearLayout" parent="Theme.AppCompat">
         <item name="android:background">@drawable/ripple_recommend_video_card</item>
     </style>
+    <style name="selectText">
+        <item name="android:textSize">14sp</item>
+    </style>
 
+    <style name="unSelectText">
+        <item name="android:textSize">13sp</item>
+    </style>
 
 </resources>

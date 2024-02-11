@@ -18,6 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        app:itemBackground="@null"
+        app:itemRippleColor="@color/primaryRed5"
+        app:itemTextAppearanceActive="@style/selectText"
+        app:itemTextAppearanceInactive="@style/unSelectText"
         app:itemTextColor="@drawable/selector_home_navigation_color"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_home_bottom_nav" />
