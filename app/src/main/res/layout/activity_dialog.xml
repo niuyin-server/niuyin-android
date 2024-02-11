@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/ic_back_b"
-        app:rightIcon="@drawable/ic_add_black"
+        app:rightIcon="@drawable/ic_add_b"
         app:title="对话框案例" />
 
     <androidx.core.widget.NestedScrollView
