@@ -57,6 +57,21 @@ public abstract class MyAdapter<T> extends BaseAdapter<MyAdapter.ViewHolder> {
     }
 
     /**
+     * 注意这个是未关注时候的瀑布流刷新数据
+     * 上拉加载更多时，建议刷新上拉加载那一部分数据即可，不用刷新所有数据
+     *
+     * @param puBuList 瀑布流集合
+     */
+    public void setMoreData(@Nullable List<T> puBuList) {
+        int start = getItemCount();
+        if (puBuList != null && puBuList.size() != 0) {
+            mDataSet.addAll(puBuList);
+            int end = mDataSet.size();
+            notifyItemRangeInserted(start, end);
+        }
+    }
+
+    /**
      * 获取当前数据
      */
     @Nullable

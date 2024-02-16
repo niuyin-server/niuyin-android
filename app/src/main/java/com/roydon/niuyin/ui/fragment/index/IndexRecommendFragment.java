@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.gson.Gson;
 import com.hjq.base.BaseAdapter;
@@ -51,6 +52,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_RECOMMEND_VIDEO = 1;
+    private static final int HANDLER_RECOMMEND_VIDEO_MORE = 2;
 
     @BindView(R.id.hl_status_hint)
     HintLayout mHintLayout;
@@ -82,6 +84,8 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
         mAdapter = new RecommendVideoAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
+//        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         showLoading();
@@ -115,7 +119,10 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                             videoRecommendVOList = data.getData();
                         } else {
                             mRefreshLayout.finishLoadMore(true);
-                            videoRecommendVOList.addAll(data.getData());
+//                            videoRecommendVOList.addAll(data.getData());
+                            videoRecommendVOList = data.getData();
+                            mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO_MORE);
+                            return;
                         }
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO);
@@ -144,6 +151,10 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
                     break;
                 case HANDLER_RECOMMEND_VIDEO:
                     mAdapter.setData(videoRecommendVOList);
+                    showComplete();
+                    break;
+                case HANDLER_RECOMMEND_VIDEO_MORE:
+                    mAdapter.setMoreData(videoRecommendVOList);
                     showComplete();
                     break;
                 default:
