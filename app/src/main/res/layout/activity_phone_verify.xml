@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:background="@color/white"
-        android:src="@drawable/bg_phone_verify" />
+        android:src="@drawable/image_phone_verify" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_phone_verify_phone"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/white"
-            android:drawableStart="@drawable/ic_small_safe"
+            android:drawableStart="@drawable/ic_verify_b"
             android:drawablePadding="15dp"
             android:hint="@string/common_code_input_hint"
             android:maxLength="@integer/sms_code_length"

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/ic_back_b"
         app:rightIcon="@drawable/ic_down_b_t"
+        android:id="@+id/titleBar"
         app:title="互动消息" />
 
     <com.roydon.niuyin.widget.HintLayout

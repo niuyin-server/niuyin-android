@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#363636"
+    android:background="@color/black"
     tools:context="com.roydon.niuyin.ui.activity.ImageActivity">
 
     <com.roydon.niuyin.widget.PhotoViewPager

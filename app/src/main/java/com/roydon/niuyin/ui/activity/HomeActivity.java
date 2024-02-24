@@ -44,6 +44,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_NOTICE_UNREAD_COUNT = 1;
+    private static final int HANDLER_NOTICE_UNREAD_COUNT_ERROR = 2;
 
     @BindView(R.id.vp_home_pager)
     ViewPager mViewPager;
@@ -113,6 +114,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
                     public void onSucceed(HttpData<Long> data) {
                         if (Objects.isNull(data) || data.getData().equals(0L)) {
                             mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
+                            return;
                         }
                         noticeUnreadCount = data.getData();
                         // 更新ui
@@ -121,7 +123,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
 
                     @Override
                     public void onFail(Exception e) {
-                        toast("加载失败");
+                        mHandler.sendEmptyMessage(HANDLER_NOTICE_UNREAD_COUNT_ERROR);
                     }
                 });
     }
@@ -138,6 +140,11 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
                     break;
                 case HANDLER_NOTICE_UNREAD_COUNT:
                     badge.setNumber(noticeUnreadCount.intValue());
+                    break;
+                case HANDLER_NOTICE_UNREAD_COUNT_ERROR:
+//                    toast("加载失败");
+                    badge.setVisible(false);
+                    badge.clearNumber();
                     break;
                 default:
                     break;

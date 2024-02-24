@@ -9,26 +9,28 @@ import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
+import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseAdapter;
+import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyActivity;
-import com.roydon.niuyin.http.model.HttpData;
+import com.roydon.niuyin.domain.NoticeBehaveShowTypeBean;
+import com.roydon.niuyin.enums.NoticeBehaveShowType;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.notice.BehaveNoticePageApi;
-import com.roydon.niuyin.http.request.video.ParentVideoCategoryApi;
 import com.roydon.niuyin.http.response.notice.NoticeVO;
-import com.roydon.niuyin.http.response.video.AppVideoCategoryVo;
 import com.roydon.niuyin.ui.adapter.NoticeBehaveMessageAdapter;
-import com.roydon.niuyin.ui.adapter.VideoCategoryAdapter;
+import com.roydon.niuyin.ui.dialog.NoticeBehaveTypeDialog;
 import com.roydon.niuyin.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +42,8 @@ public class NoticeBehaveActivity extends MyActivity implements StatusAction, On
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_NOTICE_BEHAVE_PAGE = 1;
 
+    @BindView(R.id.titleBar)
+    TitleBar titleBar;
     @BindView(R.id.hl_status_hint)
     HintLayout mHintLayout;
     @BindView(R.id.rl_status_refresh)
@@ -69,6 +73,7 @@ public class NoticeBehaveActivity extends MyActivity implements StatusAction, On
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
+
     }
 
     @Override
@@ -143,7 +148,7 @@ public class NoticeBehaveActivity extends MyActivity implements StatusAction, On
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
         NoticeVO item = mAdapter.getItem(position);
         if (item != null) {
-//            CategoryVideoActivity.start(this, item);
+            toast(item.getVideoId());
         }
     }
 
@@ -159,5 +164,39 @@ public class NoticeBehaveActivity extends MyActivity implements StatusAction, On
         mRefreshLayout.setEnableLoadMore(true);
         mRecyclerView.removeFooterView(footerView);
         getBehaveNoticePage(true);
+    }
+
+    @Override
+    public void onRightClick(View v) {
+        List<NoticeBehaveShowTypeBean> noticeBehaveShowTypeBeans = new ArrayList<>();
+        noticeBehaveShowTypeBeans.add(new NoticeBehaveShowTypeBean(NoticeBehaveShowType.All));
+        noticeBehaveShowTypeBeans.add(new NoticeBehaveShowTypeBean(NoticeBehaveShowType.LIKE));
+        noticeBehaveShowTypeBeans.add(new NoticeBehaveShowTypeBean(NoticeBehaveShowType.FOLLOW));
+        noticeBehaveShowTypeBeans.add(new NoticeBehaveShowTypeBean(NoticeBehaveShowType.FAVORITE));
+        noticeBehaveShowTypeBeans.add(new NoticeBehaveShowTypeBean(NoticeBehaveShowType.COMMENT_ADD));
+        noticeBehaveShowTypeBeans.add(new NoticeBehaveShowTypeBean(NoticeBehaveShowType.COMMENT_REPLAY));
+        noticeBehaveShowTypeBeans.add(new NoticeBehaveShowTypeBean(NoticeBehaveShowType.COMMENT_LIKE));
+        new NoticeBehaveTypeDialog.Builder(this)
+                .setList(noticeBehaveShowTypeBeans)
+                .setListener(new NoticeBehaveTypeDialog.OnListener() {
+                    @Override
+                    public void onSelected(BaseDialog dialog, int position, Object o) {
+                        NoticeBehaveShowTypeBean behaveTypeBean = (NoticeBehaveShowTypeBean) o;
+                        dialog.dismiss();
+                        pageNum = 1;
+                        noticeType = behaveTypeBean.getNoticeBehaveType().getCode();
+                        mRefreshLayout.setEnableLoadMore(true);
+                        mRecyclerView.removeFooterView(footerView);
+                        titleBar.setTitle(behaveTypeBean.getNoticeBehaveType().getInfo());
+                        showLoading();
+                        getBehaveNoticePage(true);
+                    }
+
+                    @Override
+                    public void onCancel(BaseDialog dialog) {
+
+                    }
+                })
+                .show();
     }
 }

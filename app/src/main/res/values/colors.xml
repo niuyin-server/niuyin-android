@@ -34,4 +34,9 @@
     <color name="primaryBlue5">#0D1148D2</color>
     <color name="primaryBlue1">#031148D2</color>
 
+    <!--    验证码按钮样式-->
+    <color name="btnVerifyAccent">#801148D2</color>
+    <color name="btnVerifyPressed">#1148D2</color>
+    <color name="btnVerifyDisable">#BBBBBB</color>
+
 </resources>

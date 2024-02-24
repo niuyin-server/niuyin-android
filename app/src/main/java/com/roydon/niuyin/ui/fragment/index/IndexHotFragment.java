@@ -58,7 +58,6 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
     WrapRecyclerView mRecyclerView;
 
     private HotVideoAdapter mAdapter;
-
     private List<VideoVO> videoVOList;
 
     private int pageNum = 1;
@@ -75,12 +74,12 @@ public final class IndexHotFragment extends MyFragment<HomeActivity> implements 
 
     @Override
     protected void initView() {
+        showLoading();
         mAdapter = new HotVideoAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        showLoading();
     }
 
     @Override

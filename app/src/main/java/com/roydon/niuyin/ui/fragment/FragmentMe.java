@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.http.EasyHttp;
@@ -183,6 +184,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         if (memberInfoVO.getMemberInfo().getBackImage() != null && !memberInfoVO.getMemberInfo().getBackImage().equals("")) {
             GlideApp.with(this)
                     .load(memberInfoVO.getMemberInfo().getBackImage())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(mUserBgView);
         }
         mNickNameView.setText(memberInfoVO.getNickName());

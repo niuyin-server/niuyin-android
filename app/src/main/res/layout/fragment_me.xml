@@ -44,7 +44,7 @@
                     android:layout_marginTop="-10dp"
                     android:background="@drawable/bg_card_radius" />
 
-                <!--            用户信息区域-->
+                <!-- 用户信息区域 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp">
 
-                    <!--获赞-->
+                    <!-- 获赞 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                             android:text="获赞"
                             android:textColor="@color/gray" />
                     </LinearLayout>
-                    <!--简介-->
+                    <!-- 简介 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -311,6 +311,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
                 <!--用户头像用户名区域-->
                 <LinearLayout
@@ -391,7 +392,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -418,7 +419,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-
 
     </LinearLayout>
 

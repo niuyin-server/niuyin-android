@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,40 +17,38 @@ import com.hjq.base.action.AnimAction;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyAdapter;
+import com.roydon.niuyin.domain.NoticeBehaveShowTypeBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2018/12/2
- * desc   : 菜单选择框
+ * desc   : 消息类型选择框
  */
-public final class MenuDialog {
+public final class NoticeBehaveTypeDialog {
 
     public static final class Builder extends BaseDialog.Builder<Builder> implements BaseAdapter.OnItemClickListener {
 
         private OnListener mListener;
         private boolean mAutoDismiss = true;
 
-        private final MenuAdapter mAdapter;
+        private final NoticeBehaveTypeAdapter mAdapter;
         private final TextView mCancelView;
 
         public Builder(Context context) {
             super(context);
-            setContentView(R.layout.dialog_menu);
+            setContentView(R.layout.dialog_notice_behave_type);
             setAnimStyle(AnimAction.BOTTOM);
 
-            RecyclerView recyclerView = findViewById(R.id.rv_menu_list);
-            mCancelView = findViewById(R.id.tv_menu_cancel);
+            RecyclerView recyclerView = findViewById(R.id.rv_type_list);
+            mCancelView = findViewById(R.id.tv_type_cancel);
 
-            mAdapter = new MenuAdapter(getContext());
+            mAdapter = new NoticeBehaveTypeAdapter(getContext());
             mAdapter.setOnItemClickListener(this);
             recyclerView.setAdapter(mAdapter);
 
-            setOnClickListener(R.id.tv_menu_cancel);
+            setOnClickListener(R.id.tv_type_cancel);
         }
 
         @Override
@@ -78,6 +77,10 @@ public final class MenuDialog {
         }
 
         public Builder setList(String... data) {
+            return setList(Arrays.asList(data));
+        }
+
+        public Builder setList(NoticeBehaveShowTypeBean... data) {
             return setList(Arrays.asList(data));
         }
 
@@ -136,9 +139,9 @@ public final class MenuDialog {
         }
     }
 
-    private static final class MenuAdapter extends MyAdapter<Object> {
+    private static final class NoticeBehaveTypeAdapter extends MyAdapter<NoticeBehaveShowTypeBean> {
 
-        private MenuAdapter(Context context) {
+        private NoticeBehaveTypeAdapter(Context context) {
             super(context);
         }
 
@@ -150,18 +153,22 @@ public final class MenuDialog {
 
         final class ViewHolder extends MyAdapter.ViewHolder {
 
+            private final ImageView mIconIV;
             private final TextView mTextView;
             private final View mLineView;
 
             ViewHolder() {
-                super(R.layout.item_menu);
-                mTextView = (TextView) findViewById(R.id.tv_menu_text);
-                mLineView = findViewById(R.id.v_menu_line);
+                super(R.layout.item_notice_behave_type);
+                mIconIV = (ImageView) findViewById(R.id.iv_type_icon);
+                mTextView = (TextView) findViewById(R.id.tv_type_name);
+                mLineView = findViewById(R.id.v_type_line);
             }
 
             @Override
             public void onBindView(int position) {
-                mTextView.setText(getItem(position).toString());
+                NoticeBehaveShowTypeBean item = getItem(position);
+                mIconIV.setImageResource(item.getNoticeBehaveType().getIcon());
+                mTextView.setText(item.getNoticeBehaveType().getInfo());
 
                 if (position == 0) {
                     // 当前是否只有一个条目

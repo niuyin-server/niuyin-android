@@ -131,6 +131,7 @@ public class VideoCommendDialog {
                 case R.id.btn_send:
                     if (mListener != null) {
                         mListener.onSend(getDialog(), mCommentContentET.getText().toString());
+                        mCommentContentET.clearComposingText();
                     }
                     dismiss();
                     break;

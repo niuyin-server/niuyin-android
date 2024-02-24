@@ -47,6 +47,7 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_MY_LIKE_PAGE = 1;
+    private static final int HANDLER_MY_LIKE_PAGE_ERROR = 2;
 
     @BindView(R.id.hl_status_hint)
     HintLayout mHintLayout;
@@ -60,7 +61,7 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
     private List<MyLikeVideoVO> myLikeVideoVOList;
 
     private int pageNum = 1;
-    private int pageSize = 24;
+    private int pageSize = 12;
 
     public static MeLikeFragment newInstance() {
         return new MeLikeFragment();
@@ -122,7 +123,7 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
 
                     @Override
                     public void onFail(Exception e) {
-                        toast("加载失败");
+                        mHandler.sendEmptyMessage(HANDLER_MY_LIKE_PAGE_ERROR);
                     }
                 });
     }
@@ -140,6 +141,9 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
                 case HANDLER_MY_LIKE_PAGE:
                     mAdapter.setData(myLikeVideoVOList);
                     showComplete();
+                    break;
+                case HANDLER_MY_LIKE_PAGE_ERROR:
+                    showError(v -> getMyLikePage(true));
                     break;
                 default:
                     break;

@@ -62,7 +62,6 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
     WrapRecyclerView mRecyclerView;
 
     private RecommendVideoAdapter mAdapter;
-
     private List<VideoRecommendVO> videoRecommendVOList;
 
     public static IndexRecommendFragment newInstance() {
@@ -81,6 +80,7 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
 
     @Override
     protected void initView() {
+        showLoading();
         mAdapter = new RecommendVideoAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
@@ -88,7 +88,6 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        showLoading();
     }
 
     @Override

@@ -124,6 +124,7 @@ public final class FragmentCategoryVideoData extends MyFragment<CategoryVideoAct
                     public void onSucceed(PageDataInfo<CategoryVideoVo> rows) {
                         if (rows.getTotal() == 0) {
                             mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
+                            return;
                         }
                         if (isRefresh) {
                             mRefreshLayout.finishRefresh(true);
@@ -131,9 +132,9 @@ public final class FragmentCategoryVideoData extends MyFragment<CategoryVideoAct
                         } else {
                             mRefreshLayout.finishLoadMore(true);
                             categoryVideoVoList.addAll(rows.getRows());
-                            if (rows.getRows().size() < pageSize) {
-                                mRefreshLayout.setNoMoreData(true);
-                            }
+                        }
+                        if (rows.getRows().size() < pageSize) {
+                            mRefreshLayout.setNoMoreData(true);
                         }
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_CATEGORY_VIDEO_DATA);
@@ -183,11 +184,11 @@ public final class FragmentCategoryVideoData extends MyFragment<CategoryVideoAct
                 } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
                     // 竖屏 0.75
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
-                }else if(Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())){
+                } else if (Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())) {
                     // 正方形视频
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SQUARE.getCode());
                 }
-            }else {
+            } else {
                 VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
             }
         } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {

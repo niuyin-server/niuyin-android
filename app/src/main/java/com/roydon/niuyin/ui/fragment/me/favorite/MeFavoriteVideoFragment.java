@@ -47,6 +47,7 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_MY_FAVORITE_VIDEO_PAGE = 1;
+    private static final int HANDLER_MY_FAVORITE_VIDEO_PAGE_ERROR = 2;
 
     @BindView(R.id.hl_status_hint)
     HintLayout mHintLayout;
@@ -60,7 +61,7 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     private List<MyFavoriteVideoVO> myFavoriteVideoVOList;
 
     private int pageNum = 1;
-    private int pageSize = 24;
+    private int pageSize = 12;
 
     public static MeFavoriteVideoFragment newInstance() {
         return new MeFavoriteVideoFragment();
@@ -96,35 +97,31 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
      * @param isRefresh
      */
     public void getMyFavoriteVideoPage(boolean isRefresh) {
-        EasyHttp.post(this)
-                .api(new MyFavoriteVideoPageApi()
-                        .setPageNum(pageNum)
-                        .setPageSize(pageSize))
-                .request(new HttpCallback<PageDataInfo<MyFavoriteVideoVO>>(this.getAttachActivity()) {
+        EasyHttp.post(this).api(new MyFavoriteVideoPageApi().setPageNum(pageNum).setPageSize(pageSize)).request(new HttpCallback<PageDataInfo<MyFavoriteVideoVO>>(this.getAttachActivity()) {
 
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onSucceed(PageDataInfo<MyFavoriteVideoVO> rows) {
-                        if (isRefresh) {
-                            mRefreshLayout.finishRefresh(true);
-                            myFavoriteVideoVOList = rows.getRows();
-                        } else {
-                            mRefreshLayout.finishLoadMore(true);
-                            myFavoriteVideoVOList.addAll(rows.getRows() == null ? new ArrayList<>() : rows.getRows());
-                        }
-                        if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myFavoriteVideoVOList.size()) {
-                            mRefreshLayout.setEnableLoadMore(false);
-                            toast("not have more");
-                        }
-                        // 更新ui
-                        mHandler.sendEmptyMessage(HANDLER_MY_FAVORITE_VIDEO_PAGE);
-                    }
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onSucceed(PageDataInfo<MyFavoriteVideoVO> rows) {
+                if (isRefresh) {
+                    mRefreshLayout.finishRefresh(true);
+                    myFavoriteVideoVOList = rows.getRows();
+                } else {
+                    mRefreshLayout.finishLoadMore(true);
+                    myFavoriteVideoVOList.addAll(Objects.isNull(rows.getRows()) ? new ArrayList<>() : rows.getRows());
+                }
+                if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myFavoriteVideoVOList.size()) {
+                    mRefreshLayout.setEnableLoadMore(false);
+                    toast("not have more");
+                }
+                // 更新ui
+                mHandler.sendEmptyMessage(HANDLER_MY_FAVORITE_VIDEO_PAGE);
+            }
 
-                    @Override
-                    public void onFail(Exception e) {
-                        toast("加载失败");
-                    }
-                });
+            @Override
+            public void onFail(Exception e) {
+                mHandler.sendEmptyMessage(HANDLER_MY_FAVORITE_VIDEO_PAGE_ERROR);
+            }
+        });
     }
 
     @SuppressLint("HandlerLeak")
@@ -140,6 +137,9 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
                 case HANDLER_MY_FAVORITE_VIDEO_PAGE:
                     mAdapter.setData(myFavoriteVideoVOList);
                     showComplete();
+                    break;
+                case HANDLER_MY_FAVORITE_VIDEO_PAGE_ERROR:
+                    showError(v -> getMyFavoriteVideoPage(true));
                     break;
                 default:
                     break;
