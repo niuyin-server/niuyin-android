@@ -109,6 +109,7 @@
 
             <!--            搜索历史-->
             <LinearLayout
+                android:id="@+id/ll_search_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -150,12 +151,13 @@
                         tools:listitem="@layout/item_video_search_history" />
 
                 </LinearLayout>
-            </LinearLayout>
 
-            <View style="@style/HorizontalLineStyle2" />
+                <View style="@style/HorizontalLineStyle2" />
+            </LinearLayout>
 
             <!--            热搜榜-->
             <LinearLayout
+                android:id="@+id/ll_hot_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

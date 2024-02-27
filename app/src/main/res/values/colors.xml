@@ -26,12 +26,14 @@
     <color name="primaryRed20">#33D21B46</color>
     <color name="primaryRed10">#1AD21B46</color>
     <color name="primaryRed5">#0DD21B46</color>
+    <color name="primaryRed2">#05D21B46</color>
     <color name="primaryRed1">#03D21B46</color>
     <color name="primaryBlue">#1148D2</color>
     <color name="primaryBlue50">#801148D2</color>
     <color name="primaryBlue20">#331148D2</color>
     <color name="primaryBlue10">#1A1148D2</color>
     <color name="primaryBlue5">#0D1148D2</color>
+    <color name="primaryBlue2">#051148D2</color>
     <color name="primaryBlue1">#031148D2</color>
 
     <!--    验证码按钮样式-->

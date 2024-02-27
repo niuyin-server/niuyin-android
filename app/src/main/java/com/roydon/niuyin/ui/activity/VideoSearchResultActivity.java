@@ -47,6 +47,7 @@ public class VideoSearchResultActivity extends MyActivity implements StatusActio
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_VIDEO_SEARCH = 1;
     private static final int HANDLER_VIDEO_SEARCH_EMPTY = 2;
+    private static final int HANDLER_VIDEO_SEARCH_ERROR = 3;
 
     @DebugLog
     public static void start(Context context, String keyword) {
@@ -134,6 +135,10 @@ public class VideoSearchResultActivity extends MyActivity implements StatusActio
                     @Override
                     public void onSucceed(PageDataInfo<AppVideoSearchVO> rows) {
                         if (isRefresh) {
+                            if (Objects.isNull(rows.getRows()) || rows.getRows().size() == 0) {
+                                mHandler.sendEmptyMessage(HANDLER_VIDEO_SEARCH_EMPTY);
+                                return;
+                            }
                             mRefreshLayout.finishRefresh(true);
                             mAppVideoSearchVOList = rows.getRows();
                         } else {
@@ -152,7 +157,7 @@ public class VideoSearchResultActivity extends MyActivity implements StatusActio
 
                     @Override
                     public void onFail(Exception e) {
-                        toast("加载失败");
+                        mHandler.sendEmptyMessage(HANDLER_VIDEO_SEARCH_ERROR);
                     }
                 });
     }
@@ -173,6 +178,9 @@ public class VideoSearchResultActivity extends MyActivity implements StatusActio
                     break;
                 case HANDLER_VIDEO_SEARCH_EMPTY:
                     showEmpty();
+                    break;
+                case HANDLER_VIDEO_SEARCH_ERROR:
+                    showError(v -> postVideoSearch(true));
                     break;
                 default:
                     break;

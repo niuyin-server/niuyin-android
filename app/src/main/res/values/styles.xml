@@ -1,6 +1,6 @@
 <resources>
 
-<!--    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">-->
+    <!--    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">-->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- 窗口背景颜色 -->
         <item name="android:windowBackground">@color/windowBackground</item>
@@ -140,12 +140,15 @@
     <style name="RippleLinearLayout" parent="Theme.AppCompat">
         <item name="android:background">@drawable/ripple_recommend_video_card</item>
     </style>
-    <style name="selectText">
-        <item name="android:textSize">14sp</item>
+
+    <!-- 菜单栏字体 -->
+    <style name="navSelectText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>x`
     </style>
 
-    <style name="unSelectText">
-        <item name="android:textSize">13sp</item>
+    <style name="navUnSelectText">
+        <item name="android:textSize">11sp</item>
     </style>
 
 </resources>

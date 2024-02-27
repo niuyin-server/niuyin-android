@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,8 +44,10 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_VIDEO_SEARCH_HISTORY = 1;
     private static final int HANDLER_VIDEO_SEARCH_HISTORY_EMPTY = 2;
-    private static final int HANDLER_HOT_VIDEO_SEARCH = 3;
-    private static final int HANDLER_HOT_VIDEO_SEARCH_EMPTY = 4;
+    private static final int HANDLER_VIDEO_SEARCH_HISTORY_ERROR = 3;
+    private static final int HANDLER_HOT_VIDEO_SEARCH = 10;
+    private static final int HANDLER_HOT_VIDEO_SEARCH_EMPTY = 11;
+    private static final int HANDLER_HOT_VIDEO_SEARCH_ERROR = 12;
 
     @BindView(R.id.iv_back)
     ImageView mBack;
@@ -53,11 +56,15 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
     @BindView(R.id.tv_search)
     TextView mSearch;
     // 搜索记录
+    @BindView(R.id.ll_search_history)
+    LinearLayout mSearchHistoryLayout;
     @BindView(R.id.videoSearchHistoryRecyclerView)
     RecyclerView mVideoSearchHistoryRecyclerView;
     private VideoSearchHistoryAdapter mVideoSearchHistoryAdapter;
     private List<VideoSearchHistory> mVideoSearchHistoryList;
     // 热搜
+    @BindView(R.id.ll_hot_search)
+    LinearLayout mHotSearchLayout;
     @BindView(R.id.hotSearchRecyclerView)
     RecyclerView mHotSearchRecyclerView;
     private HotVideoSearchAdapter mHotVideoSearchAdapter;
@@ -86,10 +93,12 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
             }
         });
         // 历史搜索
+        mSearchHistoryLayout.setVisibility(View.GONE);
         mVideoSearchHistoryAdapter = new VideoSearchHistoryAdapter(this);
         mVideoSearchHistoryAdapter.setOnItemClickListener(this);
         mVideoSearchHistoryRecyclerView.setAdapter(mVideoSearchHistoryAdapter);
         // 牛音热搜
+        mHotSearchLayout.setVisibility(View.GONE);
         mHotVideoSearchAdapter = new HotVideoSearchAdapter(this);
         mHotVideoSearchAdapter.setOnItemClickListener(this);
         mHotSearchRecyclerView.setAdapter(mHotVideoSearchAdapter);
@@ -115,6 +124,7 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
                     public void onSucceed(HttpData<List<VideoSearchHistory>> data) {
                         if (Objects.isNull(data) || data.getData().isEmpty()) {
                             mHandler.sendEmptyMessage(HANDLER_VIDEO_SEARCH_HISTORY_EMPTY);
+                            return;
                         }
                         mVideoSearchHistoryList = data.getData();
                         // 更新ui
@@ -123,7 +133,7 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
 
                     @Override
                     public void onFail(Exception e) {
-                        toast("加载失败");
+                        mHandler.sendEmptyMessage(HANDLER_VIDEO_SEARCH_HISTORY_ERROR);
                     }
                 });
     }
@@ -141,6 +151,7 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
                     public void onSucceed(HttpData<String[]> data) {
                         if (Objects.isNull(data) || data.getData().length == 0) {
                             mHandler.sendEmptyMessage(HANDLER_HOT_VIDEO_SEARCH_EMPTY);
+                            return;
                         }
                         mHotVideoSearchs = data.getData();
                         // 更新ui
@@ -149,7 +160,7 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
 
                     @Override
                     public void onFail(Exception e) {
-                        toast("加载失败");
+                        mHandler.sendEmptyMessage(HANDLER_HOT_VIDEO_SEARCH_ERROR);
                     }
                 });
     }
@@ -163,15 +174,25 @@ public class VideoSearchActivity extends MyActivity implements StatusAction, OnR
             switch (msg.what) {
                 case HANDLER_WHAT_EMPTY:
                     break;
+                case HANDLER_VIDEO_SEARCH_HISTORY_EMPTY:
+                    mSearchHistoryLayout.setVisibility(View.GONE);
+                    break;
                 case HANDLER_VIDEO_SEARCH_HISTORY:
+                    mSearchHistoryLayout.setVisibility(View.VISIBLE);
                     mVideoSearchHistoryAdapter.setData(mVideoSearchHistoryList);
                     break;
-                case HANDLER_VIDEO_SEARCH_HISTORY_EMPTY:
-                    break;
-                case HANDLER_HOT_VIDEO_SEARCH:
-                    mHotVideoSearchAdapter.setData(Arrays.asList(mHotVideoSearchs));
+                case HANDLER_VIDEO_SEARCH_HISTORY_ERROR:
+                    mSearchHistoryLayout.setVisibility(View.GONE);
                     break;
                 case HANDLER_HOT_VIDEO_SEARCH_EMPTY:
+                    mHotSearchLayout.setVisibility(View.GONE);
+                    break;
+                case HANDLER_HOT_VIDEO_SEARCH:
+                    mHotSearchLayout.setVisibility(View.VISIBLE);
+                    mHotVideoSearchAdapter.setData(Arrays.asList(mHotVideoSearchs));
+                    break;
+                case HANDLER_HOT_VIDEO_SEARCH_ERROR:
+                    mHotSearchLayout.setVisibility(View.GONE);
                     break;
                 default:
                     break;
