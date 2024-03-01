@@ -191,13 +191,13 @@ public abstract class MyActivity extends BaseActivity implements ToastAction, Ti
     @Override
     public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
         super.startActivityForResult(intent, requestCode, options);
-        overridePendingTransition(R.anim.activity_right_in, R.anim.activity_right_out);
+        overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
     }
 
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.activity_left_in, R.anim.activity_left_out);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     /**
