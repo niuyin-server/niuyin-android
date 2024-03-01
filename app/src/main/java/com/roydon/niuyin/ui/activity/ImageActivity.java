@@ -1,7 +1,11 @@
 package com.roydon.niuyin.ui.activity;
 
+
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
@@ -14,16 +18,15 @@ import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.other.IntentKey;
 import com.roydon.niuyin.ui.pager.ImagePagerAdapter;
 import com.rd.PageIndicatorView;
+import com.roydon.niuyin.utils.PicSaveUtil;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/03/05
- *    desc   : 查看大图
+ * desc   : 查看大图，图片轮播
  */
 public final class ImageActivity extends MyActivity {
 
@@ -31,6 +34,18 @@ public final class ImageActivity extends MyActivity {
     ViewPager mViewPager;
     @BindView(R.id.pv_image_indicator)
     PageIndicatorView mIndicatorView;
+
+    @BindView(R.id.ll_close)
+    LinearLayout mCloseLayout;
+    @BindView(R.id.ll_play)
+    LinearLayout mPlayLayout;
+    @BindView(R.id.iv_play)
+    ImageView mPlayIV;
+    @BindView(R.id.ll_download)
+    LinearLayout mDownloadLayout;
+
+    private ArrayList<String> imageList;
+    private boolean play = false;
 
     public static void start(Context context, String url) {
         ArrayList<String> images = new ArrayList<>(1);
@@ -59,6 +74,7 @@ public final class ImageActivity extends MyActivity {
     @Override
     protected void initView() {
         mIndicatorView.setViewPager(mViewPager);
+        setOnClickListener(R.id.ll_close, R.id.ll_play, R.id.ll_download);
     }
 
     @Override
@@ -74,15 +90,41 @@ public final class ImageActivity extends MyActivity {
 
     @Override
     protected void initData() {
-        ArrayList<String> images = getStringArrayList(IntentKey.PICTURE);
+        imageList = getStringArrayList(IntentKey.PICTURE);
         int index = getInt(IntentKey.INDEX);
-        if (images != null && images.size() > 0) {
-            mViewPager.setAdapter(new ImagePagerAdapter(this, images));
-            if (index != 0 && index <= images.size()) {
+        if (imageList != null && imageList.size() > 0) {
+            mViewPager.setAdapter(new ImagePagerAdapter(this, imageList));
+            if (index != 0 && index <= imageList.size()) {
                 mViewPager.setCurrentItem(index);
             }
         } else {
             finish();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_close:
+                finish();
+                break;
+            case R.id.ll_play:
+                play = !play;
+                if (play) {
+                    // 正在播放
+                    mPlayIV.setImageResource(R.drawable.ic_pause_w);
+                } else {
+                    mPlayIV.setImageResource(R.drawable.ic_play_w);
+                }
+                break;
+            case R.id.ll_download:
+                int currentItem = mViewPager.getCurrentItem();
+                PicSaveUtil.savePic(imageList.get(currentItem), this, PicSaveUtil.SAVE_PATH_TYPE_DCIM, UUID.randomUUID().toString());
+//                toast("图片暂不支持下载 " + currentItem);
+                toast("下载成功");
+                break;
+            default:
+                break;
         }
     }
 

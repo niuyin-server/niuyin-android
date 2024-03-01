@@ -14,9 +14,6 @@ import com.roydon.niuyin.http.glide.GlideApp;
 import java.util.List;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/03/05
  * desc   : 图片加载适配器
  */
 public final class ImagePagerAdapter extends PagerAdapter implements View.OnClickListener {
@@ -60,8 +57,8 @@ public final class ImagePagerAdapter extends PagerAdapter implements View.OnClic
     @Override
     public void onClick(View v) {
         // 单击图片退出当前的 Activity
-        if (!mActivity.isFinishing()) {
-            mActivity.finish();
-        }
+//        if (!mActivity.isFinishing()) {
+//            mActivity.finish();
+//        }
     }
 }
