@@ -70,7 +70,8 @@
                 android:id="@+id/tv_comment_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="评论内容"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -78,12 +79,11 @@
             <!--            评论操作-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:src="@drawable/ic_behave_like_g" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -99,7 +99,7 @@
                 android:id="@+id/ll_open_replay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
