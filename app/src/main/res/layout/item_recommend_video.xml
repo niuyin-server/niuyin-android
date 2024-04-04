@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="1dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginEnd="1dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="2dp"
     android:clickable="true"
     android:foreground="@drawable/ripple_recommend_video_card"
     android:orientation="vertical"
@@ -90,21 +90,6 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_like_empty_w" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_like_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="5dp"
-                    android:text="0"
-                    android:textColor="@color/white" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginStart="10dp"
                     android:src="@drawable/ic_comment_w_e" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -131,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
+                android:layout_margin="8dp"
                 android:ellipsize="end"
                 android:maxHeight="64dp"
                 android:maxLines="2"
@@ -148,9 +133,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="5dp">
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp">
             <!--作者-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -162,8 +147,8 @@
 
                 <com.roydon.niuyin.widget.RoundImageView
                     android:id="@+id/iv_author_avatar"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_avatar_default" />
 
@@ -186,15 +171,32 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="right|center_vertical"
                 android:orientation="horizontal">
 
+                <!--                <androidx.appcompat.widget.AppCompatImageView-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:padding="5dp"-->
+                <!--                    android:scaleType="fitXY"-->
+                <!--                    android:src="@drawable/ic_more_b_v" />-->
+
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_more_b_v" />
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_like_empty_g" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_like_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:text="0"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
 
             </LinearLayout>
         </LinearLayout>

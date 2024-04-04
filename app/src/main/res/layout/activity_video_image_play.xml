@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@drawable/ic_back_b"
-        app:title="图文" />
+        app:title="" />
 
     <!-- 16:10 视频-->
     <com.hjq.widget.layout.RatioFrameLayout

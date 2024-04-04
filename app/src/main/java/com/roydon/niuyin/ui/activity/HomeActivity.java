@@ -91,7 +91,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         badge = mBottomNavigationView.getOrCreateBadge(R.id.home_message);
 
         // 设置徽章的显示位置
-        badge.setVerticalOffset(10);
+        badge.setVerticalOffset(15);
 //        badge.setHorizontalOffset(10);
         // 设置徽章的样式
         badge.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryRed));
