@@ -20,8 +20,8 @@ public class AppVideoUserCommentParentVO extends VideoUserComment {
         this.childrenCount = childrenCount;
     }
 
-    public AppVideoUserCommentParentVO(Long commentId, String videoId, Long userId, Long parentId, Long originId, String content, String status, LocalDateTime createTime, String nickName, String avatar, Long childrenCount) {
-        super(commentId, videoId, userId, parentId, originId, content, status, createTime);
+    public AppVideoUserCommentParentVO(Long commentId, String videoId, Long userId, Long parentId, Long originId, String content, Long likeNum, String status, LocalDateTime createTime, String nickName, String avatar, Long childrenCount) {
+        super(commentId, videoId, userId, parentId, originId, content, likeNum, status, createTime);
         this.nickName = nickName;
         this.avatar = avatar;
         this.childrenCount = childrenCount;

@@ -36,6 +36,10 @@ public class VideoUserComment implements Serializable {
      */
     private String content;
     /**
+     * 点赞量
+     */
+    private Long likeNum;
+    /**
      * 状态：0默认1禁止
      */
     private String status;
@@ -45,13 +49,14 @@ public class VideoUserComment implements Serializable {
     public VideoUserComment() {
     }
 
-    public VideoUserComment(Long commentId, String videoId, Long userId, Long parentId, Long originId, String content, String status, LocalDateTime createTime) {
+    public VideoUserComment(Long commentId, String videoId, Long userId, Long parentId, Long originId, String content, Long likeNum, String status, LocalDateTime createTime) {
         this.commentId = commentId;
         this.videoId = videoId;
         this.userId = userId;
         this.parentId = parentId;
         this.originId = originId;
         this.content = content;
+        this.likeNum = likeNum;
         this.status = status;
         this.createTime = createTime;
     }
@@ -94,6 +99,14 @@ public class VideoUserComment implements Serializable {
 
     public void setOriginId(Long originId) {
         this.originId = originId;
+    }
+
+    public Long getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Long likeNum) {
+        this.likeNum = likeNum;
     }
 
     public String getContent() {

@@ -22,6 +22,7 @@ import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
+import com.roydon.niuyin.http.request.behave.CommentVideoApi;
 import com.roydon.niuyin.http.request.behave.MyFavoriteVideoPageApi;
 import com.roydon.niuyin.http.request.behave.VideoCommentParentPageApi;
 import com.roydon.niuyin.http.response.behave.AppVideoUserCommentParentVO;
@@ -121,8 +122,10 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                         .setListener(new VideoCommendDialog.OnListener() {
                             @Override
                             public void onSend(BaseDialog dialog, String content) {
-                                toast(content);
+//                                toast(content);
                                 mCommendView.clearComposingText();
+                                // 评论视频
+                                postCommentVideo(videoInfoVO.getVideoId(), content);
                             }
 
                             @Override
@@ -248,5 +251,32 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                 footerView.setOnClickListener(v -> toast("点击了尾部"));
             }
         });
+    }
+
+    /**
+     * 评论视频
+     */
+    public void postCommentVideo(String videoId, String content) {
+        EasyHttp.post(this)
+                .api(new CommentVideoApi()
+                        .setVideoId(videoId)
+                        .setContent(content))
+                .request(new HttpCallback<HttpData<Boolean>>(this.getAttachActivity()) {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        if (data.getCode() == 200) {
+                            toast("评论成功");
+                            getVideoCommentParentPage(true);
+                        } else {
+                            toast(data.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        toast("评论失败");
+                    }
+                });
     }
 }
