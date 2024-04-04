@@ -153,8 +153,10 @@ public class VideoPlayActivity extends MyActivity {
         ArrayList<Fragment> mIndexFragments = new ArrayList<>();
         VideoInfoFragment videoInfoFragment = VideoInfoFragment.newInstance();
         videoInfoFragment.setVideoInfoVO(videoInfoVO);
+        VideoCommentFragment videoCommentFragment = VideoCommentFragment.newInstance();
+        videoCommentFragment.setVideoInfoVO(videoInfoVO);
         mIndexFragments.add(videoInfoFragment);
-        mIndexFragments.add(VideoCommentFragment.newInstance());
+        mIndexFragments.add(videoCommentFragment);
         mViewPager.setOffscreenPageLimit(mIndexFragments.size());
         mViewPager.setAdapter(new VideoPlayAdapter(getSupportFragmentManager(), mTitles, mIndexFragments));
         mSlidingTabLayout.setViewPager(mViewPager);
