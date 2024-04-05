@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.enums.VideoCommentPageOrderEnum;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.behave.CommentVideoApi;
@@ -71,11 +73,23 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
     @BindView(R.id.recyclerView)
     WrapRecyclerView mRecyclerView;
 
+    @BindView(R.id.tv_comment_order_by)
+    TextView mCommentOrderByTV;
+    @BindView(R.id.tv_comment_count)
+    TextView mCommentCountTV;
+    @BindView(R.id.ll_order_by)
+    LinearLayout mOrderByLayout;
+    @BindView(R.id.tv_order_by_tip)
+    TextView mOrderByTipTV;
+
     private VideoCommentParentAdapter mAdapter;
     private List<AppVideoUserCommentParentVO> myVideoUserCommentParentVOList;
 
+    private String orderBy = "1";
     private int pageNum = 1;
-    private int pageSize = 12;
+    private int pageSize = 10;
+
+    private Long commentCount = 0L;
 
     public static VideoCommentFragment newInstance() {
         return new VideoCommentFragment();
@@ -98,7 +112,7 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
         mAdapter.setOnItemLongClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        setOnClickListener(R.id.et_commend);
+        setOnClickListener(R.id.et_commend, R.id.ll_order_by);
     }
 
     @Override
@@ -122,7 +136,6 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                         .setListener(new VideoCommendDialog.OnListener() {
                             @Override
                             public void onSend(BaseDialog dialog, String content) {
-//                                toast(content);
                                 mCommendView.clearComposingText();
                                 // 评论视频
                                 postCommentVideo(videoInfoVO.getVideoId(), content);
@@ -135,6 +148,29 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                         })
                         .show();
                 break;
+            case R.id.ll_order_by:
+                // 排序方式
+                switch (orderBy) {
+                    case "0":
+                        orderBy = "1";
+                        mAdapter.clearData();
+                        showLoading();
+                        getVideoCommentParentPage(true);
+                        mCommentOrderByTV.setText(VideoCommentPageOrderEnum.LIKE_NUM.getDesc());
+                        mOrderByTipTV.setText("按热度");
+                        break;
+                    case "1":
+                        orderBy = "0";
+                        mAdapter.clearData();
+                        showLoading();
+                        getVideoCommentParentPage(true);
+                        mCommentOrderByTV.setText(VideoCommentPageOrderEnum.CREATE_TIME.getDesc());
+                        mOrderByTipTV.setText("按时间");
+                        break;
+                    default:
+                        break;
+                }
+
             default:
                 break;
         }
@@ -188,7 +224,7 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
-        @SuppressLint("NotifyDataSetChanged")
+        @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -197,6 +233,7 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                     showEmpty();
                     break;
                 case HANDLER_VIDEO_COMMENT_PARENT_PAGE:
+                    mCommentCountTV.setText(commentCount + "");
                     mAdapter.setData(myVideoUserCommentParentVOList);
                     showComplete();
                     break;
@@ -221,6 +258,7 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
     public void getVideoCommentParentPage(boolean isRefresh) {
         EasyHttp.post(this).api(new VideoCommentParentPageApi()
                 .setVideoId(videoInfoVO.getVideoId())
+                .setOrderBy(orderBy)
                 .setPageNum(pageNum)
                 .setPageSize(pageSize)).request(new HttpCallback<PageDataInfo<AppVideoUserCommentParentVO>>(this.getAttachActivity()) {
 
@@ -234,6 +272,7 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                 if (isRefresh) {
                     mRefreshLayout.finishRefresh(true);
                     myVideoUserCommentParentVOList = rows.getRows();
+                    commentCount = rows.getTotal();
                     // 更新ui
                     mHandler.sendEmptyMessage(HANDLER_VIDEO_COMMENT_PARENT_PAGE);
                 } else {

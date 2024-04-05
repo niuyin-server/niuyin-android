@@ -77,6 +77,8 @@ public class VideoCommentParentAdapter extends MyAdapter<AppVideoUserCommentPare
             if (item.getChildrenCount() > 0) {
                 openReplayLayout.setVisibility(View.VISIBLE);
                 replayCountTV.setText(item.getChildrenCount().toString());
+            } else {
+                openReplayLayout.setVisibility(View.GONE);
             }
         }
     }

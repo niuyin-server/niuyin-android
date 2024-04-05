@@ -16,11 +16,17 @@ public class VideoCommentParentPageApi implements IRequestApi {
     }
 
     private String videoId;
+    private String orderBy;
     private int pageNum = 1;
     private int pageSize = 10;
 
     public VideoCommentParentPageApi setVideoId(String videoId) {
         this.videoId = videoId;
+        return this;
+    }
+
+    public VideoCommentParentPageApi setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
         return this;
     }
 
