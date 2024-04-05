@@ -115,6 +115,9 @@ dependencies {
     implementation project(':umeng')
     implementation project(':copy')
 
+    // 弹窗库
+    implementation 'com.github.li-xiaojun:XPopup:2.9.4'
+
     // 轮播 https://github.com/youth5201314/banner
     implementation 'io.github.youth5201314:banner:2.2.3'
 

@@ -25,16 +25,14 @@ import com.roydon.niuyin.enums.VideoCommentPageOrderEnum;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.behave.CommentVideoApi;
-import com.roydon.niuyin.http.request.behave.MyFavoriteVideoPageApi;
 import com.roydon.niuyin.http.request.behave.VideoCommentParentPageApi;
+import com.roydon.niuyin.http.request.behave.VideoCommentReplayPageApi;
 import com.roydon.niuyin.http.response.behave.AppVideoUserCommentParentVO;
-import com.roydon.niuyin.http.response.behave.MyFavoriteVideoVO;
+import com.roydon.niuyin.http.response.behave.VideoCommentReplayVO;
 import com.roydon.niuyin.http.response.video.VideoInfoVO;
-import com.roydon.niuyin.http.response.video.VideoRecommendVO;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
-import com.roydon.niuyin.ui.adapter.MeFavoriteVideoAdapter;
-import com.roydon.niuyin.ui.adapter.RecommendVideoAdapter;
 import com.roydon.niuyin.ui.adapter.VideoCommentParentAdapter;
+import com.roydon.niuyin.ui.adapter.VideoCommentReplayAdapter;
 import com.roydon.niuyin.ui.dialog.VideoCommendDialog;
 import com.roydon.niuyin.ui.dialog.VideoCommentReplayDialog;
 import com.roydon.niuyin.widget.HintLayout;
@@ -42,27 +40,25 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 
 /**
  * @author roydon
  * @date 2024/1/31 23:51
- * @description 视频播放页-视频评论Fragment
+ * @description 视频播放页-视频评论回复评论Fragment
  */
 @SuppressLint("NonConstantResourceId")
-public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener, BaseAdapter.OnItemLongClickListener {
+public class VideoCommentReplayFragment extends MyFragment<VideoPlayActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener, BaseAdapter.OnItemLongClickListener {
 
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
-    private static final int HANDLER_VIDEO_COMMENT_PARENT_PAGE = 1;
-    private static final int HANDLER_VIDEO_COMMENT_PARENT_PAGE_MORE = 2;
-    private static final int HANDLER_VIDEO_COMMENT_PARENT_PAGE_ERROR = 3;
+    private static final int HANDLER_VIDEO_COMMENT_REPLAY_PAGE = 1;
+    private static final int HANDLER_VIDEO_COMMENT_REPLAY_PAGE_MORE = 2;
+    private static final int HANDLER_VIDEO_COMMENT_REPLAY_PAGE_ERROR = 3;
 
-    private VideoInfoVO videoInfoVO;
+    private AppVideoUserCommentParentVO videoUserCommentParent;
 
     @BindView(R.id.et_commend)
     TextView mCommendView;
@@ -74,17 +70,17 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
     @BindView(R.id.recyclerView)
     WrapRecyclerView mRecyclerView;
 
-    @BindView(R.id.tv_comment_order_by)
-    TextView mCommentOrderByTV;
-    @BindView(R.id.tv_comment_count)
-    TextView mCommentCountTV;
-    @BindView(R.id.ll_order_by)
-    LinearLayout mOrderByLayout;
-    @BindView(R.id.tv_order_by_tip)
-    TextView mOrderByTipTV;
+//    @BindView(R.id.tv_comment_order_by)
+//    TextView mCommentOrderByTV;
+//    @BindView(R.id.tv_comment_count)
+//    TextView mCommentCountTV;
+//    @BindView(R.id.ll_order_by)
+//    LinearLayout mOrderByLayout;
+//    @BindView(R.id.tv_order_by_tip)
+//    TextView mOrderByTipTV;
 
-    private VideoCommentParentAdapter mAdapter;
-    private List<AppVideoUserCommentParentVO> myVideoUserCommentParentVOList;
+    private VideoCommentReplayAdapter mAdapter;
+    private List<VideoCommentReplayVO> mVideoCommentReplayVOList;
 
     private String orderBy = "1";
     private int pageNum = 1;
@@ -92,46 +88,33 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
 
     private Long commentCount = 0L;
 
-    public static VideoCommentFragment newInstance() {
-        return new VideoCommentFragment();
+    public static VideoCommentReplayFragment newInstance() {
+        return new VideoCommentReplayFragment();
     }
 
-    public void setVideoInfoVO(VideoInfoVO videoInfoVO) {
-        this.videoInfoVO = videoInfoVO;
+    public void setVideoUserCommentParent(AppVideoUserCommentParentVO parent) {
+        this.videoUserCommentParent = parent;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_video_comment;
+        return R.layout.fragment_video_comment_replay;
     }
 
     @Override
     protected void initView() {
         showLoading();
-        mAdapter = new VideoCommentParentAdapter(getContext());
+        mAdapter = new VideoCommentReplayAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemLongClickListener(this);
-        mAdapter.setOnItemChildClickListener(new VideoCommentParentAdapter.OnItemChildClickListener() {
-            @Override
-            public void onOpenReplay(View view, int position, AppVideoUserCommentParentVO item) {
-                new VideoCommentReplayDialog.Builder(getContext(), item, getActivity())
-                        .setListener(new VideoCommentReplayDialog.OnListener() {
-                            @Override
-                            public void onSelected(BaseDialog dialog, int position, AppVideoUserCommentParentVO bean) {
-
-                            }
-                        })
-                        .show();
-            }
-        });
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
-        setOnClickListener(R.id.et_commend, R.id.ll_order_by);
+        setOnClickListener(R.id.et_commend);
     }
 
     @Override
     protected void lazyLoadData() {
-        getVideoCommentParentPage(true);
+        getVideoCommentReplayPage(true);
     }
 
     @Override
@@ -152,7 +135,7 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                             public void onSend(BaseDialog dialog, String content) {
                                 mCommendView.clearComposingText();
                                 // 评论视频
-                                postCommentVideo(videoInfoVO.getVideoId(), content);
+//                                postCommentVideo(videoInfoVO.getVideoId(), content);
                             }
 
                             @Override
@@ -162,29 +145,6 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                         })
                         .show();
                 break;
-            case R.id.ll_order_by:
-                // 排序方式
-                switch (orderBy) {
-                    case "0":
-                        orderBy = "1";
-                        mAdapter.clearData();
-                        showLoading();
-                        getVideoCommentParentPage(true);
-                        mCommentOrderByTV.setText(VideoCommentPageOrderEnum.LIKE_NUM.getDesc());
-                        mOrderByTipTV.setText("按热度");
-                        break;
-                    case "1":
-                        orderBy = "0";
-                        mAdapter.clearData();
-                        showLoading();
-                        getVideoCommentParentPage(true);
-                        mCommentOrderByTV.setText(VideoCommentPageOrderEnum.CREATE_TIME.getDesc());
-                        mOrderByTipTV.setText("按时间");
-                        break;
-                    default:
-                        break;
-                }
-
             default:
                 break;
         }
@@ -226,14 +186,14 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pageNum++;
-        getVideoCommentParentPage(false);
+        getVideoCommentReplayPage(false);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
         mRefreshLayout.setEnableLoadMore(true);
-        getVideoCommentParentPage(true);
+        getVideoCommentReplayPage(true);
     }
 
     @SuppressLint("HandlerLeak")
@@ -246,17 +206,16 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
                 case HANDLER_WHAT_EMPTY:
                     showEmpty();
                     break;
-                case HANDLER_VIDEO_COMMENT_PARENT_PAGE:
-                    mCommentCountTV.setText(commentCount + "");
-                    mAdapter.setData(myVideoUserCommentParentVOList);
+                case HANDLER_VIDEO_COMMENT_REPLAY_PAGE:
+                    mAdapter.setData(mVideoCommentReplayVOList);
                     showComplete();
                     break;
-                case HANDLER_VIDEO_COMMENT_PARENT_PAGE_MORE:
-                    mAdapter.setMoreData(myVideoUserCommentParentVOList);
+                case HANDLER_VIDEO_COMMENT_REPLAY_PAGE_MORE:
+                    mAdapter.setMoreData(mVideoCommentReplayVOList);
                     showComplete();
                     break;
-                case HANDLER_VIDEO_COMMENT_PARENT_PAGE_ERROR:
-                    showError(v -> getVideoCommentParentPage(true));
+                case HANDLER_VIDEO_COMMENT_REPLAY_PAGE_ERROR:
+                    showError(v -> getVideoCommentReplayPage(true));
                     break;
                 default:
                     break;
@@ -264,45 +223,36 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
         }
     };
 
-    /**
-     * 分页视频根评论
-     *
-     * @param isRefresh
-     */
-    public void getVideoCommentParentPage(boolean isRefresh) {
-        EasyHttp.post(this).api(new VideoCommentParentPageApi()
-                        .setVideoId(videoInfoVO.getVideoId())
+
+    private void getVideoCommentReplayPage(boolean isRefresh) {
+        EasyHttp.post(getActivity()).api(new VideoCommentReplayPageApi()
+                        .setCommentId(videoUserCommentParent.getCommentId())
                         .setOrderBy(orderBy)
                         .setPageNum(pageNum)
                         .setPageSize(pageSize))
-                .request(new HttpCallback<PageDataInfo<AppVideoUserCommentParentVO>>(this.getAttachActivity()) {
+                .request(new HttpCallback<PageDataInfo<VideoCommentReplayVO>>(getAttachActivity()) {
 
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
-                    public void onSucceed(PageDataInfo<AppVideoUserCommentParentVO> rows) {
+                    public void onSucceed(PageDataInfo<VideoCommentReplayVO> rows) {
                         if (rows.getTotal() == 0) {
                             mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
                             return;
                         }
                         if (isRefresh) {
                             mRefreshLayout.finishRefresh(true);
-                            myVideoUserCommentParentVOList = rows.getRows();
-                            commentCount = rows.getTotal();
+                            mVideoCommentReplayVOList = rows.getRows();
                             // 更新ui
-                            mHandler.sendEmptyMessage(HANDLER_VIDEO_COMMENT_PARENT_PAGE);
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_COMMENT_REPLAY_PAGE);
                         } else {
                             mRefreshLayout.finishLoadMore(true);
-                            myVideoUserCommentParentVOList = rows.getRows();
-                            mHandler.sendEmptyMessage(HANDLER_VIDEO_COMMENT_PARENT_PAGE_MORE);
+                            mVideoCommentReplayVOList = rows.getRows();
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_COMMENT_REPLAY_PAGE_MORE);
                         }
                     }
 
                     @Override
                     public void onFail(Exception e) {
-                        showError(view -> getVideoCommentParentPage(isRefresh));
-                        TextView footerView = mRecyclerView.addFooterView(R.layout.item_recycler_footer);
-                        footerView.setText("我也是有底线的");
-                        footerView.setOnClickListener(v -> toast("点击了尾部"));
                     }
                 });
     }
@@ -310,27 +260,27 @@ public class VideoCommentFragment extends MyFragment<VideoPlayActivity> implemen
     /**
      * 评论视频
      */
-    public void postCommentVideo(String videoId, String content) {
-        EasyHttp.post(this)
-                .api(new CommentVideoApi()
-                        .setVideoId(videoId)
-                        .setContent(content))
-                .request(new HttpCallback<HttpData<Boolean>>(this.getAttachActivity()) {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onSucceed(HttpData<Boolean> data) {
-                        if (data.getCode() == 200) {
-                            toast("评论成功");
-                            getVideoCommentParentPage(true);
-                        } else {
-                            toast(data.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        toast("评论失败");
-                    }
-                });
-    }
+//    public void postCommentVideo(String videoId, String content) {
+//        EasyHttp.post(this)
+//                .api(new CommentVideoApi()
+//                        .setVideoId(videoId)
+//                        .setContent(content))
+//                .request(new HttpCallback<HttpData<Boolean>>(this.getAttachActivity()) {
+//                    @RequiresApi(api = Build.VERSION_CODES.N)
+//                    @Override
+//                    public void onSucceed(HttpData<Boolean> data) {
+//                        if (data.getCode() == 200) {
+//                            toast("评论成功");
+//                            getVideoCommentParentPage(true);
+//                        } else {
+//                            toast(data.getMessage());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFail(Exception e) {
+//                        toast("评论失败");
+//                    }
+//                });
+//    }
 }

@@ -36,16 +36,15 @@ import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE;
 import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_SETTLING;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/02/12
- *    desc   : 省市区选择对话框
- *    doc    : https://baijiahao.baidu.com/s?id=1615894776741007967
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/02/12
+ * desc   : 省市区选择对话框
+ * doc    : https://baijiahao.baidu.com/s?id=1615894776741007967
  */
 public final class AddressDialog {
 
-    public static final class Builder
-            extends BaseDialog.Builder<Builder>
+    public static final class Builder extends BaseDialog.Builder<Builder>
             implements TabLayout.OnTabSelectedListener,
             Runnable, RecyclerViewAdapter.OnSelectListener,
             BaseDialog.OnShowListener, BaseDialog.OnDismissListener {
@@ -121,6 +120,7 @@ public final class AddressDialog {
         public Builder setTitle(@StringRes int id) {
             return setTitle(getString(id));
         }
+
         public Builder setTitle(CharSequence text) {
             mTitleView.setText(text);
             return this;
@@ -306,10 +306,12 @@ public final class AddressDialog {
         }
 
         @Override
-        public void onTabUnselected(TabLayout.Tab tab) {}
+        public void onTabUnselected(TabLayout.Tab tab) {
+        }
 
         @Override
-        public void onTabReselected(TabLayout.Tab tab) {}
+        public void onTabReselected(TabLayout.Tab tab) {
+        }
 
         /**
          * {@link BaseDialog.OnShowListener}
@@ -422,9 +424,13 @@ public final class AddressDialog {
 
     private static final class AddressBean {
 
-        /** （省\市\区）的名称 */
+        /**
+         * （省\市\区）的名称
+         */
         private final String name;
-        /** 下一级的 Json */
+        /**
+         * 下一级的 Json
+         */
         private final JSONObject next;
 
         private AddressBean(String name, JSONObject next) {
@@ -475,7 +481,7 @@ public final class AddressDialog {
         /**
          * 获取城市列表
          *
-         * @param jsonObject        城市Json
+         * @param jsonObject 城市Json
          */
         private static List<AddressBean> getCityList(JSONObject jsonObject) {
             try {
@@ -498,7 +504,7 @@ public final class AddressDialog {
         /**
          * 获取区域列表
          *
-         * @param jsonObject        区域 Json
+         * @param jsonObject 区域 Json
          */
         private static List<AddressBean> getAreaList(JSONObject jsonObject) {
             try {
@@ -545,15 +551,16 @@ public final class AddressDialog {
         /**
          * 选择完成后回调
          *
-         * @param province          省
-         * @param city              市
-         * @param area              区
+         * @param province 省
+         * @param city     市
+         * @param area     区
          */
         void onSelected(BaseDialog dialog, String province, String city, String area);
 
         /**
          * 点击取消时回调
          */
-        default void onCancel(BaseDialog dialog) {}
+        default void onCancel(BaseDialog dialog) {
+        }
     }
 }

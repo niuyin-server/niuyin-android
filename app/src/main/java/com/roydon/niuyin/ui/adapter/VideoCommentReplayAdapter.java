@@ -11,15 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.hjq.base.BaseDialog;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyAdapter;
-import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.http.glide.GlideApp;
-import com.roydon.niuyin.http.response.behave.AppVideoUserCommentParentVO;
-import com.roydon.niuyin.http.response.behave.MyFavoriteVideoVO;
+import com.roydon.niuyin.http.response.behave.VideoCommentReplayVO;
 import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
 
@@ -28,13 +24,13 @@ import butterknife.BindView;
 /**
  * @author roydon
  * @date 2024/2/2 20:50
- * @description 视频父评论adapter
+ * @description 视频根评论回复评论adapter
  */
-public class VideoCommentParentAdapter extends MyAdapter<AppVideoUserCommentParentVO> {
+public class VideoCommentReplayAdapter extends MyAdapter<VideoCommentReplayVO> {
 
     private OnItemChildClickListener mOnItemChildClickListener;
 
-    public VideoCommentParentAdapter(Context context) {
+    public VideoCommentReplayAdapter(Context context) {
         super(context);
     }
 
@@ -44,14 +40,14 @@ public class VideoCommentParentAdapter extends MyAdapter<AppVideoUserCommentPare
 
     @NonNull
     @Override
-    public VideoCommentParentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VideoCommentParentAdapter.ViewHolder();
+    public VideoCommentReplayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new VideoCommentReplayAdapter.ViewHolder();
     }
 
     final class ViewHolder extends MyAdapter.ViewHolder {
 
         ViewHolder() {
-            super(R.layout.item_video_comment_parent);
+            super(R.layout.item_video_comment_replay);
         }
 
         @BindView(R.id.iv_avatar)
@@ -62,16 +58,16 @@ public class VideoCommentParentAdapter extends MyAdapter<AppVideoUserCommentPare
         TextView mPublishTimeTV;
         @BindView(R.id.tv_comment_content)
         TextView mCommentContentTV;
-        @BindView(R.id.ll_open_replay)
-        LinearLayout openReplayLayout;
-        @BindView(R.id.tv_reply_count)
-        TextView replayCountTV;
+        @BindView(R.id.tv_replay_nick_name)
+        TextView replayNickNameTV;
+        @BindView(R.id.ll_replay_user)
+        LinearLayout replayUserLayout;
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint("SetTextI18n")
         @Override
         public void onBindView(int position) {
-            AppVideoUserCommentParentVO item = getItem(position);
+            VideoCommentReplayVO item = getItem(position);
             if (item == null) {
                 return;
             }
@@ -81,13 +77,11 @@ public class VideoCommentParentAdapter extends MyAdapter<AppVideoUserCommentPare
             mNicknameTV.setText(item.getNickName());
             mPublishTimeTV.setText(TimeUtils.getSmartTime(DateUtils.localDateTime2Long(item.getCreateTime())));
             mCommentContentTV.setText(item.getContent());
-            // 是否有子评论
-            if (item.getChildrenCount() > 0) {
-                openReplayLayout.setVisibility(View.VISIBLE);
-                replayCountTV.setText(item.getChildrenCount().toString());
-                openReplayLayout.setOnClickListener(v -> mOnItemChildClickListener.onOpenReplay(v, position, item));
+            if (item.getReplayUserId() != null) {
+                replayUserLayout.setVisibility(View.VISIBLE);
+                replayNickNameTV.setText("@" + item.getReplayUserNickName());
             } else {
-                openReplayLayout.setVisibility(View.GONE);
+                replayUserLayout.setVisibility(View.GONE);
             }
         }
     }
@@ -97,7 +91,12 @@ public class VideoCommentParentAdapter extends MyAdapter<AppVideoUserCommentPare
         /**
          * 展开回复
          */
-        void onOpenReplay(View view, int position, AppVideoUserCommentParentVO item);
+        void onOpenReplay(View view, int position, VideoCommentReplayVO item);
+
+        /**
+         * 回复评论
+         */
+        void onReplayComment(View view, int position, VideoCommentReplayVO item);
 
     }
 }

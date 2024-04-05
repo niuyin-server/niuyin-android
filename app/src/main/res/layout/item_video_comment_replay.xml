@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.adapter.VideoCommentParentAdapter">
+    tools:context="com.roydon.niuyin.ui.adapter.VideoCommentReplayAdapter">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,6 +66,32 @@
             android:layout_marginStart="55dp"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:id="@+id/ll_replay_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_replay_nick_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="‘@’昵称"
+                    android:textColor="@color/primaryBlue"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="："
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_comment_content"
                 android:layout_width="match_parent"
@@ -75,7 +101,6 @@
                 android:text="评论内容"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
             <!--            评论操作-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,35 +120,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_open_replay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="展开"
-                    android:textColor="@color/primaryRed" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_reply_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:text="3"
-                    android:textColor="@color/primaryRed"
-                    android:textStyle="bold" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="条回复 >"
-                    android:textColor="@color/primaryRed" />
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

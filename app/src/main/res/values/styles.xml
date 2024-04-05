@@ -131,7 +131,7 @@
 
     <!-- 上拉刷新下拉加载样式 -->
     <style name="RefreshLayoutStyle" parent="Base.CardView">
-        <item name="srlPrimaryColor">@color/colorAccent</item>
+        <item name="srlPrimaryColor">@color/primaryRed</item>
         <item name="srlAccentColor">@color/white</item>
         <item name="srlEnablePreviewInEditMode">false</item>
     </style>
