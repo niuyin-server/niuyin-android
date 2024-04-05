@@ -25,11 +25,9 @@ public class VideoCommentReplayDialog {
 
         private OnListener mListener;
 
-        private AppVideoUserCommentParentVO appVideoUserCommentParentVO;
+        private AppVideoUserCommentParentVO parentComment;
 
         ViewPager2 mViewPager;
-
-        FragmentManager fragmentManager;
 
         @SuppressLint("ClickableViewAccessibility")
         public Builder(Context context, AppVideoUserCommentParentVO comment, FragmentActivity fragmentActivity) {
@@ -38,8 +36,10 @@ public class VideoCommentReplayDialog {
             setHeight(getResources().getDisplayMetrics().heightPixels - (getResources().getDisplayMetrics().widthPixels * 10 / 16) - 90);
 
             mViewPager = findViewById(R.id.viewPager);
-            FragmentStateAdapter fragmentStateAdapter = new VideoCommentReplayFragmentStateAdapter(fragmentActivity,comment);
+            FragmentStateAdapter fragmentStateAdapter = new VideoCommentReplayFragmentStateAdapter(fragmentActivity, comment);
             mViewPager.setAdapter(fragmentStateAdapter);
+
+            this.parentComment = comment;
         }
 
         public Builder setListener(OnListener mListener) {
@@ -47,15 +47,6 @@ public class VideoCommentReplayDialog {
             return this;
         }
 
-//        public Builder setParentComment() {
-//            this.appVideoUserCommentParentVO = comment;
-//            return this;
-//        }
-//
-//        public Builder setViewPager() {
-//
-//            return this;
-//        }
     }
 
     public interface OnListener {
