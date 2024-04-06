@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -31,7 +32,14 @@ import com.roydon.niuyin.http.request.user.UserInfoApi;
 import com.roydon.niuyin.http.request.user.UserProfileApi;
 import com.roydon.niuyin.http.response.member.MemberInfoVO;
 import com.roydon.niuyin.other.IntentKey;
+import com.roydon.niuyin.ui.adapter.MeAdapter;
+import com.roydon.niuyin.ui.adapter.UserProfileViewPagerAdapter;
+import com.roydon.niuyin.ui.fragment.me.MeFavoriteFragment;
+import com.roydon.niuyin.ui.fragment.me.MeLikeFragment;
+import com.roydon.niuyin.ui.fragment.me.MePostFragment;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -156,6 +164,24 @@ public class UserProfileActivity extends MyActivity implements XCollapsingToolba
         mMenuNicknameView.setText(memberInfoVO.getNickName());
         mMenuNicknameView.setVisibility(View.GONE);
         mUserIdView.setText(memberInfoVO.getUserId().toString());
+        // 设置 SlidingTabLayout
+        // tab
+        ArrayList<String> mTitles = new ArrayList<>();
+        ArrayList<Fragment> mMeFragments = new ArrayList<>();
+        mTitles.add("作品");
+        mMeFragments.add(MePostFragment.newInstance());
+        if (memberInfoVO.getMemberInfo().getLikeShowStatus().equals("0")) {
+            mTitles.add("喜欢");
+            mMeFragments.add(MeLikeFragment.newInstance());
+        }
+        if (memberInfoVO.getMemberInfo().getFavoriteShowStatus().equals("0")) {
+            mTitles.add("收藏");
+            mMeFragments.add(MeFavoriteFragment.newInstance());
+        }
+        mViewPager.setOffscreenPageLimit(mMeFragments.size());
+        mViewPager.setAdapter(new UserProfileViewPagerAdapter(getSupportFragmentManager(), mTitles, mMeFragments));
+        mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setCurrentTab(0);
 
     }
 
