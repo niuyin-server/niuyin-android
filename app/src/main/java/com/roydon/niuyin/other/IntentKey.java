@@ -104,4 +104,7 @@ public final class IntentKey {
 
     // 搜索
     public static final String SEARCH_KEYWORD = "search_keyword";
+
+    // 用户
+    public static final String USER_ID = "user_id";
 }

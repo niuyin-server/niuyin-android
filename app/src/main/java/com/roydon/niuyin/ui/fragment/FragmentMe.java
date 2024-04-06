@@ -25,6 +25,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.widget.square.SquareImageView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyFragment;
@@ -67,9 +68,9 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     @BindView(R.id.tv_menu_nickname)
     TextView mMenuNicknameView;
     @BindView(R.id.iv_menu_search)
-    ImageView mMenuSearchView;
+    SquareImageView mMenuSearchView;
     @BindView(R.id.iv_menu_list)
-    ImageView mMenuListView;
+    SquareImageView mMenuListView;
     @BindView(R.id.ll_userinfo)
     LinearLayout mUserinfoView;
 
@@ -80,8 +81,6 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     ImageView mAvatarView;
     @BindView(R.id.tv_nickname)
     TextView mNickNameView;
-    @BindView(R.id.tv_menu_nickname)
-    TextView mMenuNickNameView;
     @BindView(R.id.tv_user_id)
     TextView mUserIdView;
 
@@ -188,8 +187,8 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                     .into(mUserBgView);
         }
         mNickNameView.setText(memberInfoVO.getNickName());
-        mMenuNickNameView.setText(memberInfoVO.getNickName());
-        mMenuNickNameView.setVisibility(View.GONE);
+        mMenuNicknameView.setText(memberInfoVO.getNickName());
+        mMenuNicknameView.setVisibility(View.GONE);
         mUserIdView.setText(memberInfoVO.getUserId().toString());
     }
 
@@ -209,7 +208,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
             mMenuSearchView.setImageResource(R.drawable.ic_search_b);
             mMenuListView.setBackgroundResource(R.drawable.bg_icon_transparent);
             mMenuListView.setImageResource(R.drawable.ic_list_b);
-            mMenuNickNameView.setVisibility(View.VISIBLE);
+            mMenuNicknameView.setVisibility(View.VISIBLE);
         } else {
             getStatusBarConfig().statusBarDarkFont(false).init();
             mUserinfoView.setVisibility(View.VISIBLE);
@@ -219,7 +218,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
             mMenuSearchView.setImageResource(R.drawable.ic_search_w);
             mMenuListView.setBackgroundResource(R.drawable.bg_icon_grey);
             mMenuListView.setImageResource(R.drawable.ic_list_w);
-            mMenuNickNameView.setVisibility(View.GONE);
+            mMenuNicknameView.setVisibility(View.GONE);
         }
     }
 

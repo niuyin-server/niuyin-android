@@ -193,10 +193,14 @@
             android:name=".ui.activity.CategoryVideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <!-- 互动通知 -->
+            android:screenOrientation="portrait" /> <!-- 互动通知 -->
         <activity
             android:name=".ui.activity.NoticeBehaveActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" /><!-- 用户信息 -->
+        <activity
+            android:name=".ui.activity.UserProfileActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

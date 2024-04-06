@@ -5,7 +5,7 @@ import com.hjq.http.config.IRequestApi;
 /**
  * @author roydon
  * @date 2024/1/29 22:04
- * @description 获取用户详情-根据token
+ * @description 获取个人详情-根据token
  * 请求类型：get
  */
 public final class UserInfoApi implements IRequestApi {

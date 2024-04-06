@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.roydon.niuyin.ui.fragment.FragmentMe"
+    tools:context=".ui.activity.UserProfileActivity"
     tools:ignore="HardcodedText">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,7 +17,7 @@
         app:elevation="0px">
 
         <com.roydon.niuyin.widget.XCollapsingToolbarLayout
-            android:id="@+id/ctl_test_bar"
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="@color/white"
@@ -50,7 +50,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingStart="15dp"
-                    android:paddingEnd="15dp">
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="10dp">
 
                     <!-- 获赞 -->
                     <LinearLayout
@@ -61,7 +62,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="100"
+                            android:text="1000"
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -86,14 +87,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="朋友"
+                            android:text="关注"
                             android:textColor="@color/gray" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:text="100"
+                            android:text="10"
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -102,24 +103,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="获赞"
+                            android:text="粉丝"
                             android:textColor="@color/gray" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="100"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="获赞"
-                            android:textColor="@color/gray" />
                     </LinearLayout>
                     <!-- 简介 -->
                     <LinearLayout
@@ -129,8 +115,11 @@
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_user_desc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:text="人要走多远的路才能在时光的尽头找寻到真正的自己" />
                     </LinearLayout>
                     <!--年龄-->
@@ -156,7 +145,13 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="18岁"
+                                android:text="18"
+                                android:textColor="@color/black" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="岁"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
@@ -201,49 +196,12 @@
                                 android:text="清华大学"
                                 android:textColor="@color/black" />
                         </LinearLayout>
-
                     </LinearLayout>
-                    <!--编辑-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:orientation="horizontal"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_edit_profile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/ripple_effect"
-                            android:padding="0dp"
-                            android:text="编辑资料"
-                            android:textColor="@color/black" />
-
-                        <View
-                            android:layout_width="20dp"
-                            android:layout_height="match_parent" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_add_friend"
-                            android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/ripple_effect"
-                            android:padding="0dp"
-                            android:text="添加朋友"
-                            android:textColor="@color/black" />
-
-                    </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/t_test_title"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:layout_collapseMode="pin" />
@@ -297,7 +255,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/bg_icon_grey"
                         android:padding="8dp"
-                        android:src="@drawable/ic_list_w" />
+                        android:src="@drawable/ic_more_w_h" />
 
                 </LinearLayout>
 
@@ -309,7 +267,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
-                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
                 <!--用户头像用户名区域-->
                 <LinearLayout
@@ -325,7 +282,7 @@
                         android:orientation="vertical">
 
                         <com.roydon.niuyin.widget.RoundImageView
-                            android:id="@+id/riv_avatar"
+                            android:id="@+id/iv_avatar"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center_vertical"
@@ -351,7 +308,7 @@
                                 android:id="@+id/tv_nickname"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="还会心动吗"
+                                android:text="昵称"
                                 android:textColor="@color/white"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -419,13 +376,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-    <!--    <androidx.viewpager.widget.ViewPager-->
-    <!--        android:id="@+id/viewPager"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_weight="1"-->
-    <!--        app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

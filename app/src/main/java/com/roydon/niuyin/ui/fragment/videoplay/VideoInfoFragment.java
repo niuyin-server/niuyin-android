@@ -24,6 +24,7 @@ import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.response.video.VideoInfoVO;
+import com.roydon.niuyin.ui.activity.UserProfileActivity;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
 import com.roydon.niuyin.ui.adapter.VideoTagAdapter;
 import com.roydon.niuyin.utils.DateUtils;
@@ -163,7 +164,7 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_author:
-                toast(videoInfoVO.getUserId());
+                UserProfileActivity.start(getContext(), videoInfoVO.getUserId());
                 break;
             case R.id.sb_like:
                 toast("like" + mBehaveLikeButton.isChecked());
