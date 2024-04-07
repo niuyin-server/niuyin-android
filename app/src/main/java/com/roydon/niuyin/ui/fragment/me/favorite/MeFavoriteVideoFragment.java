@@ -111,7 +111,6 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
                 }
                 if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myFavoriteVideoVOList.size()) {
                     mRefreshLayout.setEnableLoadMore(false);
-                    toast("not have more");
                 }
                 // 更新ui
                 mHandler.sendEmptyMessage(HANDLER_MY_FAVORITE_VIDEO_PAGE);

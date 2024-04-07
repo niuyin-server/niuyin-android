@@ -76,16 +76,15 @@ public class VideoImagePlayActivity extends MyActivity {
 
     @Override
     protected void initData() {
-
-        EasyHttp.get(this).api(new VideoInfoApi().setVideoId(getString(IntentKey.VIDEO_ID))).request(new HttpCallback<HttpData<VideoInfoVO>>(this) {
-            @Override
-            public void onSucceed(HttpData<VideoInfoVO> data) {
-                videoInfoVO = data.getData();
-                // 获取视频成功
-                mHandler.sendEmptyMessage(HANDLER_VIDEO_INFO);
-            }
-        });
-
+        EasyHttp.get(this).api(new VideoInfoApi().setVideoId(getString(IntentKey.VIDEO_ID)))
+                .request(new HttpCallback<HttpData<VideoInfoVO>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<VideoInfoVO> data) {
+                        videoInfoVO = data.getData();
+                        // 获取视频成功
+                        mHandler.sendEmptyMessage(HANDLER_VIDEO_INFO);
+                    }
+                });
     }
 
     @SuppressLint("HandlerLeak")

@@ -115,7 +115,6 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
                         }
                         if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myLikeVideoVOList.size()) {
                             mRefreshLayout.setEnableLoadMore(false);
-                            toast("not have more");
                         }
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_MY_LIKE_PAGE);

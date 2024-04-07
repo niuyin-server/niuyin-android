@@ -25,12 +25,6 @@ public final class FollowDynamicAdapter extends MyAdapter<DynamicUser> {
     public FollowDynamicAdapter(Context context) {
         super(context);
     }
-//
-//    @Override
-//    public int getItemViewType(int position) {
-//        String showType = getItem(position).getp();
-//        return Integer.parseInt(showType);
-//    }
 
     @NonNull
     @Override
