@@ -99,7 +99,8 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
+        DynamicUser item = dynamicUserList.get(position);
+        toast(item.getNickname());
     }
 
     @Override
@@ -124,6 +125,7 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
                     break;
                 case HANDLER_FOLLOW_DYNAMIC:
                     followDynamicAdapter.setData(dynamicUserList);
+                    mRefreshLayout.finishRefresh();
                     showComplete();
                     break;
                 case HANDLER_FOLLOW_DYNAMIC_ERROR:
