@@ -8,9 +8,13 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.AttachPopupView;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyFragment;
@@ -69,6 +73,28 @@ public final class FragmentMessage extends MyFragment<HomeActivity> implements B
     @Override
     protected void initData() {
         initNoticeTypeView();
+    }
+
+    /**
+     * 左项被点击
+     *
+     * @param v 被点击的左项View
+     */
+    @Override
+    public void onLeftClick(View v) {
+        AttachPopupView attachPopupView = new XPopup.Builder(getContext())
+                .isCoverSoftInput(true)
+                .hasShadowBg(false)
+                .atView(v)  // 依附于所点击的View，内部会自动判断在上方或者下方显示
+                .asAttachList(new String[]{"分享", "编辑", "发布即刻"},
+                        new int[]{R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round},
+                        new OnSelectListener() {
+                            @Override
+                            public void onSelect(int position, String text) {
+                                toast("click " + text);
+                            }
+                        }, 0, 0);
+        attachPopupView.show();
     }
 
     private void initNoticeTypeView() {

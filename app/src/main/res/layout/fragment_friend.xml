@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,4 +14,51 @@
         app:backButton="false"
         app:title="@string/home_nav_friend" />
 
+    <com.roydon.niuyin.widget.HintLayout
+        android:id="@+id/hintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            style="@style/RefreshLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--  朋友动态  -->
+                <com.hjq.widget.layout.WrapRecyclerView
+                    android:id="@+id/rv_follow_dynamics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_follow_dynamic" />
+
+                <com.hjq.widget.layout.WrapRecyclerView
+                    android:id="@+id/rv_video_dynamics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="1"
+                    tools:listitem="@layout/item_recommend_video" />
+            </LinearLayout>
+
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </com.roydon.niuyin.widget.HintLayout>
 </LinearLayout>
