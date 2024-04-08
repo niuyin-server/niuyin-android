@@ -4,7 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
@@ -18,23 +21,45 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.gson.Gson;
 import com.hjq.base.BaseAdapter;
+import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
+import com.hjq.widget.layout.WrapRecyclerView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.enums.PublishType;
+import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.glide.GlideApp;
+import com.roydon.niuyin.http.model.HttpData;
+import com.roydon.niuyin.http.model.PageDataInfo;
+import com.roydon.niuyin.http.request.behave.VideoCommentParentPageApi;
+import com.roydon.niuyin.http.request.video.RelateVideoRecommendApi;
+import com.roydon.niuyin.http.response.behave.AppVideoUserCommentParentVO;
+import com.roydon.niuyin.http.response.video.RelateVideoVO;
 import com.roydon.niuyin.http.response.video.VideoInfoVO;
+import com.roydon.niuyin.other.MediaVideoInfo;
 import com.roydon.niuyin.ui.activity.UserProfileActivity;
+import com.roydon.niuyin.ui.activity.VideoImagePlayActivity;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
+import com.roydon.niuyin.ui.adapter.VideoCommentParentAdapter;
+import com.roydon.niuyin.ui.adapter.VideoRelateRecommendAdapter;
 import com.roydon.niuyin.ui.adapter.VideoTagAdapter;
+import com.roydon.niuyin.ui.dialog.VideoCommentReplayDialog;
 import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
+import com.roydon.niuyin.utils.VideoPlayUtil;
 import com.roydon.niuyin.widget.HintLayout;
 import com.sackcentury.shinebuttonlib.ShineButton;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -43,7 +68,12 @@ import butterknife.BindView;
  * @date 2024/1/31 23:51
  * @description niuyin-android
  */
-public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
+public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements StatusAction, OnRefreshLoadMoreListener {
+
+    // handler
+    private static final int HANDLER_WHAT_EMPTY = 0;
+    private static final int HANDLER_VIDEO_RELATE_RECOMMEND = 1;
+    private static final int HANDLER_VIDEO_RELATE_RECOMMEND_MORE = 2;
 
     @BindView(R.id.ll_author)
     LinearLayout mAuthorLayout;
@@ -82,6 +112,17 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
 
     private VideoInfoVO videoInfoVO;
 
+    // 相关推荐
+    @BindView(R.id.hintLayout)
+    HintLayout mHintLayout;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerView)
+    WrapRecyclerView mRecyclerView;
+
+    VideoRelateRecommendAdapter videoRelateRecommendAdapter;
+    private List<RelateVideoVO> relateVideoVOList;
+
     public static VideoInfoFragment newInstance() {
         return new VideoInfoFragment();
     }
@@ -102,7 +143,14 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         mVideoDescMaterialCardView.setVisibility(View.GONE);
         //视频标签
         mVideoTagAdapter = new VideoTagAdapter(getContext());
-        mVideoTagAdapter.setOnItemClickListener(this);
+        mVideoTagAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+                // 视频标签点击事件
+                String videoTag = mVideoTagAdapter.getItem(position);
+                toast(videoTag);
+            }
+        });
         mVideoTagRecyclerView.setAdapter(mVideoTagAdapter);
         setOnClickListener(R.id.ll_author, R.id.sb_like, R.id.sb_not_like, R.id.sb_favorite, R.id.sb_share, R.id.ll_open_desc);
         mBehaveLikeButton.init(getAttachActivity());
@@ -113,11 +161,53 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         mBehaveNotLikeButton.setOnClickListener(this);
         mBehaveFavoriteButton.setOnClickListener(this);
         mBehaveShareButton.setOnClickListener(this);
+        // 视频相关推荐
+        showLoading();
+        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        videoRelateRecommendAdapter = new VideoRelateRecommendAdapter(getContext());
+        videoRelateRecommendAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+                RelateVideoVO item = videoRelateRecommendAdapter.getItem(position);
+                toast("点击了视频 " + item.getPublishType());
+                if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
+                    // 视频
+                    // 设置视频比例 4:3竖屏视频
+                    if (!Objects.isNull(item.getVideoInfo())) {
+                        MediaVideoInfo mediaVideoInfo = new Gson().fromJson(item.getVideoInfo(), MediaVideoInfo.class);
+                        if (mediaVideoInfo.getWidth() > mediaVideoInfo.getHeight()) {
+                            // 横屏 1.6
+                            VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.HENG.getCode());
+                        } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
+                            // 竖屏 0.75
+                            VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SHU.getCode());
+                        } else if (Objects.equals(mediaVideoInfo.getWidth(), mediaVideoInfo.getHeight())) {
+                            // 正方形视频
+                            VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.SQUARE.getCode());
+                        } else {
+                            VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
+                        }
+                    } else {
+                        VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
+                    }
+                } else if (item.getPublishType().equals(PublishType.IMAGE.getCode())) {
+                    // 图文
+                    VideoImagePlayActivity.start(getContext(), item.getVideoId());
+                }
+            }
+        });
+        videoRelateRecommendAdapter.setOnItemLongClickListener(new BaseAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(RecyclerView recyclerView, View itemView, int position) {
+                return false;
+            }
+        });
+        mRecyclerView.setAdapter(videoRelateRecommendAdapter);
     }
 
     @Override
     protected void lazyLoadData() {
-
+        getVideoRelateRecommend(true);
     }
 
     @SuppressLint("SetTextI18n")
@@ -125,10 +215,7 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     @Override
     protected void initData() {
         if (videoInfoVO.getAuthor() != null && !videoInfoVO.getAuthor().getAvatar().equals("")) {
-            GlideApp.with(this)
-                    .load(videoInfoVO.getAuthor().getAvatar())
-                    .circleCrop()
-                    .into(mAuthorAvatarView);
+            GlideApp.with(this).load(videoInfoVO.getAuthor().getAvatar()).circleCrop().into(mAuthorAvatarView);
         }
         mAuthorNicknameView.setText(videoInfoVO.getAuthor().getNickName());
         mVideoTitleView.setText(videoInfoVO.getVideoTitle());
@@ -140,19 +227,12 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
 
     @Override
     public HintLayout getHintLayout() {
-        return null;
-    }
-
-    @Override
-    public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-        // 视频标签点击事件
-        String videoTag = mVideoTagAdapter.getItem(position);
-        toast(videoTag);
+        return mHintLayout;
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        getVideoRelateRecommend(false);
     }
 
     @Override
@@ -189,6 +269,62 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         }
     }
 
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case HANDLER_WHAT_EMPTY:
+                    showEmpty();
+                    break;
+                case HANDLER_VIDEO_RELATE_RECOMMEND:
+                    videoRelateRecommendAdapter.setData(relateVideoVOList);
+                    showComplete();
+                    break;
+                case HANDLER_VIDEO_RELATE_RECOMMEND_MORE:
+                    videoRelateRecommendAdapter.setMoreData(relateVideoVOList);
+                    showComplete();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+
+    /**
+     * 获取相关视频
+     *
+     * @param isRefresh
+     */
+    private void getVideoRelateRecommend(boolean isRefresh) {
+        EasyHttp.get(this).api(new RelateVideoRecommendApi().setVideoId(videoInfoVO.getVideoId()))
+                .request(new HttpCallback<HttpData<List<RelateVideoVO>>>(this.getAttachActivity()) {
+
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSucceed(HttpData<List<RelateVideoVO>> data) {
+                        if (isRefresh) {
+                            mRefreshLayout.finishRefresh(true);
+                            relateVideoVOList = data.getData();
+                            // 更新ui
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_RELATE_RECOMMEND);
+                        } else {
+                            mRefreshLayout.finishLoadMore(true);
+                            relateVideoVOList = data.getData();
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_RELATE_RECOMMEND_MORE);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                    }
+                });
+
+    }
 
     private void showCollapseCard() {
         Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);

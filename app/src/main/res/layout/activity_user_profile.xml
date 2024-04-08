@@ -60,6 +60,7 @@
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_like_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1000"
@@ -75,6 +76,7 @@
                             android:textColor="@color/gray" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_follow_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -91,6 +93,7 @@
                             android:textColor="@color/gray" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_fans_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -191,6 +194,7 @@
                                 android:src="@drawable/ic_campus_w" />
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_campus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="清华大学"

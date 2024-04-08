@@ -30,6 +30,7 @@ import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.user.UserInfoApi;
 import com.roydon.niuyin.http.request.user.UserProfileApi;
+import com.roydon.niuyin.http.response.member.AppMemberInfoVO;
 import com.roydon.niuyin.http.response.member.MemberInfoVO;
 import com.roydon.niuyin.other.IntentKey;
 import com.roydon.niuyin.ui.adapter.MeAdapter;
@@ -75,8 +76,16 @@ public class UserProfileActivity extends MyActivity implements XCollapsingToolba
     TextView mNickNameView;
     @BindView(R.id.tv_user_id)
     TextView mUserIdView;
+    @BindView(R.id.tv_like_count)
+    TextView mLikeCountTV;
+    @BindView(R.id.tv_follow_count)
+    TextView mFollowCountTV;
+    @BindView(R.id.tv_fans_count)
+    TextView mFansCountTV;
+    @BindView(R.id.tv_campus)
+    TextView mCampusTV;
 
-    private MemberInfoVO memberInfoVO;
+    private AppMemberInfoVO memberInfoVO;
 
     @BindView(R.id.slidingTabLayout)
     SlidingTabLayout mSlidingTabLayout;
@@ -140,9 +149,8 @@ public class UserProfileActivity extends MyActivity implements XCollapsingToolba
         }
     }
 
-
     @SuppressLint("SetTextI18n")
-    private void showUserProfile(MemberInfoVO memberInfoVO) {
+    private void showUserProfile(AppMemberInfoVO memberInfoVO) {
         if (memberInfoVO.getAvatar() != null && !memberInfoVO.getAvatar().equals("")) {
             GlideApp.with(this)
                     .load(memberInfoVO.getAvatar())
@@ -164,6 +172,11 @@ public class UserProfileActivity extends MyActivity implements XCollapsingToolba
         mMenuNicknameView.setText(memberInfoVO.getNickName());
         mMenuNicknameView.setVisibility(View.GONE);
         mUserIdView.setText(memberInfoVO.getUserId().toString());
+        // 量化数据
+        mLikeCountTV.setText(memberInfoVO.getLikeCount() + "");
+        mFollowCountTV.setText(memberInfoVO.getFollowCount() + "");
+        mFansCountTV.setText(memberInfoVO.getFansCount() + "");
+        mCampusTV.setText(memberInfoVO.getMemberInfo().getCampus());
         // 设置 SlidingTabLayout
         // tab
         ArrayList<String> mTitles = new ArrayList<>();
@@ -207,10 +220,10 @@ public class UserProfileActivity extends MyActivity implements XCollapsingToolba
         EasyHttp.get(this)
                 .api(new UserProfileApi()
                         .setUserId(getLong(IntentKey.USER_ID)))
-                .request(new HttpCallback<HttpData<MemberInfoVO>>(this) {
+                .request(new HttpCallback<HttpData<AppMemberInfoVO>>(this) {
 
                     @Override
-                    public void onSucceed(HttpData<MemberInfoVO> data) {
+                    public void onSucceed(HttpData<AppMemberInfoVO> data) {
                         memberInfoVO = data.getData();
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_USERPROFILE);
