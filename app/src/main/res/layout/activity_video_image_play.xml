@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.roydon.niuyin.ui.activity.VideoImagePlayActivity">
 
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:leftIcon="@drawable/ic_back_b"
-        app:title="" />
+    <!--    <com.hjq.bar.TitleBar-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:leftIcon="@drawable/ic_back_b"-->
+    <!--        app:title="" />-->
 
     <!-- 16:10 视频-->
     <com.hjq.widget.layout.RatioFrameLayout

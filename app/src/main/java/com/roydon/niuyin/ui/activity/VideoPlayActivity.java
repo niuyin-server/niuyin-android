@@ -29,6 +29,7 @@ import com.roydon.niuyin.other.MediaVideoInfo;
 import com.roydon.niuyin.ui.adapter.VideoPlayAdapter;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoInfoFragment;
+import com.roydon.niuyin.utils.BlurUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -142,11 +143,14 @@ public class VideoPlayActivity extends MyActivity {
 
     private void showVideoInfo(VideoInfoVO videoInfoVO) {
 
+//        BlurUtil.blurLayoutBackground(this, videoInfoVO.getCoverImage(), mScreenScaleLayout, getResources());
+
         mVideoPlayerView.setUrl(videoInfoVO.getVideoUrl()); //设置视频地址
         StandardVideoController controller = new StandardVideoController(this);
         controller.addDefaultControlComponent(videoInfoVO.getVideoTitle(), false);
         mVideoPlayerView.setVideoController(controller); //设置控制器
         mVideoPlayerView.start(); //开始播放，不调用则不自动播放
+
 
         // tab
         String[] mTitles = {"简介", "评论"};

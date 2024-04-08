@@ -184,6 +184,7 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
      * 获取好友动态
      */
     private void getFollowDynamic() {
+        mFriendDynamicLayout.setVisibility(View.GONE);
         EasyHttp.get(this)
                 .api(new FollowDynamicApi())
                 .request(new HttpCallback<PageDataInfo<DynamicUser>>(getAttachActivity()) {
