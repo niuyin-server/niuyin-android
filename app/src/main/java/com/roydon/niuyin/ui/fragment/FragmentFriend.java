@@ -54,9 +54,11 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_FOLLOW_DYNAMIC = 1;
-    private static final int HANDLER_FOLLOW_DYNAMIC_ERROR = 2;
+    private static final int HANDLER_FOLLOW_DYNAMIC_MORE = 2;
+    private static final int HANDLER_FOLLOW_DYNAMIC_ERROR = 3;
     private static final int HANDLER_VIDEO_DYNAMIC = 10;
-    private static final int HANDLER_VIDEO_DYNAMIC_ERROR = 11;
+    private static final int HANDLER_VIDEO_DYNAMIC_MORE = 11;
+    private static final int HANDLER_VIDEO_DYNAMIC_ERROR = 12;
 
     @BindView(R.id.hintLayout)
     HintLayout mHintLayout;
@@ -101,6 +103,7 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
 
     @Override
     protected void initView() {
+        showLoading();
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
         // 用户动态
         followDynamicAdapter = new FollowDynamicAdapter(getContext());
@@ -116,7 +119,7 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
         videoImageDynamicAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                VideoVO item = videoVOList.get(position);
+                VideoVO item = videoImageDynamicAdapter.getItem(position);
                 if ((PublishType.VIDEO.getCode()).equals(item.getPublishType())) {
                     // 视频
                     VideoPlayActivity.start(getContext(), item.getVideoId(), VideoScreenType.DEFAULT.getCode());
@@ -172,6 +175,10 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
                     videoImageDynamicAdapter.setData(videoVOList);
                     showComplete();
                     break;
+                case HANDLER_VIDEO_DYNAMIC_MORE:
+                    videoImageDynamicAdapter.setMoreData(videoVOList);
+                    showComplete();
+                    break;
                 case HANDLER_VIDEO_DYNAMIC_ERROR:
                     break;
                 default:
@@ -184,7 +191,7 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
      * 获取好友动态
      */
     private void getFollowDynamic() {
-        mFriendDynamicLayout.setVisibility(View.GONE);
+//        mFriendDynamicLayout.setVisibility(View.GONE);
         EasyHttp.get(this)
                 .api(new FollowDynamicApi())
                 .request(new HttpCallback<PageDataInfo<DynamicUser>>(getAttachActivity()) {
@@ -220,15 +227,19 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
                         if (isRefresh) {
                             mRefreshLayout.finishRefresh(true);
                             videoVOList = rows;
+                            // 更新ui
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_DYNAMIC);
                         } else {
                             mRefreshLayout.finishLoadMore(true);
-                            videoVOList.addAll(rows == null ? new ArrayList<>() : rows);
+                            videoVOList = rows;
+                            // 更新ui
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_DYNAMIC_MORE);
                         }
-                        if (Objects.isNull(rows) || rows.isEmpty() || rows.size() < videoVOList.size()) {
-                            mRefreshLayout.setEnableLoadMore(false);
-                        }
-                        // 更新ui
-                        mHandler.sendEmptyMessage(HANDLER_VIDEO_DYNAMIC);
+//                        if (Objects.isNull(rows) || rows.isEmpty() || rows.size() < videoVOList.size()) {
+//                            mRefreshLayout.setEnableLoadMore(false);
+//                        }
+//                        // 更新ui
+//                        mHandler.sendEmptyMessage(HANDLER_VIDEO_DYNAMIC);
                     }
                 });
     }

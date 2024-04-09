@@ -115,6 +115,12 @@ dependencies {
     implementation project(':umeng')
     implementation project(':copy')
 
+    // 图片轮播 https://github.com/zhpanvip/BannerViewPager
+    implementation 'com.github.zhpanvip:bannerviewpager:3.5.12'
+
+    // viewPager2 SmartViewPager2Adapter
+//    implementation 'com.github.lihangleo2:SmartViewPager2Adapter:3.1.2'
+
     // 弹窗库
     implementation 'com.github.li-xiaojun:XPopup:2.9.4'
 

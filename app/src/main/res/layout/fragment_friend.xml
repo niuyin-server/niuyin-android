@@ -14,75 +14,76 @@
         app:backButton="false"
         app:title="@string/home_nav_friend" />
 
-    <com.roydon.niuyin.widget.HintLayout
-        android:id="@+id/hintLayout"
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        style="@style/RefreshLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:id="@+id/refreshLayout"
-            style="@style/RefreshLayoutStyle"
+        <com.scwang.smartrefresh.header.MaterialHeader
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content" />
 
-            <com.scwang.smartrefresh.header.MaterialHeader
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/scroll_view"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:overScrollMode="never">
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/ll_friend_dynamic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/ll_friend_dynamic"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:paddingStart="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingEnd="15dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:orientation="horizontal"
-                            android:paddingStart="15dp"
-                            android:paddingTop="15dp"
-                            android:paddingEnd="15dp">
+                            android:layout_weight="1"
+                            android:gravity="left|center_vertical"
+                            android:text="好友动态"
+                            android:textStyle="bold" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="left|center_vertical"
-                                android:text="好友动态"
-                                android:textStyle="bold" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="right|center_vertical"
-                                android:text="更多 >"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <!--  朋友动态  -->
-                        <com.hjq.widget.layout.WrapRecyclerView
-                            android:id="@+id/rv_follow_dynamics"
-                            android:layout_width="match_parent"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_follow_dynamic" />
+                            android:layout_weight="1"
+                            android:gravity="right|center_vertical"
+                            android:text="更多 >"
+                            android:textStyle="bold" />
+
                     </LinearLayout>
+
+                    <!--  朋友动态  -->
+                    <com.hjq.widget.layout.WrapRecyclerView
+                        android:id="@+id/rv_follow_dynamics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_follow_dynamic" />
+                </LinearLayout>
+
+                <com.roydon.niuyin.widget.HintLayout
+                    android:id="@+id/hintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <com.hjq.widget.layout.WrapRecyclerView
                         android:id="@+id/rv_video_dynamics"
@@ -92,14 +93,14 @@
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="1"
                         tools:listitem="@layout/item_recommend_video" />
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
+                </com.roydon.niuyin.widget.HintLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    </com.roydon.niuyin.widget.HintLayout>
 </LinearLayout>

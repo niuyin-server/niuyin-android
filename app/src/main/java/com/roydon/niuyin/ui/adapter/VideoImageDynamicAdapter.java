@@ -25,9 +25,14 @@ import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.holder.BannerImageHolder;
+import com.zhpan.bannerview.BannerViewPager;
+import com.zhpan.bannerview.constants.IndicatorGravity;
+import com.zhpan.indicator.enums.IndicatorSlideMode;
+import com.zhpan.indicator.enums.IndicatorStyle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -116,8 +121,8 @@ public final class VideoImageDynamicAdapter extends MyAdapter<VideoVO> {
         TextView mNicknameTV;
         @BindView(R.id.tv_publish_time)
         TextView mPublishTimeTV;
-        @BindView(R.id.banner)
-        Banner mBanner;
+        @BindView(R.id.bannerViewPager)
+        BannerViewPager bannerViewPager;
         @BindView(R.id.tv_title)
         TextView mTitleIV;
         @BindView(R.id.tv_like_num)
@@ -140,14 +145,27 @@ public final class VideoImageDynamicAdapter extends MyAdapter<VideoVO> {
             }
             mNicknameTV.setText(item.getUserNickName());
             mPublishTimeTV.setText(TimeUtils.getSmartTime(DateUtils.localDateTime2Long(item.getCreateTime())));
-            mBanner.setAdapter(new VideoImageBannerAdapter<String>(Arrays.asList(item.getImageList())) {
+            List<String> imgs = Arrays.asList(item.getImageList());
+            int size = imgs.size();
+
+            int widthPixels = getResources().getDisplayMetrics().widthPixels;
+            int ceil = (widthPixels - 40 * size) / size;
+            bannerViewPager.setAdapter(new BannerAdapter())
+                    .setIndicatorStyle(IndicatorStyle.ROUND_RECT)
+                    .setIndicatorSlideMode(IndicatorSlideMode.SMOOTH)
+                    .setIndicatorGravity(IndicatorGravity.CENTER)
+                    .setIndicatorSliderWidth(ceil)
+                    .setIndicatorHeight(10)
+                    .setIndicatorSliderColor(getResources().getColor(R.color.gray50), getResources().getColor(R.color.white))
+                    .setOnPageClickListener(new BannerViewPager.OnPageClickListener() {
                         @Override
-                        public void onBindView(BannerImageHolder holder, String data, int position, int size) {
-                            //图片加载
-                            Glide.with(holder.itemView).load(data).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder.imageView);
+                        public void onPageClick(View clickedView, int position) {
+                            ArrayList<String> arrayList = new ArrayList<>(imgs);
+                            ImageActivity.start(getContext(), arrayList, position);
                         }
-                    }).addBannerLifecycleObserver(null)//添加生命周期观察者
-                    .setIndicator(new SquareIndicator(getContext()));
+                    })
+                    .create(imgs);
+
             mTitleIV.setText(item.getVideoTitle());
             mLikeNumIV.setText(item.getLikeNum() + "");
             mCommentNumIV.setText(item.getLikeNum() + "");

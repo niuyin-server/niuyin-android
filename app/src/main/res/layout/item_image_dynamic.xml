@@ -113,18 +113,23 @@
                 android:background="@color/black"
                 app:sizeRatio="1.6">
 
-                <com.youth.banner.Banner
-                    android:id="@+id/banner"
+<!--                <com.youth.banner.Banner-->
+<!--                    android:id="@+id/banner"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:banner_indicator_gravity="center"-->
+<!--                    app:banner_indicator_normal_color="@color/white"-->
+<!--                    app:banner_indicator_normal_width="30dp"-->
+<!--                    app:banner_indicator_radius="5dp"-->
+<!--                    app:banner_indicator_selected_color="@color/primaryRed"-->
+<!--                    app:banner_indicator_selected_width="30dp"-->
+<!--                    app:banner_indicator_space="10dp"-->
+<!--                    app:banner_loop_time="5000" />-->
+
+                <com.zhpan.bannerview.BannerViewPager
+                    android:id="@+id/bannerViewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:banner_indicator_gravity="center"
-                    app:banner_indicator_normal_color="@color/white"
-                    app:banner_indicator_normal_width="30dp"
-                    app:banner_indicator_radius="5dp"
-                    app:banner_indicator_selected_color="@color/primaryRed"
-                    app:banner_indicator_selected_width="30dp"
-                    app:banner_indicator_space="10dp"
-                    app:banner_loop_time="5000" />
+                    android:layout_height="match_parent" />
 
             </com.hjq.widget.layout.RatioFrameLayout>
         </LinearLayout>
