@@ -8,12 +8,12 @@ import com.hjq.http.model.BodyType;
 public class TestServer extends ReleaseServer {
 
     /**
-     * http://39.101.67.45:9090
+     * http://8.130.182.227:9090
      * https://6da51c2a.r18.cpolar.top
      */
     @Override
     public String getHost() {
-        return "https://12a9e60f.r2.cpolar.top/";
+        return "https://8.130.182.227:9090/";
     }
 
     @Override

@@ -19,10 +19,12 @@ import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.helper.InputTextHelper;
+import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.LoginApi;
 import com.roydon.niuyin.http.response.LoginBean;
+import com.roydon.niuyin.other.CommonConstants;
 import com.roydon.niuyin.other.IntentKey;
 import com.roydon.niuyin.other.KeyboardWatcher;
 import com.hjq.demo.wxapi.WXEntryActivity;
@@ -32,6 +34,7 @@ import com.hjq.http.listener.HttpCallback;
 import com.hjq.umeng.Platform;
 import com.hjq.umeng.UmengClient;
 import com.hjq.umeng.UmengLogin;
+import com.roydon.niuyin.ui.dialog.WaitDialog;
 
 import butterknife.BindView;
 
@@ -166,18 +169,21 @@ public final class LoginActivity extends MyActivity implements UmengLogin.OnLogi
 //                    finish();
 //                    return;
 //                }
-
+                new WaitDialog.Builder(this).setCancelable(true).create().show();
                 EasyHttp.post(this)
                         .api(new LoginApi()
-                                .setPhone(mPhoneView.getText().toString())
+                                .setUsername(mPhoneView.getText().toString())
                                 .setPassword(mPasswordView.getText().toString()))
                         .request(new HttpCallback<HttpData<LoginBean>>(this) {
 
                             @Override
                             public void onSucceed(HttpData<LoginBean> data) {
-                                toast("登录成功" + data.getData().getToken());
+                                toast("登录成功");
                                 // 更新 Token
-                                EasyConfig.getInstance().addParam("token", data.getData().getToken());
+//                                EasyConfig.getInstance().addParam("token", data.getData().getToken());
+                                EasyConfig.getInstance().addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + data.getData().getToken());
+                                // token保存到本地
+                                TokenManager.saveToken(getActivity(), data.getData().getToken());
                                 // 跳转到主页
                                 startActivity(HomeActivity.class);
                                 finish();

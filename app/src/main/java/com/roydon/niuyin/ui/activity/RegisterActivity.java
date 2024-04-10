@@ -13,6 +13,7 @@ import com.roydon.niuyin.helper.InputTextHelper;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.GetCodeApi;
 import com.roydon.niuyin.http.request.RegisterApi;
+import com.roydon.niuyin.http.request.user.SmsRegisterApi;
 import com.roydon.niuyin.http.response.RegisterBean;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -21,10 +22,10 @@ import com.hjq.widget.view.CountdownView;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 注册界面
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 注册界面
  */
 public final class RegisterActivity extends MyActivity {
 
@@ -65,6 +66,7 @@ public final class RegisterActivity extends MyActivity {
                 .setMain(mCommitView)
                 .setListener(helper -> mPhoneView.getText().toString().length() == 11 &&
                         mPasswordView1.getText().toString().length() >= 6 &&
+                        mPasswordView1.getText().toString().length() <= 18 &&
                         mPasswordView1.getText().toString().equals(mPasswordView2.getText().toString()))
                 .build();
 
@@ -100,23 +102,23 @@ public final class RegisterActivity extends MyActivity {
                 }
 
                 // 获取验证码
-                EasyHttp.post(this)
-                        .api(new GetCodeApi()
-                        .setPhone(mPhoneView.getText().toString()))
-                        .request(new HttpCallback<HttpData<Void>>(this) {
-
-                            @Override
-                            public void onSucceed(HttpData<Void> data) {
-                                toast(R.string.common_code_send_hint);
-                                mCountdownView.start();
-                            }
-
-                            @Override
-                            public void onFail(Exception e) {
-                                super.onFail(e);
-                                mCountdownView.start();
-                            }
-                        });
+//                EasyHttp.post(this)
+//                        .api(new GetCodeApi()
+//                                .setPhone(mPhoneView.getText().toString()))
+//                        .request(new HttpCallback<HttpData<Void>>(this) {
+//
+//                            @Override
+//                            public void onSucceed(HttpData<Void> data) {
+//                                toast(R.string.common_code_send_hint);
+//                                mCountdownView.start();
+//                            }
+//
+//                            @Override
+//                            public void onFail(Exception e) {
+//                                super.onFail(e);
+//                                mCountdownView.start();
+//                            }
+//                        });
                 break;
             case R.id.btn_register_commit:
                 if (true) {
@@ -127,14 +129,15 @@ public final class RegisterActivity extends MyActivity {
                 }
                 // 提交注册
                 EasyHttp.post(this)
-                        .api(new RegisterApi()
-                        .setPhone(mPhoneView.getText().toString())
-                        .setCode(mCodeView.getText().toString())
-                        .setPassword(mPasswordView1.getText().toString()))
-                        .request(new HttpCallback<HttpData<RegisterBean>>(this) {
+                        .api(new SmsRegisterApi()
+                                .setTelephone(mPhoneView.getText().toString())
+                                .setSmsCode(mCodeView.getText().toString())
+                                .setPassword(mPasswordView1.getText().toString())
+                                .setConfirmPassword(mPasswordView2.getText().toString()))
+                        .request(new HttpCallback<HttpData<Boolean>>(this) {
 
                             @Override
-                            public void onSucceed(HttpData<RegisterBean> data) {
+                            public void onSucceed(HttpData<Boolean> data) {
                                 LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
                                 setResult(RESULT_OK);
                                 finish();

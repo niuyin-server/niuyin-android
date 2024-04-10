@@ -23,6 +23,8 @@ import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.DoubleClickHelper;
+import com.roydon.niuyin.helper.SPUtils;
+import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.notice.UnreadNoticeCountApi;
 import com.roydon.niuyin.other.KeyboardWatcher;
@@ -98,7 +100,10 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         badge.setBadgeTextColor(ContextCompat.getColor(this, R.color.white));
         badge.setMaxCharacterCount(3);
 
-        getNoticeUnReadCount();
+        // 获取通知，判断是否登录
+        if (!Objects.isNull(TokenManager.getToken(this))) {
+            getNoticeUnReadCount();
+        }
     }
 
     /**

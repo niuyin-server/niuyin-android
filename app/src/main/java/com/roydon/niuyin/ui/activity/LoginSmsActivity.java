@@ -182,7 +182,7 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                     toast(R.string.common_phone_input_error);
                     return;
                 }
-                new WaitDialog.Builder(this).setCancelable(false).create().show();
+                new WaitDialog.Builder(this).setCancelable(true).create().show();
                 EasyHttp.post(this)
                         .api(new LoginSmsApi()
                                 .setTelephone(mTelephoneView.getText().toString())
