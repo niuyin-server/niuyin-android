@@ -2,15 +2,26 @@ package com.roydon.niuyin.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.ArraySet;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.badge.BadgeDrawable;
@@ -33,14 +44,16 @@ import com.roydon.niuyin.ui.fragment.FragmentMe;
 import com.roydon.niuyin.ui.fragment.FragmentMessage;
 import com.roydon.niuyin.ui.fragment.FragmentUpload;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import butterknife.BindView;
 
 /**
  * desc   : 主页界面
  */
-public final class HomeActivity extends MyActivity implements KeyboardWatcher.SoftKeyboardStateListener, BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
+public final class HomeActivity extends MyActivity implements KeyboardWatcher.SoftKeyboardStateListener {
 
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
@@ -49,8 +62,21 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
 
     @BindView(R.id.vp_home_pager)
     ViewPager mViewPager;
-    @BindView(R.id.bv_home_navigation)
+    @BindView(R.id.navigationView)
     BottomNavigationView mBottomNavigationView;
+
+    //    @BindView(R.id.fragment)
+//    Fragment fragment;
+//    @BindView(R.id.indexMotionLayout)
+//    MotionLayout indexMotionLayout;
+//    @BindView(R.id.friendMotionLayout)
+//    MotionLayout friendMotionLayout;
+//    @BindView(R.id.uploadMotionLayout)
+//    MotionLayout uploadMotionLayout;
+//    @BindView(R.id.messageMotionLayout)
+//    MotionLayout messageMotionLayout;
+//    @BindView(R.id.meMotionLayout)
+//    MotionLayout meMotionLayout;
 
     private BaseFragmentAdapter<MyFragment> mPagerAdapter;
 
@@ -61,19 +87,108 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
      */
     private Long noticeUnreadCount = 0L;
 
+//    NavController navController;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_home;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
         // 不使用图标默认变色
         mBottomNavigationView.setItemIconTintList(null);
-        mBottomNavigationView.setOnNavigationItemSelectedListener(this);
-        mBottomNavigationView.setOnNavigationItemReselectedListener(this);
+        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.fragmentIndex:
+                        mPagerAdapter.setCurrentItem(FragmentIndex.class);
+                        return true;
+                    case R.id.fragmentFriend:
+                        mPagerAdapter.setCurrentItem(FragmentFriend.class);
+                        return true;
+                    case R.id.fragmentUpload:
+                        mPagerAdapter.setCurrentItem(FragmentUpload.class);
+                        return true;
+                    case R.id.fragmentMessage:
+                        mPagerAdapter.setCurrentItem(FragmentMessage.class);
+                        return true;
+                    case R.id.fragmentMe:
+                        mPagerAdapter.setCurrentItem(FragmentMe.class);
+                        return true;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+        mBottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.fragmentIndex:
+                        toast("刷新");
+//                mPagerAdapter.setCurrentItem(FragmentIndex.class);
+                        break;
+                    case R.id.fragmentFriend:
+//                mPagerAdapter.setCurrentItem(FragmentFriend.class);
+                        break;
+                    case R.id.fragmentUpload:
+//                mPagerAdapter.setCurrentItem(FragmentUpload.class);
+                        break;
+                    case R.id.fragmentMessage:
+//                mPagerAdapter.setCurrentItem(FragmentMessage.class);
+                        break;
+                    case R.id.fragmentMe:
+//                mPagerAdapter.setCurrentItem(FragmentMe.class);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
         KeyboardWatcher.with(this).setListener(this);
+
+//        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        Set<Integer> fragmentSet = new HashSet();
+//        fragmentSet.add(R.id.fragmentIndex);
+//        indexMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.fragmentIndex);
+//        });
+//        friendMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.fragmentFriend);
+//        });
+//        uploadMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.fragmentUpload);
+//        });
+//        messageMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.fragmentMessage);
+//        });
+//        meMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.fragmentMe);
+//        });
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            controller.popBackStack();
+//            indexMotionLayout.setProgress(0.001F);
+//            indexMotionLayout.transitionToEnd();
+//            friendMotionLayout.setProgress(0.001F);
+//            friendMotionLayout.transitionToEnd();
+//            uploadMotionLayout.setProgress(0.001F);
+//            uploadMotionLayout.transitionToEnd();
+//            messageMotionLayout.setProgress(0.001F);
+//            messageMotionLayout.transitionToEnd();
+//            meMotionLayout.setProgress(0.001F);
+//            meMotionLayout.transitionToEnd();
+//        });
+
     }
+
+//    @Override
+//    public boolean onNavigateUp() {
+//        return navController.navigateUp();
+//    }
 
     @Override
     protected void initData() {
@@ -90,7 +205,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
 
         // 添加徽章 badge
-        badge = mBottomNavigationView.getOrCreateBadge(R.id.home_message);
+        badge = mBottomNavigationView.getOrCreateBadge(R.id.fragmentMessage);
 
         // 设置徽章的显示位置
         badge.setVerticalOffset(15);
@@ -104,7 +219,44 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         if (!Objects.isNull(TokenManager.getToken(this))) {
             getNoticeUnReadCount();
         }
+
     }
+
+//    @Override
+//    public boolean onNavigateUp() {
+//        return navController.navigateUp();
+//    }
+
+//    @Override
+//    public boolean onNavigateUp() {
+//        NavController navController = NavHostFragment.findNavController(fragment);
+//
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            controller.popBackStack();
+//            indexMotionLayout.setProgress(0.001F);
+//            indexMotionLayout.transitionToEnd();
+//            friendMotionLayout.setProgress(0.001F);
+//            friendMotionLayout.transitionToEnd();
+//            uploadMotionLayout.setProgress(0.001F);
+//            uploadMotionLayout.transitionToEnd();
+//            messageMotionLayout.setProgress(0.001F);
+//            messageMotionLayout.transitionToEnd();
+//            meMotionLayout.setProgress(0.001F);
+//            meMotionLayout.transitionToEnd();
+//        });
+//        indexMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.indexMotionLayout);
+//        });friendMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.friendMotionLayout);
+//        });uploadMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.uploadMotionLayout);
+//        });messageMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.messageMotionLayout);
+//        });meMotionLayout.setOnClickListener(view -> {
+//            navController.navigate(R.id.meMotionLayout);
+//        });
+//        return navController.navigateUp();
+//    }
 
     /**
      * 获取未读消息数
@@ -157,60 +309,6 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         }
     };
 
-    /**
-     * {@link BottomNavigationView.OnNavigationItemSelectedListener}
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_home:
-                mPagerAdapter.setCurrentItem(FragmentIndex.class);
-                return true;
-            case R.id.home_friend:
-                mPagerAdapter.setCurrentItem(FragmentFriend.class);
-                return true;
-            case R.id.home_upload:
-                mPagerAdapter.setCurrentItem(FragmentUpload.class);
-                return true;
-            case R.id.home_message:
-                mPagerAdapter.setCurrentItem(FragmentMessage.class);
-                return true;
-            case R.id.home_me:
-                mPagerAdapter.setCurrentItem(FragmentMe.class);
-                return true;
-            default:
-                break;
-        }
-        return false;
-    }
-
-    @Override
-    public void onNavigationItemReselected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_home:
-                toast("刷新");
-//                mPagerAdapter.setCurrentItem(FragmentIndex.class);
-                break;
-            case R.id.home_friend:
-//                mPagerAdapter.setCurrentItem(FragmentFriend.class);
-                break;
-            case R.id.home_upload:
-//                mPagerAdapter.setCurrentItem(FragmentUpload.class);
-                break;
-            case R.id.home_message:
-//                mPagerAdapter.setCurrentItem(FragmentMessage.class);
-                break;
-            case R.id.home_me:
-//                mPagerAdapter.setCurrentItem(FragmentMe.class);
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * {@link KeyboardWatcher.SoftKeyboardStateListener}
-     */
     @Override
     public void onSoftKeyboardOpened(int keyboardHeight) {
         mBottomNavigationView.setVisibility(View.GONE);

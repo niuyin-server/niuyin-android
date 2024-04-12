@@ -92,12 +92,12 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
 
     @Override
     protected void lazyLoadData() {
-        getRecommendVideoList(true);
+
     }
 
     @Override
     protected void initData() {
-
+        getRecommendVideoList(true);
     }
 
     /**

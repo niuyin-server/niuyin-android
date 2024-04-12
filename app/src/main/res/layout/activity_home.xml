@@ -13,8 +13,62 @@
         android:layout_height="0px"
         android:layout_weight="1" />
 
+    <!--    <fragment-->
+    <!--        android:id="@+id/nav_host_fragment"-->
+    <!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:defaultNavHost="true"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/navigationView"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:navGraph="@navigation/navigation_home" />-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/navigationView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="52dp"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent">-->
+
+    <!--        <include-->
+    <!--            layout="@layout/layout_navigation_index"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--        <include-->
+    <!--            layout="@layout/layout_navigation_friend"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--        <include-->
+    <!--            layout="@layout/layout_navigation_upload"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--        <include-->
+    <!--            layout="@layout/layout_navigation_message"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--        <include-->
+    <!--            layout="@layout/layout_navigation_me"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1" />-->
+    <!--    </LinearLayout>-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bv_home_navigation"
+        android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/white"
@@ -24,6 +78,9 @@
         app:itemTextAppearanceInactive="@style/navUnSelectText"
         app:itemTextColor="@drawable/selector_home_navigation_color"
         app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_home_bottom_nav" />
 
 </LinearLayout>

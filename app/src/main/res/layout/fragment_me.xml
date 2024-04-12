@@ -259,6 +259,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:gravity="end"
                     android:padding="10dp">
 
                     <com.hjq.widget.square.SquareImageView

@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.xuexiang.xaop'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'androidx.navigation.safeargs'
 apply from: "../config.gradle"
 
 android {
@@ -202,6 +205,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation 'androidx.appcompat:appcompat:1.2.0' // 1.6.1 Android resource linking failed
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'  // warn：AAPT，版本不得超过2.5.0
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 
     // 状态栏沉浸：https://github.com/gyf-dev/ImmersionBar

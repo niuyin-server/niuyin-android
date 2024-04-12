@@ -3,27 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_home"
+        android:id="@+id/fragmentIndex"
         android:icon="@drawable/selector_home_index"
         android:title="@string/home_nav_index" />
 
     <item
-        android:id="@+id/home_friend"
+        android:id="@+id/fragmentFriend"
         android:icon="@drawable/selector_home_friend"
         android:title="@string/home_nav_friend" />
 
     <item
-        android:id="@+id/home_upload"
+        android:id="@+id/fragmentUpload"
         android:icon="@drawable/selector_home_upload"
         android:title="@string/home_nav_upload" />
 
     <item
-        android:id="@+id/home_message"
+        android:id="@+id/fragmentMessage"
         android:icon="@drawable/selector_home_message"
         android:title="@string/home_nav_message" />
 
     <item
-        android:id="@+id/home_me"
+        android:id="@+id/fragmentMe"
         android:icon="@drawable/selector_home_me"
         android:title="@string/home_nav_me" />
 </menu>
