@@ -13,7 +13,7 @@ public class TestServer extends ReleaseServer {
      */
     @Override
     public String getHost() {
-        return "https://8.130.182.227:9090/";
+        return "http://8.130.182.227:9090/";
     }
 
     @Override

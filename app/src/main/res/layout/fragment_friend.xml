@@ -74,7 +74,6 @@
                         android:id="@+id/rv_follow_dynamics"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_follow_dynamic" />

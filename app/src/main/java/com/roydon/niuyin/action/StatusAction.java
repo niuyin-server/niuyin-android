@@ -29,7 +29,7 @@ public interface StatusAction {
      * 显示加载中
      */
     default void showLoading() {
-        showLoading(R.raw.loading_cat);
+        showLoading(R.raw.loading_dot);
     }
 
     default void showLoading(@RawRes int id) {
@@ -54,7 +54,7 @@ public interface StatusAction {
      * 显示空提示
      */
     default void showEmpty() {
-        showLayout(R.drawable.hint_empty_b, R.string.hint_layout_no_data, null);
+        showLayout(R.drawable.hint_status_nerdata, R.string.hint_layout_no_data, null);
     }
 
     /**
@@ -73,7 +73,7 @@ public interface StatusAction {
                 }
             }
         }
-        showLayout(R.drawable.hint_404, R.string.hint_layout_error_request, listener);
+        showLayout(R.drawable.hint_status_500, R.string.hint_layout_error_request, listener);
     }
 
     /**
@@ -87,6 +87,14 @@ public interface StatusAction {
         HintLayout layout = getHintLayout();
         layout.show();
         layout.setIcon(drawable);
+        layout.setHint(hint);
+        layout.setOnClickListener(listener);
+    }
+
+    default void showAnimLayout(@RawRes int id, CharSequence hint, View.OnClickListener listener) {
+        HintLayout layout = getHintLayout();
+        layout.show();
+        layout.setAnim(id);
         layout.setHint(hint);
         layout.setOnClickListener(listener);
     }

@@ -330,6 +330,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/bg_image_border"
+                            android:padding="2dp"
                             android:scaleType="fitXY"
                             android:src="@mipmap/avatar_ganyu" />
                     </LinearLayout>

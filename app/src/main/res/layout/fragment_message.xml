@@ -34,18 +34,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="15dp">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/setting_status" />
+                    <com.roydon.niuyin.widget.RoundImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@color/gray30"
+                        android:padding="12dp"
+                        android:src="@drawable/ico_setting_b_f" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="4dp"
                         android:text="状态设置"
                         android:textColor="@color/gray" />
 

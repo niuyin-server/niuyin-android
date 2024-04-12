@@ -52,6 +52,8 @@
     <color name="gray">#808080</color>
     <color name="gray80">#CC808080</color>
     <color name="gray50">#80808080</color>
+    <color name="gray30">#4D808080</color>
+    <color name="gray10">#1A808080</color>
     <!-- 红色 -->
     <color name="red">#FF0000</color>
     <!-- 金色 -->

@@ -17,7 +17,7 @@
         android:id="@+id/bv_home_navigation"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@drawable/bg_nav"
+        android:background="@color/white"
         app:itemBackground="@null"
         app:itemRippleColor="@color/primaryRed2"
         app:itemTextAppearanceActive="@style/navSelectText"
