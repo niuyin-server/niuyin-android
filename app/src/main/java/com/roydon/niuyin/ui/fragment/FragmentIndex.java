@@ -69,12 +69,7 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
         String avatarCache = SPUtils.getString(SPUtils.AVATAR, "", getContext());
-        if (avatarCache.equals("")) {
-            GlideApp.with(this)
-                    .load(R.drawable.ic_avatar_default)
-                    .circleCrop()
-                    .into(mAvatarView);
-        } else {
+        if (!avatarCache.equals("")) {
             GlideApp.with(this)
                     .load(avatarCache)
                     .circleCrop()

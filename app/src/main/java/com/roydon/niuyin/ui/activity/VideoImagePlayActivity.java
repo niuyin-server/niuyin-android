@@ -15,6 +15,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.RatioFrameLayout;
+import com.hjq.widget.square.SquareImageView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.common.MyActivity;
@@ -26,7 +27,6 @@ import com.roydon.niuyin.ui.adapter.BannerAdapter;
 import com.roydon.niuyin.ui.adapter.VideoPlayAdapter;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoInfoFragment;
-import com.roydon.niuyin.utils.BlurUtil;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.indicator.enums.IndicatorSlideMode;
@@ -63,7 +63,17 @@ public class VideoImagePlayActivity extends MyActivity {
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
 
+    // menu
+    @BindView(R.id.iv_menu_back)
+    SquareImageView menuBackIV;
+
     private VideoInfoVO videoInfoVO;
+
+    @Override
+    public boolean isStatusBarEnabled() {
+        // 使用沉浸式状态栏
+        return !super.isStatusBarEnabled();
+    }
 
     @Override
     protected int getLayoutId() {
@@ -74,8 +84,21 @@ public class VideoImagePlayActivity extends MyActivity {
     protected void initView() {
 
         // 4:3竖屏视频
-        mScreenScaleLayout.setSizeRatio(0.75f);
+//        mScreenScaleLayout.setSizeRatio(0.75f);
 
+        setOnClickListener(R.id.iv_menu_back);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_menu_back:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -146,7 +169,7 @@ public class VideoImagePlayActivity extends MyActivity {
                 .setIndicatorSlideMode(IndicatorSlideMode.SMOOTH)
                 .setIndicatorGravity(IndicatorGravity.CENTER)
                 .setIndicatorSliderWidth(ceil)
-                .setIndicatorHeight(15)
+                .setIndicatorHeight(10)
                 .setIndicatorSliderColor(getResources().getColor(R.color.gray50), getResources().getColor(R.color.white))
                 .setOnPageClickListener(new BannerViewPager.OnPageClickListener() {
                     @Override

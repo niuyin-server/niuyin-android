@@ -8,24 +8,16 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseAdapter;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
-import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.core.AttachPopupView;
-import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.domain.NoticeTypeBean;
 import com.roydon.niuyin.enums.MessageType;
-import com.roydon.niuyin.http.model.HttpData;
-import com.roydon.niuyin.http.request.video.ParentVideoCategoryApi;
-import com.roydon.niuyin.http.response.video.AppVideoCategoryVo;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.NoticeBehaveActivity;
 import com.roydon.niuyin.ui.adapter.NoticeTypeAdapter;
+import com.roydon.niuyin.ui.popup.MenuPopup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,19 +74,24 @@ public final class FragmentMessage extends MyFragment<HomeActivity> implements B
      */
     @Override
     public void onLeftClick(View v) {
-        AttachPopupView attachPopupView = new XPopup.Builder(getContext())
-                .isCoverSoftInput(true)
-                .hasShadowBg(false)
-                .atView(v)  // 依附于所点击的View，内部会自动判断在上方或者下方显示
-                .asAttachList(new String[]{"分享", "编辑", "发布即刻"},
-                        new int[]{R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round},
-                        new OnSelectListener() {
-                            @Override
-                            public void onSelect(int position, String text) {
-                                toast("click " + text);
-                            }
-                        }, 0, 0);
-        attachPopupView.show();
+//        AttachPopupView attachPopupView = new XPopup.Builder(getContext())
+//                .isCoverSoftInput(true)
+//                .hasShadowBg(false)
+//                .atView(v)  // 依附于所点击的View，内部会自动判断在上方或者下方显示
+//                .asAttachList(new String[]{"分享", "编辑", "发布即刻"},
+//                        new int[]{R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round},
+//                        new OnSelectListener() {
+//                            @Override
+//                            public void onSelect(int position, String text) {
+//                                toast("click " + text);
+//                            }
+//                        }, 0, 0);
+//        attachPopupView.show();
+
+        new MenuPopup.Builder(getContext())
+                .setList("选择拍照", "选取相册")
+                .setListener((MenuPopup.OnListener<String>) (popupWindow, position, s) -> toast(s))
+                .showAsDropDown(v);
     }
 
     private void initNoticeTypeView() {

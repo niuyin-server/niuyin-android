@@ -53,7 +53,7 @@ public final class MenuPopup {
                 case Gravity.CENTER:
                 case Gravity.CENTER_VERTICAL:
                     // 重新设置动画
-                    setAnimStyle(AnimAction.SCALE);
+                    setAnimStyle(AnimAction.IOS);
                     break;
                 default:
                     break;
@@ -124,9 +124,9 @@ public final class MenuPopup {
             ViewHolder() {
                 super(new TextView(getContext()));
                 mTextView = (TextView) getItemView();
-                mTextView.setTextColor(getColor(R.color.black50));
+                mTextView.setTextColor(getColor(R.color.black));
                 mTextView.setTextSize(16);
-                mTextView.setPaddingRelative((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()));
+                mTextView.setPaddingRelative((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
             }
 
             @Override

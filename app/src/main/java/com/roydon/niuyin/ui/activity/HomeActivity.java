@@ -23,16 +23,15 @@ import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.DoubleClickHelper;
-import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.notice.UnreadNoticeCountApi;
 import com.roydon.niuyin.other.KeyboardWatcher;
-import com.roydon.niuyin.ui.fragment.FragmentUpload;
-import com.roydon.niuyin.ui.fragment.FragmentIndex;
 import com.roydon.niuyin.ui.fragment.FragmentFriend;
-import com.roydon.niuyin.ui.fragment.FragmentMessage;
+import com.roydon.niuyin.ui.fragment.FragmentIndex;
 import com.roydon.niuyin.ui.fragment.FragmentMe;
+import com.roydon.niuyin.ui.fragment.FragmentMessage;
+import com.roydon.niuyin.ui.fragment.FragmentUpload;
 
 import java.util.Objects;
 
@@ -41,7 +40,7 @@ import butterknife.BindView;
 /**
  * desc   : 主页界面
  */
-public final class HomeActivity extends MyActivity implements KeyboardWatcher.SoftKeyboardStateListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public final class HomeActivity extends MyActivity implements KeyboardWatcher.SoftKeyboardStateListener, BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
 
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
@@ -72,6 +71,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         // 不使用图标默认变色
         mBottomNavigationView.setItemIconTintList(null);
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
+        mBottomNavigationView.setOnNavigationItemReselectedListener(this);
         KeyboardWatcher.with(this).setListener(this);
     }
 
@@ -182,6 +182,30 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void onNavigationItemReselected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_home:
+                toast("刷新");
+//                mPagerAdapter.setCurrentItem(FragmentIndex.class);
+                break;
+            case R.id.home_friend:
+//                mPagerAdapter.setCurrentItem(FragmentFriend.class);
+                break;
+            case R.id.home_upload:
+//                mPagerAdapter.setCurrentItem(FragmentUpload.class);
+                break;
+            case R.id.home_message:
+//                mPagerAdapter.setCurrentItem(FragmentMessage.class);
+                break;
+            case R.id.home_me:
+//                mPagerAdapter.setCurrentItem(FragmentMe.class);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
