@@ -34,6 +34,7 @@ import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.user.UserInfoApi;
 import com.roydon.niuyin.http.response.member.MemberInfoVO;
+import com.roydon.niuyin.ui.activity.FollowFansActivity;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.PersonalProfileActivity;
 import com.roydon.niuyin.ui.activity.SettingActivity;
@@ -83,6 +84,10 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
     TextView mNickNameView;
     @BindView(R.id.tv_user_id)
     TextView mUserIdView;
+    @BindView(R.id.ll_follows)
+    LinearLayout followsLayout;
+    @BindView(R.id.ll_fans)
+    LinearLayout fansLayout;
 
     // 按钮
     @BindView(R.id.btn_edit_profile)
@@ -122,7 +127,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setCurrentTab(0);
 
-        setOnClickListener(R.id.iv_menu_list, R.id.ll_userinfo);
+        setOnClickListener(R.id.iv_menu_list, R.id.ll_userinfo, R.id.ll_follows, R.id.ll_fans);
 
     }
 
@@ -247,6 +252,12 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                 break;
             case R.id.ll_userinfo:
                 startActivity(PersonalProfileActivity.class);
+                break;
+            case R.id.ll_follows:
+                FollowFansActivity.start(getContext(), 0);
+                break;
+            case R.id.ll_fans:
+                FollowFansActivity.start(getContext(), 1);
                 break;
             default:
                 break;

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.behave.VideoCommentParentPageApi;
+import com.roydon.niuyin.http.request.social.FollowUserApi;
 import com.roydon.niuyin.http.request.video.RelateVideoRecommendApi;
 import com.roydon.niuyin.http.response.behave.AppVideoUserCommentParentVO;
 import com.roydon.niuyin.http.response.video.RelateVideoVO;
@@ -96,6 +98,8 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     LinearLayout mOpenDescLayout;
     @BindView(R.id.iv_open_desc)
     ImageView mOpenDescView;
+    @BindView(R.id.btn_follow_user)
+    Button followUserBTN;
     //    behave 操作
     @BindView(R.id.sb_like)
     ShineButton mBehaveLikeButton;
@@ -152,7 +156,7 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
             }
         });
         mVideoTagRecyclerView.setAdapter(mVideoTagAdapter);
-        setOnClickListener(R.id.ll_author, R.id.sb_like, R.id.sb_not_like, R.id.sb_favorite, R.id.sb_share, R.id.ll_open_desc);
+        setOnClickListener(R.id.ll_author, R.id.sb_like, R.id.sb_not_like, R.id.sb_favorite, R.id.sb_share, R.id.ll_open_desc, R.id.btn_follow_user);
         mBehaveLikeButton.init(getAttachActivity());
         mBehaveNotLikeButton.init(getAttachActivity());
         mBehaveFavoriteButton.init(getAttachActivity());
@@ -164,6 +168,8 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         // 视频相关推荐
         showLoading();
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        // 禁用刷新
+        mRefreshLayout.setEnableRefresh(false);
         videoRelateRecommendAdapter = new VideoRelateRecommendAdapter(getContext());
         videoRelateRecommendAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
@@ -264,11 +270,14 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
                     hideCollapseCard();
                 }
                 break;
+            case R.id.btn_follow_user:
+                apiFollowUser(videoInfoVO.getUserId());
+                followUserBTN.setEnabled(false);
+                break;
             default:
                 break;
         }
     }
-
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -324,6 +333,31 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
                     }
                 });
 
+    }
+
+    /**
+     * 关注用户
+     */
+    private void apiFollowUser(Long userId) {
+        EasyHttp.get(this).api(new FollowUserApi().setUserId(userId))
+                .request(new HttpCallback<HttpData<Boolean>>(this.getAttachActivity()) {
+
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        Boolean data1 = data.getData();
+                        if (data1) {
+                            toast("关注成功");
+                        } else {
+                            toast(data.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+
+                    }
+                });
     }
 
     private void showCollapseCard() {

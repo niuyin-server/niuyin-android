@@ -29,6 +29,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:targetApi="n">
+
         <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
             android:name="UMENG_CHANNEL"
@@ -198,9 +199,15 @@
             android:name=".ui.activity.NoticeBehaveActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" /><!-- 用户信息 -->
+            android:screenOrientation="portrait" /> <!-- 用户信息 -->
         <activity
             android:name=".ui.activity.UserProfileActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!--        关注粉丝页面-->
+        <activity
+            android:name=".ui.activity.FollowFansActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

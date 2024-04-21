@@ -5,31 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_v"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.fragment.FragmentUpload">
+    tools:context=".ui.activity.FollowFansActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        app:backButton="false"
-        app:leftIcon="@drawable/ic_setting_b"
-        app:rightIcon="@drawable/ic_drafts_b"
-        app:title="上传" />
+        app:leftIcon="@drawable/ic_back_b"
+        app:title="我的关注" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <!--        <androidx.appcompat.widget.AppCompatImageView-->
-        <!--            android:id="@+id/iv_feedback"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_marginStart="10dp"-->
-        <!--            android:layout_marginEnd="10dp"-->
-        <!--            android:src="@drawable/ic_slide_b" />-->
 
         <LinearLayout
             android:layout_width="0dp"
@@ -63,12 +51,13 @@
         <!--            android:src="@drawable/ic_category_b" />-->
     </LinearLayout>
 
+    <View style="@style/HorizontalLineStyle" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 
 </LinearLayout>

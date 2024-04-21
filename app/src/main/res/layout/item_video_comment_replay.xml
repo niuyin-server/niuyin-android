@@ -124,5 +124,5 @@
 
     </LinearLayout>
 
-    <View style="@style/HorizontalLineStyle2" />
+    <View style="@style/HorizontalLineStyle" />
 </LinearLayout>
