@@ -22,6 +22,7 @@ import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.social.FollowDynamicApi;
+import com.roydon.niuyin.http.request.social.InitUserInBoxApi;
 import com.roydon.niuyin.http.request.social.VideoDynamicPageApi;
 import com.roydon.niuyin.http.request.user.UserProfileApi;
 import com.roydon.niuyin.http.response.member.MemberInfoVO;
@@ -153,6 +154,7 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
         getFollowDynamic();
         pageNum = 1;
         getVideoDynamic(true);
+        initUserInBox();
     }
 
     @SuppressLint("HandlerLeak")
@@ -240,6 +242,21 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
 //                        }
 //                        // 更新ui
 //                        mHandler.sendEmptyMessage(HANDLER_VIDEO_DYNAMIC);
+                    }
+                });
+    }
+
+    /**
+     * 初始化用户收件箱
+     */
+    private void initUserInBox() {
+        EasyHttp.get(this)
+                .api(new InitUserInBoxApi())
+                .request(new HttpCallback<HttpData<Boolean>>(getAttachActivity()) {
+
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        Boolean data1 = data.getData();
                     }
                 });
     }
