@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.adapter.FollowUserAdapter">
+    tools:context="com.roydon.niuyin.ui.adapter.FansUserAdapter">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,13 +49,24 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_cancel_follow"
+                android:id="@+id/btn_return_follow"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ripple_button_follow"
+                android:padding="0dp"
+                android:text="回关"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_fans"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/ripple_effect"
                 android:padding="0dp"
-                android:text="取消关注"
+                android:text="已互粉"
                 android:textColor="@color/black50"
                 android:textSize="12sp" />
         </LinearLayout>
