@@ -3,12 +3,14 @@ package com.roydon.niuyin.ui.activity;
 import android.view.Gravity;
 import android.view.View;
 
+import com.hjq.base.BaseDialog;
 import com.hjq.base.action.AnimAction;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.CacheDataManager;
+import com.roydon.niuyin.helper.SPManager;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.glide.GlideApp;
@@ -16,6 +18,7 @@ import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.LogoutApi;
 import com.roydon.niuyin.other.AppConfig;
 import com.roydon.niuyin.ui.dialog.MenuDialog;
+import com.roydon.niuyin.ui.dialog.MessageDialog;
 import com.roydon.niuyin.ui.dialog.UpdateDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -116,33 +119,49 @@ public final class SettingActivity extends MyActivity
                 }, 500);
                 break;
             case R.id.sb_setting_exit:
-                if (true) {
-                    // 清除token
-                    TokenManager.clearToken(getActivity());
-                    // 清除用户缓存
-                    SPUtils.clear(this);
-                    startActivity(LoginActivity.class);
-                    // 进行内存优化，销毁除登录页之外的所有界面
-                    ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
-                    return;
-                }
-
-                // 退出登录
-                EasyHttp.post(this)
-                        .api(new LogoutApi())
-                        .request(new HttpCallback<HttpData<Void>>(this) {
+                new MessageDialog.Builder(this)
+                        .setTitle("退出登录")
+                        .setMessage("确定退出登录吗？确定后将清空当前登录信息")
+                        .setConfirm(getString(R.string.common_confirm))
+                        .setCancel(getString(R.string.common_cancel))
+                        // 设置点击按钮后不关闭对话框
+                        //.setAutoDismiss(false)
+                        .setListener(new MessageDialog.OnListener() {
 
                             @Override
-                            public void onSucceed(HttpData<Void> data) {
+                            public void onConfirm(BaseDialog dialog) {
                                 // 清除token
-                                TokenManager.clearToken(getActivity());
+                                TokenManager.getInstance(getActivity()).clearToken();
                                 // 清除用户缓存
-                                SPUtils.remove(SPUtils.AVATAR, getActivity());
+//                                SPUtils.clear(getActivity());
+                                SPManager.getInstance(getActivity()).clear();
                                 startActivity(LoginActivity.class);
                                 // 进行内存优化，销毁除登录页之外的所有界面
                                 ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
                             }
-                        });
+
+                            @Override
+                            public void onCancel(BaseDialog dialog) {
+                            }
+                        })
+                        .show();
+
+                // 退出登录
+//                EasyHttp.post(this)
+//                        .api(new LogoutApi())
+//                        .request(new HttpCallback<HttpData<Void>>(this) {
+//
+//                            @Override
+//                            public void onSucceed(HttpData<Void> data) {
+//                                // 清除token
+//                                TokenManager.clearToken(getActivity());
+//                                // 清除用户缓存
+//                                SPUtils.remove(SPUtils.AVATAR, getActivity());
+//                                startActivity(LoginActivity.class);
+//                                // 进行内存优化，销毁除登录页之外的所有界面
+//                                ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+//                            }
+//                        });
                 break;
             default:
                 break;

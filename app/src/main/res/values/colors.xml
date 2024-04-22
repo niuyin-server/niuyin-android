@@ -20,7 +20,7 @@
     <!-- 对话框确认按钮文本颜色 -->
     <color name="colorConfirm">#007AFF</color>
     <!-- 对话框取消按钮文本颜色 -->
-    <color name="colorCancel">#F44336</color>
+    <color name="colorCancel">#F33224</color>
 
     <color name="primaryRed">#D21B46</color>
     <color name="primaryRed50">#80D21B46</color>

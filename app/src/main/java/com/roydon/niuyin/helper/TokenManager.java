@@ -7,28 +7,47 @@ import com.roydon.niuyin.other.CommonConstants;
 
 public class TokenManager {
 
+    private Context context;
+
+    private TokenManager(Context context) {
+        this.context = context;
+    }
+
+    private volatile static TokenManager instance;
+
+    public static synchronized TokenManager getInstance(Context context) {
+        if (instance == null) {
+            synchronized (TokenManager.class) {
+                if (instance == null) {
+                    instance = new TokenManager(context);
+                }
+            }
+        }
+        return instance;
+    }
+
     private static final String PREF_NAME = "TokenPrefs";
     private static final String KEY_TOKEN = "token";
 
-    public static void saveToken(Context context, String token) {
-        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    public void saveToken(String token) {
+        SharedPreferences sp = this.context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(KEY_TOKEN, token);
         editor.commit();
     }
 
-    public static String getToken(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    public String getToken() {
+        SharedPreferences sp = this.context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return sp.getString(KEY_TOKEN, null);
     }
 
-    public boolean hasToken(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    public boolean hasToken() {
+        SharedPreferences sp = this.context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return sp.contains(KEY_TOKEN);
     }
 
-    public static void clearToken(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    public void clearToken() {
+        SharedPreferences sp = this.context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(KEY_TOKEN);
         editor.commit();

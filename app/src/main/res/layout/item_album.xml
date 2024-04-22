@@ -17,7 +17,7 @@
         android:layout_height="80dp"
         android:scaleType="centerCrop"
         app:scaleRatio="0.95"
-        tools:src="@drawable/ic_niuyin_logo" />
+        tools:src="@drawable/android_studio_stable" />
 
     <LinearLayout
         android:layout_width="0px"

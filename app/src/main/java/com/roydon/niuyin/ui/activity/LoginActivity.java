@@ -19,11 +19,14 @@ import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.helper.InputTextHelper;
+import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.helper.TokenManager;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.LoginApi;
+import com.roydon.niuyin.http.request.user.UserInfoApi;
 import com.roydon.niuyin.http.response.LoginBean;
+import com.roydon.niuyin.http.response.member.MemberInfoVO;
 import com.roydon.niuyin.other.CommonConstants;
 import com.roydon.niuyin.other.IntentKey;
 import com.roydon.niuyin.other.KeyboardWatcher;
@@ -170,25 +173,7 @@ public final class LoginActivity extends MyActivity implements UmengLogin.OnLogi
 //                    return;
 //                }
                 new WaitDialog.Builder(this).setCancelable(true).create().show();
-                EasyHttp.post(this)
-                        .api(new LoginApi()
-                                .setUsername(mPhoneView.getText().toString())
-                                .setPassword(mPasswordView.getText().toString()))
-                        .request(new HttpCallback<HttpData<LoginBean>>(this) {
-
-                            @Override
-                            public void onSucceed(HttpData<LoginBean> data) {
-                                toast("登录成功");
-                                // 更新 Token
-//                                EasyConfig.getInstance().addParam("token", data.getData().getToken());
-                                EasyConfig.getInstance().addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + data.getData().getToken());
-                                // token保存到本地
-                                TokenManager.saveToken(getActivity(), data.getData().getToken());
-                                // 跳转到主页
-                                startActivity(HomeActivity.class);
-                                finish();
-                            }
-                        });
+                apiLogin(mPhoneView.getText().toString(), mPasswordView.getText().toString());
                 break;
             case R.id.iv_login_qq:
                 break;
@@ -211,6 +196,50 @@ public final class LoginActivity extends MyActivity implements UmengLogin.OnLogi
             default:
                 break;
         }
+    }
+
+    /**
+     * 手机密码登录
+     *
+     * @param phone
+     * @param pwd
+     */
+    private void apiLogin(String phone, String pwd) {
+        EasyHttp.post(this)
+                .api(new LoginApi()
+                        .setUsername(phone)
+                        .setPassword(pwd))
+                .request(new HttpCallback<HttpData<LoginBean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<LoginBean> data) {
+                        toast("登录成功");
+                        apiGetUserInfo();
+                        // 更新 Token
+//                                EasyConfig.getInstance().addParam("token", data.getData().getToken());
+                        EasyConfig.getInstance().addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + data.getData().getToken());
+                        // token保存到本地
+                        TokenManager.getInstance(getActivity()).saveToken(data.getData().getToken());
+                        // 跳转到主页
+                        startActivity(HomeActivity.class);
+                        finish();
+
+                    }
+                });
+    }
+
+    private void apiGetUserInfo() {
+        EasyHttp.get(this)
+                .api(new UserInfoApi())
+                .request(new HttpCallback<HttpData<MemberInfoVO>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<MemberInfoVO> data) {
+                        MemberInfoVO memberInfoVO = data.getData();
+                        // 更新缓存
+                        spSetString(SPUtils.AVATAR, memberInfoVO.getAvatar());
+                    }
+                });
     }
 
     @Override

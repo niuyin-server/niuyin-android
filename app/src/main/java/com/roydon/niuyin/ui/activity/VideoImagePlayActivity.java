@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.RatioFrameLayout;
@@ -99,6 +101,16 @@ public class VideoImagePlayActivity extends MyActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    protected ImmersionBar createStatusBarConfig() {
+        return super.createStatusBarConfig()
+                // 有导航栏的情况下，activity全屏显示，也就是activity最下面被导航栏覆盖，不写默认非全屏
+                .fullScreen(true)
+                .hideBar(BarHide.FLAG_SHOW_BAR)
+                // 透明导航栏，不写默认黑色(设置此方法，fullScreen()方法自动为true)
+                .transparentNavigationBar();
     }
 
     @Override

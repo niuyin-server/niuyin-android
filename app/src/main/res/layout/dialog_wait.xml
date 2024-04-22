@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/black85"
+    app:cardBackgroundColor="@color/black80"
     app:cardCornerRadius="15dp"
     app:cardElevation="0px"
     tools:context="com.roydon.niuyin.ui.dialog.WaitDialog">

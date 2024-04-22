@@ -13,7 +13,7 @@
         android:background="@color/white"
         android:scaleType="centerCrop"
         app:scaleRatio="0.95"
-        tools:src="@drawable/ic_niuyin_logo" />
+        tools:src="@drawable/android_studio_stable" />
 
     <FrameLayout
         android:id="@+id/fl_photo_check"

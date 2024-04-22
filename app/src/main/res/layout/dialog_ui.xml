@@ -65,6 +65,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="@string/common_confirm"
+                android:textStyle="bold"
                 android:textColor="@color/colorConfirm"
                 android:textSize="14sp" />
         </LinearLayout>

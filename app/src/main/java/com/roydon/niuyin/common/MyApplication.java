@@ -13,6 +13,11 @@ import androidx.annotation.RequiresApi;
 import com.billy.android.swipe.SmartSwipeBack;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
+import com.hjq.http.EasyConfig;
+import com.hjq.http.config.IRequestServer;
+import com.hjq.toast.ToastInterceptor;
+import com.hjq.toast.ToastUtils;
+import com.hjq.umeng.UmengClient;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.SwipeAction;
 import com.roydon.niuyin.helper.ActivityStackManager;
@@ -24,11 +29,6 @@ import com.roydon.niuyin.other.AppConfig;
 import com.roydon.niuyin.other.CommonConstants;
 import com.roydon.niuyin.ui.activity.CrashActivity;
 import com.roydon.niuyin.ui.activity.HomeActivity;
-import com.hjq.http.EasyConfig;
-import com.hjq.http.config.IRequestServer;
-import com.hjq.toast.ToastInterceptor;
-import com.hjq.toast.ToastUtils;
-import com.hjq.umeng.UmengClient;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -84,8 +84,9 @@ public final class MyApplication extends Application {
 
             @Override
             public Drawable getBackIcon() {
-                return getDrawable(R.drawable.ic_back_black);
+                return getDrawable(R.drawable.ic_back_b);
             }
+
         });
 
         // Bugly 异常捕捉
@@ -117,21 +118,54 @@ public final class MyApplication extends Application {
             server = new ReleaseServer();
         }
 
-        EasyConfig.with(new OkHttpClient())
-                // 是否打印日志
-                .setLogEnabled(AppConfig.isDebug())
-                // 设置服务器配置
-                .setServer(server)
-                // 设置请求处理策略
-                .setHandler(new RequestHandler())
-                // 设置请求重试次数
-                .setRetryCount(3)
-                // 添加全局请求参数
+        if (TokenManager.getInstance(application).hasToken()) {
+            EasyConfig.with(new OkHttpClient())
+                    // 是否打印日志
+                    .setLogEnabled(AppConfig.isDebug())
+                    // 设置服务器配置
+                    .setServer(server)
+                    // 设置请求处理策略
+                    .setHandler(new RequestHandler())
+                    // 设置请求重试次数
+                    .setRetryCount(2)
+                    // 添加全局请求参数
 //                .addParam("Content-Type", "application/json;charset=UTF-8")
-                // 添加全局请求头
-                .addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + TokenManager.getToken(application))
-                // 启用配置
-                .into();
+                    // 添加全局请求头
+                    .addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + TokenManager.getInstance(application).getToken())
+                    // 启用配置
+                    .into();
+        } else {
+            EasyConfig.with(new OkHttpClient())
+                    // 是否打印日志
+                    .setLogEnabled(AppConfig.isDebug())
+                    // 设置服务器配置
+                    .setServer(server)
+                    // 设置请求处理策略
+                    .setHandler(new RequestHandler())
+                    // 设置请求重试次数
+                    .setRetryCount(2)
+                    // 添加全局请求参数
+//                .addParam("Content-Type", "application/json;charset=UTF-8")
+                    // 添加全局请求头
+//                    .addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + TokenManager.getToken(application))
+                    // 启用配置
+                    .into();
+        }
+//        EasyConfig.with(new OkHttpClient())
+//                // 是否打印日志
+//                .setLogEnabled(AppConfig.isDebug())
+//                // 设置服务器配置
+//                .setServer(server)
+//                // 设置请求处理策略
+//                .setHandler(new RequestHandler())
+//                // 设置请求重试次数
+//                .setRetryCount(2)
+//                // 添加全局请求参数
+////                .addParam("Content-Type", "application/json;charset=UTF-8")
+//                // 添加全局请求头
+//                .addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + TokenManager.getToken(application))
+//                // 启用配置
+//                .into();
 
         // Activity 侧滑返回
         SmartSwipeBack.activitySlidingBack(application, activity -> {

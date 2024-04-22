@@ -11,7 +11,6 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:leftIcon="@drawable/ic_back_b"
         app:title="我的关注" />
 
     <LinearLayout

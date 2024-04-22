@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 按压状态 -->
-    <item android:drawable="@color/black20" android:state_pressed="true" />
+    <item android:drawable="@color/colorLine" android:state_pressed="true" />
 
     <!-- 默认状态 -->
     <item android:drawable="@color/white" />

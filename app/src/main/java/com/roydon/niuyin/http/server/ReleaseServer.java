@@ -9,11 +9,11 @@ public class ReleaseServer implements IRequestServer {
 
     @Override
     public String getHost() {
-        return "http://39.101.67.45:9090/";
+        return "http://8.130.182.227:9090";
     }
 
     @Override
     public String getPath() {
-        return "api/";
+        return "/";
     }
 }

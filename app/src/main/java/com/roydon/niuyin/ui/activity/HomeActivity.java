@@ -217,7 +217,7 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         badge.setMaxCharacterCount(3);
 
         // 获取通知，判断是否登录
-        if (!Objects.isNull(TokenManager.getToken(this))) {
+        if (TokenManager.getInstance(getActivity()).hasToken()) {
             getNoticeUnReadCount();
         }
 

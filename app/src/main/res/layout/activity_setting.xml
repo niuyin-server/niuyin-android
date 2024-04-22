@@ -36,10 +36,10 @@
             android:background="@drawable/bg_setting_update"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
-            android:paddingBottom="3dp"
+            android:paddingBottom="2dp"
             android:text="new"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
     </com.hjq.widget.layout.SettingBar>

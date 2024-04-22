@@ -13,6 +13,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.helper.SPManager;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.ui.activity.HomeActivity;
@@ -70,10 +71,9 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         ImmersionBar.setTitleBar(getAttachActivity(), mToolbar);
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
-        String avatarCache = SPUtils.getString(SPUtils.AVATAR, "", getContext());
-        if (!avatarCache.equals("")) {
+        if (SPManager.getInstance(getActivity()).hasString(SPManager.AVATAR)) {
             GlideApp.with(this)
-                    .load(avatarCache)
+                    .load(spGetString(SPManager.AVATAR))
                     .circleCrop()
                     .into(mAvatarView);
         }
