@@ -100,6 +100,12 @@ public final class IndexRecommendFragment extends MyFragment<HomeActivity> imple
         getRecommendVideoList(true);
     }
 
+    public void onTabReClickRefresh() {
+        mRecyclerView.smoothScrollToPosition(0);
+        mRefreshLayout.autoRefresh();
+//        this.onRefresh(mRefreshLayout);
+    }
+
     /**
      * 获取推荐视频列表
      *

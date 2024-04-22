@@ -129,7 +129,8 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
             public void onNavigationItemReselected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.fragmentIndex:
-                        toast("刷新");
+//                        toast("刷新");
+                        mPagerAdapter.getItem(0).onTabReClickRefresh();
 //                mPagerAdapter.setCurrentItem(FragmentIndex.class);
                         break;
                     case R.id.fragmentFriend:

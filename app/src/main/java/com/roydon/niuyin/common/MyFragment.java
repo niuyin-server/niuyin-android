@@ -181,4 +181,7 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A> i
     public String spGetString(String key) {
         return SPUtils.getString(key, "", getContext());
     }
+
+    public void onTabReClickRefresh() {
+    }
 }

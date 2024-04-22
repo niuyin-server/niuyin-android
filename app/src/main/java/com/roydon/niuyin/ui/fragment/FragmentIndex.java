@@ -53,6 +53,8 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
     @BindView(R.id.iv_test_search)
     ImageView mSearchView;
 
+    ArrayList<Fragment> mIndexFragments;
+
     public static FragmentIndex newInstance() {
         return new FragmentIndex();
     }
@@ -77,7 +79,7 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         }
         // tab
         String[] mTitles = {"关注", "推荐", "热门"};
-        ArrayList<Fragment> mIndexFragments = new ArrayList<>();
+        mIndexFragments = new ArrayList<>();
         mIndexFragments.add(IndexFollowFragment.newInstance());
         mIndexFragments.add(IndexRecommendFragment.newInstance());
         mIndexFragments.add(IndexHotFragment.newInstance());
@@ -112,6 +114,13 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    public void onTabReClickRefresh() {
+        mSlidingTabLayout.setCurrentTab(1);
+        Fragment fragment = mIndexFragments.get(1);
+        ((IndexRecommendFragment) fragment).onTabReClickRefresh();
     }
 
     @Override
