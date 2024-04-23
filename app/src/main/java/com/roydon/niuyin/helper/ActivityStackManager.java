@@ -8,27 +8,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.collection.ArrayMap;
 
+import java.util.Map;
+import java.util.Random;
+
 /**
- *    desc   : Activity 栈管理
+ * desc   : Activity 栈管理
  */
 public final class ActivityStackManager implements Application.ActivityLifecycleCallbacks {
 
     private static volatile ActivityStackManager sInstance;
 
-    private final ArrayMap<String, Activity> mActivitySet = new ArrayMap<>();
+    private final Map<String, Activity> mActivitySet = new ArrayMap<>();
 
-    /** 当前应用上下文对象 */
+    /**
+     * 当前应用上下文对象
+     */
     private Application mApplication;
-    /** 当前 Activity 对象标记 */
+    /**
+     * 当前 Activity 对象标记
+     */
     private String mCurrentTag;
 
-    private ActivityStackManager() {}
+    private ActivityStackManager() {
+    }
 
     public static ActivityStackManager getInstance() {
         // 加入双重校验锁
-        if(sInstance == null) {
+        if (sInstance == null) {
             synchronized (ActivityStackManager.class) {
-                if(sInstance == null){
+                if (sInstance == null) {
                     sInstance = new ActivityStackManager();
                 }
             }
@@ -99,7 +107,7 @@ public final class ActivityStackManager implements Application.ActivityLifecycle
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
         mCurrentTag = getObjectTag(activity);
-        mActivitySet.put(getObjectTag(activity), activity);
+        mActivitySet.put(mCurrentTag, activity);
     }
 
     @Override
@@ -113,13 +121,16 @@ public final class ActivityStackManager implements Application.ActivityLifecycle
     }
 
     @Override
-    public void onActivityPaused(@NonNull Activity activity) {}
+    public void onActivityPaused(@NonNull Activity activity) {
+    }
 
     @Override
-    public void onActivityStopped(@NonNull Activity activity) {}
+    public void onActivityStopped(@NonNull Activity activity) {
+    }
 
     @Override
-    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {}
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+    }
 
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {

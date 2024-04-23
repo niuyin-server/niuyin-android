@@ -1,6 +1,5 @@
 package com.roydon.niuyin.common;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,17 +11,15 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.bar.TitleBar;
 import com.hjq.base.BaseActivity;
 import com.hjq.base.BaseDialog;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.OnHttpListener;
+import com.hjq.umeng.UmengClient;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.SwipeAction;
 import com.roydon.niuyin.action.TitleBarAction;
 import com.roydon.niuyin.action.ToastAction;
 import com.roydon.niuyin.helper.SPManager;
-import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.model.HttpData;
-import com.roydon.niuyin.ui.dialog.WaitDialog;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.OnHttpListener;
-import com.hjq.umeng.UmengClient;
 
 import butterknife.ButterKnife;
 import okhttp3.Call;
