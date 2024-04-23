@@ -40,34 +40,36 @@
                     android:id="@+id/ll_friend_dynamic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:paddingStart="15dp"
-                        android:paddingTop="15dp"
-                        android:paddingEnd="15dp">
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:background="@color/white"-->
+                    <!--                        android:orientation="horizontal"-->
+                    <!--                        android:paddingStart="15dp"-->
+                    <!--                        android:paddingTop="15dp"-->
+                    <!--                        android:paddingEnd="15dp">-->
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="left|center_vertical"
-                            android:text="好友动态"
-                            android:textStyle="bold" />
+                    <!--                        <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:gravity="left|center_vertical"-->
+                    <!--                            android:text="好友动态"-->
+                    <!--                            android:textStyle="bold" />-->
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right|center_vertical"
-                            android:text="更多 >"
-                            android:textStyle="bold" />
+                    <!--                        <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:gravity="right|center_vertical"-->
+                    <!--                            android:text="更多 >"-->
+                    <!--                            android:textStyle="bold" />-->
 
-                    </LinearLayout>
+                    <!--                    </LinearLayout>-->
 
                     <!--  朋友动态  -->
                     <com.hjq.widget.layout.WrapRecyclerView
@@ -77,7 +79,10 @@
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_follow_dynamic" />
+
                 </LinearLayout>
+
+                <View style="@style/HorizontalLineStyle" />
 
                 <com.roydon.niuyin.widget.HintLayout
                     android:id="@+id/hintLayout"

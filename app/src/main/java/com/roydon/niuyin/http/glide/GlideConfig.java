@@ -31,7 +31,7 @@ import java.io.InputStream;
 public class GlideConfig extends AppGlideModule {
 
     /** 本地图片缓存文件最大值 */
-    private static final int IMAGE_DISK_CACHE_MAX_SIZE = 300 * 1024 * 1024;
+    private static final int IMAGE_DISK_CACHE_MAX_SIZE = 256 * 1024 * 1024;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
@@ -61,7 +61,7 @@ public class GlideConfig extends AppGlideModule {
         builder.setBitmapPool(new LruBitmapPool(customBitmapPoolSize));
 
         // 设置默认的加载占位图和加载出错图
-        builder.setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.image_loading_egg).error(R.drawable.image_loading_err));
+        builder.setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.image_loading_card).error(R.drawable.image_loading_error));
     }
 
     @Override

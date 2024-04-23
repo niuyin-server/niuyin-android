@@ -9,7 +9,7 @@
     <dimen name="circle_size">999dp</dimen>
 
     <!-- 默认按钮的圆角大小 -->
-    <dimen name="button_round_size">5dp</dimen>
+    <dimen name="button_round_size">6dp</dimen>
     <dimen name="button_round_size_8">8dp</dimen>
 
     <!-- 通用对话框圆角大小 -->

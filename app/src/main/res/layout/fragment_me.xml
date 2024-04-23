@@ -48,15 +48,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp">
+                    android:orientation="vertical">
 
                     <!-- 获赞 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -127,7 +127,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -139,7 +141,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -158,7 +162,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="18岁"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black60" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -179,7 +183,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="河南·郑州"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black60" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -199,29 +203,28 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="清华大学"
-                                android:textColor="@color/black" />
+                                android:text="河南电子科技大学"
+                                android:textColor="@color/black60" />
                         </LinearLayout>
 
                     </LinearLayout>
                     <!--编辑-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:orientation="horizontal"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
+                        android:layout_height="52dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_edit_profile"
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
+                            android:layout_marginStart="15dp"
                             android:layout_weight="1"
                             android:background="@drawable/ripple_effect"
                             android:padding="0dp"
                             android:text="编辑资料"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black80" />
 
                         <View
                             android:layout_width="20dp"
@@ -231,11 +234,12 @@
                             android:id="@+id/btn_add_friend"
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
+                            android:layout_marginEnd="15dp"
                             android:layout_weight="1"
                             android:background="@drawable/ripple_effect"
                             android:padding="0dp"
                             android:text="添加朋友"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black80" />
 
                     </LinearLayout>
 

@@ -149,13 +149,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="18"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black60" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="岁"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black60" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -176,7 +176,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="河南·郑州"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black60" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -198,7 +198,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="清华大学"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black60" />
                         </LinearLayout>
                     </LinearLayout>
                     <!--是否关注-->
@@ -228,7 +228,7 @@
                             android:clickable="true"
                             android:foreground="@drawable/ripple_recommend_video_card"
                             android:orientation="vertical"
-                            app:cardCornerRadius="5dp"
+                            app:cardCornerRadius="@dimen/button_round_size"
                             app:cardElevation="1dp">
 
                             <LinearLayout

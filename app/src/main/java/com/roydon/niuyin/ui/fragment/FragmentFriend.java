@@ -29,7 +29,9 @@ import com.roydon.niuyin.http.response.member.MemberInfoVO;
 import com.roydon.niuyin.http.response.social.DynamicUser;
 import com.roydon.niuyin.http.response.video.VideoVO;
 import com.roydon.niuyin.other.IntentKey;
+import com.roydon.niuyin.ui.activity.FollowFansActivity;
 import com.roydon.niuyin.ui.activity.HomeActivity;
+import com.roydon.niuyin.ui.activity.UserProfileActivity;
 import com.roydon.niuyin.ui.activity.VideoImagePlayActivity;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
 import com.roydon.niuyin.ui.adapter.FollowDynamicAdapter;
@@ -111,7 +113,7 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
         followDynamicAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                toast("用户id " + dynamicUserList.get(position).getUserId());
+                UserProfileActivity.start(getContext(), dynamicUserList.get(position).getUserId());
             }
         });
         followDynamicRV.setAdapter(followDynamicAdapter);
