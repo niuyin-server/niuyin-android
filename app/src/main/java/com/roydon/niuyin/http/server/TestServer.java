@@ -11,7 +11,7 @@ public class TestServer extends ReleaseServer {
      * http://8.130.182.227:9090
      * https://6da51c2a.r18.cpolar.top
      */
-    private static String SERVER_HOST_TEST = "https://2ddb4cfd.r3.cpolar.top";
+    private static String SERVER_HOST_TEST = "http://8.130.182.227:9090";
 
     @Override
     public String getHost() {

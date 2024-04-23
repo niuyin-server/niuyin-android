@@ -1,5 +1,8 @@
 package com.roydon.niuyin.ui.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -23,6 +26,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.base.action.AnimAction;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.square.SquareImageView;
@@ -207,6 +211,9 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         if (shown) {
             getStatusBarConfig().statusBarDarkFont(true).init();
             mUserinfoView.setVisibility(View.GONE);
+            ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mMenuAvatarView, "alpha", 0f, 1f);
+            fadeIn.setDuration(500);
+            fadeIn.start();
             mMenuAvatarView.setVisibility(View.VISIBLE);
             mMenuNicknameView.setTextColor(ContextCompat.getColor(getAttachActivity(), R.color.black));
             mMenuSearchView.setBackgroundResource(R.drawable.bg_icon_transparent);

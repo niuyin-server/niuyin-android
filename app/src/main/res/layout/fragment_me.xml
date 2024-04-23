@@ -357,7 +357,7 @@
                                 android:id="@+id/tv_nickname"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="还会心动吗"
+                                android:text="昵称"
                                 android:textColor="@color/white"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
