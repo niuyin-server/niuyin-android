@@ -1,4 +1,4 @@
-package com.roydon.niuyin.ui.fragment.me;
+package com.roydon.niuyin.ui.fragment.user;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -20,9 +20,9 @@ import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.enums.PublishType;
 import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.model.PageDataInfo;
-import com.roydon.niuyin.http.request.video.MyPostPageApi;
+import com.roydon.niuyin.http.request.video.UserPostPageApi;
 import com.roydon.niuyin.http.response.video.MyVideoVO;
-import com.roydon.niuyin.ui.activity.HomeActivity;
+import com.roydon.niuyin.ui.activity.UserProfileActivity;
 import com.roydon.niuyin.ui.activity.VideoImagePlayActivity;
 import com.roydon.niuyin.ui.activity.VideoPlayActivity;
 import com.roydon.niuyin.ui.adapter.MePostAdapter;
@@ -43,7 +43,7 @@ import butterknife.BindView;
  * @description niuyin-android
  */
 @SuppressLint("NonConstantResourceId")
-public class MePostFragment extends MyFragment<HomeActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
+public class UserPostFragment extends MyFragment<UserProfileActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener {
 
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
@@ -60,11 +60,16 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
 
     private List<MyVideoVO> myVideoVOList;
 
+    private Long userId;
     private int pageNum = 1;
     private int pageSize = 12;
 
-    public static MePostFragment newInstance() {
-        return new MePostFragment();
+    public UserPostFragment(Long userId) {
+        this.userId = userId;
+    }
+
+    public static UserPostFragment newInstance(Long userId) {
+        return new UserPostFragment(userId);
     }
 
     @Override
@@ -98,7 +103,8 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
      */
     public void getMyPostPage(boolean isRefresh) {
         EasyHttp.post(this)
-                .api(new MyPostPageApi()
+                .api(new UserPostPageApi()
+                        .setUserId(userId)
                         .setPageNum(pageNum)
                         .setPageSize(pageSize))
                 .request(new HttpCallback<PageDataInfo<MyVideoVO>>(this.getAttachActivity()) {

@@ -1,4 +1,4 @@
-package com.roydon.niuyin.http.request.behave;
+package com.roydon.niuyin.http.request.video;
 
 import com.hjq.http.config.IRequestApi;
 

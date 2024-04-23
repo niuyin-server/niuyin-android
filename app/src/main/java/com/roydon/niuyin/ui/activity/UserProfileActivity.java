@@ -25,19 +25,15 @@ import com.hjq.widget.square.SquareImageView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.common.MyActivity;
-import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
-import com.roydon.niuyin.http.request.user.UserInfoApi;
 import com.roydon.niuyin.http.request.user.UserProfileApi;
 import com.roydon.niuyin.http.response.member.AppMemberInfoVO;
-import com.roydon.niuyin.http.response.member.MemberInfoVO;
 import com.roydon.niuyin.other.IntentKey;
-import com.roydon.niuyin.ui.adapter.MeAdapter;
 import com.roydon.niuyin.ui.adapter.UserProfileViewPagerAdapter;
-import com.roydon.niuyin.ui.fragment.me.MeFavoriteFragment;
-import com.roydon.niuyin.ui.fragment.me.MeLikeFragment;
-import com.roydon.niuyin.ui.fragment.me.MePostFragment;
+import com.roydon.niuyin.ui.fragment.user.UserFavoriteFragment;
+import com.roydon.niuyin.ui.fragment.user.UserLikeFragment;
+import com.roydon.niuyin.ui.fragment.user.UserPostFragment;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
@@ -182,14 +178,14 @@ public class UserProfileActivity extends MyActivity implements XCollapsingToolba
         ArrayList<String> mTitles = new ArrayList<>();
         ArrayList<Fragment> mMeFragments = new ArrayList<>();
         mTitles.add("作品");
-        mMeFragments.add(MePostFragment.newInstance());
+        mMeFragments.add(UserPostFragment.newInstance(memberInfoVO.getUserId()));
         if (memberInfoVO.getMemberInfo().getLikeShowStatus().equals("0")) {
             mTitles.add("喜欢");
-            mMeFragments.add(MeLikeFragment.newInstance());
+            mMeFragments.add(UserLikeFragment.newInstance(memberInfoVO.getUserId()));
         }
         if (memberInfoVO.getMemberInfo().getFavoriteShowStatus().equals("0")) {
             mTitles.add("收藏");
-            mMeFragments.add(MeFavoriteFragment.newInstance());
+            mMeFragments.add(UserFavoriteFragment.newInstance(memberInfoVO.getUserId()));
         }
         mViewPager.setOffscreenPageLimit(mMeFragments.size());
         mViewPager.setAdapter(new UserProfileViewPagerAdapter(getSupportFragmentManager(), mTitles, mMeFragments));
