@@ -127,7 +127,7 @@ public final class MyApplication extends Application {
                     // 设置请求处理策略
                     .setHandler(new RequestHandler())
                     // 设置请求重试次数
-                    .setRetryCount(2)
+//                    .setRetryCount(2)
                     // 添加全局请求参数
 //                .addParam("Content-Type", "application/json;charset=UTF-8")
                     // 添加全局请求头
@@ -143,7 +143,7 @@ public final class MyApplication extends Application {
                     // 设置请求处理策略
                     .setHandler(new RequestHandler())
                     // 设置请求重试次数
-                    .setRetryCount(2)
+                    .setRetryCount(0)
                     // 添加全局请求参数
 //                .addParam("Content-Type", "application/json;charset=UTF-8")
                     // 添加全局请求头

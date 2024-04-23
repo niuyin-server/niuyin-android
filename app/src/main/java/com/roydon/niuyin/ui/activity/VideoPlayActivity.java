@@ -29,7 +29,6 @@ import com.roydon.niuyin.other.MediaVideoInfo;
 import com.roydon.niuyin.ui.adapter.VideoPlayAdapter;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoCommentFragment;
 import com.roydon.niuyin.ui.fragment.videoplay.VideoInfoFragment;
-import com.roydon.niuyin.utils.BlurUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -73,6 +72,7 @@ public class VideoPlayActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        getStatusBarConfig().statusBarDarkFont(false).statusBarColor(R.color.black);
         mVideoStatusView.setVisibility(View.GONE);
         if (getString(IntentKey.VIDEO_SCREEN_TYPE) != null) {
             if (VideoScreenType.HENG.getCode().equals(getString(IntentKey.VIDEO_SCREEN_TYPE))) {
@@ -87,12 +87,20 @@ public class VideoPlayActivity extends MyActivity {
         }
     }
 
+//    public void reLoadNewVideo(String videoId) {
+//        this.apiGetVideoInfo(videoId);
+//    }
+
     @Override
     protected void initData() {
+        apiGetVideoInfo(getString(IntentKey.VIDEO_ID));
 
+    }
+
+    private void apiGetVideoInfo(String videoId) {
         EasyHttp.get(this)
                 .api(new VideoInfoApi()
-                        .setVideoId(getString(IntentKey.VIDEO_ID)))
+                        .setVideoId(videoId))
                 .request(new HttpCallback<HttpData<VideoInfoVO>>(this) {
 
                     @Override
@@ -103,7 +111,6 @@ public class VideoPlayActivity extends MyActivity {
 
                     }
                 });
-
     }
 
     @SuppressLint("HandlerLeak")

@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="10dp"
-    android:background="@drawable/bg_video_tag"
+    android:background="@drawable/selector_video_tag"
     android:orientation="horizontal"
     android:paddingLeft="8dp"
     android:paddingTop="5dp"
@@ -19,6 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="标签"
-        android:textColor="@color/black" />
+        android:textColor="@color/black80" />
 
 </LinearLayout>

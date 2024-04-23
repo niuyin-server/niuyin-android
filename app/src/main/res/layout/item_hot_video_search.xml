@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
-    android:background="@drawable/bg_recommend_video"
-    android:orientation="horizontal"
-    android:padding="5dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:foreground="@drawable/ripple_recommend_video_card"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="1dp"
     tools:context="com.roydon.niuyin.ui.adapter.HotVideoSearchAdapter">
 
-    <com.hjq.widget.square.SquareLinearLayout
-        android:layout_width="28dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center">
+        android:background="@drawable/bg_recommend_video"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_sort"
-            android:layout_width="wrap_content"
+        <com.hjq.widget.square.SquareLinearLayout
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </com.hjq.widget.square.SquareLinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_keyword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:text="1"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:text="热搜"
             android:textColor="@color/black"
             android:textSize="16sp" />
-    </com.hjq.widget.square.SquareLinearLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_keyword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:paddingStart="5dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:text="热搜"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

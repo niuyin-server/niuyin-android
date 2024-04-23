@@ -43,6 +43,9 @@ public class HotVideoSearchAdapter extends MyAdapter<String> {
         @Override
         public void onBindView(int position) {
             String item = getItem(position);
+            if (position == 0) {
+
+            }
             mSortView.setText(position + 1 + "");
             mKeywordView.setText(item);
         }

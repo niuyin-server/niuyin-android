@@ -37,6 +37,9 @@ import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
 import com.roydon.niuyin.http.request.behave.VideoCommentParentPageApi;
+import com.roydon.niuyin.http.request.behave.VideoLikeApi;
+import com.roydon.niuyin.http.request.behave.VideoUnlikeApi;
+import com.roydon.niuyin.http.request.notice.UnreadNoticeCountApi;
 import com.roydon.niuyin.http.request.social.FollowUserApi;
 import com.roydon.niuyin.http.request.video.RelateVideoRecommendApi;
 import com.roydon.niuyin.http.response.behave.AppVideoUserCommentParentVO;
@@ -49,6 +52,7 @@ import com.roydon.niuyin.ui.activity.VideoPlayActivity;
 import com.roydon.niuyin.ui.adapter.VideoCommentParentAdapter;
 import com.roydon.niuyin.ui.adapter.VideoRelateRecommendAdapter;
 import com.roydon.niuyin.ui.adapter.VideoTagAdapter;
+import com.roydon.niuyin.ui.dialog.MessageDialog;
 import com.roydon.niuyin.ui.dialog.VideoCommentReplayDialog;
 import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
@@ -76,6 +80,8 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_VIDEO_RELATE_RECOMMEND = 1;
     private static final int HANDLER_VIDEO_RELATE_RECOMMEND_MORE = 2;
+    private static final int HANDLER_VIDEO_LIKE_SUCCESS = 10;
+    private static final int HANDLER_VIDEO_UNLIKE_SUCCESS = 11;
 
     @BindView(R.id.ll_author)
     LinearLayout mAuthorLayout;
@@ -109,6 +115,10 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     ShineButton mBehaveFavoriteButton;
     @BindView(R.id.sb_share)
     ShineButton mBehaveShareButton;
+    @BindView(R.id.tv_like_num)
+    TextView videoLikeNumTV;
+    @BindView(R.id.tv_favorite_num)
+    TextView videoFavoriteNumTV;
 
     @BindView(R.id.videoTagRecyclerView)
     RecyclerView mVideoTagRecyclerView;
@@ -175,7 +185,8 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
                 RelateVideoVO item = videoRelateRecommendAdapter.getItem(position);
-                toast("点击了视频 " + item.getPublishType());
+//                toast("点击了视频 " + item.getPublishType());
+//                getAttachActivity().reLoadNewVideo(item.getVideoId());
                 if (item.getPublishType().equals(PublishType.VIDEO.getCode())) {
                     // 视频
                     // 设置视频比例 4:3竖屏视频
@@ -229,6 +240,45 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         mPublishTimeView.setText(TimeUtils.getSmartTime(DateUtils.localDateTime2Long(videoInfoVO.getCreateTime())));
         mVideoDescView.setText(videoInfoVO.getVideoDesc() == null || videoInfoVO.getVideoDesc().equals("") ? "-" : videoInfoVO.getVideoDesc());
         mVideoTagAdapter.setData(Arrays.asList(videoInfoVO.getTags()));
+        videoLikeNumTV.setText(videoInfoVO.getLikeNum() != null ? videoInfoVO.getLikeNum().toString() : "0");
+        videoFavoriteNumTV.setText(videoInfoVO.getFavoriteNum() != null ? videoInfoVO.getFavoriteNum().toString() : "0");
+        mBehaveLikeButton.setChecked(videoInfoVO.isWeatherLike());
+        mBehaveFavoriteButton.setChecked(videoInfoVO.isWeatherFavorite());
+        mBehaveFavoriteButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                new MessageDialog.Builder(getContext())
+                        // 标题可以不用填写
+                        .setTitle("我是标题")
+                        // 内容必须要填写
+                        .setMessage("我是内容")
+                        // 确定按钮文本
+                        .setConfirm(getString(R.string.common_confirm))
+                        // 设置 null 表示不显示取消按钮
+                        .setCancel(getString(R.string.common_cancel))
+                        // 设置点击按钮后不关闭对话框
+                        //.setAutoDismiss(false)
+                        .setListener(new MessageDialog.OnListener() {
+
+                            @Override
+                            public void onConfirm(BaseDialog dialog) {
+                            }
+
+                            @Override
+                            public void onCancel(BaseDialog dialog) {
+                            }
+                        })
+                        .show();
+                return false;
+            }
+        });
+        if (videoInfoVO.isWeatherFollow()) {
+            followUserBTN.setEnabled(false);
+            followUserBTN.setText("已关注");
+        } else {
+            followUserBTN.setEnabled(true);
+            followUserBTN.setText("关注");
+        }
     }
 
     @Override
@@ -253,7 +303,12 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
                 UserProfileActivity.start(getContext(), videoInfoVO.getUserId());
                 break;
             case R.id.sb_like:
-                toast("like" + mBehaveLikeButton.isChecked());
+//                toast("like" + mBehaveLikeButton.isChecked());
+                if (mBehaveLikeButton.isChecked()) {
+                    apiVideoLike(videoInfoVO.getVideoId());
+                } else {
+                    apiVideoUnlike(videoInfoVO.getVideoId());
+                }
                 break;
             case R.id.sb_not_like:
                 break;
@@ -296,6 +351,13 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
                 case HANDLER_VIDEO_RELATE_RECOMMEND_MORE:
                     videoRelateRecommendAdapter.setMoreData(relateVideoVOList);
                     showComplete();
+                    break;
+                case HANDLER_VIDEO_LIKE_SUCCESS:
+                    toast("点赞成功");
+                    videoLikeNumTV.setText((Integer.parseInt(videoLikeNumTV.getText().toString()) + 1) + "");
+                    break;
+                case HANDLER_VIDEO_UNLIKE_SUCCESS:
+                    videoLikeNumTV.setText((Integer.parseInt(videoLikeNumTV.getText().toString()) - 1) + "");
                     break;
                 default:
                     break;
@@ -356,6 +418,50 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
                     @Override
                     public void onFail(Exception e) {
 
+                    }
+                });
+    }
+
+    /**
+     * 视频点赞
+     */
+    private void apiVideoLike(String videoId) {
+        EasyHttp.get(this)
+                .api(new VideoLikeApi().setVideoId(videoId))
+                .request(new HttpCallback<HttpData<Boolean>>(getAttachActivity()) {
+
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        if (data.getData()) {
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_LIKE_SUCCESS);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                    }
+                });
+    }
+
+    /**
+     * 视频取消点赞
+     */
+    private void apiVideoUnlike(String videoId) {
+        EasyHttp.get(this)
+                .api(new VideoUnlikeApi().setVideoId(videoId))
+                .request(new HttpCallback<HttpData<Boolean>>(getAttachActivity()) {
+
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        if (data.getData()) {
+                            mHandler.sendEmptyMessage(HANDLER_VIDEO_UNLIKE_SUCCESS);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
                     }
                 });
     }
