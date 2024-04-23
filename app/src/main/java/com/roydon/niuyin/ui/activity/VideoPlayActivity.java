@@ -72,7 +72,7 @@ public class VideoPlayActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        getStatusBarConfig().statusBarDarkFont(false).statusBarColor(R.color.black);
+//        getStatusBarConfig().statusBarDarkFont(false).statusBarColor(R.color.black);
         mVideoStatusView.setVisibility(View.GONE);
         if (getString(IntentKey.VIDEO_SCREEN_TYPE) != null) {
             if (VideoScreenType.HENG.getCode().equals(getString(IntentKey.VIDEO_SCREEN_TYPE))) {

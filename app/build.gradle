@@ -84,9 +84,9 @@ android {
     // 友盟多渠道打包
     android.productFlavors {
         tencent {}  // 应用宝
-        baidu {}    // 百度
-        xiaomi {}   // 小米
-        huawei {}   // 华为
+//        baidu {}    // 百度
+//        xiaomi {}   // 小米
+//        huawei {}   // 华为
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [channel: name]

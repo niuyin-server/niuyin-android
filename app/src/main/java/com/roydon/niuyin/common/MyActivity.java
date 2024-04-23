@@ -132,8 +132,7 @@ public abstract class MyActivity extends BaseActivity implements ToastAction, Ti
         // 在BaseActivity里初始化
         mImmersionBar = ImmersionBar.with(this)
                 // 默认状态栏字体颜色为黑色
-                .statusBarDarkFont(isStatusBarDarkFont())
-                .statusBarColor(R.color.white);
+                .statusBarDarkFont(isStatusBarDarkFont());
         return mImmersionBar;
     }
 

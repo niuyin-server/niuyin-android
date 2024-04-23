@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_recommend_video"
+        android:background="@drawable/shape_hot_search"
         android:orientation="horizontal"
         android:padding="5dp">
 

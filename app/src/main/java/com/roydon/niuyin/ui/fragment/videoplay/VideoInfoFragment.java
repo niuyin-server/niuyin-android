@@ -27,6 +27,8 @@ import com.hjq.base.BaseAdapter;
 import com.hjq.base.BaseDialog;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.umeng.Platform;
+import com.hjq.umeng.UmengShare;
 import com.hjq.widget.layout.WrapRecyclerView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
@@ -53,6 +55,7 @@ import com.roydon.niuyin.ui.adapter.VideoCommentParentAdapter;
 import com.roydon.niuyin.ui.adapter.VideoRelateRecommendAdapter;
 import com.roydon.niuyin.ui.adapter.VideoTagAdapter;
 import com.roydon.niuyin.ui.dialog.MessageDialog;
+import com.roydon.niuyin.ui.dialog.ShareDialog;
 import com.roydon.niuyin.ui.dialog.VideoCommentReplayDialog;
 import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
@@ -114,7 +117,7 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     @BindView(R.id.sb_favorite)
     ShineButton mBehaveFavoriteButton;
     @BindView(R.id.sb_share)
-    ShineButton mBehaveShareButton;
+    ImageView mBehaveShareButton;
     @BindView(R.id.tv_like_num)
     TextView videoLikeNumTV;
     @BindView(R.id.tv_favorite_num)
@@ -170,7 +173,6 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         mBehaveLikeButton.init(getAttachActivity());
         mBehaveNotLikeButton.init(getAttachActivity());
         mBehaveFavoriteButton.init(getAttachActivity());
-        mBehaveShareButton.init(getAttachActivity());
         mBehaveLikeButton.setOnClickListener(this);
         mBehaveNotLikeButton.setOnClickListener(this);
         mBehaveFavoriteButton.setOnClickListener(this);
@@ -315,6 +317,33 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
             case R.id.sb_favorite:
                 break;
             case R.id.sb_share:
+                new ShareDialog.Builder(getContext())
+                        // 分享标题
+                        .setShareTitle(videoInfoVO.getVideoTitle())
+                        // 分享描述
+                        .setShareDescription(videoInfoVO.getVideoDesc())
+                        // 分享缩略图
+                        .setShareLogo(videoInfoVO.getCoverImage())
+                        // 分享链接
+                        .setShareUrl(videoInfoVO.getVideoUrl())
+                        .setListener(new UmengShare.OnShareListener() {
+
+                            @Override
+                            public void onSucceed(Platform platform) {
+                                toast("分享成功");
+                            }
+
+                            @Override
+                            public void onError(Platform platform, Throwable t) {
+                                toast("分享出错");
+                            }
+
+                            @Override
+                            public void onCancel(Platform platform) {
+                                toast("分享取消");
+                            }
+                        })
+                        .show();
                 break;
             case R.id.ll_open_desc:
                 if (mVideoDescMaterialCardView.getVisibility() == View.GONE) {

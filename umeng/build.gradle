@@ -10,7 +10,7 @@ android {
         // 清单占位符
         manifestPlaceholders = [
                 // 友盟 AppKey
-                "UMENG_APPKEY" : "5cb16d93570df399fd0014e2",
+                "UMENG_APPKEY" : "6627bcc3940d5a4c49462169",
                 // QQ AppId
                 "QQ_APPID" : "101828096",
                 // QQ AppKey
