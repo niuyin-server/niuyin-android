@@ -1,12 +1,16 @@
 package com.roydon.niuyin.ui.fragment;
 
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
+
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.base.BaseAdapter;
@@ -47,6 +51,8 @@ import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
+import xyz.doikki.videocontroller.StandardVideoController;
+import xyz.doikki.videoplayer.util.L;
 
 /**
  * desc   : 朋友
@@ -133,6 +139,56 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
             }
         });
         videoDynamicRV.setAdapter(videoImageDynamicAdapter);
+//        videoDynamicRV.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Overrided
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//                int firstVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+//                int lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition();
+//
+//                // 判断视频是否完全展示在窗口
+//                if (firstVisibleItemPosition >= 0 && lastVisibleItemPosition >= 0) {
+//                    for (int i = firstVisibleItemPosition; i <= lastVisibleItemPosition; i++) {
+//                        View child = layoutManager.findViewByPosition(i);
+//                        // 判断视频view是否完全展示在窗口
+//                        if (isViewCompletelyDisplayed(child)) {
+//                            // 自动播放视频
+//                            handleVideoPlay((VideoImageDynamicAdapter.ViewHolderVideo) child.getTag());
+//                            // 播放逻辑
+//                        }
+//                    }
+//                }
+//            }
+//        });
+    }
+
+    // 判断view是否完全展示在窗口的方法
+    private boolean isViewCompletelyDisplayed(View view) {
+        if (view == null) {
+            return false;
+        }
+
+        Rect scrollBounds = new Rect();
+        videoDynamicRV.getHitRect(scrollBounds);
+        return view.getLocalVisibleRect(scrollBounds);
+    }
+
+    VideoImageDynamicAdapter.ViewHolderVideo videoViewHolder;
+
+
+    private void handleVideoPlay(VideoImageDynamicAdapter.ViewHolderVideo videoViewHolder) {
+        this.videoViewHolder = videoViewHolder;
+        // 检查视频是否已准备就绪，如果未播放则开始播放
+        if (!videoViewHolder.videoPlayer.isPlaying()) {
+            StandardVideoController controller = new StandardVideoController(getContext());
+            controller.addDefaultControlComponent("", false);
+            videoViewHolder.videoPlayer.setVideoController(controller); //设置控制器
+            videoViewHolder.videoPlayer.start();
+            videoViewHolder.mCoverIV.setVisibility(View.GONE);
+            videoViewHolder.videoStatus.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -274,4 +330,9 @@ public final class FragmentFriend extends MyFragment<HomeActivity> implements St
         return !super.isStatusBarEnabled();
     }
 
+    @Override
+    public void onPause() {
+//        videoViewHolder.videoPlayer.pause();
+        super.onPause();
+    }
 }

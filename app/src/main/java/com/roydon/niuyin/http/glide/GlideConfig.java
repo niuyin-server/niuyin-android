@@ -22,15 +22,17 @@ import java.io.File;
 import java.io.InputStream;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/15
- *    desc   : Glide 全局配置
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/12/15
+ * desc   : Glide 全局配置
  */
 @GlideModule
 public class GlideConfig extends AppGlideModule {
 
-    /** 本地图片缓存文件最大值 */
+    /**
+     * 本地图片缓存文件最大值
+     */
     private static final int IMAGE_DISK_CACHE_MAX_SIZE = 256 * 1024 * 1024;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -61,7 +63,7 @@ public class GlideConfig extends AppGlideModule {
         builder.setBitmapPool(new LruBitmapPool(customBitmapPoolSize));
 
         // 设置默认的加载占位图和加载出错图
-        builder.setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.image_loading_card).error(R.drawable.image_loading_error));
+        builder.setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.image_loading_bg).error(R.drawable.image_loading_error));
     }
 
     @Override

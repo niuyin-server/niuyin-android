@@ -3,7 +3,6 @@ package com.roydon.niuyin.ui.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,19 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
+import com.hjq.widget.layout.RatioFrameLayout;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyAdapter;
 import com.roydon.niuyin.http.glide.GlideApp;
-import com.roydon.niuyin.http.response.social.DynamicUser;
 import com.roydon.niuyin.http.response.video.VideoVO;
+import com.roydon.niuyin.other.MediaVideoInfo;
 import com.roydon.niuyin.ui.activity.ImageActivity;
 import com.roydon.niuyin.utils.DateUtils;
 import com.roydon.niuyin.utils.TimeUtils;
-import com.youth.banner.Banner;
-import com.youth.banner.holder.BannerImageHolder;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
 import com.zhpan.indicator.enums.IndicatorSlideMode;
@@ -33,8 +29,10 @@ import com.zhpan.indicator.enums.IndicatorStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
+import xyz.doikki.videoplayer.player.VideoView;
 
 /**
  * 视频、图文动态
@@ -63,7 +61,7 @@ public final class VideoImageDynamicAdapter extends MyAdapter<VideoVO> {
         }
     }
 
-    final class ViewHolderVideo extends MyAdapter.ViewHolder {
+    public final class ViewHolderVideo extends MyAdapter.ViewHolder {
 
         ViewHolderVideo() {
             super(R.layout.item_video_dynamic);
@@ -76,7 +74,7 @@ public final class VideoImageDynamicAdapter extends MyAdapter<VideoVO> {
         @BindView(R.id.tv_publish_time)
         TextView mPublishTimeTV;
         @BindView(R.id.iv_cover)
-        ImageView mCoverIV;
+        public ImageView mCoverIV;
         @BindView(R.id.tv_title)
         TextView mTitleIV;
         @BindView(R.id.tv_like_num)
@@ -85,6 +83,12 @@ public final class VideoImageDynamicAdapter extends MyAdapter<VideoVO> {
         TextView mCommentNumIV;
         @BindView(R.id.tv_favorite_num)
         TextView mFavoriteNumIV;
+        @BindView(R.id.rl_screen_scale)
+        RatioFrameLayout screenScaleLayout;
+        @BindView(R.id.videoPlayer)
+        public VideoView videoPlayer;
+        @BindView(R.id.iv_video_status)
+        public ImageView videoStatus;
 
         @SuppressLint("SetTextI18n")
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -106,10 +110,26 @@ public final class VideoImageDynamicAdapter extends MyAdapter<VideoVO> {
             mLikeNumIV.setText(item.getLikeNum() + "");
             mCommentNumIV.setText(item.getLikeNum() + "");
             mFavoriteNumIV.setText(item.getLikeNum() + "");
+            // 设置视频比例 4:3竖屏视频
+            if (!Objects.isNull(item.getVideoInfo())) {
+                MediaVideoInfo mediaVideoInfo = new Gson().fromJson(item.getVideoInfo(), MediaVideoInfo.class);
+                if (mediaVideoInfo.getWidth() > mediaVideoInfo.getHeight()) {
+                    // 横屏 1.6
+                    screenScaleLayout.setSizeRatio(1.6f);
+                } else if (mediaVideoInfo.getHeight() > mediaVideoInfo.getWidth()) {
+                    // 竖屏 0.75
+                    screenScaleLayout.setSizeRatio(0.75f);
+                }
+            }
+            videoPlayer.setUrl(item.getVideoUrl()); //设置视频地址
+//            StandardVideoController controller = new StandardVideoController(getContext());
+//            controller.addDefaultControlComponent(item.getVideoTitle(), false);
+//            videoPlayer.setVideoController(controller); //设置控制器
+//            videoPlayer.start(); //开始播放，不调用则不自动播放
         }
     }
 
-    final class ViewHolderImage extends MyAdapter.ViewHolder {
+    public final class ViewHolderImage extends MyAdapter.ViewHolder {
 
         ViewHolderImage() {
             super(R.layout.item_image_dynamic);

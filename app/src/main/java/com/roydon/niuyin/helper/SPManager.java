@@ -13,6 +13,7 @@ public class SPManager {
     public static final String USERID = "userId";
     public static final String USERNAME = "userName";
     public static final String AVATAR = "avatar";
+    public static final String BACK_IMAGE = "backImage";
 
     private static final String NAME = "config";
 

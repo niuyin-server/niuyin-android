@@ -1,5 +1,8 @@
 package com.roydon.niuyin.ui.activity;
 
+import static com.roydon.niuyin.helper.SPManager.AVATAR;
+import static com.roydon.niuyin.helper.SPManager.BACK_IMAGE;
+
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -26,6 +29,7 @@ import com.hjq.widget.view.CountdownView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
+import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.InputTextHelper;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.helper.TokenManager;
@@ -235,6 +239,7 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                         TokenManager.getInstance(getActivity()).saveToken(data.getData().getToken());
                         // 跳转到主页
                         startActivity(HomeActivity.class);
+//                        ActivityStackManager.getInstance().finishAllActivities(HomeActivity.class);
                         finish();
                     }
 
@@ -255,7 +260,8 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                     public void onSucceed(HttpData<MemberInfoVO> data) {
                         MemberInfoVO memberInfoVO = data.getData();
                         // 更新缓存
-                        spSetString(SPUtils.AVATAR, memberInfoVO.getAvatar());
+                        spSetString(AVATAR, memberInfoVO.getAvatar());
+                        spSetString(BACK_IMAGE, memberInfoVO.getMemberInfo().getBackImage());
                     }
                 });
     }

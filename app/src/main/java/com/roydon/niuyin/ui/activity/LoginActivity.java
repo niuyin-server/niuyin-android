@@ -18,6 +18,7 @@ import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.DebugLog;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
+import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.InputTextHelper;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.helper.TokenManager;
@@ -157,9 +158,11 @@ public final class LoginActivity extends MyActivity implements UmengLogin.OnLogi
         switch (v.getId()) {
             case R.id.tv_login_sms:
                 startActivity(LoginSmsActivity.class);
+                finish();
                 break;
             case R.id.tv_login_forget:
                 startActivity(PasswordForgetActivity.class);
+                finish();
                 break;
             case R.id.btn_login_commit:
                 if (mPhoneView.getText().toString().length() != 11) {
@@ -178,7 +181,7 @@ public final class LoginActivity extends MyActivity implements UmengLogin.OnLogi
             case R.id.iv_login_qq:
                 break;
             case R.id.iv_login_wx:
-                toast("记得改好第三方 AppID 和 AppKey，否则会调不起来哦");
+//                toast("记得改好第三方 AppID 和 AppKey，否则会调不起来哦");
                 Platform platform;
                 switch (v.getId()) {
                     case R.id.iv_login_qq:
@@ -222,6 +225,7 @@ public final class LoginActivity extends MyActivity implements UmengLogin.OnLogi
                         TokenManager.getInstance(getActivity()).saveToken(data.getData().getToken());
                         // 跳转到主页
                         startActivity(HomeActivity.class);
+//                        ActivityStackManager.getInstance().finishAllActivities(HomeActivity.class);
                         finish();
 
                     }

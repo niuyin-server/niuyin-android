@@ -1,5 +1,8 @@
 package com.roydon.niuyin.ui.fragment;
 
+import static com.roydon.niuyin.helper.SPManager.AVATAR;
+import static com.roydon.niuyin.helper.SPManager.BACK_IMAGE;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
@@ -33,6 +36,7 @@ import com.hjq.widget.square.SquareImageView;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.helper.SPManager;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
@@ -132,7 +136,20 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
         mSlidingTabLayout.setCurrentTab(0);
 
         setOnClickListener(R.id.iv_menu_list, R.id.ll_userinfo, R.id.ll_follows, R.id.ll_fans);
-
+        if (SPManager.getInstance(getActivity()).hasString(SPManager.BACK_IMAGE)) {
+            GlideApp.with(this)
+                    .load(spGetString(SPManager.BACK_IMAGE))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .into(mUserBgView);
+        }
+        if (SPManager.getInstance(getActivity()).hasString(AVATAR)) {
+            GlideApp.with(this)
+                    .load(spGetString(SPManager.AVATAR))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .into(mAvatarView);
+        }
     }
 
     @Override
@@ -152,7 +169,7 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_GET_USERINFO);
                         // 更新缓存
-                        spSetString(SPUtils.AVATAR, memberInfoVO.getAvatar());
+                        spSetString(AVATAR, memberInfoVO.getAvatar());
                     }
                 });
 
@@ -189,11 +206,14 @@ public final class FragmentMe extends MyFragment<HomeActivity> implements XColla
                     .into(mMenuAvatarView);
             mMenuAvatarView.setVisibility(View.GONE);
         }
-        if (memberInfoVO.getMemberInfo().getBackImage() != null && !memberInfoVO.getMemberInfo().getBackImage().equals("")) {
-            GlideApp.with(this)
-                    .load(memberInfoVO.getMemberInfo().getBackImage())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(mUserBgView);
+//        if (memberInfoVO.getMemberInfo().getBackImage() != null && !memberInfoVO.getMemberInfo().getBackImage().equals("")) {
+//            GlideApp.with(this)
+//                    .load(memberInfoVO.getMemberInfo().getBackImage())
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .into(mUserBgView);
+//        }
+        if (memberInfoVO.getMemberInfo().getBackImage() != null && !memberInfoVO.getMemberInfo().getBackImage().equals("") && !spGetString(SPManager.BACK_IMAGE).equals(memberInfoVO.getMemberInfo().getBackImage())) {
+            spSetString(BACK_IMAGE, memberInfoVO.getMemberInfo().getBackImage());
         }
         mNickNameView.setText(memberInfoVO.getNickName());
         mMenuNicknameView.setText(memberInfoVO.getNickName());

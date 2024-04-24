@@ -14,7 +14,6 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.helper.SPManager;
-import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.VideoCategoryActivity;

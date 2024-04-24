@@ -95,7 +95,7 @@
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="1"
-                        tools:listitem="@layout/item_recommend_video" />
+                        tools:listitem="@layout/item_video_dynamic" />
                 </com.roydon.niuyin.widget.HintLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
