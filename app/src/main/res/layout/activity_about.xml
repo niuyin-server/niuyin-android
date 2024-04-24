@@ -48,6 +48,17 @@
             android:text="@string/github_link"
             android:textSize="15sp" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:autoLink="all"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="20dp"
+            android:text="@string/author_link"
+            android:textColor="@color/primaryRed"
+            android:textSize="15sp" />
+
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView

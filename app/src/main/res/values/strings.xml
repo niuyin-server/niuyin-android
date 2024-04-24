@@ -141,13 +141,16 @@
     <string name="setting_update">检查更新</string>
     <string name="setting_cache">清空缓存</string>
     <string name="setting_auto">自动登录</string>
+    <string name="setting_author">作者信息</string>
+    <string name="setting_web">niuyin-web</string>
+    <string name="setting_creator">创作者中心</string>
     <string name="setting_agreement">隐私协议</string>
     <string name="setting_about">关于</string>
     <string name="setting_exit">退出登录</string>
 
     <!-- 关于 -->
     <string name="about_title">关于</string>
-    <string name="about_author"><font color="#f69f69">Android</font> — roydon</string>
+    <string name="about_author"><font color="#f69f69">niuyin-android</font> — roydon</string>
 
     <string name="about_copyright">Copyright © 2023 &#8211; 2024</string>
 
@@ -212,5 +215,8 @@
     <string name="photo_picture_error">图片错误</string>
 
     <string name="github_link">https://github.com/roydonGuo</string>
+    <string name="author_link">https://www.roydon.asia</string>
+    <string name="niuyin_web_link">http://106.14.105.101:5173</string>
+    <string name="niuyin_creator_link">http://106.14.105.101:5273</string>
 
 </resources>

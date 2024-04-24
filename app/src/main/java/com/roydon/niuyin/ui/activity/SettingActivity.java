@@ -52,7 +52,7 @@ public final class SettingActivity extends MyActivity
         mAutoSwitchView.setOnCheckedChangeListener(this);
 
         setOnClickListener(R.id.sb_setting_language, R.id.sb_setting_update, R.id.sb_setting_agreement, R.id.sb_setting_about,
-                R.id.sb_setting_cache, R.id.sb_setting_auto, R.id.sb_setting_exit);
+                R.id.sb_setting_cache, R.id.sb_setting_auto, R.id.sb_setting_exit, R.id.sb_setting_author, R.id.sb_setting_web, R.id.sb_setting_creator);
     }
 
     @Override
@@ -94,8 +94,17 @@ public final class SettingActivity extends MyActivity
                     toast(R.string.update_no_update);
                 }
                 break;
+            case R.id.sb_setting_author:
+                BrowserActivity.start(this, getString(R.string.author_link));
+                break;
+            case R.id.sb_setting_web:
+                BrowserActivity.start(this, getString(R.string.niuyin_web_link));
+                break;
+            case R.id.sb_setting_creator:
+                BrowserActivity.start(this, getString(R.string.niuyin_creator_link));
+                break;
             case R.id.sb_setting_agreement:
-                BrowserActivity.start(this, "https://github.com/getActivity/Donate");
+                BrowserActivity.start(this, getString(R.string.author_link));
                 break;
             case R.id.sb_setting_about:
                 startActivity(AboutActivity.class);
