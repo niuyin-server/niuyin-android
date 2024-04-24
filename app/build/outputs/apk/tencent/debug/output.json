@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.roydon.niuyin",
+  "variantName": "tencentDebug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 10,
+      "versionName": "10",
+      "enabled": true,
+      "outputFile": "niuyin-android_v1.0_debug.apk"
+    }
+  ]
+}
