@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/07/25
  *    desc   : 图片选择列表分割线
  */
 public final class GridSpaceDecoration extends RecyclerView.ItemDecoration {

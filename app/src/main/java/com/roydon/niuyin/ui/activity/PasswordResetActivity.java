@@ -20,9 +20,6 @@ import com.hjq.http.listener.HttpCallback;
 import butterknife.BindView;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/02/27
  * desc   : 重置密码
  */
 public final class PasswordResetActivity extends MyActivity {

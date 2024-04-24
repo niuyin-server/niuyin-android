@@ -19,9 +19,6 @@ import com.hjq.widget.view.CountdownView;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/04/20
  *    desc   : 校验手机号
  */
 public final class PhoneVerifyActivity extends MyActivity {

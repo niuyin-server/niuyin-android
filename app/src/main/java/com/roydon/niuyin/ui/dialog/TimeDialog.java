@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/08/17
  * desc   : 时间选择对话框
  */
 public final class TimeDialog {

@@ -23,9 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/10/09
  *    desc   : 单选或者多选对话框
  */
 public final class SelectDialog {

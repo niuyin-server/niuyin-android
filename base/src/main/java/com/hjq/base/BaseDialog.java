@@ -43,9 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/11/24
  *    desc   : Dialog 基类
  */
 public class BaseDialog extends AppCompatDialog implements ContextAction, HandlerAction, ClickAction,

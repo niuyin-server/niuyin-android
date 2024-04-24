@@ -18,9 +18,6 @@ import com.hjq.widget.view.CountdownView;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/02/27
  *    desc   : 忘记密码
  */
 public final class PasswordForgetActivity extends MyActivity {

@@ -22,9 +22,6 @@ import java.io.File;
 import java.io.InputStream;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/12/15
  * desc   : Glide 全局配置
  */
 @GlideModule

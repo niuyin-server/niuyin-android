@@ -21,9 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/10/18
  * desc   : 菜单 PopupWindow
  */
 public final class MenuPopup {

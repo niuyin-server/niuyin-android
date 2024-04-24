@@ -6,9 +6,6 @@ import com.hjq.base.BasePopupWindow;
 import com.roydon.niuyin.R;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/10/18
  * desc   : 可进行拷贝的副本
  */
 public final class CopyPopup {

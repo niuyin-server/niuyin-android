@@ -22,9 +22,6 @@ import com.hjq.widget.view.CountdownView;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/04/20
  *    desc   : 更换手机号
  */
 public final class PhoneResetActivity extends MyActivity {

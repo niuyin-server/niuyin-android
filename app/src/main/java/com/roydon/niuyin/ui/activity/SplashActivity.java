@@ -19,9 +19,6 @@ import com.hjq.http.listener.HttpCallback;
 import butterknife.BindView;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2018/10/18
  * desc   : 闪屏界面
  */
 public final class SplashActivity extends MyActivity {

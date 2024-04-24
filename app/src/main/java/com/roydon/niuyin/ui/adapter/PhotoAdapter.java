@@ -18,9 +18,6 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/07/24
  *    desc   : 图片选择适配器
  */
 public final class PhotoAdapter extends MyAdapter<String> {

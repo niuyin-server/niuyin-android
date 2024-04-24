@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.hjq.base.BaseDialog;
 import com.hjq.base.action.AnimAction;
+import com.hjq.http.EasyConfig;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
@@ -17,6 +18,7 @@ import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.LogoutApi;
 import com.roydon.niuyin.other.AppConfig;
+import com.roydon.niuyin.other.CommonConstants;
 import com.roydon.niuyin.ui.dialog.MenuDialog;
 import com.roydon.niuyin.ui.dialog.MessageDialog;
 import com.roydon.niuyin.ui.dialog.UpdateDialog;
@@ -28,9 +30,6 @@ import com.hjq.widget.view.SwitchButton;
 import butterknife.BindView;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/03/01
  * desc   : 设置界面
  */
 public final class SettingActivity extends MyActivity
@@ -133,11 +132,10 @@ public final class SettingActivity extends MyActivity
                                 // 清除token
                                 TokenManager.getInstance(getActivity()).clearToken();
                                 // 清除用户缓存
-//                                SPUtils.clear(getActivity());
                                 SPManager.getInstance(getActivity()).clear();
-                                startActivity(LoginActivity.class);
                                 // 进行内存优化，销毁除登录页之外的所有界面
-                                ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+                                ActivityStackManager.getInstance().finishAllActivities();
+                                startActivity(LoginActivity.class);
                             }
 
                             @Override

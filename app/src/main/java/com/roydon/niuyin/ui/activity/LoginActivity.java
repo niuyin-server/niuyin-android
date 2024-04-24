@@ -157,12 +157,12 @@ public final class LoginActivity extends MyActivity implements UmengLogin.OnLogi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_login_sms:
-                startActivity(LoginSmsActivity.class);
                 finish();
+                startActivity(LoginSmsActivity.class);
                 break;
             case R.id.tv_login_forget:
-                startActivity(PasswordForgetActivity.class);
                 finish();
+                startActivity(PasswordForgetActivity.class);
                 break;
             case R.id.btn_login_commit:
                 if (mPhoneView.getText().toString().length() != 11) {

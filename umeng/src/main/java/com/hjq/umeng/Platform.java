@@ -5,7 +5,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 /**
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/04/03
  *    desc   : 友盟平台
  */
 public enum Platform {

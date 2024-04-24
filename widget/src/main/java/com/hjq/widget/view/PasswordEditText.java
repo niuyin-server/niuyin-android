@@ -16,9 +16,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import com.hjq.widget.R;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/08/25
  *    desc   : 密码隐藏显示 EditText
  */
 public final class PasswordEditText extends RegexEditText

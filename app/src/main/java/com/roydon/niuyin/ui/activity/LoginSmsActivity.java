@@ -232,15 +232,14 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                     public void onSucceed(HttpData<LoginBean> data) {
                         toast("登录成功");
                         apiGetUserInfo();
+//                        finish();
+                        startActivity(HomeActivity.class);
+                        ActivityStackManager.getInstance().finishAllActivities(HomeActivity.class);
                         // 更新 Token
-//                                EasyConfig.getInstance().addParam("token", data.getData().getToken());
                         EasyConfig.getInstance().addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + data.getData().getToken());
                         // token保存到本地
                         TokenManager.getInstance(getActivity()).saveToken(data.getData().getToken());
                         // 跳转到主页
-                        startActivity(HomeActivity.class);
-//                        ActivityStackManager.getInstance().finishAllActivities(HomeActivity.class);
-                        finish();
                     }
 
                     @Override

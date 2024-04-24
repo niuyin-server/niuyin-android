@@ -29,9 +29,6 @@ import com.roydon.niuyin.ui.dialog.MessageDialog;
 import com.roydon.niuyin.ui.dialog.ToastDialog;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/09/24
  *    desc   : 基于 WebView 封装
  */
 public final class BrowserView extends WebView {

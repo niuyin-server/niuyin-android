@@ -12,9 +12,6 @@ import com.roydon.niuyin.common.MyAdapter;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/09/22
  *    desc   : 状态数据列表
  */
 public final class StatusAdapter extends MyAdapter<String> {

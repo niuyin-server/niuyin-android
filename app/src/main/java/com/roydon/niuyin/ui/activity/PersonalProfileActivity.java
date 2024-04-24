@@ -22,9 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/04/20
  * desc   : 个人资料
  */
 public final class PersonalProfileActivity extends MyActivity {

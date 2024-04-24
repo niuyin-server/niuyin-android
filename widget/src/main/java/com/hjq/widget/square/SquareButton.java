@@ -6,9 +6,6 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatButton;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/07/06
  *    desc   : 正方形的 Button
  */
 public final class SquareButton extends AppCompatButton {

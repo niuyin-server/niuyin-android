@@ -11,9 +11,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.roydon.niuyin.R;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/09/21
  * desc   : 引导页适配器
  */
 public final class GuidePagerAdapter extends PagerAdapter {

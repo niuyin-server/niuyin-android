@@ -12,9 +12,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/07/04
  *    desc   : 软键盘监听类
  */
 public final class KeyboardWatcher implements
