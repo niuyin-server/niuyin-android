@@ -38,6 +38,7 @@ import com.roydon.niuyin.enums.VideoScreenType;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.model.PageDataInfo;
+import com.roydon.niuyin.http.request.behave.FavoriteFolderListApi;
 import com.roydon.niuyin.http.request.behave.VideoCommentParentPageApi;
 import com.roydon.niuyin.http.request.behave.VideoLikeApi;
 import com.roydon.niuyin.http.request.behave.VideoUnlikeApi;
@@ -45,6 +46,7 @@ import com.roydon.niuyin.http.request.notice.UnreadNoticeCountApi;
 import com.roydon.niuyin.http.request.social.FollowUserApi;
 import com.roydon.niuyin.http.request.video.RelateVideoRecommendApi;
 import com.roydon.niuyin.http.response.behave.AppVideoUserCommentParentVO;
+import com.roydon.niuyin.http.response.behave.FavoriteFolderVO;
 import com.roydon.niuyin.http.response.video.RelateVideoVO;
 import com.roydon.niuyin.http.response.video.VideoInfoVO;
 import com.roydon.niuyin.other.MediaVideoInfo;
@@ -54,7 +56,9 @@ import com.roydon.niuyin.ui.activity.VideoPlayActivity;
 import com.roydon.niuyin.ui.adapter.VideoCommentParentAdapter;
 import com.roydon.niuyin.ui.adapter.VideoRelateRecommendAdapter;
 import com.roydon.niuyin.ui.adapter.VideoTagAdapter;
+import com.roydon.niuyin.ui.dialog.FavoritesFolderDialog;
 import com.roydon.niuyin.ui.dialog.MessageDialog;
+import com.roydon.niuyin.ui.dialog.SelectDialog;
 import com.roydon.niuyin.ui.dialog.ShareDialog;
 import com.roydon.niuyin.ui.dialog.VideoCommentReplayDialog;
 import com.roydon.niuyin.utils.DateUtils;
@@ -67,8 +71,13 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import butterknife.BindView;
 
@@ -85,6 +94,7 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     private static final int HANDLER_VIDEO_RELATE_RECOMMEND_MORE = 2;
     private static final int HANDLER_VIDEO_LIKE_SUCCESS = 10;
     private static final int HANDLER_VIDEO_UNLIKE_SUCCESS = 11;
+    private static final int HANDLER_FAVORITE_FOLDER_LIST_SUCCESS = 20;
 
     @BindView(R.id.ll_author)
     LinearLayout mAuthorLayout;
@@ -139,6 +149,9 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
 
     VideoRelateRecommendAdapter videoRelateRecommendAdapter;
     private List<RelateVideoVO> relateVideoVOList;
+
+    // 收藏夹列表
+    List<FavoriteFolderVO> favoriteFolderVOList;
 
     public static VideoInfoFragment newInstance() {
         return new VideoInfoFragment();
@@ -227,6 +240,7 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
     @Override
     protected void lazyLoadData() {
         getVideoRelateRecommend(true);
+        apiFavoriteFolderList(videoInfoVO.getVideoId());
     }
 
     @SuppressLint("SetTextI18n")
@@ -249,25 +263,59 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
         mBehaveFavoriteButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new MessageDialog.Builder(getContext())
-                        // 标题可以不用填写
-                        .setTitle("我是标题")
-                        // 内容必须要填写
-                        .setMessage("我是内容")
-                        // 确定按钮文本
-                        .setConfirm(getString(R.string.common_confirm))
-                        // 设置 null 表示不显示取消按钮
-                        .setCancel(getString(R.string.common_cancel))
-                        // 设置点击按钮后不关闭对话框
-                        //.setAutoDismiss(false)
-                        .setListener(new MessageDialog.OnListener() {
+//                new MessageDialog.Builder(getContext())
+//                        // 标题可以不用填写
+//                        .setTitle("我是标题")
+//                        // 内容必须要填写
+//                        .setMessage("我是内容")
+//                        // 确定按钮文本
+//                        .setConfirm(getString(R.string.common_confirm))
+//                        // 设置 null 表示不显示取消按钮
+//                        .setCancel(getString(R.string.common_cancel))
+//                        // 设置点击按钮后不关闭对话框
+//                        //.setAutoDismiss(false)
+//                        .setListener(new MessageDialog.OnListener() {
+//
+//                            @Override
+//                            public void onConfirm(BaseDialog dialog) {
+//                            }
+//
+//                            @Override
+//                            public void onCancel(BaseDialog dialog) {
+//                            }
+//                        })
+//                        .show();
+//                toast("收藏");
+//                new FavoritesFolderDialog.Builder(getContext()).show();
+                // 使用Java Stream筛选出weatherFavorite为true的元素的下标集合
+                List<Integer> indexList = IntStream.range(0, favoriteFolderVOList.size())
+                        .filter(i -> favoriteFolderVOList.get(i).getWeatherFavorite())
+                        .boxed()
+                        .collect(Collectors.toList());
+
+                // 多选对话框
+                new FavoritesFolderDialog.Builder(getContext())
+                        .setList(favoriteFolderVOList)
+                        // 设置默认选中
+                        .setSelect(indexList)
+                        .setListener(new FavoritesFolderDialog.OnListener<FavoriteFolderVO>() {
 
                             @Override
-                            public void onConfirm(BaseDialog dialog) {
+                            public void onSelected(BaseDialog dialog, HashMap<Integer, FavoriteFolderVO> data) {
+                                Set<Long> folderIdSet = new HashSet<>();
+                                data.entrySet().forEach(entry -> {
+                                    folderIdSet.add(entry.getValue().getFavoriteId());
+                                });
+                                if (folderIdSet.isEmpty()) {
+                                    return;
+                                } else {
+                                    toast("确定了" + folderIdSet.toString());
+                                }
                             }
 
                             @Override
                             public void onCancel(BaseDialog dialog) {
+                                toast("取消了");
                             }
                         })
                         .show();
@@ -388,6 +436,8 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
                 case HANDLER_VIDEO_UNLIKE_SUCCESS:
                     videoLikeNumTV.setText((Integer.parseInt(videoLikeNumTV.getText().toString()) - 1) + "");
                     break;
+                case HANDLER_FAVORITE_FOLDER_LIST_SUCCESS:
+                    break;
                 default:
                     break;
             }
@@ -487,6 +537,29 @@ public class VideoInfoFragment extends MyFragment<VideoPlayActivity> implements 
                         if (data.getData()) {
                             mHandler.sendEmptyMessage(HANDLER_VIDEO_UNLIKE_SUCCESS);
                         }
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                    }
+                });
+    }
+
+    /**
+     * 根据视频id查询收藏夹列表
+     *
+     * @param videoId
+     */
+    private void apiFavoriteFolderList(String videoId) {
+        EasyHttp.get(this)
+                .api(new FavoriteFolderListApi().setVideoId(videoId))
+                .request(new HttpCallback<HttpData<List<FavoriteFolderVO>>>(getAttachActivity()) {
+
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSucceed(HttpData<List<FavoriteFolderVO>> data) {
+                        favoriteFolderVOList = data.getData();
+                        mHandler.sendEmptyMessage(HANDLER_FAVORITE_FOLDER_LIST_SUCCESS);
                     }
 
                     @Override

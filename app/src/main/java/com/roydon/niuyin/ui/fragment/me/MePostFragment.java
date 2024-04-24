@@ -73,6 +73,11 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
     }
 
     @Override
+    protected boolean statusBarDarkFont() {
+        return !super.statusBarDarkFont();
+    }
+
+    @Override
     protected void initView() {
         mAdapter = new MePostAdapter(getContext());
         mAdapter.setOnItemClickListener(this);

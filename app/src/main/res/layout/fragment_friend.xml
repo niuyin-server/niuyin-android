@@ -14,7 +14,6 @@
         app:backButton="false"
         app:title="@string/home_nav_friend" />
 
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         style="@style/RefreshLayoutStyle"

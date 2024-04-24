@@ -73,6 +73,11 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     }
 
     @Override
+    protected boolean statusBarDarkFont() {
+        return !super.statusBarDarkFont();
+    }
+
+    @Override
     protected void initView() {
         mAdapter = new MeFavoriteVideoAdapter(getContext());
         mAdapter.setOnItemClickListener(this);

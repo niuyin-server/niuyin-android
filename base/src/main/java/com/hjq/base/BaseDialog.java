@@ -387,7 +387,7 @@ public class BaseDialog extends AppCompatDialog implements ContextAction, Handle
         /** 背景遮盖层开关 */
         private boolean mBackgroundDimEnabled = true;
         /** 背景遮盖层透明度 */
-        private float mBackgroundDimAmount = 0.5f;
+        private float mBackgroundDimAmount = 0.3f;
 
         /** 是否能够被取消 */
         private boolean mCancelable = true;

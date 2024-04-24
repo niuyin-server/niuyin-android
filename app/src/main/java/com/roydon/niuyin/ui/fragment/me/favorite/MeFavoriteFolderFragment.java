@@ -21,6 +21,11 @@ public class MeFavoriteFolderFragment extends MyFragment<HomeActivity> {
     }
 
     @Override
+    protected boolean statusBarDarkFont() {
+        return !super.statusBarDarkFont();
+    }
+
+    @Override
     protected void initView() {
 
     }

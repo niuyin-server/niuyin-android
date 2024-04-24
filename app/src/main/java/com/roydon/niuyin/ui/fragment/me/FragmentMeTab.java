@@ -61,6 +61,11 @@ public final class FragmentMeTab extends MyFragment<HomeActivity> {
         return R.layout.fragment_me_tab;
     }
 
+    @Override
+    protected boolean statusBarDarkFont() {
+        return !super.statusBarDarkFont();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {

@@ -73,6 +73,11 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
     }
 
     @Override
+    protected boolean statusBarDarkFont() {
+        return !super.statusBarDarkFont();
+    }
+
+    @Override
     protected void initView() {
         mAdapter = new MeLikeAdapter(getContext());
         mAdapter.setOnItemClickListener(this);
