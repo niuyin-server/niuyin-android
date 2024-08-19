@@ -1,0 +1,18 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/white50"
+    tools:targetApi="lollipop"> <!-- 设置水波纹的颜色 -->
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white80" />  <!-- 设置水波纹的遮罩颜色 -->
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/transparent" />
+        </shape>
+    </item>
+
+</ripple>

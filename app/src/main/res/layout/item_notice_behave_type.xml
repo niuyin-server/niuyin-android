@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="@drawable/ripple_recommend_video_card"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    tools:context="com.roydon.niuyin.ui.dialog.NoticeBehaveTypeDialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_type_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/notice_like" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_type_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="全部消息" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_type_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_size"
+        android:layout_gravity="bottom"
+        android:background="@color/colorLine" />
+
+</androidx.cardview.widget.CardView>

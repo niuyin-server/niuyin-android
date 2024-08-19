@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.roydon.niuyin.ui.activity.VideoSearchResultActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0px">
+
+        <com.roydon.niuyin.widget.XCollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:scrimVisibleHeightTrigger="100dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+
+            <com.hjq.bar.TitleBar
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:backButton="false"
+                app:barStyle="transparent"
+                app:layout_collapseMode="pin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_back_b" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_search_container"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_video_search_bar"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_search_b" />
+
+                        <com.hjq.widget.view.ClearEditText
+                            android:id="@+id/tv_hint_keyword"
+                            style="@style/EditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center_horizontal"
+                            android:paddingLeft="10dp"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="搜索"
+                        android:textColor="@color/primaryRed"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.hjq.bar.TitleBar>
+
+        </com.roydon.niuyin.widget.XCollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+            <com.roydon.niuyin.widget.HintLayout
+                android:id="@+id/hl_status_hint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                    android:id="@+id/rl_status_refresh"
+                    style="@style/RefreshLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.scwang.smartrefresh.header.MaterialHeader
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.hjq.widget.layout.WrapRecyclerView
+                        android:id="@+id/rv_status_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listCount="10"
+                        tools:listitem="@layout/item_video_search_result" />
+
+                    <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            </com.roydon.niuyin.widget.HintLayout>
+
+</LinearLayout>

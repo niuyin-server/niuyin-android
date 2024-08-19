@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_v"
+    android:orientation="vertical"
+    tools:context="com.roydon.niuyin.ui.fragment.FragmentUpload">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:backButton="false"
+        app:leftIcon="@drawable/ic_setting_b"
+        app:rightIcon="@drawable/ic_drafts_b"
+        app:title="上传" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/iv_feedback"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            android:src="@drawable/ic_slide_b" />-->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/slidingTabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:tl_indicator_color="@color/primaryRed"
+                app:tl_tab_padding="20dp"
+                app:tl_tab_space_equal="true"
+                app:tl_textSelectColor="@color/white"
+                app:tl_textUnselectColor="@color/black"
+                tl:tl_indicator_margin_left="3dp"
+                tl:tl_indicator_margin_right="3dp"
+                tl:tl_indicator_style="BLOCK" />
+        </LinearLayout>
+
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/iv_category"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            android:src="@drawable/ic_category_b" />-->
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.roydon.niuyin.ui.activity.VideoCategoryActivity">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/ic_back_b"
+        app:title="视频分类" />
+
+    <com.roydon.niuyin.widget.HintLayout
+        android:id="@+id/hl_status_hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hjq.widget.layout.WrapRecyclerView
+            android:id="@+id/rv_status_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/item_video_category" />
+
+    </com.roydon.niuyin.widget.HintLayout>
+
+</LinearLayout>

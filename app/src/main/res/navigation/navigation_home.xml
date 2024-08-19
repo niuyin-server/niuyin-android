@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_home"
+    app:startDestination="@id/fragmentIndex">
+
+    <fragment
+        android:id="@+id/fragmentIndex"
+        android:name="com.roydon.niuyin.ui.fragment.FragmentIndex"
+        android:label="@string/home_nav_index"
+        tools:layout="@layout/fragment_index" />
+    <fragment
+        android:id="@+id/fragmentFriend"
+        android:name="com.roydon.niuyin.ui.fragment.FragmentFriend"
+        android:label="fragment_friend"
+        tools:layout="@layout/fragment_friend" />
+    <fragment
+        android:id="@+id/fragmentUpload"
+        android:name="com.roydon.niuyin.ui.fragment.FragmentUpload"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" />
+    <fragment
+        android:id="@+id/fragmentMessage"
+        android:name="com.roydon.niuyin.ui.fragment.FragmentMessage"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/fragmentMe"
+        android:name="com.roydon.niuyin.ui.fragment.FragmentMe"
+        android:label="fragment_me"
+        tools:layout="@layout/fragment_me" />
+
+</navigation>
