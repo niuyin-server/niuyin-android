@@ -177,7 +177,6 @@
         <activity
             android:name=".ui.activity.VideoImagePlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" /> <!-- 视频播放 -->
         <activity
             android:name=".ui.activity.VideoPlayActivity"
