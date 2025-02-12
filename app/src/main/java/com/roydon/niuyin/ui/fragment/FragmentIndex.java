@@ -19,9 +19,9 @@ import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.VideoCategoryActivity;
 import com.roydon.niuyin.ui.activity.VideoSearchActivity;
 import com.roydon.niuyin.ui.adapter.HomeAdapter;
-import com.roydon.niuyin.ui.fragment.index.IndexFollowFragment;
 import com.roydon.niuyin.ui.fragment.index.IndexHotFragment;
 import com.roydon.niuyin.ui.fragment.index.IndexRecommendFragment;
+import com.roydon.niuyin.ui.fragment.index.IndexVideoFeedFragment;
 import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 
 import java.util.ArrayList;
@@ -79,7 +79,8 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         // tab
         String[] mTitles = {"关注", "推荐", "热门"};
         mIndexFragments = new ArrayList<>();
-        mIndexFragments.add(IndexFollowFragment.newInstance());
+//        mIndexFragments.add(IndexFollowFragment.newInstance());
+        mIndexFragments.add(IndexVideoFeedFragment.newInstance());
         mIndexFragments.add(IndexRecommendFragment.newInstance());
         mIndexFragments.add(IndexHotFragment.newInstance());
         mViewPager.setOffscreenPageLimit(mIndexFragments.size());

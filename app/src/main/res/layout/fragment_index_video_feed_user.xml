@@ -4,9 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.roydon.niuyin.ui.fragment.index.IndexVideoFeedFragment">
+    tools:context="com.roydon.niuyin.ui.fragment.index.IndexVideoFeedUserFragment">
 
-    <com.roydon.niuyin.widget.TouchViewPager
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="推荐视频流用户页" />
+
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
