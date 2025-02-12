@@ -17,8 +17,8 @@ public class UserPostPageApi implements IRequestApi {
 
     private Long userId;
     private String videoTitle;
-    private int pageNum = 1;
-    private int pageSize = 10;
+    private int pageNum;
+    private int pageSize;
 
     public UserPostPageApi setUserId(Long userId) {
         this.userId = userId;

@@ -31,9 +31,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -47,7 +45,8 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_MY_LIKE_PAGE = 1;
-    private static final int HANDLER_MY_LIKE_PAGE_ERROR = 2;
+    private static final int HANDLER_MY_LIKE_PAGE_MORE = 2;
+    private static final int HANDLER_MY_LIKE_PAGE_ERROR = 3;
 
     @BindView(R.id.hl_status_hint)
     HintLayout mHintLayout;
@@ -61,7 +60,7 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
     private List<MyLikeVideoVO> myLikeVideoVOList;
 
     private int pageNum = 1;
-    private int pageSize = 12;
+    private int pageSize = 10;
 
     public static MeLikeFragment newInstance() {
         return new MeLikeFragment();
@@ -116,10 +115,9 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
                             myLikeVideoVOList = rows.getRows();
                         } else {
                             mRefreshLayout.finishLoadMore(true);
-                            myLikeVideoVOList.addAll(rows.getRows() == null ? new ArrayList<>() : rows.getRows());
-                        }
-                        if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myLikeVideoVOList.size()) {
-                            mRefreshLayout.setEnableLoadMore(false);
+                            myLikeVideoVOList = rows.getRows();
+                            mHandler.sendEmptyMessage(HANDLER_MY_LIKE_PAGE_MORE);
+                            return;
                         }
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_MY_LIKE_PAGE);
@@ -144,6 +142,10 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
                     break;
                 case HANDLER_MY_LIKE_PAGE:
                     mAdapter.setData(myLikeVideoVOList);
+                    showComplete();
+                    break;
+                case HANDLER_MY_LIKE_PAGE_MORE:
+                    mAdapter.setMoreData(myLikeVideoVOList);
                     showComplete();
                     break;
                 case HANDLER_MY_LIKE_PAGE_ERROR:
@@ -182,7 +184,6 @@ public class MeLikeFragment extends MyFragment<HomeActivity> implements StatusAc
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
-        mRefreshLayout.setEnableLoadMore(true);
         getMyLikePage(true);
     }
 }

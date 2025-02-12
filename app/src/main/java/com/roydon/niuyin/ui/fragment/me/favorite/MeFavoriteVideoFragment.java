@@ -31,9 +31,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -47,7 +45,8 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_MY_FAVORITE_VIDEO_PAGE = 1;
-    private static final int HANDLER_MY_FAVORITE_VIDEO_PAGE_ERROR = 2;
+    private static final int HANDLER_MY_FAVORITE_VIDEO_PAGE_MORE = 2;
+    private static final int HANDLER_MY_FAVORITE_VIDEO_PAGE_ERROR = 3;
 
     @BindView(R.id.hl_status_hint)
     HintLayout mHintLayout;
@@ -61,7 +60,7 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     private List<MyFavoriteVideoVO> myFavoriteVideoVOList;
 
     private int pageNum = 1;
-    private int pageSize = 12;
+    private int pageSize = 10;
 
     public static MeFavoriteVideoFragment newInstance() {
         return new MeFavoriteVideoFragment();
@@ -112,10 +111,9 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
                     myFavoriteVideoVOList = rows.getRows();
                 } else {
                     mRefreshLayout.finishLoadMore(true);
-                    myFavoriteVideoVOList.addAll(Objects.isNull(rows.getRows()) ? new ArrayList<>() : rows.getRows());
-                }
-                if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myFavoriteVideoVOList.size()) {
-                    mRefreshLayout.setEnableLoadMore(false);
+                    myFavoriteVideoVOList = rows.getRows();
+                    mHandler.sendEmptyMessage(HANDLER_MY_FAVORITE_VIDEO_PAGE_MORE);
+                    return;
                 }
                 // 更新ui
                 mHandler.sendEmptyMessage(HANDLER_MY_FAVORITE_VIDEO_PAGE);
@@ -140,6 +138,10 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
                     break;
                 case HANDLER_MY_FAVORITE_VIDEO_PAGE:
                     mAdapter.setData(myFavoriteVideoVOList);
+                    showComplete();
+                    break;
+                case HANDLER_MY_FAVORITE_VIDEO_PAGE_MORE:
+                    mAdapter.setMoreData(myFavoriteVideoVOList);
                     showComplete();
                     break;
                 case HANDLER_MY_FAVORITE_VIDEO_PAGE_ERROR:
@@ -179,7 +181,6 @@ public class MeFavoriteVideoFragment extends MyFragment<HomeActivity> implements
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
-        mRefreshLayout.setEnableLoadMore(true);
         getMyFavoriteVideoPage(true);
     }
 }

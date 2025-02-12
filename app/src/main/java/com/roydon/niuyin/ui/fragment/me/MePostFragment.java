@@ -31,9 +31,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -48,6 +46,7 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
     // handler
     private static final int HANDLER_WHAT_EMPTY = 0;
     private static final int HANDLER_MY_PAGE = 1;
+    private static final int HANDLER_MY_PAGE_MORE = 2;
 
     @BindView(R.id.hl_status_hint)
     HintLayout mHintLayout;
@@ -61,7 +60,7 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
     private List<MyVideoVO> myVideoVOList;
 
     private int pageNum = 1;
-    private int pageSize = 12;
+    private int pageSize = 10;
 
     public static MePostFragment newInstance() {
         return new MePostFragment();
@@ -116,10 +115,9 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
                             myVideoVOList = rows.getRows();
                         } else {
                             mRefreshLayout.finishLoadMore(true);
-                            myVideoVOList.addAll(rows.getRows() == null ? new ArrayList<>() : rows.getRows());
-                        }
-                        if (Objects.isNull(rows.getRows()) || rows.getRows().isEmpty() || rows.getRows().size() < myVideoVOList.size()) {
-                            mRefreshLayout.setEnableLoadMore(false);
+                            myVideoVOList = rows.getRows();
+                            mHandler.sendEmptyMessage(HANDLER_MY_PAGE_MORE);
+                            return;
                         }
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_MY_PAGE);
@@ -144,6 +142,10 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
                     break;
                 case HANDLER_MY_PAGE:
                     mAdapter.setData(myVideoVOList);
+                    showComplete();
+                    break;
+                case HANDLER_MY_PAGE_MORE:
+                    mAdapter.setMoreData(myVideoVOList);
                     showComplete();
                     break;
                 default:
@@ -179,7 +181,6 @@ public class MePostFragment extends MyFragment<HomeActivity> implements StatusAc
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         pageNum = 1;
-        mRefreshLayout.setEnableLoadMore(true);
         getMyPostPage(true);
     }
 }
