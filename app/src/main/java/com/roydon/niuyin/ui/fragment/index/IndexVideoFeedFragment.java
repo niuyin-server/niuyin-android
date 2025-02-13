@@ -43,7 +43,7 @@ public final class IndexVideoFeedFragment extends MyFragment<HomeActivity> imple
 
     @Override
     protected void initView() {
-        fragments.add(IndexVideoFeedRecommendFragment.newInstance());
+//        fragments.add(IndexVideoFeedRecommendFragment.newInstance());
         fragments.add(IndexVideoFeedUserFragment.newInstance());
         viewPager.setOffscreenPageLimit(fragments.size());
         viewPager.setAdapter(new HomeAdapter(getChildFragmentManager(), new String[]{}, fragments));

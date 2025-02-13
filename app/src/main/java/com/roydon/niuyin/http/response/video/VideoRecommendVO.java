@@ -1,5 +1,6 @@
 package com.roydon.niuyin.http.response.video;
 
+import com.google.android.exoplayer2.source.BaseMediaSource;
 import com.roydon.niuyin.http.response.Author;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ public class VideoRecommendVO implements Serializable {
     private String videoId;
     private String videoTitle; //标题
     private String coverImage; //封面
+    private String videoUrl; // 视频地址
     private Long viewNum; //观看量
     private Long likeNum;  // 点赞量
     private Long favoriteNum;  // 收藏量
@@ -18,11 +20,15 @@ public class VideoRecommendVO implements Serializable {
     private String videoInfo;
     private LocalDateTime createTime; //发布时间
     private Long userId;
-    private Author author;
+    public Author author;
 
-    public VideoRecommendVO(String videoId, String videoTitle, String coverImage, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, String videoInfo, LocalDateTime createTime, Long userId, Author author) {
+    /** 本地文件缓存资源 */
+    BaseMediaSource mediaSource;
+
+    public VideoRecommendVO(String videoId, String videoTitle, String coverImage,String videoUrl, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, String videoInfo, LocalDateTime createTime, Long userId, Author author) {
         this.videoId = videoId;
         this.videoTitle = videoTitle;
+        this.videoUrl = videoUrl;
         this.coverImage = coverImage;
         this.viewNum = viewNum;
         this.likeNum = likeNum;
@@ -41,6 +47,7 @@ public class VideoRecommendVO implements Serializable {
                 "videoId='" + videoId + '\'' +
                 ", videoTitle='" + videoTitle + '\'' +
                 ", coverImage='" + coverImage + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
                 ", viewNum=" + viewNum +
                 ", likeNum=" + likeNum +
                 ", favoriteNum=" + favoriteNum +
@@ -51,6 +58,22 @@ public class VideoRecommendVO implements Serializable {
                 ", userId=" + userId +
                 ", author=" + author +
                 '}';
+    }
+
+    public BaseMediaSource getMediaSource() {
+        return mediaSource;
+    }
+
+    public void setMediaSource(BaseMediaSource mediaSource) {
+        this.mediaSource = mediaSource;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public String getVideoId() {

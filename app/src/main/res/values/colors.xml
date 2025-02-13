@@ -42,4 +42,6 @@
     <color name="btnVerifyPressed">#1148D2</color>
     <color name="btnVerifyDisable">#BBBBBB</color>
 
+    <color name="like_icon">#ff2c54</color>
+
 </resources>

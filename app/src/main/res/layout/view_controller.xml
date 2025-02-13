@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:background="@color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="18dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" @芝士学爆"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.roydon.niuyin.widget.autolinktextview.AutoLinkTextView
+            android:id="@+id/autoLinkTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:highlight_textcolor="@color/gold"
+            tools:text="只有 #允儿 的脸我才敢拉这么近" />
+
+        <com.roydon.niuyin.widget.MarqueeTextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text=" @大致爱高清 创作的原生 - 大致爱高清"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="62dp">
+
+            <com.roydon.niuyin.widget.RoundImageView
+                android:id="@+id/ivHead"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/ivFocus"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:padding="3dp"
+                android:src="@mipmap/add_focus" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.roydon.niuyin.widget.IconFontTextView
+                android:id="@+id/ivLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/icon_like_fill"
+                android:textColor="@color/white"
+                android:textSize="32sp" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView"
+                android:layout_width="85dp"
+                android:layout_height="85dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvLikecount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-22dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="22.5w" />
+
+        <com.roydon.niuyin.widget.IconFontTextView
+            android:id="@+id/ivComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/icon_comment"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/tvCommentcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="3823" />
+
+        <com.roydon.niuyin.widget.IconFontTextView
+            android:id="@+id/ivShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/icon_more"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/tvSharecount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="3371" />
+
+        <RelativeLayout
+            android:id="@+id/rlRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="15dp">
+
+            <ImageView
+                android:id="@+id/ivRecord"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/ic_record" />
+
+            <com.roydon.niuyin.widget.RoundImageView
+                android:id="@+id/ivHeadAnim"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

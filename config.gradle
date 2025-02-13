@@ -1,10 +1,10 @@
 // 通用配置
 android {
 
-    compileSdkVersion 29
+    compileSdkVersion 31
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 10
         versionName "1.0"
     }
@@ -13,6 +13,12 @@ android {
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // 开启 ViewBinding
+    buildFeatures{
+        viewBinding = true
+        dataBinding = true
     }
 
     // 设置 SO 库存放目录

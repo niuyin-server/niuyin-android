@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.roydon.niuyin.ui.fragment.index.IndexVideoFeedRecommendFragment">
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="推荐视频流" />
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <com.roydon.niuyin.widget.HintLayout
+            android:id="@+id/hintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                style="@style/RefreshLayoutStyle"
+                app:srlEnableLoadMore="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.scwang.smartrefresh.header.MaterialHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </com.roydon.niuyin.widget.HintLayout>
+    </RelativeLayout>
 
 </LinearLayout>
