@@ -2,6 +2,12 @@ package com.roydon.niuyin.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +19,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import butterknife.BindView
 import com.airbnb.lottie.LottieAnimationView
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.roydon.niuyin.R
 import com.roydon.niuyin.databinding.ViewControllerBinding
 import com.roydon.niuyin.helper.AutoLinkHrefManager
@@ -33,55 +41,53 @@ class ControllerView @JvmOverloads constructor(context: Context, attrs: Attribut
     private var binding: ViewControllerBinding =
         ViewControllerBinding.inflate(LayoutInflater.from(context), this, true)
 
-//    @BindView(R.id.ivHead)
-//    lateinit var ivHead: RoundImageView
-//
-//    @BindView(R.id.ivFocus)
-//    lateinit var ivFocus: ImageView
-//
-//    @BindView(R.id.tvNickname)
-//    lateinit var tvNickname: TextView
-//
-//    @BindView(R.id.autoLinkTextView)
-//    lateinit var autoLinkTextView: AutoLinkTextView
-//
-//    @BindView(R.id.ivHeadAnim)
-//    lateinit var ivHeadAnim: RoundImageView
-//
-//    @BindView(R.id.ivLike)
-//    lateinit var ivLike: IconFontTextView
-//
-//    @BindView(R.id.tvLikecount)
-//    lateinit var tvLikecount: TextView
-//
-//    @BindView(R.id.tvCommentcount)
-//    lateinit var tvCommentcount: TextView
-//
-//    @BindView(R.id.tvSharecount)
-//    lateinit var tvSharecount: TextView
-//
-//    @BindView(R.id.animationView)
-//    lateinit var animationView: LottieAnimationView
-
     init {
         init()
     }
 
     private fun init() {
-        binding.ivHead!!.setOnClickListener(this)
-        binding.tvCommentcount!!.setOnClickListener(this)
-        binding.tvSharecount!!.setOnClickListener(this)
-        binding.tvLikecount!!.setOnClickListener(this)
-        binding.ivFocus!!.setOnClickListener(this)
+        binding.ivHead.setOnClickListener(this)
+        binding.tvCommentcount.setOnClickListener(this)
+        binding.tvSharecount.setOnClickListener(this)
+        binding.tvLikecount.setOnClickListener(this)
+        binding.ivFocus.setOnClickListener(this)
         setRotateAnim()
     }
 
     @SuppressLint("SetTextI18n")
     fun setVideoData(videoData: VideoRecommendVO) {
         this.videoData = videoData
+        // 设置 binding.rlContainerVideo 背景
+//        val blurRadius = 10f // 模糊半径
+//        GlideApp.with(this)
+//            .asBitmap() // 加载为 Bitmap
+//            .load(videoData.coverImage)
+//            .into(object : CustomTarget<Bitmap>() {
+//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+//                    // 将 Bitmap 设置为 RelativeLayout 的背景
+//                    binding.rlContainerVideo.background = BitmapDrawable(resources, resource)
+//
+//                    // 如果设备支持 RenderEffect，应用模糊效果
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//                        val renderEffect = RenderEffect.createBlurEffect(
+//                            blurRadius, // X 轴模糊半径
+//                            blurRadius, // Y 轴模糊半径
+//                            Shader.TileMode.CLAMP
+//                        )
+//                        binding.rlContainerVideo.setRenderEffect(renderEffect)
+//                    } else {
+//                        // 如果设备版本低于 Android 12，显示原图或提示用户
+//                        binding.rlContainerVideo.setBackgroundColor(resources.getColor(android.R.color.darker_gray))
+//                    }
+//                }
+//
+//                override fun onLoadCleared(placeholder: Drawable?) {
+//                    // 在图片加载被清除时调用，可以设置一个占位图
+//                }
+//            })
         GlideApp.with(context).load(videoData.author!!.avatar).into(binding.ivHead)
         binding.tvNickname.text = "@" + videoData.author!!.nickName
-        AutoLinkHrefManager.setContent(videoData.videoInfo, binding.autoLinkTextView)
+        AutoLinkHrefManager.setContent(videoData.videoTitle, binding.autoLinkTextView)
         GlideApp.with(context).load(videoData.author!!.avatar).into(binding.ivHeadAnim)
         binding.tvLikecount.text = NumUtils.numberFilter(videoData.likeNum)
         binding.tvCommentcount.text = NumUtils.numberFilter(videoData.commentNum)

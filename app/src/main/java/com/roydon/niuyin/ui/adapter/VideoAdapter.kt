@@ -39,6 +39,7 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView) :
             Glide.with(context)
                 .asBitmap()
                 .load(it.videoUrl)
+                .centerCrop()
                 .apply(RequestOptions.frameOf(0))  // 从第一帧开始
                 .into(holder.binding.ivCover)
             holder?.binding?.likeView?.setOnLikeListener(object : LikeView.OnLikeListener {
@@ -75,8 +76,7 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView) :
         //开启缓存文件
         val mediaItem = MediaItem.fromUri(url)
         //构建 DataSourceFactory
-        val dataSourceFactory = CacheDataSource.Factory().setCache(cache)
-            .setUpstreamDataSourceFactory(DefaultDataSource.Factory(context))
+        val dataSourceFactory = CacheDataSource.Factory().setCache(cache).setUpstreamDataSourceFactory(DefaultDataSource.Factory(context))
         //构建 MediaSource
         return ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
     }

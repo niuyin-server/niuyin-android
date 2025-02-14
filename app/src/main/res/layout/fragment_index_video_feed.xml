@@ -6,9 +6,14 @@
     android:orientation="vertical"
     tools:context="com.roydon.niuyin.ui.fragment.index.IndexVideoFeedFragment">
 
-    <com.roydon.niuyin.widget.TouchViewPager
-        android:id="@+id/viewPager"
+    <com.roydon.niuyin.widget.HintLayout
+        android:id="@+id/hintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <com.roydon.niuyin.widget.TouchViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.roydon.niuyin.widget.HintLayout>
 </LinearLayout>

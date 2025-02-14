@@ -27,6 +27,8 @@ import butterknife.BindView;
  */
 public final class IndexVideoFeedFragment extends MyFragment<HomeActivity> implements StatusAction, OnRefreshLoadMoreListener, BaseAdapter.OnItemClickListener, BaseAdapter.OnItemLongClickListener {
 
+    @BindView(R.id.hintLayout)
+    HintLayout hintLayout;
     @BindView(R.id.viewPager)
     TouchViewPager viewPager;
 
@@ -43,10 +45,11 @@ public final class IndexVideoFeedFragment extends MyFragment<HomeActivity> imple
 
     @Override
     protected void initView() {
-//        fragments.add(IndexVideoFeedRecommendFragment.newInstance());
+        showLoading();
+        fragments.add(IndexVideoFeedRecommendFragment.newInstance());
         fragments.add(IndexVideoFeedUserFragment.newInstance());
         viewPager.setOffscreenPageLimit(fragments.size());
-        viewPager.setAdapter(new HomeAdapter(getChildFragmentManager(), new String[]{}, fragments));
+
     }
 
     @Override
@@ -65,7 +68,8 @@ public final class IndexVideoFeedFragment extends MyFragment<HomeActivity> imple
 
     @Override
     protected void lazyLoadData() {
-
+        viewPager.setAdapter(new HomeAdapter(getChildFragmentManager(), new String[]{}, fragments));
+        showComplete();
     }
 
     @Override
@@ -75,7 +79,7 @@ public final class IndexVideoFeedFragment extends MyFragment<HomeActivity> imple
 
     @Override
     public HintLayout getHintLayout() {
-        return null;
+        return hintLayout;
     }
 
     @Override

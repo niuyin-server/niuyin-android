@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -21,21 +20,20 @@ import com.google.android.exoplayer2.source.BaseMediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
-import com.roydon.niuyin.R;
 import com.roydon.niuyin.databinding.ViewPlayviewBinding;
 
 import java.io.File;
 
 public class VideoPlayer extends FrameLayout implements IPlayer, DefaultLifecycleObserver {
 
-    private final TrackSelector trackSelector;
-    private final SimpleExoPlayer mPlayer;
-    private PlayerView playerView;
+    private TrackSelector trackSelector;
+
+    private SimpleExoPlayer mPlayer;
+
     public static final long MAX_CACHE_BYTE = 1024 * 1024 * 200; // 200MB
 
     private final DefaultLoadControl loadControl = new DefaultLoadControl.Builder()
@@ -43,16 +41,11 @@ public class VideoPlayer extends FrameLayout implements IPlayer, DefaultLifecycl
             .setBufferDurationsMs(5000, 7000, 700, 1000) // 设置缓冲时间
             .build();
 
-    private final SimpleCache cache;
+    private SimpleCache cache;
 
     public VideoPlayer(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        trackSelector = new DefaultTrackSelector(context);
-        mPlayer = new SimpleExoPlayer.Builder(context)
-                .setTrackSelector(trackSelector)
-                .build();
-
-        initPlayer();
+        initPlayer(context);
         File cacheFile = new File(context.getCacheDir(), "niuyin_cache_file");
         cache = new SimpleCache(cacheFile, new LeastRecentlyUsedCacheEvictor(MAX_CACHE_BYTE), new StandaloneDatabaseProvider(context));
     }
@@ -72,9 +65,13 @@ public class VideoPlayer extends FrameLayout implements IPlayer, DefaultLifecycl
         release();
     }
 
-    private void initPlayer() {
-
-        ViewPlayviewBinding binding = ViewPlayviewBinding.inflate(LayoutInflater.from(getContext()), this, false);
+    private void initPlayer(Context context) {
+        trackSelector = new DefaultTrackSelector(context);
+        mPlayer = new SimpleExoPlayer.Builder(context)
+                .setTrackSelector(trackSelector)
+                .setLoadControl(loadControl)
+                .build();
+        ViewPlayviewBinding binding = ViewPlayviewBinding.inflate(LayoutInflater.from(context), this, true);
         binding.playerView.setPlayer(mPlayer);
         binding.playerView.setUseController(false);
         mPlayer.setPlayWhenReady(true);

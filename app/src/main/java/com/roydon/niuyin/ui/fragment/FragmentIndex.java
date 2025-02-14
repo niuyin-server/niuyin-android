@@ -13,7 +13,9 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.helper.RxBus;
 import com.roydon.niuyin.helper.SPManager;
+import com.roydon.niuyin.helper.player.PauseVideoEvent;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.VideoCategoryActivity;
@@ -84,12 +86,27 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         mIndexFragments.add(IndexRecommendFragment.newInstance());
         mIndexFragments.add(IndexHotFragment.newInstance());
         mViewPager.setOffscreenPageLimit(mIndexFragments.size());
-        mViewPager.setAdapter(new HomeAdapter(getFragmentManager(), mTitles, mIndexFragments));
+        mViewPager.setAdapter(new HomeAdapter(getChildFragmentManager(), mTitles, mIndexFragments));
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setCurrentTab(1);
         // 点击事件监听
         setOnClickListener(R.id.tv_search_hint, R.id.iv_category);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
 
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                RxBus.getDefault().post(new PauseVideoEvent(false));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     @Override
