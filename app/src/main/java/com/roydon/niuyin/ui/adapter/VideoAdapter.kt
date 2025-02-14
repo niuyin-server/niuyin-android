@@ -16,6 +16,7 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSource
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.roydon.niuyin.databinding.ItemVideoBinding
+import com.roydon.niuyin.helper.player.VideoCacheManager
 import com.roydon.niuyin.helper.player.VideoPlayer
 import com.roydon.niuyin.http.response.video.VideoRecommendVO
 import com.roydon.niuyin.widget.LikeView
@@ -34,7 +35,7 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView) :
     }
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
-        mList[position]?.let {
+        mList[position].let {
             holder.binding.controller.setVideoData(it)
             Glide.with(context)
                 .asBitmap()
@@ -42,7 +43,7 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView) :
                 .centerCrop()
                 .apply(RequestOptions.frameOf(0))  // 从第一帧开始
                 .into(holder.binding.ivCover)
-            holder?.binding?.likeView?.setOnLikeListener(object : LikeView.OnLikeListener {
+            holder.binding.likeView.setOnLikeListener(object : LikeView.OnLikeListener {
                 override fun onLikeListener() {
 //                    if (!it.isLiked) {  //未点赞，会有点赞效果，否则无
 //                        holder?.binding?.controller!!.like()
@@ -58,16 +59,16 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView) :
     /**
      * 构建一个共用缓存文件
      */
-    val cache: SimpleCache by lazy {
-        //构建缓存文件
-        val cacheFile = context.cacheDir.resolve("niuyin_cache_file$this.hashCode()")
-        //构建simpleCache缓存实例
-        SimpleCache(
-            cacheFile,
-            LeastRecentlyUsedCacheEvictor(VideoPlayer.MAX_CACHE_BYTE),
-            StandaloneDatabaseProvider(context)
-        )
-    }
+//    val cache: SimpleCache by lazy {
+//        //构建缓存文件
+//        val cacheFile = context.cacheDir.resolve("niuyin_cache_file$this.hashCode()")
+//        //构建simpleCache缓存实例
+//        SimpleCache(
+//            cacheFile,
+//            LeastRecentlyUsedCacheEvictor(VideoPlayer.MAX_CACHE_BYTE),
+//            StandaloneDatabaseProvider(context)
+//        )
+//    }
 
     /**
      * 构建当前url视频的缓存
@@ -76,7 +77,7 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView) :
         //开启缓存文件
         val mediaItem = MediaItem.fromUri(url)
         //构建 DataSourceFactory
-        val dataSourceFactory = CacheDataSource.Factory().setCache(cache).setUpstreamDataSourceFactory(DefaultDataSource.Factory(context))
+        val dataSourceFactory = CacheDataSource.Factory().setCache(VideoCacheManager.getInstance(context)).setUpstreamDataSourceFactory(DefaultDataSource.Factory(context))
         //构建 MediaSource
         return ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
     }

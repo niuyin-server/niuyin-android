@@ -15,18 +15,14 @@ import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.database.StandaloneDatabaseProvider;
 import com.google.android.exoplayer2.source.BaseMediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
-import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.roydon.niuyin.databinding.ViewPlayviewBinding;
-
-import java.io.File;
 
 public class VideoPlayer extends FrameLayout implements IPlayer, DefaultLifecycleObserver {
 
@@ -46,8 +42,7 @@ public class VideoPlayer extends FrameLayout implements IPlayer, DefaultLifecycl
     public VideoPlayer(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initPlayer(context);
-        File cacheFile = new File(context.getCacheDir(), "niuyin_cache_file");
-        cache = new SimpleCache(cacheFile, new LeastRecentlyUsedCacheEvictor(MAX_CACHE_BYTE), new StandaloneDatabaseProvider(context));
+        cache = VideoCacheMainManager.getInstance(context);
     }
 
     @Override
