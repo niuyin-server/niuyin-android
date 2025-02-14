@@ -49,7 +49,7 @@ class VideoAdapter(val context: Context, val recyclerView: RecyclerView) :
 //                    }
                 }
             })
-            holder.binding.ivPlay.alpha = 0.4f
+            holder.binding.ivPlay.alpha = 0.5f
         }
         //利用预加item，提前加载缓存资源
         mList[position].mediaSource = buildMediaSource(mList[position].videoUrl)

@@ -155,7 +155,7 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
 
         // 切换播放器位置
         dettachParentView(rootView);
-        autoPlayVideo(curPlayPos, ivCover);
+        autoPlayVideo(curPlayPos, ivCover, ivPlay);
         autoLoadMoreVideo(position);
     }
 
@@ -175,7 +175,7 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
     /**
      * 自动播放视频
      */
-    private void autoPlayVideo(int position, ImageView ivCover) {
+    private void autoPlayVideo(int position, ImageView ivCover, ImageView ivPlay) {
         videoView.playVideo(adapter.getDatas().get(position).getMediaSource());
 
         videoView.getPlayer().addListener(new Player.Listener() {
@@ -196,6 +196,9 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
             @Override
             public void onIsPlayingChanged(boolean isPlaying) {
                 // 播放状态变为播放或暂停时的回调
+                if (isPlaying) {
+                    ivPlay.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -246,53 +249,50 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
 
     private void observeEvent() {
         // 监听播放或暂停事件
-        subscribe = RxBus.getDefault().toObservable(PauseVideoEvent.class)
-                .subscribe(new Action1<PauseVideoEvent>() {
-                    @Override
-                    public void call(PauseVideoEvent event) {
-                        if (videoView != null) {
-                            if (event.isPlayOrPause()) {
-                                videoView.play();
-                            } else {
-                                videoView.pause();
-                            }
-                        } else {
-                            // 处理 videoView 为 null 的情况
-                        }
+        subscribe = RxBus.getDefault().toObservable(PauseVideoEvent.class).subscribe(new Action1<PauseVideoEvent>() {
+            @Override
+            public void call(PauseVideoEvent event) {
+                if (videoView != null) {
+                    if (event.isPlayOrPause()) {
+                        videoView.play();
+                    } else {
+                        videoView.pause();
                     }
-                });
+                } else {
+                    // 处理 videoView 为 null 的情况
+                }
+            }
+        });
     }
 
     /**
      * 获取推荐视频列表
      */
     public void getRecommendVideoList(boolean refresh) {
-        EasyHttp.get(this)
-                .api(new RecommendVideoApi())
-                .request(new HttpCallback<HttpData<List<VideoRecommendVO>>>(this.getAttachActivity()) {
+        EasyHttp.get(this).api(new RecommendVideoApi()).request(new HttpCallback<HttpData<List<VideoRecommendVO>>>(this.getAttachActivity()) {
 
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onSucceed(HttpData<List<VideoRecommendVO>> data) {
-                        if (refresh) {
-                            refreshLayout.finishRefresh(true);
-                            videoRecommendVOList = data.getData();
-                        } else {
-                            refreshLayout.finishLoadMore(true);
-                            refreshLayout.finishRefresh(true);
-                            videoRecommendVOList = data.getData();
-                            mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO_MORE);
-                            return;
-                        }
-                        // 更新ui
-                        mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO);
-                    }
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onSucceed(HttpData<List<VideoRecommendVO>> data) {
+                if (refresh) {
+                    refreshLayout.finishRefresh(true);
+                    videoRecommendVOList = data.getData();
+                } else {
+                    refreshLayout.finishLoadMore(true);
+                    refreshLayout.finishRefresh(true);
+                    videoRecommendVOList = data.getData();
+                    mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO_MORE);
+                    return;
+                }
+                // 更新ui
+                mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO);
+            }
 
-                    @Override
-                    public void onFail(Exception e) {
-                        toast(e.getMessage());
-                    }
-                });
+            @Override
+            public void onFail(Exception e) {
+                toast(e.getMessage());
+            }
+        });
     }
 
     @SuppressLint("HandlerLeak")

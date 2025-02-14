@@ -34,7 +34,7 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             app:highlight_textcolor="@color/gold"
-            tools:text="只有 #允儿 的脸我才敢拉这么近" />
+            tools:text="当你看到这个视频你会艾特谁！ #芝士学爆 " />
 
         <com.roydon.niuyin.widget.MarqueeTextView
             android:layout_width="180dp"
@@ -43,7 +43,7 @@
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
-            android:text=" @大致爱高清 创作的原生 - 大致爱高清"
+            android:text=" @还会心动吗 创作的原生 - 还会心动吗"
             android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
@@ -68,8 +68,8 @@
 
             <ImageView
                 android:id="@+id/ivFocus"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:padding="3dp"
