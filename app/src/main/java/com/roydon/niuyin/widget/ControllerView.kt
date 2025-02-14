@@ -85,7 +85,7 @@ class ControllerView @JvmOverloads constructor(context: Context, attrs: Attribut
 //                    // 在图片加载被清除时调用，可以设置一个占位图
 //                }
 //            })
-        GlideApp.with(context).load(videoData.author!!.avatar).into(binding.ivHead)
+        GlideApp.with(context).load(videoData.author!!.avatar).circleCrop().into(binding.ivHead)
         binding.tvNickname.text = "@" + videoData.author!!.nickName
         AutoLinkHrefManager.setContent(videoData.videoTitle, binding.autoLinkTextView)
         GlideApp.with(context).load(videoData.author!!.avatar).into(binding.ivHeadAnim)
