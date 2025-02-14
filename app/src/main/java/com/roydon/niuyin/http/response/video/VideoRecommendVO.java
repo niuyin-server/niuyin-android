@@ -5,6 +5,7 @@ import com.roydon.niuyin.http.response.Author;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class VideoRecommendVO implements Serializable {
     private static final long serialVersionUID = -657506685397131L;
@@ -12,6 +13,7 @@ public class VideoRecommendVO implements Serializable {
     private String videoTitle; //标题
     private String coverImage; //封面
     private String videoUrl; // 视频地址
+    private String[] imageList; // 图片集合
     private Long viewNum; //观看量
     private Long likeNum;  // 点赞量
     private Long favoriteNum;  // 收藏量
@@ -22,13 +24,16 @@ public class VideoRecommendVO implements Serializable {
     private Long userId;
     public Author author;
 
-    /** 本地文件缓存资源 */
+    /**
+     * 本地文件缓存资源
+     */
     BaseMediaSource mediaSource;
 
-    public VideoRecommendVO(String videoId, String videoTitle, String coverImage,String videoUrl, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, String videoInfo, LocalDateTime createTime, Long userId, Author author) {
+    public VideoRecommendVO(String videoId, String videoTitle, String coverImage, String videoUrl, String[] imageList, Long viewNum, Long likeNum, Long favoriteNum, Long commentNum, String publishType, String videoInfo, LocalDateTime createTime, Long userId, Author author) {
         this.videoId = videoId;
         this.videoTitle = videoTitle;
         this.videoUrl = videoUrl;
+        this.imageList = imageList;
         this.coverImage = coverImage;
         this.viewNum = viewNum;
         this.likeNum = likeNum;
@@ -48,6 +53,7 @@ public class VideoRecommendVO implements Serializable {
                 ", videoTitle='" + videoTitle + '\'' +
                 ", coverImage='" + coverImage + '\'' +
                 ", videoUrl='" + videoUrl + '\'' +
+                ", imageList=" + Arrays.toString(imageList) +
                 ", viewNum=" + viewNum +
                 ", likeNum=" + likeNum +
                 ", favoriteNum=" + favoriteNum +
@@ -57,7 +63,16 @@ public class VideoRecommendVO implements Serializable {
                 ", createTime=" + createTime +
                 ", userId=" + userId +
                 ", author=" + author +
+                ", mediaSource=" + mediaSource +
                 '}';
+    }
+
+    public String[] getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(String[] imageList) {
+        this.imageList = imageList;
     }
 
     public BaseMediaSource getMediaSource() {

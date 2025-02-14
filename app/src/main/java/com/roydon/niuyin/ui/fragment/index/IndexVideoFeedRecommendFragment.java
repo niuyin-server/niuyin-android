@@ -1,10 +1,7 @@
 package com.roydon.niuyin.ui.fragment.index;
 
 import android.annotation.SuppressLint;
-import android.graphics.RenderEffect;
-import android.graphics.Shader;
 import android.os.Build;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -40,7 +37,6 @@ import com.roydon.niuyin.widget.HintLayout;
 import com.roydon.niuyin.widget.LikeView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
@@ -159,7 +155,8 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
 
         // 切换播放器位置
         dettachParentView(rootView);
-        autoPlayVideo(curPlayPos, ivCover, controllerView);
+        autoPlayVideo(curPlayPos, ivCover);
+        autoLoadMoreVideo(position);
     }
 
     /**
@@ -178,7 +175,7 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
     /**
      * 自动播放视频
      */
-    private void autoPlayVideo(int position, ImageView ivCover, ControllerView controllerView) {
+    private void autoPlayVideo(int position, ImageView ivCover) {
         videoView.playVideo(adapter.getDatas().get(position).getMediaSource());
 
         videoView.getPlayer().addListener(new Player.Listener() {
@@ -208,6 +205,13 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
                 ivCurCover = ivCover;
             }
         });
+    }
+
+    void autoLoadMoreVideo(int position) {
+        if (position == adapter.getItemCount() - 1) {
+            // 加载下一页
+            getRecommendVideoList(false);
+        }
     }
 
     /**
@@ -262,7 +266,7 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
     /**
      * 获取推荐视频列表
      */
-    public void getRecommendVideoList() {
+    public void getRecommendVideoList(boolean refresh) {
         EasyHttp.get(this)
                 .api(new RecommendVideoApi())
                 .request(new HttpCallback<HttpData<List<VideoRecommendVO>>>(this.getAttachActivity()) {
@@ -270,8 +274,16 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onSucceed(HttpData<List<VideoRecommendVO>> data) {
-                        refreshLayout.finishRefresh(true);
-                        videoRecommendVOList = data.getData();
+                        if (refresh) {
+                            refreshLayout.finishRefresh(true);
+                            videoRecommendVOList = data.getData();
+                        } else {
+                            refreshLayout.finishLoadMore(true);
+                            refreshLayout.finishRefresh(true);
+                            videoRecommendVOList = data.getData();
+                            mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO_MORE);
+                            return;
+                        }
                         // 更新ui
                         mHandler.sendEmptyMessage(HANDLER_RECOMMEND_VIDEO);
                     }
@@ -299,6 +311,10 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
                     observeEvent();
                     showComplete();
                     break;
+                case HANDLER_RECOMMEND_VIDEO_MORE:
+                    adapter.appendList(videoRecommendVOList);
+                    showComplete();
+                    break;
                 default:
                     break;
             }
@@ -312,7 +328,7 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
 
     @Override
     protected void lazyLoadData() {
-        getRecommendVideoList();
+        getRecommendVideoList(true);
 
     }
 
@@ -343,6 +359,6 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        getRecommendVideoList();
+        getRecommendVideoList(true);
     }
 }

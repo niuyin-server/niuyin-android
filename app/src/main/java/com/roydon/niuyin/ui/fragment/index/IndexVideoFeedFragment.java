@@ -5,11 +5,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.hjq.base.BaseAdapter;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.action.StatusAction;
 import com.roydon.niuyin.common.MyFragment;
+import com.roydon.niuyin.helper.RxBus;
+import com.roydon.niuyin.helper.player.PauseVideoEvent;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.adapter.HomeAdapter;
 import com.roydon.niuyin.widget.HintLayout;
@@ -49,7 +52,25 @@ public final class IndexVideoFeedFragment extends MyFragment<HomeActivity> imple
         fragments.add(IndexVideoFeedRecommendFragment.newInstance());
         fragments.add(IndexVideoFeedUserFragment.newInstance());
         viewPager.setOffscreenPageLimit(fragments.size());
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
 
+            @Override
+            public void onPageSelected(int i) {
+                if (i == 0) {
+                    RxBus.getDefault().post(new PauseVideoEvent(true));
+                } else {
+                    RxBus.getDefault().post(new PauseVideoEvent(false));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     @Override

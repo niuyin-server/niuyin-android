@@ -22,7 +22,7 @@ class LikeView : RelativeLayout {
     private var gestureDetector: GestureDetector? = null
 
     /** 图片大小  */
-    private val likeViewSize = 330
+    private val likeViewSize = 300
     private val angles = intArrayOf(-30, 0, 30)
 
     /** 单击是否有点赞效果  */

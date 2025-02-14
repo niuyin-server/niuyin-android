@@ -69,7 +69,6 @@ public class VideoPlayer extends FrameLayout implements IPlayer, DefaultLifecycl
         trackSelector = new DefaultTrackSelector(context);
         mPlayer = new SimpleExoPlayer.Builder(context)
                 .setTrackSelector(trackSelector)
-                .setLoadControl(loadControl)
                 .build();
         ViewPlayviewBinding binding = ViewPlayviewBinding.inflate(LayoutInflater.from(context), this, true);
         binding.playerView.setPlayer(mPlayer);

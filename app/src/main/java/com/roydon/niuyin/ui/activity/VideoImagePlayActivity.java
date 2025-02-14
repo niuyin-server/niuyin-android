@@ -173,7 +173,7 @@ public class VideoImagePlayActivity extends MyActivity {
         int size = imgs.size();
 
         int widthPixels = getResources().getDisplayMetrics().widthPixels;
-        int ceil = (widthPixels - 40 * size) / size;
+        int ceil = (widthPixels - 32 * size) / size;
 
         bannerViewPager.setAdapter(new BannerAdapter())
                 .setLifecycleRegistry(getLifecycle())
@@ -181,7 +181,7 @@ public class VideoImagePlayActivity extends MyActivity {
                 .setIndicatorSlideMode(IndicatorSlideMode.SMOOTH)
                 .setIndicatorGravity(IndicatorGravity.CENTER)
                 .setIndicatorSliderWidth(ceil)
-                .setIndicatorHeight(10)
+                .setIndicatorHeight(8)
                 .setIndicatorSliderColor(getResources().getColor(R.color.gray50), getResources().getColor(R.color.white))
                 .setOnPageClickListener(new BannerViewPager.OnPageClickListener() {
                     @Override
