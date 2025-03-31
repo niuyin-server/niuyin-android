@@ -72,7 +72,7 @@
             android:name=".ui.activity.HomeActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" /> <!-- 登录界面 -->
         <activity
             android:name=".ui.activity.LoginActivity"
