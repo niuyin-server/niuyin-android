@@ -1,6 +1,9 @@
 package com.roydon.niuyin.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -46,6 +49,9 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     private static final int HANDLER_NOTICE_UNREAD_COUNT = 1;
     private static final int HANDLER_NOTICE_UNREAD_COUNT_ERROR = 2;
 
+    private static final String INTENT_KEY_IN_FRAGMENT_INDEX = "fragmentIndex";
+    private static final String INTENT_KEY_IN_FRAGMENT_CLASS = "fragmentClass";
+
     @BindView(R.id.vp_home_pager)
     ViewPager mViewPager;
     @BindView(R.id.navigationView)
@@ -74,6 +80,19 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     private Long noticeUnreadCount = 0L;
 
 //    NavController navController;
+
+    public static void start(Context context) {
+        start(context, FragmentIndex.class);
+    }
+
+    public static void start(Context context, Class<? extends MyFragment<?>> fragmentClass) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        intent.putExtra(INTENT_KEY_IN_FRAGMENT_CLASS, fragmentClass);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
+    }
 
     @Override
     protected int getLayoutId() {
@@ -208,7 +227,6 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
         }
 
     }
-
 //    @Override
 //    public boolean onNavigateUp() {
 //        return navController.navigateUp();

@@ -3,6 +3,8 @@ package com.roydon.niuyin.ui.activity;
 import static com.roydon.niuyin.helper.SPManager.AVATAR;
 import static com.roydon.niuyin.helper.SPManager.BACK_IMAGE;
 
+import static java.security.AccessController.getContext;
+
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -31,8 +33,10 @@ import com.roydon.niuyin.aop.SingleClick;
 import com.roydon.niuyin.common.MyActivity;
 import com.roydon.niuyin.helper.ActivityStackManager;
 import com.roydon.niuyin.helper.InputTextHelper;
+import com.roydon.niuyin.helper.RxBus;
 import com.roydon.niuyin.helper.SPUtils;
 import com.roydon.niuyin.helper.TokenManager;
+import com.roydon.niuyin.helper.event.UserLoginEvent;
 import com.roydon.niuyin.http.glide.GlideApp;
 import com.roydon.niuyin.http.model.HttpData;
 import com.roydon.niuyin.http.request.GetCodeApi;
@@ -45,6 +49,7 @@ import com.roydon.niuyin.http.response.member.MemberInfoVO;
 import com.roydon.niuyin.other.CommonConstants;
 import com.roydon.niuyin.other.KeyboardWatcher;
 import com.roydon.niuyin.ui.dialog.WaitDialog;
+import com.roydon.niuyin.ui.fragment.FragmentIndex;
 
 import butterknife.BindView;
 
@@ -231,15 +236,13 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                     @Override
                     public void onSucceed(HttpData<LoginBean> data) {
                         toast("登录成功");
-                        apiGetUserInfo();
-//                        finish();
-                        startActivity(HomeActivity.class);
-                        ActivityStackManager.getInstance().finishAllActivities(HomeActivity.class);
                         // 更新 Token
                         EasyConfig.getInstance().addHeader(CommonConstants.AUTHORIZATION, CommonConstants.AUTHORIZATION_PREFIX + data.getData().getToken());
                         // token保存到本地
                         TokenManager.getInstance(getActivity()).saveToken(data.getData().getToken());
                         // 跳转到主页
+                        ActivityStackManager.getInstance().finishAllActivities(HomeActivity.class);
+                        startActivity(HomeActivity.class);
                     }
 
                     @Override
@@ -250,20 +253,23 @@ public class LoginSmsActivity extends MyActivity implements UmengLogin.OnLoginLi
                 });
     }
 
-    private void apiGetUserInfo() {
-        EasyHttp.get(this)
-                .api(new UserInfoApi())
-                .request(new HttpCallback<HttpData<MemberInfoVO>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<MemberInfoVO> data) {
-                        MemberInfoVO memberInfoVO = data.getData();
-                        // 更新缓存
-                        spSetString(AVATAR, memberInfoVO.getAvatar());
-                        spSetString(BACK_IMAGE, memberInfoVO.getMemberInfo().getBackImage());
-                    }
-                });
-    }
+//    private void apiGetUserInfo() {
+//        EasyHttp.get(this)
+//                .api(new UserInfoApi())
+//                .request(new HttpCallback<HttpData<MemberInfoVO>>(this) {
+//
+//                    @Override
+//                    public void onSucceed(HttpData<MemberInfoVO> data) {
+//                        MemberInfoVO memberInfoVO = data.getData();
+//                        // 更新缓存
+//                        spSetString(AVATAR, memberInfoVO.getAvatar());
+//                        spSetString(BACK_IMAGE, memberInfoVO.getMemberInfo().getBackImage());
+//
+//                        // 发送登录事件
+//                        RxBus.getDefault().post(new UserLoginEvent(memberInfoVO.getUserId(), memberInfoVO.getUserName(), memberInfoVO.getNickName(), memberInfoVO.getAvatar()));
+//                    }
+//                });
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

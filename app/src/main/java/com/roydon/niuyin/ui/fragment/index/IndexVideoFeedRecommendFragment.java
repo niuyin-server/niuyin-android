@@ -133,16 +133,13 @@ public final class IndexVideoFeedRecommendFragment extends MyFragment<HomeActivi
         ImageView ivCover = rootView.findViewById(R.id.iv_cover);
 
         // 播放暂停事件
-        likeView.setOnPlayPauseListener(new LikeView.OnPlayPauseListener() {
-            @Override
-            public void onPlayOrPause() {
-                if (videoView.isPlaying()) {
-                    videoView.pause();
-                    ivPlay.setVisibility(View.VISIBLE);
-                } else {
-                    videoView.play();
-                    ivPlay.setVisibility(View.GONE);
-                }
+        likeView.setOnPlayPauseListener(() -> {
+            if (videoView.isPlaying()) {
+                videoView.pause();
+                ivPlay.setVisibility(View.VISIBLE);
+            } else {
+                videoView.play();
+                ivPlay.setVisibility(View.GONE);
             }
         });
 

@@ -21,7 +21,9 @@ public class RxBus {
     public static RxBus getDefault() {
         if (instance == null) {
             synchronized (RxBus.class) {
-                instance = new RxBus();
+                if (instance == null) {
+                    instance = new RxBus();
+                }
             }
         }
         return instance;

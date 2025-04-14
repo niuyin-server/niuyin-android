@@ -1,5 +1,8 @@
 package com.roydon.niuyin.ui.fragment;
 
+import static com.roydon.niuyin.helper.SPManager.AVATAR;
+import static com.roydon.niuyin.helper.SPManager.BACK_IMAGE;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,12 +14,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.immersionbar.ImmersionBar;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.roydon.niuyin.R;
 import com.roydon.niuyin.common.MyFragment;
 import com.roydon.niuyin.helper.RxBus;
 import com.roydon.niuyin.helper.SPManager;
+import com.roydon.niuyin.helper.TokenManager;
+import com.roydon.niuyin.helper.event.UserLoginEvent;
 import com.roydon.niuyin.helper.player.PauseVideoEvent;
 import com.roydon.niuyin.http.glide.GlideApp;
+import com.roydon.niuyin.http.model.HttpData;
+import com.roydon.niuyin.http.request.user.UserInfoApi;
+import com.roydon.niuyin.http.response.member.MemberInfoVO;
 import com.roydon.niuyin.ui.activity.HomeActivity;
 import com.roydon.niuyin.ui.activity.VideoCategoryActivity;
 import com.roydon.niuyin.ui.activity.VideoSearchActivity;
@@ -29,6 +39,8 @@ import com.roydon.niuyin.widget.XCollapsingToolbarLayout;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * desc   : 首页
@@ -54,7 +66,7 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
     TextView mSearchHintView;
     @BindView(R.id.iv_test_search)
     ImageView mSearchView;
-
+    private Subscription subscribe;
     ArrayList<Fragment> mIndexFragments;
 
     public static FragmentIndex newInstance() {
@@ -72,12 +84,7 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         ImmersionBar.setTitleBar(getAttachActivity(), mToolbar);
         //设置渐变监听
         mCollapsingToolbarLayout.setOnScrimsListener(this);
-        if (SPManager.getInstance(getActivity()).hasString(SPManager.AVATAR)) {
-            GlideApp.with(this)
-                    .load(spGetString(SPManager.AVATAR))
-                    .circleCrop()
-                    .into(mAvatarView);
-        }
+
         // tab
         String[] mTitles = {"关注", "推荐", "热门"};
         mIndexFragments = new ArrayList<>();
@@ -109,6 +116,19 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
         });
     }
 
+    private void observeEvent() {
+        // 监听播放或暂停事件
+        subscribe = RxBus.getDefault().toObservable(UserLoginEvent.class).subscribe(new Action1<UserLoginEvent>() {
+            @Override
+            public void call(UserLoginEvent event) {
+                GlideApp.with(getContext())
+                        .load(event.getAvatar())
+                        .circleCrop()
+                        .into(mAvatarView);
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -130,7 +150,36 @@ public final class FragmentIndex extends MyFragment<HomeActivity> implements XCo
 
     @Override
     protected void initData() {
+        if (TokenManager.getInstance(getActivity()).hasToken()) {
+            apiGetUserInfo();
+        }
+//        observeEvent();
+    }
 
+    private void apiGetUserInfo() {
+        EasyHttp.get(this)
+                .api(new UserInfoApi())
+                .request(new HttpCallback<HttpData<MemberInfoVO>>(getAttachActivity()) {
+
+                    @Override
+                    public void onSucceed(HttpData<MemberInfoVO> data) {
+                        MemberInfoVO memberInfoVO = data.getData();
+                        // 更新缓存
+                        spSetString(AVATAR, memberInfoVO.getAvatar());
+                        spSetString(BACK_IMAGE, memberInfoVO.getMemberInfo().getBackImage());
+                        GlideApp.with(getAttachActivity())
+                                .load(spGetString(SPManager.AVATAR))
+                                .circleCrop()
+                                .into(mAvatarView);
+                        // 发送登录事件
+//                        RxBus.getDefault().post(new UserLoginEvent(memberInfoVO.getUserId(), memberInfoVO.getUserName(), memberInfoVO.getNickName(), memberInfoVO.getAvatar()));
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        super.onFail(e);
+                    }
+                });
     }
 
     @Override
