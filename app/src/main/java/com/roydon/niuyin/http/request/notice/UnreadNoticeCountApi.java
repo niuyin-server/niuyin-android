@@ -13,7 +13,7 @@ public class UnreadNoticeCountApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "notice/api/v1/app/unreadCount";
+        return "notice/app-api/api/v1/app/unreadCount";
     }
 
 }

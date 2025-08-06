@@ -12,7 +12,7 @@ public class CategoryVideoDataApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "video/api/v1/app/category/videoPage";
+        return "video/app-api/api/v1/app/category/videoPage";
     }
 
     private Long id;

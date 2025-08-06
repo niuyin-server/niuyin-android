@@ -12,7 +12,7 @@ public class MyFavoriteVideoPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "behave/api/v1/app/favorite/myPage";
+        return "behave/app-api/api/v1/app/favorite/myPage";
     }
 
     private int pageNum = 1;

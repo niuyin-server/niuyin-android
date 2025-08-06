@@ -12,6 +12,6 @@ public class InitUserInBoxApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "social/api/v1/app/follow/initUserInBox";
+        return "social/app-api/api/v1/app/follow/initUserInBox";
     }
 }

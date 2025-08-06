@@ -12,7 +12,7 @@ public class VideoCommentReplayPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "behave/api/v1/app/comment/replyPage";
+        return "behave/app-api/api/v1/app/comment/replyPage";
     }
 
     private Long commentId;

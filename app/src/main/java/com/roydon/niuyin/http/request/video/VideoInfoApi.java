@@ -12,7 +12,7 @@ public class VideoInfoApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "video/api/v1/app/info/" + this.videoId;
+        return "video/app-api/api/v1/app/info/" + this.videoId;
     }
 
     /**

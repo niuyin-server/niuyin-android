@@ -12,7 +12,7 @@ public class CommentVideoApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "behave/api/v1/app/comment";
+        return "behave/app-api/api/v1/app/comment";
     }
 
     private String videoId;

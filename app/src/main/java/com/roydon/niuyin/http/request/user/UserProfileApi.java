@@ -12,7 +12,7 @@ public final class UserProfileApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "member/api/v1/app/" + userId;
+        return "member/app-api/api/v1/app/" + userId;
     }
 
     private Long userId;

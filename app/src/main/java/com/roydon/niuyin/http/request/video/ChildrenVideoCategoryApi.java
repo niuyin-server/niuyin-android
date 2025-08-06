@@ -12,7 +12,7 @@ public class ChildrenVideoCategoryApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "video/api/v1/app/category/children/" + this.id;
+        return "video/app-api/api/v1/app/category/children/" + this.id;
     }
 
     private Long id;

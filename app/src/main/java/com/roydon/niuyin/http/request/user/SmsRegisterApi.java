@@ -9,7 +9,7 @@ public class SmsRegisterApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "member/api/v1/app/sms-register";
+        return "member/app-api/api/v1/app/sms-register";
     }
 
     /**

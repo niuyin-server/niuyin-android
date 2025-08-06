@@ -12,7 +12,7 @@ public class BehaveNoticePageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "notice/api/v1/app/behavePage";
+        return "notice/app-api/api/v1/app/behavePage";
     }
 
     private String noticeType;

@@ -13,7 +13,7 @@ public class VideoSearchApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "search/api/v1/app/video";
+        return "search/app-api/api/v1/app/video";
     }
 
     private String keyword;

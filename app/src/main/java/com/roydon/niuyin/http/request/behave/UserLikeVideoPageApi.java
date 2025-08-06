@@ -12,7 +12,7 @@ public class UserLikeVideoPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "behave/api/v1/app/like/userPage";
+        return "behave/app-api/api/v1/app/like/userPage";
     }
 
     private Long userId;

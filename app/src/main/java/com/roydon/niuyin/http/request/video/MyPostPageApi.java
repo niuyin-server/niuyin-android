@@ -12,7 +12,7 @@ public class MyPostPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "video/api/v1/app/myPage";
+        return "video/app-api/api/v1/app/myPage";
     }
 
     private int pageNum = 1;

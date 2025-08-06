@@ -12,7 +12,7 @@ public class VideoLikeApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "behave/api/v1/app/like/" + videoId;
+        return "behave/app-api/api/v1/app/like/" + videoId;
     }
 
     private String videoId;

@@ -12,7 +12,7 @@ public class RelateVideoRecommendApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "video/api/v1/relate/"+videoId;
+        return "video/app-api/api/v1/relate/"+videoId;
     }
 
     private String videoId;

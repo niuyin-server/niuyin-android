@@ -12,7 +12,7 @@ public class UserFavoriteVideoPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "behave/api/v1/app/favorite/userPage";
+        return "behave/app-api/api/v1/app/favorite/userPage";
     }
 
     private Long userId;

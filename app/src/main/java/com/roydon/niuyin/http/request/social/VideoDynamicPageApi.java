@@ -12,7 +12,7 @@ public class VideoDynamicPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "social/api/v1/app/follow/dynamicVideoPage";
+        return "social/app-api/api/v1/app/follow/dynamicVideoPage";
     }
 
     private int pageNum = 1;

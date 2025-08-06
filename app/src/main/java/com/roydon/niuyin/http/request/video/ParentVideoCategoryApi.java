@@ -11,6 +11,6 @@ import com.hjq.http.config.IRequestApi;
 public class ParentVideoCategoryApi implements IRequestApi {
     @Override
     public String getApi() {
-        return "video/api/v1/app/category/parent";
+        return "video/app-api/api/v1/app/category/parent";
     }
 }

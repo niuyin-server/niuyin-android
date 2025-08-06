@@ -12,7 +12,7 @@ public class FansPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "social/api/v1/app/follow/fansPage";
+        return "social/app-api/api/v1/app/follow/fansPage";
     }
 
     private int pageNum = 1;

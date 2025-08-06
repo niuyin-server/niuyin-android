@@ -12,7 +12,7 @@ public class FollowUserApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "social/api/v1/app/follow/" + userId;
+        return "social/app-api/api/v1/app/follow/" + userId;
     }
 
     private Long userId;

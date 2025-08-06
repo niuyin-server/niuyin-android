@@ -12,7 +12,7 @@ public class UserPostPageApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "video/api/v1/app/userPage";
+        return "video/app-api/api/v1/app/userPage";
     }
 
     private Long userId;

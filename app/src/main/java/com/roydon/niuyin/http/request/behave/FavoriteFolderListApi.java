@@ -11,7 +11,7 @@ public class FavoriteFolderListApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "behave/api/v1/app/userFavorite/list/" + videoId;
+        return "behave/app-api/api/v1/app/userFavorite/list/" + videoId;
     }
 
     private String videoId;

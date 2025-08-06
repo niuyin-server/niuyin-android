@@ -12,7 +12,7 @@ public class HotVideoSearchApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "search/api/v1/app/video/hotSearch";
+        return "search/app-api/api/v1/app/video/hotSearch";
     }
 
     private int pageNum;

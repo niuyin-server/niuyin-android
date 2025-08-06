@@ -13,6 +13,6 @@ public final class RecommendVideoApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "video/api/v1/app/recommend";
+        return "video/app-api/api/v1/app/recommend";
     }
 }
