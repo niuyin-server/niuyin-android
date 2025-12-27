@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.RenderEffect;
 import android.graphics.Shader;
 import android.os.Build;
@@ -107,6 +108,9 @@ public final class HomeActivity extends MyActivity implements KeyboardWatcher.So
     protected void initView() {
         // 不使用图标默认变色
         mBottomNavigationView.setItemIconTintList(null);
+        mBottomNavigationView.setBackgroundColor(Color.TRANSPARENT);
+        mBottomNavigationView.setElevation(0f);
+
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 //            RenderEffect blurEffect = RenderEffect.createBlurEffect(20f, 20f, Shader.TileMode.CLAMP);
 //            mBottomNavigationView.setRenderEffect(blurEffect);

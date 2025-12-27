@@ -8,7 +8,7 @@ import com.hjq.http.model.BodyType;
  */
 public class ReleaseServer implements IRequestServer {
 
-    private static String SERVER_HOST_RELEASE = "http://8.130.182.227:9090";
+    private static String SERVER_HOST_RELEASE = "http://43.240.221.8:9090";
 
     @Override
     public String getHost() {

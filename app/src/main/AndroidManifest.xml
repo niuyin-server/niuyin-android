@@ -47,18 +47,15 @@
             android:name=".ui.activity.CrashActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:process=":crash"
-            android:screenOrientation="portrait" /> <!-- 引导界面 -->
+            android:process=":crash"/> <!-- 引导界面 -->
         <activity
             android:name=".ui.activity.GuideActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 闪屏界面 -->
+            android:launchMode="singleTop" /> <!-- 闪屏界面 -->
         <activity
             android:name=".ui.activity.SplashActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:launchMode="singleTop">
 
             <!-- 程序入口 -->
             <intent-filter>
@@ -72,144 +69,118 @@
             android:name=".ui.activity.HomeActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 登录界面 -->
+            android:launchMode="singleTop"/> <!-- 登录界面 -->
         <activity
             android:name=".ui.activity.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 注册界面 -->
+            android:launchMode="singleTop"/> <!-- 注册界面 -->
         <activity
             android:name=".ui.activity.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 设置界面 -->
+            android:launchMode="singleTop"/> <!-- 设置界面 -->
         <activity
             android:name=".ui.activity.SettingActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/setting_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 忘记密码 -->
+            android:launchMode="singleTop"/> <!-- 忘记密码 -->
         <activity
             android:name=".ui.activity.PasswordForgetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/password_forget_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 重置密码 -->
+            android:launchMode="singleTop"/> <!-- 重置密码 -->
         <activity
             android:name=".ui.activity.PasswordResetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/password_reset_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 手机号校验 -->
+            android:launchMode="singleTop" /> <!-- 手机号校验 -->
         <activity
             android:name=".ui.activity.PhoneVerifyActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/phone_verify_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 手机号更换 -->
+            android:launchMode="singleTop" /> <!-- 手机号更换 -->
         <activity
             android:name=".ui.activity.PhoneResetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/phone_reset_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 关于我们 -->
+            android:launchMode="singleTop" /> <!-- 关于我们 -->
         <activity
             android:name=".ui.activity.AboutActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/about_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 个人资料 -->
+            android:launchMode="singleTop" /> <!-- 个人资料 -->
         <activity
             android:name=".ui.activity.PersonalProfileActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/personal_data_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 浏览器 -->
+            android:launchMode="singleTop"/> <!-- 浏览器 -->
         <activity
             android:name=".ui.activity.BrowserActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/web_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 图片选择 -->
+            android:launchMode="singleTop"/> <!-- 图片选择 -->
         <activity
             android:name=".ui.activity.PhotoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/photo_title"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 拍照选择 -->
+            android:launchMode="singleTop" /> <!-- 拍照选择 -->
         <activity
             android:name=".ui.activity.CameraActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 查看大图 -->
+            android:launchMode="singleTop"/> <!-- 查看大图 -->
         <activity
             android:name=".ui.activity.ImageActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 对话框案例 -->
+            android:launchMode="singleTop"/> <!-- 对话框案例 -->
         <activity
             android:name=".ui.activity.DialogActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 状态案例 -->
+            android:launchMode="singleTop" /> <!-- 状态案例 -->
         <activity
             android:name=".ui.activity.StatusActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 视频搜索页面 -->
+            android:launchMode="singleTop"/> <!-- 视频搜索页面 -->
         <activity
             android:name=".ui.activity.VideoSearchActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" /> <!-- 手机短信登录 -->
         <activity
             android:name=".ui.activity.LoginSmsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 视频分类 -->
+            android:launchMode="singleTop" /> <!-- 视频分类 -->
         <activity
             android:name=".ui.activity.VideoCategoryActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 图文 -->
+            android:launchMode="singleTop"/> <!-- 图文 -->
         <activity
             android:name=".ui.activity.VideoImagePlayActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" /> <!-- 视频播放 -->
+            android:configChanges="orientation|screenSize|keyboardHidden" /> <!-- 视频播放 -->
         <activity
             android:name=".ui.activity.VideoPlayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" /> <!-- 视频搜索结果 -->
         <activity
             android:name=".ui.activity.VideoSearchResultActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 分类视频 -->
+            android:launchMode="singleTop"/> <!-- 分类视频 -->
         <activity
             android:name=".ui.activity.CategoryVideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 互动通知 -->
+            android:launchMode="singleTop"/> <!-- 互动通知 -->
         <activity
             android:name=".ui.activity.NoticeBehaveActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" /> <!-- 用户信息 -->
+            android:launchMode="singleTop"/> <!-- 用户信息 -->
         <activity
             android:name=".ui.activity.UserProfileActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTop"/>
         <!--        关注粉丝页面-->
         <activity
             android:name=".ui.activity.FollowFansActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

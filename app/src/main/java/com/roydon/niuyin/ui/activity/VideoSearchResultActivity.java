@@ -207,14 +207,12 @@ public class VideoSearchResultActivity extends MyActivity implements StatusActio
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        toast("上拉加载");
         pageNum++;
         postVideoSearch(false);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        toast("下拉刷新");
         pageNum = 1;
         mRefreshLayout.setEnableLoadMore(true);
         postVideoSearch(false);

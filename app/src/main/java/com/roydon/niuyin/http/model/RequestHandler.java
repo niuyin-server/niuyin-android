@@ -55,6 +55,13 @@ public final class RequestHandler implements IRequestHandler {
     @Override
     public Object requestSucceed(Context context, Response response, Type type) throws Exception {
         if (!response.isSuccessful()) {
+            // 401
+            if (response.code() == 401) {
+                throw new TokenException(context.getString(R.string.http_account_error_401));
+            }else if (response.code() == 403) {
+                // 代表登录失效，需要重新登录
+                throw new TokenException(context.getString(R.string.http_account_error_403));
+            }
             // 返回响应异常
             throw new ResponseException(context.getString(R.string.http_server_error), response);
         }
